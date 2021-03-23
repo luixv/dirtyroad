@@ -7,7 +7,7 @@ htdocs/configuration.php
 img/
 install/
 licenses/
-local/
+locale/
 mailouput/
 mailtodisk/
 perl/
