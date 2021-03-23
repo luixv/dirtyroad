@@ -34,6 +34,9 @@ xampp_*
 xampp-*
 *.log
 mysql/*
+mysql/backup/test
+mysql/backup/performance_schema
+
 # But not these files...
 !htdocs/
 !mysql/data/bitnami_joomla
