@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="width" type="text"
+				label="ACF_GOOGLEMAP_WIDTH"
+				description="ACF_GOOGLEMAP_WIDTH_DESC"
+				default="400px"
+			/>
+			<field name="height" type="text"
+				label="ACF_GOOGLEMAP_HEIGHT"
+				description="ACF_GOOGLEMAP_HEIGHT_DESC"
+				default="350px"
+			/>
+			<field name="zoom" type="nrnumber"
+				label="ACF_GOOGLEMAP_ZOOM"
+				description="ACF_GOOGLEMAP_ZOOM_DESC"
+				default="16"
+			/>
+		</fieldset>
+	</fields>
+</form>
+

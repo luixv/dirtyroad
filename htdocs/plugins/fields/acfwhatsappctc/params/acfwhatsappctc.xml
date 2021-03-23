@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="prefilled_msg" type="text"
+				label="ACF_WHATSAPPCTC_PREFILLED_MSG"
+				description="ACF_WHATSAPPCTC_PREFILLED_MSG_DESC"
+			/>
+			<field name="label" type="text"
+				label="ACF_WHATSAPPCTC_LABEL"
+				description="ACF_WHATSAPPCTC_LABEL_DESC"
+			/>
+		</fieldset>
+	</fields>
+</form>

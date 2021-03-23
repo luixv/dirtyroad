@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="iframeheight" type="text" 
+				label="NR_HEIGHT"
+				description="NR_HEIGHT_DESC"
+				default="500px" 
+			/>
+			<field name="iframescrolling" type="list" 
+				label="ACF_IFRAME_IFRAMESCROLLING"
+				description="ACF_IFRAME_IFRAMESCROLLING_DESC"
+				default="auto">
+				<option value="no">JNO</option>
+				<option value="yes">JYES</option>
+				<option value="auto">Auto</option>
+			</field>
+			<field name="iframeasync" type="nrtoggle" 
+				label="ACF_IFRAME_ASYNC"
+				description="ACF_IFRAME_ASYNC_DESC"
+			/>
+			<field name="iframeparams" type="text"
+				label="ACF_IFRAME_IFRAMEPARAMS"
+				description="ACF_IFRAME_IFRAMEPARAMS_DESC"
+			/>
+		</fieldset>
+	</fields>
+</form>

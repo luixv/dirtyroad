@@ -1,0 +1,71 @@
+.photostation-div-slideshow {
+	position: relative;
+	width: 100%;
+}
+
+.photostation-div-slideshow:before {
+	content: '';
+	display: block;
+	padding-top: 100%;
+}
+
+.photostation-div-slideshow div {
+	bottom: 1px;
+	left: 1px;
+	position: absolute;
+	right: 1px;
+	top: 1px;
+}
+
+.photostation-iframe-slideshow {
+	border: 1px solid #888;
+	position: absolute;
+	height: 100%;
+	left: -1px;
+	top: -1px;
+	visibility: hidden;
+	width: 100%;
+}
+
+.photostation-iframe-lightbox {
+	border: 0;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	visibility: hidden;
+	width: 100%;
+	z-index: 1000;
+}
+
+.photostation-div-chooser {
+	background: rgba(40, 50, 60, 0.5);
+	height: 100%;
+	left: 0;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	visibility: hidden;
+	width: 100%;
+	z-index: 1000;
+}
+
+.photostation-div-chooser:before {
+	content: '';
+	height: 100%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.photostation-div-chooser iframe {
+	border: 0;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+	height: 600px;
+	vertical-align: middle;
+	width: 972px;
+}
+
+.photostation-button-chooser {
+	margin: 10px 0;
+	width: 100% !important;
+}

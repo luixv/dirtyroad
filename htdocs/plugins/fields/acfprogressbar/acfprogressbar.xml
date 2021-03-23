@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="plugin" version="3.7.0" group="fields" method="upgrade">
+	<name>ACF_PROGRESSBAR</name>
+	<description>ACF_PROGRESSBAR_DESC</description>
+	<author>Tassos Marinos</author>
+	<creationDate>April 2017</creationDate>
+	<copyright>Copyright (C) 2019 Tassos Marinos. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@tassos.gr</authorEmail>
+	<authorUrl>www.tassos.gr</authorUrl>
+	<version>1.0</version>
+	<scriptfile>script.install.php</scriptfile>
+	<files>
+		<filename plugin="acfprogressbar">acfprogressbar.php</filename>
+		<filename>script.install.helper.php</filename>
+		<filename>version.php</filename>
+		<folder>language</folder>
+		<folder>params</folder>
+		<folder>tmpl</folder>
+	</files>
+    <media folder="media" destination="plg_fields_acfprogressbar">
+        <folder>css</folder>
+    </media>
+</extension>

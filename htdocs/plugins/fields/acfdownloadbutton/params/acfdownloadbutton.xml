@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams" addfieldpath="/plugins/system/nrframework/fields">
+		<fieldset name="fieldparams">
+			<field name="directory" type="text"
+				label="ACF_DOWNLOADBUTTON_DIR"
+				description="ACF_DOWNLOADBUTTON_DIR_DESC"
+				hint="images/downloads"
+			/>
+			<field name="filter" type="nrtext"
+				label="ACF_DOWNLOADBUTTON_FILTER"
+				description="ACF_DOWNLOADBUTTON_FILTER_DESC"
+				hint=".zip"
+			/>
+			<field name="exclude" type="nrtext"
+				label="ACF_DOWNLOADBUTTON_EXCLUDE"
+				description="ACF_DOWNLOADBUTTON_EXCLUDE_DESC"
+				hint=".zip"
+			/>
+			<field name="label" type="text"
+				label="ACF_DOWNLOADBUTTON_LABEL"
+				description="ACF_DOWNLOADBUTTON_LABEL_DESC"
+				hint="Download"
+			/>
+			<field name="class" type="text"
+				label="ACF_DOWNLOADBUTTON_CLASS"
+				description="ACF_DOWNLOADBUTTON_CLASS_DESC"
+				default="btn btn-primary"
+				hint="btn"
+			/>
+		</fieldset>
+	</fields>
+</form>

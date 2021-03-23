@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.0" type="plugin" group="user">
+	<name>Notice board</name>
+	<author>Guarneri Iacopo</author>
+	<creationDate>23/01/2012</creationDate>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>iacopo.guarneri@gmail.com</authorEmail>
+	<authorUrl>http://www.iacopo-guarneri.me/</authorUrl>
+	<version>2.0.10</version>
+	<description>plugin that allows a notice board to manage personal to each user</description>
+
+	<files>
+		<filename plugin="cb_plugin_notice_board">cb_plugin_notice_board.php</filename>
+		<filename >index.html</filename>
+	</files>
+
+	<params>
+		<param name="admin_mail" type="list" default="yes" label="Send mail to admin" description="">
+			<option value="yes">yes</option>
+			<option value="no">no</option>
+		</param>
+		<param name="user_mail" type="list" default="yes" label="Send mail to user" description="">
+			<option value="yes">yes</option>
+			<option value="no">no</option>
+		</param>
+		<param name="pagination" type="list" default="10" label="pagination" description="">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">4</option>
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="30">30</option>
+			<option value="50">50</option>
+			<option value="50">100</option>
+			<option value="50">200</option>
+			<option value="50">300</option>
+			<option value="50">500</option>
+			<option value="50">1000</option>
+			<option value="50">2000</option>
+			<option value="50">5000</option>
+		</param>
+		<param name="style_pagination" type="radio" default="style2" label="Style pagination" description="">
+			<option value="style1">Style 1</option>
+			<option value="style2">Style 2</option>
+		</param>
+		
+		<!-- INIZIO MODIFICA IACOPO -->
+		<param name="show_smile" type="radio" default="no" label="Show Smile" description="">
+			<option value="yes">yes</option>
+			<option value="no">no</option>
+		</param>
+		<!-- FINE MODIFICA IACOPO -->
+		
+		<!-- INIZIO MODIFICA DIJO -->
+		<param name="show_avatar" type="radio" default="no" label="Show avatar or username (only CB)" description="">
+			<option value="yes">Avatar</option>
+			<option value="no">Username</option>
+			<option value="both">Both</option>
+		</param>
+		<!-- FINE MODIFICA DIJO -->
+
+		<param name="maxw" type="text" default="50" label="Max width avatar" description="" />
+		<param name="maxh" type="text" default="50" label="Max height avatar" description="" />
+		
+		<param name="jquery" type="radio" default="1" label="JQuery" description="">
+			<option value="1">enabled</option>
+			<option value="0">disabled</option>
+		</param>
+		
+		<field type="spacer" name="spacer1" label="Privacy options in PRO version" />
+	</params>
+
+
+	<tabs>
+	<tab name="Notice board" description="" class="cbnotice_boardTab" fields="1" position="cb_tabmain" displaytype="tab">
+	</tab>
+	</tabs>
+
+</cbinstall>

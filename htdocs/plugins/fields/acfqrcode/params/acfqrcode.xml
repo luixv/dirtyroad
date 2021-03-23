@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="size" type="text"
+				label="ACF_QRCODE_SIZE"
+				description="ACF_QRCODE_SIZE_DESC"
+				default="100"
+			/>
+			<field name="color" type="color"
+				label="ACF_QRCODE_COLOR"
+				description="ACF_QRCODE_COLOR_DESC"
+				format="hex"
+				default="#000000"
+			/>
+			<field name="bgcolor" type="color"
+				label="ACF_QRCODE_BGCOLOR"
+				description="ACF_QRCODE_BGCOLOR_DESC"
+				format="hex"
+				default="#ffffff"
+			/>
+		</fieldset>
+	</fields>
+</form>

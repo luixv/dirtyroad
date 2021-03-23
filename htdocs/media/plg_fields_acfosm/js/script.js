@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(e){var r=document.querySelectorAll(".osm_map_item");for(i=0;i<r.length;++i){var d=r[i],n=new ACF_OSM_Map(d);n.render(),n.addMarker(),n.addMarkerPopup()}});

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="width" type="nrnumber"
+				label="NR_WIDTH"
+				description="ACF_FACEBOOKVIDEO_WIDTH_DESC"
+				hint="400"
+				step="100"
+				min="220"
+			/>
+			
+		    
+		    <field name="@allowfullscreen" type="nr_pro"
+				label="ACF_ALLOWFULLSCREEN"
+				description="ACF_ALLOWFULLSCREEN_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+		    <field name="@autoplay" type="nr_pro"
+				label="ACF_AUTOPLAY"
+				description="ACF_FACEBOOKVIDEO_AUTOPLAY_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+		    <field name="@includepost" type="nr_pro"
+				label="ACF_FACEBOOKVIDEO_INCLUDEPOST"
+				description="ACF_FACEBOOKVIDEO_INCLUDEPOST_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+		    <field name="@showcaptions" type="nr_pro"
+				label="ACF_FACEBOOKVIDEO_SHOWCAPTIONS"
+				description="ACF_FACEBOOKVIDEO_SHOWCAPTIONS_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+		    
+		</fieldset>
+	</fields>
+</form>

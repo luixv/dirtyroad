@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+            <field name="timeformat" type="text" 
+                label="ACF_TIMEPICKER_TIMEFORMAT" 
+                description="ACF_TIMEPICKER_TIMEFORMAT_DESC" 
+                default="H:i"
+            />
+		</fieldset>
+	</fields>
+</form>

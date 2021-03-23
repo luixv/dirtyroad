@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="size" type="radio" 
+		        label="ACF_VIDEO_SIZE"
+				description="ACF_VIDEO_SIZE_DESC"
+		        class="btn-group btn-group-yesno"
+		        default="fixed">
+		            <option value="fixed">ACF_FIXED</option>
+		            <option value="responsive">ACF_RESPONSIVE</option>
+		    </field>
+			<field name="width" type="text"
+				label="ACF_YOUTUBE_WIDTH"
+				description="ACF_YOUTUBE_WIDTH_DESC"
+				size="40"
+				default="480"
+				showon="size:fixed"
+			/>
+			<field name="height" type="text"
+				label="ACF_YOUTUBE_HEIGHT"
+				description="ACF_YOUTUBE_HEIGHT_DESC"
+				default="270"
+				showon="size:fixed"
+			/>
+			
+		    
+		    <field name="@autoplay" type="nr_pro"
+				label="ACF_YOUTUBE_AUTOPLAY"
+				description="ACF_YOUTUBE_AUTOPLAY_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@cc_load_policy" type="nr_pro"
+				label="ACF_YOUTUBE_CC_LOAD_POLICY"
+				description="ACF_YOUTUBE_CC_LOAD_POLICY_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@color" type="nr_pro"
+				label="ACF_YOUTUBE_COLOR"
+				description="ACF_YOUTUBE_COLOR_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@controls" type="nr_pro"
+				label="ACF_YOUTUBE_CONTROLS"
+				description="ACF_YOUTUBE_CONTROLS_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@disablekb" type="nr_pro"
+				label="ACF_YOUTUBE_DISABLEKB"
+				description="ACF_YOUTUBE_DISABLEKB_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@start" type="nr_pro"
+				label="ACF_YOUTUBE_START"
+				description="ACF_YOUTUBE_START_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@end" type="nr_pro"
+				label="ACF_YOUTUBE_END"
+				description="ACF_YOUTUBE_END_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@fs" type="nr_pro"
+				label="ACF_YOUTUBE_FS"
+				description="ACF_YOUTUBE_FS_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@hl" type="nr_pro"
+				label="ACF_YOUTUBE_HL"
+				description="ACF_YOUTUBE_HL_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@iv_load_policy" type="nr_pro"
+				label="ACF_YOUTUBE_IV_LOAD_POLICY"
+				description="ACF_YOUTUBE_IV_LOAD_POLICY_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@loop" type="nr_pro"
+				label="ACF_YOUTUBE_LOOP"
+				description="ACF_YOUTUBE_LOOP_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@modestbranding" type="nr_pro"
+				label="ACF_YOUTUBE_MODESTBRANDING"
+				description="ACF_YOUTUBE_MODESTBRANDING_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@rel" type="nr_pro"
+				label="ACF_YOUTUBE_REL"
+				description="ACF_YOUTUBE_REL_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@showinfo" type="nr_pro"
+				label="ACF_YOUTUBE_SHOWINFO"
+				description="ACF_YOUTUBE_SHOWINFO_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+		    
+		</fieldset>
+	</fields>
+</form>

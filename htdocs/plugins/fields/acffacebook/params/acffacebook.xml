@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+		    <field name="widget_type" type="list" 
+		        label="ACF_FACEBOOK_WIDGET"
+				description="ACF_FACEBOOK_WIDGET_DESC"
+		        default="page">
+		            <option value="page">ACF_FACEBOOK_FBPAGE</option>
+		    </field>
+			<fields name="page" showon="fieldparams.widget_type:page">
+				<field name="width" type="text"
+					label="ACF_FACEBOOK_WIDTH"
+					description="ACF_FACEBOOK_WIDTH_DESC"
+					default="400"
+					showon="fieldparams.widget_type:page"
+				/>
+				<field name="height" type="text"
+					label="ACF_FACEBOOK_HEIGHT"
+					description="ACF_FACEBOOK_HEIGHT_DESC"
+					default="214"
+					showon="fieldparams.widget_type:page"
+				/>
+				<field name="tabs" type="checkboxes"
+					label="ACF_FACEBOOK_TABS"
+					description="ACF_FACEBOOK_TABS_DESC"
+					showon="fieldparams.widget_type:page">
+					<option value="timeline">ACF_FACEBOOK_TIMELINE</option>
+					<option value="events">ACF_FACEBOOK_EVENTS</option>
+					<option value="messages">ACF_FACEBOOK_MESSAGES</option>
+				</field>
+				<field name="show_friend_faces" type="nrtoggle" 
+					label="ACF_FACEBOOK_SHOW_FRIEND_FACES"
+					description="ACF_FACEBOOK_SHOW_FRIEND_FACES_DESC"
+					checked="true"
+					showon="fieldparams.widget_type:page"
+				/>
+				<field name="hide_cover_photo" type="nrtoggle" 
+					label="ACF_FACEBOOK_HIDE_COVER_PHOTO"
+					description="ACF_FACEBOOK_HIDE_COVER_PHOTO_DESC"
+					showon="fieldparams.widget_type:page"
+				/>
+				<field name="small_header" type="nrtoggle" 
+					label="ACF_FACEBOOK_SMALL_HEADER"
+					description="ACF_FACEBOOK_SMALL_HEADER_DESC"
+					showon="fieldparams.widget_type:page"
+				/>
+				<field name="hide_cta" type="nrtoggle" 
+					label="ACF_FACEBOOK_HIDE_CTA"
+					description="ACF_FACEBOOK_HIDE_CTA_DESC"
+					showon="fieldparams.widget_type:page"
+				/>
+			</fields>
+		</fieldset>
+	</fields>
+</form>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+    <name>Photo Station</name>
+    <author>Synology Inc.</author>
+    <creationDate>2015Q3</creationDate>
+    <version>1.0.3</version>
+    <description>This module displays images from your chosen Photo Station.</description>
+
+    <files>
+        <filename>mod_photostation.xml</filename>
+        <filename module="mod_photostation">mod_photostation.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+        <folder>sql</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="diskstation" type="text" label="DiskStation" />
+                <field name="protocol" type="radio" label="Protocol" default="0">
+                    <option value="http">HTTP</option>
+                    <option value="https">HTTPS</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" method="upgrade">
+  <name>Location Map</name>
+  <author>OrdaSoft</author> 
+  <creationDate>May 2017</creationDate>
+  <copyright>OrdaSoft 2007</copyright>
+  <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license> 
+  <version>3.7</version>
+ 
+  <description>Location Map module for Joomla 3.7
+The advantage of having the maps in a module is that you can copy the module in the Joomla backend. Thus you can have many different maps with different configurations on your site. You can then load these modules in your content pages using {loadposition position}.</description>
+   
+   <files>
+     <filename module="mod_location_map">mod_location_map.php</filename>
+     <folder>tmpl</folder>
+     <filename>index.html</filename>
+     <filename>helper.php</filename>
+     <filename>mod_location_map.xml</filename> 
+     
+  </files>         
+   
+  <config>
+  <fields name="params">
+      <fieldset name="basic">
+    
+    <field name="latitude" type="text" default="50" label="Map Center - latitude" 
+      description="Center of your location map - latitude" />
+    
+    <field name="longitude" type="text" default="36.26" label="Map Center - longitude" 
+      description="Center of your location map - longitude" />
+      
+    <field name="zoom" type="text" default="9" label="Zoom Level" 
+      description="Zoom Level for your location map" />
+    
+    <field name="messag" type="textarea" filter="safehtml" cols="30" rows="5" 
+           default="50; 36.25; Orda Soft"
+           label="Coordinates" description="Enter latitude, longitude, text message for the marker on your location map separated by semicolon (HTML code is supported). Each row is a new coordinate. For example: 50; 36.25; Orda Soft." />
+    
+    <field name="map_width" type="text" default="400" label="Width of map (px)"
+      description="The width of your location map (in px)" />
+    
+    <field name="map_height" type="text" default="250" label="Height of map (px)" 
+      description="The  height of your location map (in px)" />
+    
+    <field name="menu_map" type="radio" default="0" label="Map Type Menu" 
+      description="Show Map Type Menu (Map-Satellite-Hybrid)">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </field>
+    
+    <field name="control_map" type="radio" default="0" label="Map Controls Menu"
+     description="Show Map Controls (Up-Down-Left-Right)">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </field>
+
+    <field name="map_api_key" type="text" default="AIzaSyD4ZY-54e-nzN0-KejXHkUh-D7bbexDMKk" label="Google map key" 
+      description="For use module, you need add google map key">
+    </field>
+
+    <field
+        name="layout"
+        type="modulelayout"
+        label="JFIELD_ALT_LAYOUT_LABEL"
+        description="JFIELD_ALT_MODULE_LAYOUT_DESC">
+          </field>
+
+      </fieldset>
+      <fieldset name="advanced">
+       <field name="moduleclass_sfx" type="text"  default="" label="Module Class Suffix" description="Module Class Suffix. A suffix to be applied to the css class of the module; this allows individual module styling." />
+             <field  name="ItemId" 
+                type="text" 
+                multiple="false"
+                size="3"
+                default=""
+                label="ItemId" 
+                description="Enter Id for Menu Item booklibrary">
+        </field>
+     </fieldset>      
+  </fields>
+  </config>
+</extension>

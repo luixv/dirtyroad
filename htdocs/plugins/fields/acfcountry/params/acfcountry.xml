@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+            <field name="countrydisplay" type="list" 
+                label="ACF_RETURN_VALUE" 
+                description="ACF_RETURN_VALUE_DESC"
+                default="name">
+                    <option value="name">ACF_COUNTRY_NAME</option>
+                    <option value="code">ACF_COUNTRY_CODE</option>
+            </field>
+			<field name="multiple_selection" type="nrtoggle" 
+		        label="ACF_COUNTRY_MULTIPLE_SELECTION"
+				description="ACF_COUNTRY_MULTIPLE_SELECTION_DESC"
+			/>
+			
+            
+            <field name="@detect_visitor_country" type="nr_pro"
+				label="ACF_COUNTRY_DETECT_VISITOR_COUNTRY"
+				description="ACF_COUNTRY_DETECT_VISITOR_COUNTRY_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+            
+		</fieldset>
+	</fields>
+</form>

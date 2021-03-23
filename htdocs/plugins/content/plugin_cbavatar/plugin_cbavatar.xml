@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="content" method="upgrade">
+	<name>CB Avatar for Community Builder</name>
+	<author>Surrey Community Music Society</author>
+	<creationDate>January 2014</creationDate>
+	<copyright>Copyright (C) 2014 - Surrey Community Music Society. All rights reserved.</copyright>
+	<license>GNU/GPL</license>
+	<authorEmail>cliff@surreymusic.org.uk</authorEmail>
+	<authorUrl>www.surreymusic.org</authorUrl>
+	<version>3.0</version>
+	<description>Community Builder profile picture (avatar) Plugin into a content item. The avatr will hyperlink to the user's CB profile page. Usage in a content article: {cbavatar}username{/cbavatar}. * Plugin by Surrey Community Music Society (registered charity - www.surreymusic.org). * Additional coding by http://www.joomtut.com</description>
+	<files>
+		<filename plugin="plugin_cbavatar">plugin_cbavatar.php</filename>
+		<filename>plugin_cbavatar.xml</filename>
+	</files>
+</extension>

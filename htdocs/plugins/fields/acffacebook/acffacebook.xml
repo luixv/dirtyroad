@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="plugin" version="3.7.0" group="fields" method="upgrade">
+	<name>ACF_FACEBOOK</name>
+	<description>ACF_FACEBOOK_DESC</description>
+	<author>Tassos Marinos</author>
+	<creationDate>July 2019</creationDate>
+	<copyright>Copyright (C) 2019 Tassos Marinos. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@tassos.gr</authorEmail>
+	<authorUrl>www.tassos.gr</authorUrl>
+	<version>1.0</version>
+	<scriptfile>script.install.php</scriptfile>
+	<files>
+		<filename plugin="acffacebook">acffacebook.php</filename>
+		<filename>script.install.helper.php</filename>
+		<filename>version.php</filename>
+		<folder>language</folder>
+		<folder>params</folder>
+		<folder>tmpl</folder>
+	</files>
+</extension>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="height" type="nrnumber"
+				label="NR_HEIGHT"
+				addon="px"
+				description="ACF_PROGRESSBAR_HEIGHT_DESC"
+				default="18"
+				hint="18"
+				class="input-small"
+			/>
+			<field name="color" type="nrcolor" 
+                label="NR_COLOR"
+				description="ACF_PROGRESSBAR_COLOR_DESC"
+                default="#007bff"
+            />
+			<field name="stripped" type="nrtoggle"
+				label="ACF_PROGRESSBAR_STRIPPED"
+				description="ACF_PROGRESSBAR_STRIPPED_DESC"
+			/>
+			<field name="animated" type="nrtoggle"
+				label="ACF_PROGRESSBAR_ANIMATED"
+				description="ACF_PROGRESSBAR_ANIMATED_DESC"
+			/>
+			<field name="roundedcorners" type="nrtoggle"
+				label="ACF_PROGRESSBAR_ROUNDED_CORNERS"
+				description="ACF_PROGRESSBAR_ROUNDED_CORNERS_DESC"
+				checked="true"
+			/>
+			<field name="shadow" type="nrtoggle"
+				label="ACF_PROGRESSBAR_SHADOW"
+				description="ACF_PROGRESSBAR_SHADOW_DESC"
+				checked="true"
+			/>
+			<field name="show_label" type="list"
+				label="ACF_PROGRESSBAR_SHOW_LABEL"
+				description="ACF_PROGRESSBAR_SHOW_LABEL_DESC"
+				default="center">
+				<option value="0">JDISABLED</option>
+                <option value="left">NR_LEFT</option>
+                <option value="center">NR_CENTER</option>
+                <option value="right">NR_RIGHT</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

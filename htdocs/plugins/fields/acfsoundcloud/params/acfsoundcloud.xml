@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="width" type="text"
+				label="ACF_SOUNDCLOUD_WIDTH"
+				description="ACF_SOUNDCLOUD_WIDTH_DESC"
+				default="100%"
+			/>
+			<field name="height" type="text"
+				label="ACF_SOUNDCLOUD_HEIGHT"
+				description="ACF_SOUNDCLOUD_HEIGHT_DESC"
+				default="166"
+			/>
+			
+            
+            <field name="@autoplay" type="nr_pro"
+				label="ACF_SOUNDCLOUD_AUTOPLAY"
+				description="ACF_SOUNDCLOUD_AUTOPLAY_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@hideRelated" type="nr_pro"
+				label="ACF_SOUNDCLOUD_HIDERELATED"
+				description="ACF_SOUNDCLOUD_HIDERELATED_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@showComments" type="nr_pro"
+				label="ACF_SOUNDCLOUD_SHOWCOMMENTS"
+				description="ACF_SOUNDCLOUD_SHOWCOMMENTS_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@showUser" type="nr_pro"
+				label="ACF_SOUNDCLOUD_SHOWUSER"
+				description="ACF_SOUNDCLOUD_SHOWUSER_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@showReposts" type="nr_pro"
+				label="ACF_SOUNDCLOUD_SHOWREPOSTS"
+				description="ACF_SOUNDCLOUD_SHOWREPOSTS_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@visual" type="nr_pro"
+				label="ACF_SOUNDCLOUD_VISUAL"
+				description="ACF_SOUNDCLOUD_VISUAL_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+			<field name="@color" type="nr_pro"
+				label="ACF_SOUNDCLOUD_COLOR"
+				description="ACF_SOUNDCLOUD_COLOR_DESC"
+				url="https://www.tassos.gr/joomla-extensions/advanced-custom-fields"
+			/>
+            
+		</fieldset>
+	</fields>
+</form>

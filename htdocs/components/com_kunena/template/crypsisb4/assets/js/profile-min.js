@@ -1,0 +1,1 @@
+jQuery(document).ready(function(){var a=jQuery.parseJSON(Joomla.getOptions("com_kunena.avatartab"));if(a){jQuery('.nav-tabs a[href="#editavatar"]').tab("show");}});

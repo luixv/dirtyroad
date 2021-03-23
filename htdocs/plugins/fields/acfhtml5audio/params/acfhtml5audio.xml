@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+		    <field name="controls" type="nrtoggle" 
+		        label="ACF_CONTROLS"
+				description="ACF_CONTROLS_DESC"
+		        checked="true"
+			/>
+			<field name="autoplay" type="nrtoggle" 
+		        label="ACF_AUTOPLAY"
+				description="ACF_AUTOPLAY_DESC"
+			/>
+		    <field name="loop" type="nrtoggle" 
+		        label="ACF_LOOP"
+				description="ACF_LOOP_DESC"
+			/>
+		    <field name="muted" type="nrtoggle" 
+		        label="ACF_MUTED"
+				description="ACF_MUTED_DESC"
+			/>
+		    <field name="preload" type="list" 
+		        label="ACF_PRELOAD"
+				description="ACF_PRELOAD_DESC"
+		        default="auto">
+		            <option value="metadata">ACF_METADATA</option>
+		            <option value="auto">NR_AUTO</option>
+		            <option value="none">JNONE</option>
+		    </field>
+		</fieldset>
+	</fields>
+</form>

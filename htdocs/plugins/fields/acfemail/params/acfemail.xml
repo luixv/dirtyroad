@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field name="display_as" type="radio"
+				label="ACF_EMAIL_DISPLAY_AS"
+				description="ACF_EMAIL_DISPLAY_AS_DESC"
+				class="btn-group btn-group-yesno"
+				default="link">
+		        <option value="text">ACF_EMAIL_TEXT</option>
+				<option value="link">ACF_EMAIL_LINK</option>
+			</field>
+			<field name="cloak_support" type="nrtoggle"
+				label="ACF_EMAIL_CLOAK_SUPPORT"
+				description="ACF_EMAIL_CLOAK_SUPPORT_DESC"
+				checked="true"
+			/>
+		</fieldset>
+	</fields>
+</form>

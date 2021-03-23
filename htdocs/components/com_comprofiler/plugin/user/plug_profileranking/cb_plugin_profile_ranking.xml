@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cbinstall version="1.7" type="plugin" group="user">
+	<name>Profile ranking</name>
+	<author>Guarneri Iacopo</author>
+	<creationDate>13/11/2013</creationDate>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>iacopo.guarneri@alice.it</authorEmail>
+	<authorUrl>http://www.the-html-tool.com/</authorUrl>
+	<version>2.0.10</version>
+	<description>displays how many points positives/negatives have taken your posts</description>
+
+	<files>
+		<filename plugin="cb_plugin_profile_ranking">cb_plugin_profile_ranking.php</filename>
+		<filename >index.html</filename>
+		<filename >cb_plugin_profile_ranking.css</filename>
+		
+		<filename >images/Like.png</filename>
+		<filename >images/Unlike.png</filename>
+		<filename >images/index.html</filename>
+	</files>
+
+	<params>
+		
+	</params>
+
+
+	<tabs>
+	<tab name="Profile ranking" description="" class="cbprofile_rankingTab" fields="1" position="cb_right" displaytype="html">
+	</tab>
+	</tabs>
+
+</cbinstall>

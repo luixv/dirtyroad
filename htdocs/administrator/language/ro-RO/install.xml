@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.9" client="administrator" type="language" method="upgrade">
+	<name>Română (ro-RO)</name>
+	<tag>ro-RO</tag>
+	<version>3.9.21.1</version>
+	<creationDate>August 2020</creationDate>
+	<author>Horia Negura - Quanta</author>
+	<authorEmail>fakemoth@gmail.com</authorEmail>
+	<authorUrl>www.quanta-group.ro</authorUrl>
+	<copyright>Copyright (C) 2005-2020 Open Source Matters. Toate drepturile rezervate.</copyright>
+	<license>GNU General Public License versiunea 2 sau mai recentă, a se vedea LICENSE.txt</license>
+	<description>Joomla! 3.9 Romanian (ro-RO) Administrator Language Pack</description>
+	<files>
+		<folder>/</folder>
+		<filename file="meta">install.xml</filename>
+	</files>
+	<params />
+</extension>
