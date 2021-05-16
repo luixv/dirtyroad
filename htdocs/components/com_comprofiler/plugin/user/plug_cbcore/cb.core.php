@@ -15,6 +15,7 @@ use CB\Database\Table\FieldTable;
 use CB\Database\Table\TabTable;
 use CB\Database\Table\UserTable;
 use CBLib\Registry\Registry;
+use CBLib\Image\Color;
 
 /** ensure this file is being included by a parent file */
 if ( ! ( defined( '_VALID_CB' ) || defined( '_JEXEC' ) || defined( '_VALID_MOS' ) ) ) { die( 'Direct Access to this location is not allowed.' ); }
@@ -470,10 +471,10 @@ class CBfield_predefined extends CBfield_text {
 	 * WARNING: direct unchecked access, except if $user is set, then check
 	 * that the logged-in user has rights to edit that $user.
 	 *
-	 * @param  FieldTable  $field
-	 * @param  UserTable   $user
-	 * @param  array       $postdata
-	 * @param  string      $reason     'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
+	 * @param FieldTable     $field
+	 * @param null|UserTable $user
+	 * @param array          $postdata
+	 * @param string         $reason 'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
 	 * @return string                  Expected output.
 	 */
 	public function fieldClass( &$field, &$user, &$postdata, $reason ) {
@@ -2951,10 +2952,10 @@ class CBfield_email extends CBfield_text {
 	 * WARNING: direct unchecked access, except if $user is set, then check
 	 * that the logged-in user has rights to edit that $user.
 	 *
-	 * @param  FieldTable  $field
-	 * @param  UserTable   $user
-	 * @param  array       $postdata
-	 * @param  string      $reason     'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
+	 * @param FieldTable     $field
+	 * @param null|UserTable $user
+	 * @param array          $postdata
+	 * @param string         $reason 'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
 	 * @return string                  Expected output.
 	 */
 	public function fieldClass( &$field, &$user, &$postdata, $reason ) {
@@ -3392,7 +3393,22 @@ class CBfield_image extends cbFieldHandler {
 
 		$fieldDefault				=	'';
 
-		if ( $field->get( 'name' ) == 'canvas' ) {
+		if ( $field->getString( 'name' ) === 'avatar' ) {
+			switch ( $name ) {
+				case 'avatarHeight':
+					$fieldDefault	=	160;
+					break;
+				case 'avatarWidth':
+					$fieldDefault	=	160;
+					break;
+				case 'thumbHeight':
+					$fieldDefault	=	80;
+					break;
+				case 'thumbWidth':
+					$fieldDefault	=	80;
+					break;
+			}
+		} elseif ( $field->getString( 'name' ) === 'canvas' ) {
 			switch ( $name ) {
 				case 'avatarHeight':
 					$fieldDefault	=	640;
@@ -3865,7 +3881,7 @@ class CBfield_image extends cbFieldHandler {
 					}
 				}
 
-				$galleryImages				=	$this->displayImagesGallery( $_CB_framework->getCfg( 'absolute_path' ) . $galleryPath );
+				$galleryImages				=	$this->displayImagesGallery( $_CB_framework->getCfg( 'absolute_path' ) . $galleryPath, 'all' );
 
 				if ( ! in_array( $value, $galleryImages ) ) {
 					$this->_setValidationError( $field, $user, $reason, CBTxt::T( 'UE_UPLOAD_ERROR_CHOOSE', 'You didn\'t choose an image from the gallery.' ) . $value );
@@ -3971,109 +3987,134 @@ class CBfield_image extends cbFieldHandler {
 	 * @return null|string
 	 */
 	function _avatarHtml( &$field, &$user, $reason, $thumbnail = true, $showAvatar = 2 ) {
-		global $_CB_framework, $ueConfig;
+		global $_CB_framework;
 
-		switch ( (int) $field->params->get( 'altText', 0 ) ) {
+		switch ( $field->params->getInt( 'titleText', 0 ) ) {
 			case 2:
-				$alt			=	cbReplaceVars( $field->params->get( 'altTextCustom' ), $user, true, true, array( 'reason' => $reason ) );
-				break;
-			case 1:
-				$alt			=	null;
-				break;
-			default:
-				if ( $field->name == 'avatar' ) {
-					if ( $user && $user->id ) {
-						$alt	=	$user->getFormattedName();
-					} else {
-						$alt	=	null;
-					}
-				} elseif ( $field->name == 'canvas' ) {
-					$alt		=	null;
-				} else {
-					$alt		=	cbReplaceVars( $field->title, $user, true, true, array( 'reason' => $reason ) );		// does htmlspecialchars()
-				}
-				break;
-		}
-
-		switch ( (int) $field->params->get( 'titleText', 0 ) ) {
-			case 2:
-				$title			=	cbReplaceVars( $field->params->get( 'titleTextCustom' ), $user, true, true, array( 'reason' => $reason ) );
+				$title			=	cbReplaceVars( $field->params->getHTML( 'titleTextCustom' ), $user, true, true, array( 'reason' => $reason ) );
 				break;
 			case 1:
 				$title			=	null;
 				break;
 			default:
-				if ( $field->name == 'avatar' ) {
-					if ( $user && $user->id ) {
+				if ( $field->getString( 'name' ) === 'avatar' ) {
+					if ( $user && $user->getInt( 'id' ) ) {
 						$title	=	$user->getFormattedName();
 					} else {
 						$title	=	null;
 					}
-				} elseif ( $field->name == 'canvas' ) {
+				} elseif ( $field->getString( 'name' ) === 'canvas' ) {
 					$title		=	null;
 				} else {
-					$title		=	cbReplaceVars( $field->title, $user, true, true, array( 'reason' => $reason ) );		// does htmlspecialchars()
+					$title		=	cbReplaceVars( $field->getHTML( 'title' ), $user, true, true, array( 'reason' => $reason ) );		// does htmlspecialchars()
 				}
 				break;
 		}
 
+		$approved				=	( $user->getBool( $field->getString( 'name' ) . 'approved', true ) || ( $showAvatar === 10 ) );
+		$isInitials				=	( $field->params->getString( ( ! $approved ? 'pendingDefaultAvatar' : 'defaultAvatar' ), ( in_array( $field->getString( 'name' ), array( 'avatar', 'canvas' ) ) ? 'initial' : '' ) ) === 'initial' );
 		$imgUrl					=	$this->_avatarLivePath( $field, $user, $thumbnail, $showAvatar );
 
-		if ( ! $imgUrl ) {
+		if ( ( ! $imgUrl ) && ( ! $isInitials ) ) {
 			return null;
 		}
 
-		$approved				=	( $user->get( $field->name . 'approved', true, GetterInterface::BOOLEAN ) || ( $showAvatar == 10 ) );
+		if ( $field->getString( 'name' ) === 'canvas' ) {
+			if ( $imgUrl ) {
+				if ( $approved && ( $user->getString( $field->getString( 'name' ) ) != '' ) ) {
+					$position		=	$user->getInt( $field->getString( 'name' ) . 'position', 50 );
 
-		if ( $field->name == 'canvas' ) {
-			if ( ( $user->get( $field->name, null, GetterInterface::STRING ) != '' ) && $approved ) {
-				$position		=	$user->get( $field->name . 'position', 50, GetterInterface::INT );
-
-				if ( $position < 0 ) {
-					$position	=	0;
-				} elseif ( $position > 100 ) {
-					$position	=	100;
+					if ( $position < 0 ) {
+						$position	=	0;
+					} elseif ( $position > 100 ) {
+						$position	=	100;
+					}
+				} else {
+					$position		=	50;
 				}
-			} else {
-				$position		=	50;
+
+				return '<div style="background-image: url(' . $imgUrl . '); background-position-y: ' . $position . '%;"' . ( $title ? ' title="' . htmlspecialchars( $title ) . '"' : null ) . ' class="cbImgCanvas' . ( ! $approved ? ' cbImgCanvasPending' : null ) . ( $thumbnail ? ' cbThumbCanvas' : ' cbFullCanvas' ) . '"></div>';
 			}
 
-			$return				=	'<div style="background-image: url(' . $imgUrl . '); background-position-y: ' . $position . '%;"' . ( $title ? ' title="' . htmlspecialchars( $title ) . '"' : null ) . ' class="cbImgCanvas' . ( ! $approved ? ' cbImgCanvasPending' : null ) . ( $thumbnail ? ' cbThumbCanvas' : ' cbFullCanvas' ) . '"></div>';
-		} else {
-			switch ( $field->params->get( 'imageStyle', 'roundedbordered' ) ) {
-				case 'rounded':
-					$style		=	' rounded';
-					break;
-				case 'roundedbordered':
-					$style		=	' img-thumbnail';
-					break;
-				case 'circle':
-					$style		=	' rounded-circle';
-					break;
-				case 'circlebordered':
-					$style		=	' img-thumbnail rounded-circle';
-					break;
-				default:
-					$style		=	null;
-					break;
-			}
-
-			$profileLink		=	$user->get( '_allowProfileLink', $field->get( '_allowProfileLink', null, GetterInterface::BOOLEAN ), GetterInterface::BOOLEAN ); // For B/C
-
-			if ( $profileLink === null ) {
-				$profileLink	=	$field->params->get( 'fieldProfileLink', true, GetterInterface::BOOLEAN );
-			}
-
-			if ( $profileLink && ( ! in_array( $reason, array( 'profile', 'edit' ) ) ) && $user && $user->id ) {
-				$openTag		=	'<a href="' . $_CB_framework->userProfileUrl( $user->id, true, ( $field->name == 'avatar' ? null : $field->tabid ) ) . '">';
-				$closeTag		=	'</a>';
-			} else {
-				$openTag		=	null;
-				$closeTag		=	null;
-			}
-
-			$return				=	$openTag . '<img src="' . $imgUrl . '"' . ( $alt ? ' alt="' . htmlspecialchars( $alt ) . '"' : null ) . ( $title ? ' title="' . htmlspecialchars( $title ) . '"' : null ) . ' class="cbImgPict' . ( ! $approved ? ' cbImgPictPending' : null ) . ( $thumbnail ? ' cbThumbPict' : ' cbFullPict' ) . $style . '" />' . $closeTag;
+			return '<div style="background: linear-gradient( 0deg, ' . htmlspecialchars( Color::stringToHex( $user->getFormattedName() ) ) . ' 0%, ' . htmlspecialchars( Color::stringToHex( $user->getFormattedName(), 0.9 ) ) . ' 100% );"' . ( $title ? ' title="' . htmlspecialchars( $title ) . '"' : null ) . ' class="cbImgCanvas cbImgCanvasInitial' . ( ! $approved ? ' cbImgCanvasPending' : null ) . ( $thumbnail ? ' cbThumbCanvas' : ' cbFullCanvas' ) . '"></div>';
 		}
+
+		switch ( $field->params->getInt( 'altText', 0 ) ) {
+			case 2:
+				$alt			=	cbReplaceVars( $field->params->getHTML( 'altTextCustom' ), $user, true, true, array( 'reason' => $reason ) );
+				break;
+			case 1:
+				$alt			=	null;
+				break;
+			default:
+				if ( $field->getString( 'name' ) === 'avatar' ) {
+					if ( $user && $user->getInt( 'id' ) ) {
+						$alt	=	$user->getFormattedName();
+					} else {
+						$alt	=	null;
+					}
+				} else {
+					$alt		=	cbReplaceVars( $field->getHTML( 'title' ), $user, true, true, array( 'reason' => $reason ) );		// does htmlspecialchars()
+				}
+				break;
+		}
+
+		switch ( $field->params->getString( 'imageStyle', ( $field->getString( 'name' ) === 'avatar' ? 'circlebordered' : '' ) ) ) {
+			case 'rounded':
+				$style			=	' rounded';
+				break;
+			case 'roundedbordered':
+				$style			=	' img-thumbnail';
+				break;
+			case 'circle':
+				$style			=	' rounded-circle';
+				break;
+			case 'circlebordered':
+				$style			=	' img-thumbnail rounded-circle';
+				break;
+			default:
+				$style			=	null;
+				break;
+		}
+
+		if ( $field->getString( 'name' ) === 'avatar' ) {
+			$style				.=	' cbImgAvatar';
+		}
+
+		$profileLink			=	$user->getBool( '_allowProfileLink', $field->getBool( '_allowProfileLink' ) ); // For B/C
+
+		if ( $profileLink === null ) {
+			$profileLink		=	$field->params->getBool( 'fieldProfileLink', true );
+		}
+
+		if ( $profileLink && ( ! in_array( $reason, array( 'profile', 'edit' ) ) ) && $user && $user->getInt( 'id' ) ) {
+			$openTag			=	'<a href="' . $_CB_framework->userProfileUrl( $user->getInt( 'id' ), true, ( $field->getString( 'name' ) === 'avatar' ? null : $field->getInt( 'tabid' ) ) ) . '">';
+			$closeTag			=	'</a>';
+		} else {
+			$openTag			=	null;
+			$closeTag			=	null;
+		}
+
+		$return 				=	$openTag;
+
+		if ( $imgUrl ) {
+			$return				.=	'<img src="' . $imgUrl . '"' . ( $alt ? ' alt="' . htmlspecialchars( $alt ) . '"' : null ) . ( $title ? ' title="' . htmlspecialchars( $title ) . '"' : null ) . ' class="cbImgPict' . ( ! $approved ? ' cbImgPictPending' : null ) . ( $thumbnail ? ' cbThumbPict' : ' cbFullPict' ) . $style . '" />';
+		} else {
+			if ( in_array( Application::Config()->getInt( 'name_format', 3 ), array( 1, 2, 4, 7, 8, 9, 10, 11 ), true ) ) {
+				$initials		=	cbIsoUtf_strtoupper( $user->getFormattedName( 9 ) );
+			} else {
+				$initials		=	cbIsoUtf_strtoupper( cbutf8_substr( $user->getFormattedName(), 0, 1 ) );
+			}
+
+			$return				.=	'<svg viewBox="0 0 100 100" class="cbImgPict cbImgPictInitial' . ( ! $approved ? ' cbImgPictPending' : null ) . ( $thumbnail ? ' cbThumbPict' : ' cbFullPict' ) . $style . '">'
+								.		'<rect fill="' . htmlspecialchars( Color::stringToHex( $user->getFormattedName() ) ) . '" width="100" height="100" cx="50" cy="50" r="50" />'
+								.		'<text x="50%" y="50%" style="color: #ffffff; line-height: 1;" alignment-baseline="middle" text-anchor="middle" font-size="40" font-weight="600" dy="0.1em" dominant-baseline="middle" fill="#ffffff">'
+								.			$initials
+								.		'</text>'
+								.	'</svg>';
+		}
+
+		$return					.=	$closeTag;
 
 		return $return;
 	}
@@ -4140,10 +4181,12 @@ class CBfield_image extends cbFieldHandler {
 				$imagesBase				=	'canvas';
 			}
 
-			if ( $approvedValue == 0 ) {
-				$icon					=	$field->params->get( 'pendingDefaultAvatar', null );
+			$imageDefault				=	( in_array( $field->getString( 'name' ), array( 'avatar', 'canvas' ) ) ? 'initial' : '' );
 
-				if ( $icon == 'none' ) {
+			if ( $approvedValue == 0 ) {
+				$icon					=	$field->params->get( 'pendingDefaultAvatar', $imageDefault );
+
+				if ( ( $icon == 'none' ) || ( $icon == 'initial' ) ) {
 					return null;
 				} elseif ( $icon ) {
 					if ( ( $icon != 'pending_n.png' ) && ( ! is_file( selectTemplate( 'absolute_path' ) . '/images/' . $imagesBase . '/' . $tn . $icon ) ) ) {
@@ -4155,9 +4198,9 @@ class CBfield_image extends cbFieldHandler {
 					$icon				=	'pending_n.png';
 				}
 			} else {
-				$icon					=	$field->params->get( 'defaultAvatar', null );
+				$icon					=	$field->params->get( 'defaultAvatar', $imageDefault );
 
-				if ( $icon == 'none' ) {
+				if ( ( $icon == 'none' ) || ( $icon == 'initial' ) ) {
 					return null;
 				} elseif ( $icon ) {
 					if ( ( $icon != 'nophoto_n.png' ) && ( ! is_file( selectTemplate( 'absolute_path' ) . '/images/' . $imagesBase . '/' . $tn . $icon ) ) ) {
@@ -4479,10 +4522,10 @@ class CBfield_image extends cbFieldHandler {
 		}
 
 		if ( $field->params->get( 'image_allow_gallery', ( in_array( $fieldName, array( 'avatar', 'canvas' ) ) ? 1 : 0 ) ) ) {
-			$galleryPath						=	$field->params->get( 'image_gallery_path', null );
+			$galleryPath						=	$field->params->getString( 'image_gallery_path' );
 
 			if ( ! $galleryPath ) {
-				if ( $fieldName == 'canvas' ) {
+				if ( $fieldName === 'canvas' ) {
 					$galleryPath				=	'/images/comprofiler/gallery/canvas';
 				} else {
 					$galleryPath				=	'/images/comprofiler/gallery';
@@ -4490,35 +4533,46 @@ class CBfield_image extends cbFieldHandler {
 			}
 
 			$galleryImages						=	$this->displayImagesGallery( $_CB_framework->getCfg( 'absolute_path' ) . $galleryPath );
+			$galleryStyle						=	null;
 
-			$return								.=	'<div id="cbimagefile_gallery_' . htmlspecialchars( $fieldName ) . '" class="form-group row no-gutters mb-0 cb_form_line' . ( $hasChoices ? ' mt-3 hidden' : null ) . ' cbImageFieldGallery">';
+			if ( $fieldName !== 'canvas' ) {
+				switch ( $field->params->getString( 'imageStyle', ( $fieldName === 'avatar' ? 'circlebordered' : '' ) ) ) {
+					case 'rounded':
+						$galleryStyle			=	' rounded';
+						break;
+					case 'roundedbordered':
+						$galleryStyle			=	' img-thumbnail';
+						break;
+					case 'circle':
+						$galleryStyle			=	' rounded-circle';
+						break;
+					case 'circlebordered':
+						$galleryStyle			=	' img-thumbnail rounded-circle';
+						break;
+				}
+			}
 
-			$itemCount							=	0;
+			if ( $fieldName === 'avatar' ) {
+				$galleryStyle					.=	' cbImgAvatar';
+			}
 
-			for ( $i = 0; $i < count( $galleryImages ); $i++ ) {
-				$itemCount++;
+			$return								.=	'<div id="cbimagefile_gallery_' . htmlspecialchars( $fieldName ) . '" class="ml-n2 mr-n2 mb-n3 row no-gutters' . ( $hasChoices ? ' mt-3 hidden' : null ) . ' cbImageFieldGallery">';
 
-				$imgName						=	ucfirst( str_replace( '_', ' ', preg_replace( '/^(.*)\..*$/', '\1', preg_replace( '/^tn/', '', $galleryImages[$i] ) ) ) );
+			foreach ( $galleryImages as $i => $galleryImage ) {
+				$imgName						=	ucfirst( str_replace( '_', ' ', preg_replace( '/^(.*)\..*$/', '\1', preg_replace( '/^tn/', '', $galleryImage ) ) ) );
 
-				if ( $fieldName == 'canvas' ) {
-					$return						.=		'<div class="col-12">'
-												.			'<div class="form-group row no-gutters cb_form_line mb-0' . ( $i != 0 ? ' mt-1' : null ) . '">'
-												.				'<div class="col-1 text-center align-self-center">'
-												.					'<input type="radio" name="' . htmlspecialchars( $fieldName ) . '__gallery" id="' . htmlspecialchars( $fieldName ) . '__gallery_' . (int) $i . '" value="' . htmlspecialchars( $galleryImages[$i] ) . '"' . ( $required == 1 ? ' class="required"' : null ) . ( $galleryImages[$i] == $value ? ' checked' : null ) . ( $hasChoices ? ' disabled="disabled"' : null ) . ' />'
-												.				'</div>'
-												.				'<div class="col-11">'
-												.					'<label for="' . htmlspecialchars( $fieldName ) . '__gallery_' . (int) $i . '" class="m-0 p-0 w-100">'
-												.						'<div style="height: 100px; background-image: url(' . $_CB_framework->getCfg( 'live_site' ) . $galleryPath . '/'. htmlspecialchars( $galleryImages[$i] ) . ')" title="' . htmlspecialchars( $imgName ) . '" class="cbImgCanvas cbThumbCanvas"></div>'
-												.					'</label>'
-												.				'</div>'
-												.			'</div>'
+				if ( $fieldName === 'canvas' ) {
+					$return						.=		'<div class="position-relative col-12 col-md-6 pb-3 pl-2 pr-2">'
+												.			'<input type="radio" name="' . htmlspecialchars( $fieldName ) . '__gallery" id="' . htmlspecialchars( $fieldName ) . '__gallery_' . (int) $i . '" value="' . htmlspecialchars( preg_replace( '/^tn/', '', $galleryImage ) ) . '" class="sr-only' . ( $required == 1 ? ' required' : null ) . '"' . ( $galleryImage == $value ? ' checked' : null ) . ( $hasChoices ? ' disabled="disabled"' : null ) . ' />'
+												.			'<label for="' . htmlspecialchars( $fieldName ) . '__gallery_' . (int) $i . '" class="m-0 p-0 w-100">'
+												.				'<div style="height: 100px; background-image: url(' . $_CB_framework->getCfg( 'live_site' ) . $galleryPath . '/' . htmlspecialchars( $galleryImage ) . ');" title="' . htmlspecialchars( $imgName ) . '" class="cbImgCanvas cbThumbCanvas' . htmlspecialchars( $galleryStyle ) . '"></div>'
+												.			'</label>'
 												.		'</div>';
 				} else {
-					$return						.=		'<div class="pr-2 pb-2 text-center">'
+					$return						.=		'<div class="position-relative col-auto pb-3 pl-2 pr-2 text-center">'
+												.			'<input type="radio" name="' . htmlspecialchars( $fieldName ) . '__gallery" id="' . htmlspecialchars( $fieldName ) . '__gallery_' . (int) $i . '" value="' . htmlspecialchars( preg_replace( '/^tn/', '', $galleryImage ) ) . '" class="sr-only' . ( $required == 1 ? ' required' : null ) . '"' . ( $galleryImage == $value ? ' checked' : null ) . ( $hasChoices ? ' disabled="disabled"' : null ) . ' />'
 												.			'<label for="' . htmlspecialchars( $fieldName ) . '__gallery_' . (int) $i . '" class="m-0 p-0 w-100">'
-												.				'<img src="' . $_CB_framework->getCfg( 'live_site' ) . $galleryPath . '/'. htmlspecialchars( $galleryImages[$i] ) . '" alt="' . htmlspecialchars( $imgName ) . '" title="' . htmlspecialchars( $imgName ) . '" class="img-thumbnail cbThumbPict" />'
-												.				'<br />'
-												.				'<input type="radio" name="' . htmlspecialchars( $fieldName ) . '__gallery" id="' . htmlspecialchars( $fieldName ) . '__gallery_' . (int) $i . '" value="' . htmlspecialchars( $galleryImages[$i] ) . '"' . ( $required == 1 ? ' class="required"' : null ) . ( $galleryImages[$i] == $value ? ' checked' : null ) . ( $hasChoices ? ' disabled="disabled"' : null ) . ' />'
+												.				'<img src="' . $_CB_framework->getCfg( 'live_site' ) . $galleryPath . '/' . htmlspecialchars( $galleryImage ) . '" alt="' . htmlspecialchars( $imgName ) . '" title="' . htmlspecialchars( $imgName ) . '" class="cbImgPict cbThumbPict' . htmlspecialchars( $galleryStyle ) . '" />'
 												.			'</label>'
 												.		'</div>';
 				}
@@ -4583,6 +4637,7 @@ class CBfield_image extends cbFieldHandler {
 		$values					=	array();
 		$values[]				=	moscomprofilerHTML::makeOption( '', CBTxt::T( 'Normal CB Default' ) );
 		$values[]				=	moscomprofilerHTML::makeOption( 'none', CBTxt::T( 'No image' ) );
+		$values[]				=	moscomprofilerHTML::makeOption( 'initial', ( $basePath === 'canvas' ? CBTxt::T( 'Unique Color' ) : CBTxt::T( 'First and Last Initial' ) ) );
 
 		if ( is_dir( selectTemplate( 'absolute_path', null, 1 ) . '/images/' . $basePath ) ) {
 			foreach ( scandir( selectTemplate( 'absolute_path', null, 1 ) . '/images/' . $basePath ) as $avatar ) {
@@ -4599,7 +4654,14 @@ class CBfield_image extends cbFieldHandler {
 		return $this->loadDefaultImages( $name, $value, $control_name, 'canvas' );
 	}
 
-	protected function displayImagesGallery( $path ) {
+	/**
+	 * Returns array of image files based off path
+	 *
+	 * @param string $path
+	 * @param string $size all: return all images; any: return thumbnail or full size
+	 * @return array
+	 */
+	protected function displayImagesGallery( $path, $size = 'any' ) {
 		$dir									=	@opendir( $path );
 		$images									=	array();
 		$index									=	0;
@@ -4607,7 +4669,9 @@ class CBfield_image extends cbFieldHandler {
 		while ( true == ( $file = @readdir( $dir ) ) ) {
 			if ( ( $file != '.' ) && ( $file != '..' ) && is_file( $path . '/' . $file ) && ( ! is_link( $path. '/' . $file ) ) ) {
 				if ( preg_match( '/(\.gif$|\.png$|\.jpg|\.jpeg)$/is', $file ) ) {
-					if ( preg_match( '/^tn/', $file ) ) {
+					if ( $size === 'all' ) {
+						$images[$index]			=	$file;
+					} elseif ( preg_match( '/^tn/', $file ) ) {
 						$full					=	array_search( preg_replace( '/^tn/', '', $file ), $images );
 
 						if ( $full !== false ) {
@@ -6069,16 +6133,16 @@ class CBfield_file extends cbFieldHandler {
 	 * WARNING: direct unchecked access, except if $user is set, then check
 	 * that the logged-in user has rights to edit that $user.
 	 *
-	 * @param  FieldTable  $field
-	 * @param  UserTable   $user
-	 * @param  array       $postdata
-	 * @param  string      $reason     'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
+	 * @param FieldTable     $field
+	 * @param null|UserTable $user
+	 * @param array          $postdata
+	 * @param string         $reason 'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
 	 * @return string                  Expected output.
 	 */
 	public function fieldClass( &$field, &$user, &$postdata, $reason ) {
 		global $_CB_framework;
 
-		if ( ( ! in_array( $reason, array( 'profile', 'edit', 'list' ) ) ) || ( cbGetParam( $_GET, 'function', '' ) != 'download' ) || ( ! $user->id ) ) {
+		if ( ( ! $user ) || ( ! in_array( $reason, array( 'profile', 'edit', 'list' ) ) ) || ( cbGetParam( $_GET, 'function', '' ) != 'download' ) || ( ! $user->id ) ) {
 			return null; // wrong reason, wrong function, or user doesn't exist; do nothing
 		}
 
@@ -8711,14 +8775,18 @@ class CBfield_rating extends cbFieldHandler {
 	 *
 	 * WARNING: direct unchecked access, except if $user is set, then check well for the $reason ...
 	 *
-	 * @param  FieldTable  $field
-	 * @param  UserTable   $user
-	 * @param  array       $postdata
-	 * @param  string      $reason     'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
+	 * @param FieldTable     $field
+	 * @param null|UserTable $user
+	 * @param array          $postdata
+	 * @param string         $reason 'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
 	 * @return string                  Expected output.
 	 */
 	public function fieldClass( &$field, &$user, &$postdata, $reason ) {
 		parent::fieldClass( $field, $user, $postdata, $reason ); // Performs spoof check
+
+		if ( ! $user ) {
+			return null;
+		}
 
 		$userId							=	(int) $user->get( 'id' );
 
@@ -9226,16 +9294,20 @@ class CBfield_points extends CBfield_integer
 	 *
 	 * WARNING: direct unchecked access, except if $user is set, then check well for the $reason ...
 	 *
-	 * @param  FieldTable  $field
-	 * @param  UserTable   $user
-	 * @param  array       $postdata
-	 * @param  string      $reason     'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
+	 * @param FieldTable     $field
+	 * @param null|UserTable $user
+	 * @param array          $postdata
+	 * @param string         $reason 'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
 	 * @return string                  Expected output.
 	 */
 	public function fieldClass( &$field, &$user, &$postdata, $reason ) {
 		global $_CB_framework, $_CB_database;
 
 		parent::fieldClass( $field, $user, $postdata, $reason ); // Performs spoof check
+
+		if ( ! $user ) {
+			return null;
+		}
 
 		$userId							=	(int) $user->get( 'id' );
 

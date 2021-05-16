@@ -42,73 +42,72 @@ class HTML_cbarticlesTab
 		$tabPaging				=	$tab->params->get( 'tab_paging', 1 );
 		$canSearch				=	( $tab->params->get( 'tab_search', 1 ) && ( $searching || $pageNav->total ) );
 
-		$return					=	'<div class="articlesTab">'
-								.		'<form action="' . $_CB_framework->userProfileUrl( $user->id, true, $tab->tabid ) . '" method="post" name="articleForm" id="articleForm" class="m-0 articleForm">';
+		$return					=	'<div class="articlesTab">';
 
 		if ( $canSearch ) {
-			$return				.=			'<div class="row no-gutters mb-2 articlesHeader">'
-								.				'<div class="col-12 offset-sm-8 col-sm-4 text-sm-right">'
+			$return				.=		'<div class="row no-gutters mb-3 articlesHeader">'
+								.			'<div class="col-12 offset-sm-6 col-sm-6 text-sm-right">'
+								.				'<form action="' . $_CB_framework->userProfileUrl( $user->id, true, $tab->tabid ) . '" method="post" name="articleSearchForm" class="m-0 articleSearchForm">'
 								.					'<div class="input-group">'
-								.						'<div class="input-group-prepend">'
-								.							'<span class="input-group-text"><span class="fa fa-search"></span></span>'
-								.						'</div>'
 								.						$input['search']
+								.						'<div class="input-group-append">'
+								.							'<button type="submit" class="btn btn-light border" aria-label="' . htmlspecialchars( CBTxt::T( 'Search' ) ) . '"><span class="fa fa-search"></span></button>'
+								.						'</div>'
 								.					'</div>'
-								.				'</div>'
-								.			'</div>';
+								.				'</form>'
+								.			'</div>'
+								.		'</div>';
 		}
 
-		$return					.=			'<div class="table-responsive articlesContainer">'
-								.				'<table class="table table-hover mb-0">'
-								.					'<thead>'
-								.						'<tr>'
-								.							'<th style="width: 50%;">' . CBTxt::T( 'Article' ) . '</th>'
-								.							'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Category' ) . '</th>'
-								.							'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Created' ) . '</th>'
-								.						'</tr>'
-								.					'</thead>'
-								.					'<tbody>';
+		$return					.=		'<div class="table-responsive articlesContainer">'
+								.			'<table class="table table-hover mb-0">'
+								.				'<thead>'
+								.					'<tr>'
+								.						'<th style="width: 50%;">' . CBTxt::T( 'Article' ) . '</th>'
+								.						'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Category' ) . '</th>'
+								.						'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Created' ) . '</th>'
+								.					'</tr>'
+								.				'</thead>'
+								.				'<tbody>';
 
 		if ( $rows ) foreach ( $rows as $row ) {
-			$return				.=						'<tr>'
-								.							'<td style="width: 50%;"><a href="' . cbarticlesModel::getUrl( $row, true, 'article' ) . '">' . $row->get( 'title' ) . '</a></td>'
-								.							'<td style="width: 25%;" class="d-none d-sm-table-cell">' . ( $row->get( 'category' ) ? '<a href="' . cbarticlesModel::getUrl( $row, true, 'category' ) . '">' . $row->get( 'category_title' ) . '</a>' : CBTxt::T( 'None' ) ) . '</td>'
-								.							'<td style="width: 25%;" class="d-none d-sm-table-cell">' . cbFormatDate( $row->get( 'created' ) ) . '</td>'
-								.						'</tr>';
+			$return				.=					'<tr>'
+								.						'<td style="width: 50%;"><a href="' . cbarticlesModel::getUrl( $row, true, 'article' ) . '">' . $row->get( 'title' ) . '</a></td>'
+								.						'<td style="width: 25%;" class="d-none d-sm-table-cell">' . ( $row->get( 'category' ) ? '<a href="' . cbarticlesModel::getUrl( $row, true, 'category' ) . '">' . $row->get( 'category_title' ) . '</a>' : CBTxt::T( 'None' ) ) . '</td>'
+								.						'<td style="width: 25%;" class="d-none d-sm-table-cell">' . cbFormatDate( $row->get( 'created' ) ) . '</td>'
+								.					'</tr>';
 		} else {
-			$return				.=						'<tr>'
-								.							'<td colspan="3" class="text-left">';
+			$return				.=					'<tr>'
+								.						'<td colspan="3" class="text-left">';
 
 			if ( $searching ) {
-				$return			.=								CBTxt::T( 'No article search results found.' );
+				$return			.=							CBTxt::T( 'No article search results found.' );
 			} else {
 				if ( $viewer->id == $user->id ) {
-					$return		.=								CBTxt::T( 'You have no articles.' );
+					$return		.=							CBTxt::T( 'You have no articles.' );
 				} else {
-					$return		.=								CBTxt::T( 'This user has no articles.' );
+					$return		.=							CBTxt::T( 'This user has no articles.' );
 				}
 			}
 
-			$return				.=							'</td>'
-								.						'</tr>';
+			$return				.=						'</td>'
+								.					'</tr>';
 		}
 
-		$return					.=					'</tbody>';
+		$return					.=				'</tbody>';
 
 		if ( $tabPaging && ( $pageNav->total > $pageNav->limit ) ) {
-			$return				.=					'<tfoot>'
-								.						'<tr>'
-								.							'<td colspan="3" class="text-center">'
-								.								$pageNav->getListLinks()
-								.							'</td>'
-								.						'</tr>'
-								.					'</tfoot>';
+			$return				.=				'<tfoot>'
+								.					'<tr>'
+								.						'<td colspan="3" class="text-center">'
+								.							$pageNav->getListLinks()
+								.						'</td>'
+								.					'</tr>'
+								.				'</tfoot>';
 		}
 
-		$return					.=				'</table>'
-								.			'</div>'
-								.			$pageNav->getLimitBox( false )
-								.		'</form>'
+		$return					.=			'</table>'
+								.		'</div>'
 								.	'</div>';
 
 		return $return;

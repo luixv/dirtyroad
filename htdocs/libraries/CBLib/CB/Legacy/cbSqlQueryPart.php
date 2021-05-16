@@ -412,8 +412,21 @@ class cbSqlQueryPart
 			$column		=	$tableReferences[$this->_json->attributes( 'table' )] . '.' . $_CB_database->NameQuote( $this->_json->attributes( 'name' ) );
 
 			if ( $_CB_database->versionCompare( '5.7.8' ) ) {
-				// JSON is supported so lets perform the extraction of the value based off the JSON path:
-				$column	=	'JSON_EXTRACT( ' . $column . ', ' . $_CB_database->Quote( $path ) . ' )';
+				if ( is_string( $value ) ) {
+					$value		=	cbutf8_strtolower( $value );
+				}
+
+				if ( ( strpos( $path, '*' ) !== false ) && in_array( $operator, array( '=', '!=', '<>', 'LIKE', 'NOT LIKE' ) ) ) {
+					// We're a simple search and the path contains a wildcard so lets utilize JSON_SEARCH instead:
+					$value		=	( $valuetype == 'sql:field' ? ( isset( $tableReferences[$this->attributes( 'valuetable' )] ) ? $tableReferences[$this->attributes( 'valuetable' )] . '.' : '' ) : '' )
+									.	$this->_sqlCleanQuote( $value, $valuetype );
+
+					return "JSON_SEARCH( LOWER( $column ), 'one', $value, NULL, " . $_CB_database->Quote( $path ) . " )"
+							. ( in_array( $operator, array( '=', 'LIKE' ) ) ? " IS NOT NULL" : " IS NULL" );
+				} else {
+					// JSON is supported so lets perform the extraction of the value based off the JSON path:
+					$column		=	'LOWER( JSON_EXTRACT( ' . $column . ', ' . $_CB_database->Quote( $path ) . ' ) )';
+				}
 			}
 		}
 

@@ -11,7 +11,7 @@ namespace CBLib\Registry;
 
 defined('CBLIB') or die();
 
-interface ParamsInterface extends GetterInterface, SetterInterface, HierarchyInterface, NamespaceInterface, \ArrayAccess, \Countable, \IteratorAggregate, \Serializable
+interface ParamsInterface extends GetterInterface, TypedGetterInterface, SetterInterface, HierarchyInterface, NamespaceInterface, \ArrayAccess, \Countable, \IteratorAggregate, \Serializable
 {
 	/**
 	 * Check if a registry path exists without checking parents.

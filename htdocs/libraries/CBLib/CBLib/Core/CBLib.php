@@ -31,7 +31,7 @@ include_once __DIR__ . '/AutoLoader.php';
  */
 class CBLib
 {
-	protected static $THISCBVERSION		=	'2.5.0+build.2021.03.15.20.56.55.bab0ba330';	 	// IMPORTANT: DO NOT CHANGE MANUALLY, but when changing version automatically here also change in cbInstallerPlugin.php, the 8 XML installation files and build.xml and just above
+	protected static $THISCBVERSION		=	'2.5.0+build.2021.05.10.20.17.45.e2ddb4ef9';	 	// IMPORTANT: DO NOT CHANGE MANUALLY, but when changing version automatically here also change in cbInstallerPlugin.php, the 8 XML installation files and build.xml and just above
 	/**
 	 * @var Application
 	 */

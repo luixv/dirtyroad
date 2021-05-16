@@ -539,13 +539,14 @@ function &loadComprofilerUser( $uid ) {
 }
 
 function userProfile( $option, $uid, $submitvalue) {
-	global $ueConfig, $_CB_framework, $_PLUGINS;
+	global $_CB_framework, $_PLUGINS;
 
 	$msg					=	null;
 
 	if ( Application::Input()->get( 'user', null, GetterInterface::STRING ) != '' ) {
 		if ( ! CBuser::getMyInstance()->authoriseView( 'profile', $uid ) ) {
-			$canRegister	=	( ( ! isset( $ueConfig['reg_admin_allowcbregistration'] ) ) || $ueConfig['reg_admin_allowcbregistration'] != '1' );
+			$canRegister	=	( $_CB_framework->getCfg( 'allowUserRegistration' ) != '0' )
+								|| ( Application::Config()->get( 'reg_admin_allowcbregistration', 0, GetterInterface::INT ) == 1 );
 
 			// Can the guest access once registered with default User Group ? (and doing the check only if he even can register to avoid unneeded checks)
 			$canAccess		=	$canRegister && Application::CmsPermissions()->checkGroupsForViewAccessLevel(
@@ -553,7 +554,7 @@ function userProfile( $option, $uid, $submitvalue) {
 				Application::Config()->get( 'profile_viewaccesslevel', 3 )
 			);
 
-			if ( ( $_CB_framework->myId() < 1 ) && ( ! ( ( ( $_CB_framework->getCfg( 'allowUserRegistration' ) == '0' ) && $canRegister ) ) ) && $canAccess ) {
+			if ( ( $_CB_framework->myId() < 1 ) && $canRegister && $canAccess ) {
 				$msg		=	CBTxt::Th( 'UE_REGISTERFORPROFILEVIEW', 'Please log in or sign up to view user profiles.' );
 			} else {
 				$msg		=	CBTxt::Th( 'UE_NOT_AUTHORIZED', 'You are not authorized to view this page!' );
@@ -911,11 +912,14 @@ function sendNewPass( /** @noinspection PhpUnusedParameterInspection */ $option 
 }
 
 function registerForm( $option, $emailpass, $regErrorMSG = null ) {
-	global $_CB_framework, $ueConfig, $_PLUGINS, $_POST;
+	global $_CB_framework, $_PLUGINS, $_POST;
 
 	$msg				=	null;
 
-	if ( ( ( $_CB_framework->getCfg( 'allowUserRegistration' ) == '0' ) && ( ( ! isset( $ueConfig['reg_admin_allowcbregistration'] ) ) || $ueConfig['reg_admin_allowcbregistration'] != '1' ) ) ) {
+	$canRegister	=	( $_CB_framework->getCfg( 'allowUserRegistration' ) != '0' )
+						|| ( Application::Config()->get( 'reg_admin_allowcbregistration', 0, GetterInterface::INT ) == 1 );
+
+	if ( ! $canRegister ) {
 		$msg			=	CBTxt::Th( 'UE_NOT_AUTHORIZED', 'You are not authorized to view this page!' );
 	} elseif ( $_CB_framework->myId() ) {
 		$msg			=	CBTxt::Th( 'UE_ALREADY_LOGGED_IN', 'You are already logged in' );
@@ -967,8 +971,11 @@ function saveRegistration( $option ) {
 	cbSpoofCheck( 'registerForm' );
 	cbRegAntiSpamCheck();
 
+	$canRegister						=	( $_CB_framework->getCfg( 'allowUserRegistration' ) != '0' )
+											|| ( Application::Config()->get( 'reg_admin_allowcbregistration', 0, GetterInterface::INT ) == 1 );
+
 	// Check rights to access:
-	if ( ( ( $_CB_framework->getCfg( 'allowUserRegistration' ) == '0' ) && ( ( ! isset($ueConfig['reg_admin_allowcbregistration']) ) || $ueConfig['reg_admin_allowcbregistration'] != '1' ) ) || $_CB_framework->myId() ) {
+	if ( ( ! $canRegister ) || $_CB_framework->myId() ) {
 		$msg							=	CBTxt::Th( 'UE_NOT_AUTHORIZED', 'You are not authorized to view this page!' );
 	} else {
 		$msg							=	null;

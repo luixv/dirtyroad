@@ -58,48 +58,50 @@ class HTML_cbblogsTab
 			}
 		}
 
-		$return						=	'<div class="blogsTab">'
-									.		'<form action="' . $_CB_framework->userProfileUrl( $user->get( 'id' ), true, $tab->tabid ) . '" method="post" name="blogForm" id="blogForm" class="m-0 blogForm">';
+		$return						=	'<div class="blogsTab">';
 
 		if ( $canCreate || $canSearch ) {
-			$return					.=			'<div class="row no-gutters mb-2 blogsHeader">';
+			$return					.=		'<div class="row no-gutters mb-3 blogsHeader">';
 
 			if ( $canCreate ) {
-				$return				.=				'<div class="col-12 ' . ( $canSearch ? 'col-sm-8 mb-2 mb-sm-0' : null ) . '">'
-									.					'<button type="button" onclick="location.href=\'' . $_CB_framework->pluginClassUrl( $plugin->element, false, array( 'action' => 'blogs', 'func' => 'new' ) ) . '\';" class="btn btn-success btn-sm-block blogsButton blogsButtonNew"><span class="fa fa-plus-circle"></span> ' . CBTxt::T( 'New Blog' ) . '</button>'
-									.				'</div>';
+				$return				.=			'<div class="col-12 ' . ( $canSearch ? 'col-sm-6 mb-2 mb-sm-0' : null ) . '">'
+									.				'<a href="' . $_CB_framework->pluginClassUrl( $plugin->element, true, array( 'action' => 'blogs', 'func' => 'new' ) ) . '" class="btn btn-success btn-sm-block blogsButton blogsButtonNew"><span class="fa fa-plus-circle"></span> ' . CBTxt::T( 'Create New Post' ) . '</a>'
+									.			'</div>';
 			}
 
 			if ( $canSearch ) {
-				$return				.=				'<div class="col-12 ' . ( ! $canCreate ? 'offset-sm-8 ' : null ) . 'col-sm-4 text-sm-right">'
+				$return				.=			'<div class="col-12 ' . ( ! $canCreate ? 'offset-sm-6 ' : null ) . 'col-sm-6 text-sm-right">'
+									.				'<form action="' . $_CB_framework->userProfileUrl( $user->get( 'id' ), true, $tab->tabid ) . '" method="post" name="blogSearchForm" class="m-0 blogSearchForm">'
 									.					'<div class="input-group">'
-									.						'<div class="input-group-prepend">'
-									.							'<span class="input-group-text"><span class="fa fa-search"></span></span>'
-									.						'</div>'
 									.						$input['search']
+									.						'<div class="input-group-append">'
+									.							'<button type="submit" class="btn btn-light border" aria-label="' . htmlspecialchars( CBTxt::T( 'Search' ) ) . '"><span class="fa fa-search"></span></button>'
+									.						'</div>'
 									.					'</div>'
-									.				'</div>';
+									.				'</form>'
+									.			'</div>';
 			}
 
-			$return					.=			'</div>';
+			$return					.=		'</div>';
 		}
 
-		$return						.=			'<div class="table-responsive blogsContainer">'
-									.				'<table class="table table-hover mb-0">'
-									.					'<thead>'
-									.						'<tr>'
-									.							'<th style="width: 50%;">' . CBTxt::T( 'Title' ) . '</th>'
-									.							'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Category' ) . '</th>'
-									.							'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Created' ) . '</th>'
-									.						'</tr>'
-									.					'</thead>'
-									.					'<tbody>';
+		$return						.=		'<div class="table-responsive blogsContainer">'
+									.			'<table class="table table-hover mb-0">'
+									.				'<thead>'
+									.					'<tr>'
+									.						'<th style="width: 50%;">' . CBTxt::T( 'Title' ) . '</th>'
+									.						'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Category' ) . '</th>'
+									.						'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Created' ) . '</th>'
+									.						( $cbModerator || $profileOwner || $canPublish ? '<th style="width: 1%;"></th>' : null )
+									.					'</tr>'
+									.				'</thead>'
+									.				'<tbody>';
 
 		if ( $rows ) foreach ( $rows as $row ) {
-			$return					.=						'<tr>'
-									.							'<td style="width: 50%;">' . ( $row->get( 'published' ) ? '<a href="' . cbblogsModel::getUrl( $row, true, 'article' ) . '">' . $row->get( 'title' ) . '</a>' : $row->get( 'title' ) ) . '</td>'
-									.							'<td style="width: 25%;" class="d-none d-sm-table-cell">' . ( $row->get( 'category_published' ) ? '<a href="' . cbblogsModel::getUrl( $row, true, 'category' ) . '">' . $row->get( 'category' ) . '</a>' : $row->get( 'category' ) ) . '</td>'
-									.							'<td style="width: 25%;" class="d-none d-sm-table-cell clearfix">' . cbFormatDate( $row->get( 'created' ), true, false );
+			$return					.=					'<tr>'
+									.						'<td style="width: 50%;" class="align-middle">' . ( $row->get( 'published' ) ? '<a href="' . cbblogsModel::getUrl( $row, true, 'article' ) . '">' . $row->get( 'title' ) . '</a>' : $row->get( 'title' ) ) . '</td>'
+									.						'<td style="width: 25%;" class="align-middle d-none d-sm-table-cell">' . ( $row->get( 'category_published' ) ? '<a href="' . cbblogsModel::getUrl( $row, true, 'category' ) . '">' . $row->get( 'category' ) . '</a>' : $row->get( 'category' ) ) . '</td>'
+									.						'<td style="width: 25%;" class="align-middle d-none d-sm-table-cell">' . cbFormatDate( $row->get( 'created' ), true, false ) . '</td>';
 
 			if ( $cbModerator || $profileOwner || $canPublish ) {
 				$menuItems			=	'<ul class="list-unstyled dropdown-menu d-block position-relative m-0 blogsMenuItems">';
@@ -122,45 +124,44 @@ class HTML_cbblogsTab
 
 				$menuItems			.=	'</ul>';
 
-				$return				.=								cbTooltip( 1, $menuItems, null, 'auto', null, '<span class="ml-2 fa fa-ellipsis-v"></span>', null, 'class="float-right cbDropdownMenu blogsMenu" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle" data-cbtooltip-open-classes="active"' );
+				$return				.=						'<td style="width: 1%;" class="p-0 align-middle">'
+									.							cbTooltip( null, $menuItems, null, 'auto', null, '<span class="pt-1 pb-1 pl-3 pr-3 text-large fa fa-ellipsis-v"></span>', 'javascript:void(0);', 'class="text-body cbDropdownMenu blogsMenu" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle" data-cbtooltip-open-classes="active"' )
+									.						'</td>';
 			}
 
-			$return					.=							'</td>'
-									.						'</tr>';
+			$return					.=					'</tr>';
 		} else {
-			$return					.=						'<tr>'
-									.							'<td colspan="3">';
+			$return					.=					'<tr>'
+									.						'<td colspan="4">';
 
 			if ( $searching ) {
-				$return				.=								CBTxt::T( 'No blog search results found.' );
+				$return				.=							CBTxt::T( 'No blog search results found.' );
 			} else {
 				if ( $viewer->id == $user->id ) {
-					$return			.=								CBTxt::T( 'You have no blogs.' );
+					$return			.=							CBTxt::T( 'You have no blogs.' );
 				} else {
-					$return			.=								CBTxt::T( 'This user has no blogs.' );
+					$return			.=							CBTxt::T( 'This user has no blogs.' );
 				}
 			}
 
-			$return					.=							'</td>'
-									.						'</tr>';
+			$return					.=						'</td>'
+									.					'</tr>';
 		}
 
-		$return						.=					'</tbody>';
+		$return						.=				'</tbody>';
 
 		if ( $tabPaging && ( $pageNav->total > $pageNav->limit ) ) {
-			$return					.=					'<tfoot>'
-									.						'<tr>'
-									.							'<td colspan="3" class="text-center">'
-									.								$pageNav->getListLinks()
-									.							'</td>'
-									.						'</tr>'
-									.					'</tfoot>';
+			$return					.=				'<tfoot>'
+									.					'<tr>'
+									.						'<td colspan="4" class="text-center">'
+									.							$pageNav->getListLinks()
+									.						'</td>'
+									.					'</tr>'
+									.				'</tfoot>';
 		}
 
-		$return						.=				'</table>'
-									.			'</div>'
-									.			$pageNav->getLimitBox( false )
-									.		'</form>'
+		$return						.=			'</table>'
+									.		'</div>'
 									.	'</div>';
 
 		return $return;

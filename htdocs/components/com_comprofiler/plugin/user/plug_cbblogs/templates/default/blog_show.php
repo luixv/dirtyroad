@@ -38,7 +38,7 @@ class HTML_cbblogsBlog
 
 		$return			=	'<div class="blowShow">'
 						.		'<div class="blogsTitle mb-3 border-bottom cb-page-header"><h3 class="m-0 p-0 mb-2 cb-page-header-title">' . $row->get( 'title' ) . ' <small class="text-muted">' . CBTxt::T( 'WRITTEN_BY_BLOG_AUTHOR', 'Written by [blog_author]', array( '[blog_author]' => $cbUser->getField( 'formatname', null, 'html', 'none', 'list', 0, true ) ) ) . '</small></h3></div>'
-						.		'<div class="blogsHeader card p-2 bg-light mb-2">'
+						.		'<div class="blogsHeader card p-2 bg-light mb-3">'
 						.			CBTxt::T( 'CATEGORY_CATEGORY', 'Category: [category]', array( '[category]' => $row->get( 'category' ) ) )
 						.			' &nbsp;/&nbsp; ' . CBTxt::T( 'CREATED_CREATED', 'Created: [created]', array( '[created]' => cbFormatDate( $row->get( 'created' ) ) ) )
 						.			( $row->get( 'modified' ) && ( $row->get( 'modified' ) != '0000-00-00 00:00:00' ) ? ' &nbsp;/&nbsp; ' . CBTxt::T( 'MODIFIED_MODIFIED', 'Modified: [modified]', array( '[modified]' => cbFormatDate( $row->get( 'modified' ) ) ) ) : null )

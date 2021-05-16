@@ -40,73 +40,72 @@ class HTML_cbforumsTabPosts
 		$tabPaging			=	$tab->params->get( 'tab_posts_paging', 1 );
 		$canSearch			=	( $tab->params->get( 'tab_posts_search', 1 ) && ( $searching || $pageNav->total ) );
 
-		$return				=	'<div class="forumsPostsTab tab-content">'
-							.		'<form action="' . $_CB_framework->userProfileUrl( $user->id, true, $tab->tabid ) . '" method="post" name="forumPostsForm" id="forumPostsForm" class="m-0 forumPostsForm">';
+		$return				=	'<div class="forumsPostsTab tab-content">';
 
 		if ( $canSearch ) {
-			$return			.=			'<div class="row no-gutters mb-2 forumsHeader">'
-							.				'<div class="col-12 offset-sm-8 col-sm-4 text-sm-right">'
+			$return			.=		'<div class="row no-gutters mb-3 forumsHeader">'
+							.			'<div class="col-12 offset-sm-6 col-sm-6 text-sm-right">'
+							.				'<form action="' . $_CB_framework->userProfileUrl( $user->id, true, $tab->tabid ) . '" method="post" name="forumPostsSearchForm" class="m-0 forumPostsSearchForm">'
 							.					'<div class="input-group">'
-							.						'<div class="input-group-prepend">'
-							.							'<span class="input-group-text"><span class="fa fa-search"></span></span>'
-							.						'</div>'
 							.						$input['search']
+							.						'<div class="input-group-append">'
+							.							'<button type="submit" class="btn btn-light border" aria-label="' . htmlspecialchars( CBTxt::T( 'Search' ) ) . '"><span class="fa fa-search"></span></button>'
+							.						'</div>'
 							.					'</div>'
-							.				'</div>'
-							.			'</div>';
+							.				'</form>'
+							.			'</div>'
+							.		'</div>';
 		}
 
-		$return				.=			'<div class="table-responsive forumsContainer">'
-							.				'<table class="table table-hover mb-0">'
-							.					'<thead>'
-							.						'<tr>'
-							.							'<th style="width: 50%;">' . CBTxt::T( 'Subject' ) . '</th>'
-							.							'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Category' ) . '</th>'
-							.							'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Date' ) . '</th>'
-							.						'</tr>'
-							.					'</thead>'
-							.					'<tbody>';
+		$return				.=		'<div class="table-responsive forumsContainer">'
+							.			'<table class="table table-hover mb-0">'
+							.				'<thead>'
+							.					'<tr>'
+							.						'<th style="width: 50%;">' . CBTxt::T( 'Subject' ) . '</th>'
+							.						'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Category' ) . '</th>'
+							.						'<th style="width: 25%;" class="d-none d-sm-table-cell">' . CBTxt::T( 'Date' ) . '</th>'
+							.					'</tr>'
+							.				'</thead>'
+							.				'<tbody>';
 
 		if ( $rows ) foreach ( $rows as $row ) {
-			$return			.=						'<tr>'
-							.							'<td style="width: 50%;"><a href="' . ( isset( $row->url ) ? $row->url : cbforumsModel::getForumURL( $row->category_id, $row->id ) ) . '">' . cbforumsClass::cleanPost( $row->subject ) . '</a></td>'
-							.							'<td style="width: 25%;" class="d-none d-sm-table-cell"><a href="' . ( isset( $row->category_url ) ? $row->category_url : cbforumsModel::getForumURL( $row->category_id ) ) . '">' . cbforumsClass::cleanPost( $row->category_name ) . '</a></td>'
-							.							'<td style="width: 25%;" class="d-none d-sm-table-cell">' . cbFormatDate( date( 'Y-m-d H:i:s', $row->date ) ) . '</td>'
-							.						'</tr>';
+			$return			.=					'<tr>'
+							.						'<td style="width: 50%;"><a href="' . ( isset( $row->url ) ? $row->url : cbforumsModel::getForumURL( $row->category_id, $row->id ) ) . '">' . cbforumsClass::cleanPost( $row->subject ) . '</a></td>'
+							.						'<td style="width: 25%;" class="d-none d-sm-table-cell"><a href="' . ( isset( $row->category_url ) ? $row->category_url : cbforumsModel::getForumURL( $row->category_id ) ) . '">' . cbforumsClass::cleanPost( $row->category_name ) . '</a></td>'
+							.						'<td style="width: 25%;" class="d-none d-sm-table-cell">' . cbFormatDate( date( 'Y-m-d H:i:s', $row->date ) ) . '</td>'
+							.					'</tr>';
 		} else {
-			$return			.=						'<tr>'
-							.							'<td colspan="3">';
+			$return			.=					'<tr>'
+							.						'<td colspan="3">';
 
 			if ( $searching ) {
-				$return		.=								CBTxt::T( 'No post search results found.' );
+				$return		.=							CBTxt::T( 'No post search results found.' );
 			} else {
 				if ( $viewer->id == $user->id ) {
-					$return	.=								CBTxt::T( 'You have no posts.' );
+					$return	.=							CBTxt::T( 'You have no posts.' );
 				} else {
-					$return	.=								CBTxt::T( 'This user has no posts.' );
+					$return	.=							CBTxt::T( 'This user has no posts.' );
 				}
 			}
 
-			$return			.=							'</td>'
-							.						'</tr>';
+			$return			.=						'</td>'
+							.					'</tr>';
 		}
 
-		$return				.=					'</tbody>';
+		$return				.=				'</tbody>';
 
 		if ( $tabPaging && ( $pageNav->total > $pageNav->limit ) ) {
-			$return			.=					'<tfoot>'
-							.						'<tr>'
-							.							'<td colspan="3" class="text-center">'
-							.								$pageNav->getListLinks()
-							.							'</td>'
-							.						'</tr>'
-							.					'</tfoot>';
+			$return			.=				'<tfoot>'
+							.					'<tr>'
+							.						'<td colspan="3" class="text-center">'
+							.							$pageNav->getListLinks()
+							.						'</td>'
+							.					'</tr>'
+							.				'</tfoot>';
 		}
 
-		$return				.=				'</table>'
-							.			'</div>'
-							.			$pageNav->getLimitBox( false )
-							.		'</form>'
+		$return				.=			'</table>'
+							.		'</div>'
 							.	'</div>';
 
 		return $return;

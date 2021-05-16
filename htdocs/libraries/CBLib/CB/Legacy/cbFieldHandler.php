@@ -1694,10 +1694,10 @@ class cbFieldHandler extends cbPluginHandler
 	 *
 	 * WARNING: direct unchecked access, except if $user is set, then check well for the $reason ...
 	 *
-	 * @param  FieldTable  $field
-	 * @param  UserTable    $user
-	 * @param  array                 $postdata
-	 * @param  string                $reason     'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
+	 * @param FieldTable     $field
+	 * @param null|UserTable $user
+	 * @param array          $postdata
+	 * @param string         $reason 'profile' for user profile view, 'edit' for profile edit, 'register' for registration, 'search' for searches (always public!)
 	 * @return string                            Expected output.
 	 */
 	public function fieldClass( /** @noinspection PhpUnusedParameterInspection */ &$field, &$user, &$postdata, $reason )

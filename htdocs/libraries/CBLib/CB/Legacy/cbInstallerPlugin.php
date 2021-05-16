@@ -87,7 +87,7 @@ class cbInstallerPlugin extends cbInstaller
 		$v						=	$cbInstallXML->getElementByPath( 'version' );
 		$version				=	$v->data();
 		// We need to keep the use of a duplicate string here for upgrades from CB 2.0.13-. Can't use CBLib::version() as old CBLib may already be loaded. (fixes bug #5881)
-		$THISCBVERSION			=	'2.5.0+build.2021.03.15.20.56.55.bab0ba330';               // IMPORTANT: DO NOT CHANGE MANUALLY, but when changing version automatically here also change 2 times in CBLib.php, the 8 XML installation files and build.xml
+		$THISCBVERSION			=	'2.5.0+build.2021.05.10.20.17.45.e2ddb4ef9';               // IMPORTANT: DO NOT CHANGE MANUALLY, but when changing version automatically here also change 2 times in CBLib.php, the 8 XML installation files and build.xml
 		if ( ( $version == $ueConfig['version'] ) || ( $version == $THISCBVERSION ) || ( version_compare( $version, $ueConfig['version'], '<=' ) && version_compare( $version, '1.0', '>=' ) ) ) {
 			;
 		} else {

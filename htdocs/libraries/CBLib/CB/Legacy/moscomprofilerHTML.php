@@ -704,14 +704,15 @@ abstract class moscomprofilerHTML
 	 * Simple Javascript email cloaking
 	 * By default replaces an email with a mailto link with email cloacked
 	 *
-	 * @param  string   $mail
-	 * @param  int      $mailTo
-	 * @param  string   $text
-	 * @param  int      $email
-	 * @param  boolean  $cloakText
+	 * @param string  $mail
+	 * @param int     $mailTo
+	 * @param string  $text
+	 * @param int     $email
+	 * @param boolean $cloakText
+	 * @param string  $cloakClasses
 	 * @return string
 	 */
-	public static function emailCloaking( $mail, $mailTo = 1, $text = '', $email = 1, $cloakText = true )
+	public static function emailCloaking( $mail, $mailTo = 1, $text = '', $email = 1, $cloakText = true, $cloakClasses = null )
 	{
 		global $_CB_framework;
 
@@ -765,7 +766,7 @@ abstract class moscomprofilerHTML
 					$js					.=	"\n		var addy_text". $rand ." = '". $text ."';";
 				}
 				$js				.=	"\n		$('#cbMa" . $spanId . "').html("
-					.				"'<a ' + path + '\\'' + prefix + ':' + addy". $rand ." + '\\'>'"
+					.				"'<a ' + path + '\\'' + prefix + ':' + addy". $rand ." + '\\'" . ( $cloakClasses ? ' class="' . htmlspecialchars( $cloakClasses ) . '"' : '' ) . ">'"
 					.				" + addy_text". $rand
 					.				" + '</a>'"
 					.			");"

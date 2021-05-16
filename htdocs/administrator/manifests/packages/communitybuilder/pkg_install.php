@@ -20,6 +20,7 @@ class pkg_communitybuilderInstallerScript {
 	 */
 	private $versions = array(
 		'php' => array (
+			'8.0' => '8.0.0',
 			'7.4' => '7.4.0',
 			'7.3' => '7.3.0',
 			'7.2' => '7.2.0',
@@ -29,7 +30,7 @@ class pkg_communitybuilderInstallerScript {
 			'5.5' => '5.5.0',
 			'5.4' => '5.4.0',
 			'5.3' => '5.3.3',
-			'0' => '7.4.7' // Preferred version
+			'0' => '8.0.5' // Preferred version
 		),
 		'mysql' => array (
 			'8.0' => '8.0',
@@ -37,11 +38,12 @@ class pkg_communitybuilderInstallerScript {
 			'5.6' => '5.6',
 			'5.5' => '5.5',
 			'5.1' => '5.1',
-			'0' => '5.7.30' // Preferred version
+			'0' => '8.0.24' // Preferred version
 		),
 		'joomla' => array (
 			'5.0.0-alpha1' => '999.9',		// 999.9 = incompatible
-			'4.0.0-beta6' => '4.0.0-beta6',
+			'4.0.0-beta7' => '4.0.0-beta7',
+			'3.10-alpha5' => '3.10-alpha5',
 			'3.9' => '3.9.0',
 			'3.8' => '3.8.0',
 			'3.7' => '3.7.0',
@@ -53,7 +55,7 @@ class pkg_communitybuilderInstallerScript {
 			'3.1' => '3.1.0',
 			'3.0' => '3.0.0',
 			'2.5' => '2.5.0',
-			'0' => '3.9.19' // Preferred version
+			'0' => '3.9.26' // Preferred version
 		)
 	);
 

@@ -84,6 +84,7 @@ class cbMenuHandler
 	protected $htmlLeaf					=	null;
 	protected $htmlText					=	null;
 	protected $htmlSeparator			=	null;
+	protected $htmlIntegrations			=	null;
 	public $js							=	null;
 	public $jQuery						=	null;
 
@@ -333,7 +334,7 @@ class cbMenuHandler
 			case 'end':
 				$params['level']				-=	1;
 
-				$return							.=	sprintf( $this->htmlEnd, $params['nbMainMenus'] );
+				$return							.=	$this->htmlEnd;
 				break;
 			case 'down':
 				$return							.=	sprintf( $this->htmlDown[$params['level']-1], $val, $params['idCounter']++, $key );
@@ -429,17 +430,17 @@ class cbMenuBest extends cbMenu
 			case 1:
 				$isHtml			=	( substr( ltrim( $this->link ), 0, 1 ) == '<' );
 
-				$return			.=	'<li id="cbmenu' . $idCounter . '" class="nav-item' . ( $isHtml && $this->class ? ' ' . $this->class : null ) . ' cbMenu cbMenu' . $key . '">';
+				$return			.=	'<li id="cbmenu' . $idCounter . '" class="nav-item' . ( $isHtml && $this->class ? ' ' . $this->class : null ) . ' cbMenu cbMenu' . $key . ' cbNavBarItem">';
 
 				if ( $isHtml ) {
-					$return		.=	'<div class="nav-link">' . $this->link . '</div>';
+					$return		.=	'<div class="nav-link cbNavBarLink">' . $this->link . '</div>';
 				} else {
 					$return		.=	'<a href="' . $this->link . '"';
 
 					if ( isset( $this->class ) && $this->class ) {
-						$return	.=	' class="' . $this->class . ' nav-link"';
+						$return	.=	' class="' . $this->class . ' nav-link cbNavBarLink"';
 					} else {
-						$return	.=	' class="nav-link"';
+						$return	.=	' class="nav-link cbNavBarLink"';
 					}
 
 					if ( isset( $this->target ) && $this->target ) {
@@ -507,42 +508,37 @@ class cbBarMenuHandler extends cbMenuHandler
 {
 	public function __construct( )
 	{
-		$this->jQuery			=	"$( '.cbMenuNavBar' ).on( 'click', '.cbMenuNavBarToggle', function() {"
-								.		"var navbar = $( this ).siblings( '.navbar-collapse' );"
-								.		"if ( ! navbar.hasClass( 'show' ) ) {"
-								.			"navbar.addClass( 'show' );"
-								.			"$( this ).removeClass( 'collapsed' );"
-								.			"$( this ).attr( 'aria-expanded', true );"
-								.		"} else {"
-								.			"navbar.removeClass( 'show' );"
-								.			"$( this ).addClass( 'collapsed' );"
-								.			"$( this ).attr( 'aria-expanded', false );"
-								.		"}"
-								.	"});";
+		parent::__construct();
 
-		$this->htmlBegin		=	'<div class="navbar navbar-expand-sm navbar-light bg-light mb-0 border cbMenuNavBar" role="navigation">'
-								.		'<button type="button" class="navbar-toggler ml-auto cbMenuNavBarToggle" aria-controls="cbmenunav" aria-expanded="false" aria-label="' . htmlspecialchars( CBTxt::T( 'Toggle Menu' ) ) . '">'
-								.			'<span class="navbar-toggler-icon"></span>'
-								.		'</button>'
-								.		'<div class="collapse navbar-collapse h-auto" id="cbmenunav">'
-								.			'<ul class="navbar-nav flex-wrap m-0 w-100 cbMenuNav">';
+		$this->htmlBegin		=	'<div class="navbar navbar-expand navbar-light bg-light mb-0 border cbNavBar cbMenuNavBar" role="navigation">'
+								.		'<input type="checkbox" id="cbmenunavoverflow" aria-hidden="true" tabindex="-1" class="d-none cbNavBarOverflowToggle" />'
+								.		'<div class="collapse navbar-collapse cbNavBarContainer" id="cbmenunav">'
+								.			'<ul class="navbar-nav flex-wrap flex-grow-1 m-0 cbNavBarMenu">';
 
-		$this->htmlEnd			=			'</ul>'
+		$this->htmlEnd			=				'<li class="position-absolute nav-item cbNavBarItem cbNavBarOverflow">'
+								.					'<label for="cbmenunavoverflow" aria-hidden="true" class="m-0 nav-link cbNavBarLink">'
+								.						'<span class="fa fa-bars cbNavBarOverflowMoreIcon"></span>'
+								.						'<span class="fa fa-times cbNavBarOverflowCloseIcon"></span>'
+								.						' ' . CBTxt::T( 'CBNAV_MORE', 'More' )
+								.					'</label>'
+								.				'</li>'
+								.			'</ul>'
+								.			( $this->htmlIntegrations ? '<div class="ml-auto d-flex align-items-center text-nowrap cbNavBarSticky">' . $this->htmlIntegrations . '</div>' : null )
 								.		'</div>'
 								.	'</div>';
 
 		$this->htmlDown			=	array();
 
-		$this->htmlDown[]		=	'<li id="cbmenu%2$d" class="nav-item dropdown cbMenu cbMenu%3$s cbTooltip" data-cbtooltip-tooltip-target="#cbsubmenu%2$d" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbMenuDropdown" data-cbtooltip-adjust-y="0" data-cbtooltip-open-classes="show">'
-								.		'<a href="javascript: void(0);" class="nav-link dropdown-toggle">%1$s</a>'
+		$this->htmlDown[]		=	'<li id="cbmenu%2$d" class="nav-item dropdown cbMenu cbMenu%3$s cbTooltip cbNavBarItem" data-cbtooltip-tooltip-target="#cbsubmenu%2$d" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbMenuDropdown" data-cbtooltip-adjust-y="0" data-cbtooltip-open-classes="show">'
+								.		'<a href="javascript: void(0);" class="nav-link dropdown-toggle cbNavBarLink">%1$s</a>'
 								.			'<ul id="cbsubmenu%2$d" class="list-unstyled dropdown-menu cbSubMenu">';
 
-		$this->htmlDown[]		=	'<li id="cbmenu%2$d" class="nav-item dropdown cbMenuL2 cbMenu%3$s cbTooltip" data-cbtooltip-tooltip-target="#cbsubmenu%2$d" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbMenuDropdown" data-cbtooltip-adjust-y="0" data-cbtooltip-open-classes="show">'
-								.		'<a href="javascript: void(0);" class="nav-link dropdown-toggle">%1$s</a>'
+		$this->htmlDown[]		=	'<li id="cbmenu%2$d" class="nav-item dropdown cbMenuL2 cbMenu%3$s cbTooltip cbNavBarItem" data-cbtooltip-tooltip-target="#cbsubmenu%2$d" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbMenuDropdown" data-cbtooltip-adjust-y="0" data-cbtooltip-open-classes="show">'
+								.		'<a href="javascript: void(0);" class="nav-link dropdown-toggle cbNavBarLink">%1$s</a>'
 								.			'<ul id="cbsubmenu%2$d" class="list-unstyled dropdown-menu cbSubMenuL2">';
 
-		$this->htmlDown[]		=	'<li id="cbmenu%2$d" class="nav-item dropdown cbMenuL3 cbMenu%3$s cbTooltip" data-cbtooltip-tooltip-target="#cbsubmenu%2$d" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbMenuDropdown" data-cbtooltip-adjust-y="0" data-cbtooltip-open-classes="show">'
-								.		'<a href="javascript: void(0);" class="nav-link dropdown-toggle">%1$s</a>'
+		$this->htmlDown[]		=	'<li id="cbmenu%2$d" class="nav-item dropdown cbMenuL3 cbMenu%3$s cbTooltip cbNavBarItem" data-cbtooltip-tooltip-target="#cbsubmenu%2$d" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbMenuDropdown" data-cbtooltip-adjust-y="0" data-cbtooltip-open-classes="show">'
+								.		'<a href="javascript: void(0);" class="nav-link dropdown-toggle cbNavBarLink">%1$s</a>'
 								.			'<ul id="cbsubmenu%2$d" class="list-unstyled dropdown-menu cbSubMenuL3">';
 
 		$this->htmlUp			=	array();
@@ -561,7 +557,7 @@ class cbBarMenuHandler extends cbMenuHandler
 		$this->htmlLeaf[]		=	'<div class="cbMenuSingleText">%s</div>';
 
 		$this->htmlLeaf[]		=	'<div id="cbmenu%3$d" class="dropdown cbMenu cbTooltip" data-cbtooltip-tooltip-target="#cbsubmenu%3$d" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbMenuDropdown" data-cbtooltip-adjust-y="0" data-cbtooltip-open-classes="show">'
-								.		'<a href="%1$s" class="nav-link dropdown-toggle">%2$s</a>'
+								.		'<a href="%1$s" class="nav-link dropdown-toggle cbNavBarLink">%2$s</a>'
 								.	'</div>';
 
 		$this->htmlLeaf[]		=	'<li class="cbMenuLeaf2 cbMenu%3$s"><a href="%s" class="dropdown-item">%s</a></li>';
@@ -892,6 +888,17 @@ class cbMenuULlist extends cbMenu
 
 class cbMenuBar extends cbBarMenuHandler
 {
+	public function __construct( $user )
+	{
+		global $_PLUGINS;
+
+		$_PLUGINS->loadPluginGroup( 'user' );
+
+		$this->htmlIntegrations	=	implode( '', $_PLUGINS->trigger( 'onAfterMenu', array( $user ) ) );
+
+		parent::__construct();
+	}
+
 	public function outputScripts( )
 	{
 		initToolTip( 1 );
@@ -950,21 +957,21 @@ class getMenuTab extends cbTabHandler
 		switch ( $params->get( 'menuFormat', 'menuBar' ) ) {
 			case 'menuList':
 			case 'no':
-				$this->menuBar		=	new cbMenuList( 1 );
+				$this->menuBar		=	new cbMenuList();
 				break;
 			case 'menuUL':
-				$this->menuBar		=	new cbMenuUL( 1 );
+				$this->menuBar		=	new cbMenuUL();
 				break;
 			case 'menuDivs':
-				$this->menuBar		=	new cbMenuDivs( 1 );
+				$this->menuBar		=	new cbMenuDivs();
 				break;
 			case 'menuBar':
 			default:
-				$this->menuBar		=	new cbMenuBar( 1 );
+				$this->menuBar		=	new cbMenuBar( $user );
 				break;
 		}
 
-		$this->menuBar->outputScripts( 1 );
+		$this->menuBar->outputScripts();
 	}
 
 	/**
@@ -1216,18 +1223,18 @@ class getMenuTab extends cbTabHandler
 						$tooltip					.=	'<form action="' . $connUrl . '" method="post" id="connOverForm" name="connOverForm" class="cb_form m-0 cbValidation cbConnReqForm">'
 													.		'<div class="form-group row no-gutters cbft_textarea cbtt_group cb_form_line">'
 													.			'<div class="cb_field col-12">'
-													.				'<textarea cols="40" rows="8" name="message" class="form-control"></textarea>'
+													.				'<textarea cols="40" rows="8" name="message" class="form-control input-block"></textarea>'
 													.			'</div>'
 													.		'</div>'
 													.		'<div class="row no-gutters cb_form_line cbConnReqButtons">'
 													.			'<div class="col-12">'
-													.				'<input type="submit" class="btn btn-primary cbConnReqSubmit" value="' . htmlspecialchars( CBTxt::Th( 'UE_SENDCONNECTIONREQUEST', 'Request Connection' ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
-													.				' <input type="button" id="cbConnReqCancel" class="btn btn-secondary cbConnReqCancel cbTooltipClose" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCELCONNECTIONREQUEST', 'Cancel' ) ) . '" />'
+													.				'<input type="submit" class="btn btn-primary btn-sm-block cbConnReqSubmit" value="' . htmlspecialchars( CBTxt::Th( 'UE_SENDCONNECTIONREQUEST', 'Request Connection' ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
+													.				' <input type="button" id="cbConnReqCancel" class="btn btn-secondary btn-sm-block cbConnReqCancel cbTooltipClose" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCELCONNECTIONREQUEST', 'Cancel' ) ) . '" />'
 													.			'</div>'
 													.		'</div>'
 													.	'</form>';
 
-						$connLink					=	'javascript: void(0);" onclick="cbjQuery.cbmodal( ' . htmlspecialchars( json_encode( $tooltip, JSON_HEX_TAG ) ) . ', { title: ' . htmlspecialchars( json_encode( $tooltipTitle, JSON_HEX_TAG ) ) . ' } )';
+						$connLink					=	'javascript: void(0);"' . cbTooltip( null, $tooltip, $tooltipTitle, 800, null, null, null, 'data-hascbtooltip="true" data-cbtooltip-modal="true"' );
 						$connImg					=	'<span class="fa fa-heart"></span> ';
 					} else {
 						$connLink					=	$connUrl;
@@ -1524,21 +1531,21 @@ class getStatusTab extends cbTabHandler
 
 		switch ( $params->get( 'statusFormat', 'menuList' ) ) {
 			case 'menuBar':
-				$this->menuList		=	new cbMenuBar( 1 );
+				$this->menuList		=	new cbMenuBar( $user );
 				break;
 			case 'menuUL':
-				$this->menuList		=	new cbMenuUL( 1 );
+				$this->menuList		=	new cbMenuUL();
 				break;
 			case 'menuDivs':
-				$this->menuList		=	new cbMenuDivs( 1 );
+				$this->menuList		=	new cbMenuDivs();
 				break;
 			case 'menuList':
 			default:
-				$this->menuList		=	new cbMenuList( 1 );
+				$this->menuList		=	new cbMenuList();
 				break;
 		}
 
-		$this->menuList->outputScripts( 1 );
+		$this->menuList->outputScripts();
 	}
 
 	/**

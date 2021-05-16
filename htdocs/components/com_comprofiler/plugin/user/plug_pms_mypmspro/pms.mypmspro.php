@@ -34,7 +34,7 @@ $_PLUGINS->registerFunction( 'onAfterDeleteUser', 'deleteMessages', '\CB\Plugin\
 
 $_PLUGINS->registerFunction( 'mod_onCBAdminMenu', 'adminMenu', '\CB\Plugin\PMS\Trigger\AdminTrigger' );
 
-$_PLUGINS->registerFunction( 'onPrepareMenus', 'getMessages','\CB\Plugin\PMS\Trigger\MenuTrigger' );
+$_PLUGINS->registerFunction( 'onAfterMenu', 'getMessages','\CB\Plugin\PMS\Trigger\MenuTrigger' );
 
 class getmypmsproTab extends cbPMSHandler
 {

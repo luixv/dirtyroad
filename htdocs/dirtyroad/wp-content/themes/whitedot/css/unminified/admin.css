@@ -1,0 +1,494 @@
+.rate-us {
+    padding: 20px 40px;
+    background: #f9f9f9;
+    padding-bottom: 40px;
+}
+.rate-us p {
+    font-size: 14px;
+}
+.rate-us a {
+    box-shadow: 0 17px 25px -14px #00b9eb;
+    text-transform: uppercase;
+}
+
+
+.whitedot-notice {
+    position: relative;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.06);
+    padding: 6px 20px;
+}
+
+.whitedot-notice p {
+    font-size: 15px;
+}
+
+.whitedot-notice-btn {
+    text-decoration: none;
+    color: #fff;
+    background: #00b9eb;
+    font-size: 15px;
+    padding: 8px 12px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-right: 10px;
+    transition: .3s;
+    margin-top: 8px;
+}
+
+.whitedot-notice-btn:hover,
+.whitedot-notice-btn:focus,
+.whitedot-notice-btn:active {
+    color: #fff;
+    background: #00a9d6;
+    box-shadow: none;
+    border: 0;
+}
+
+@media(min-width: 768px){
+
+    .whitedot-notice.premium {
+        padding: 0;
+        height: 150px;
+        border-radius: 0px;
+    }
+
+    .whitedot-notice.premium img {
+        width: 150px;
+        float: left;
+        margin-right: 15px;
+    }
+
+    .whitedot-notice.premium .whitedot-notice-btn {
+        text-decoration: none;
+        color: #00b9eb;
+        font-size: 15px;
+        background: transparent;
+        padding: 4px 0;
+        border-radius: 0;
+        display: inline-block;
+        margin-right: 0;
+        transition: .3s;
+        margin-top: 4px;
+    }
+
+    .notice-content {
+        padding: 10px 15px;
+    }
+
+}
+
+@media(max-width: 767px){
+
+    .whitedot-notice.premium img {
+        display: none;
+    }
+
+}
+
+/*WhiteDot Settings Page*/
+
+.whitedot-premium {
+    background: #00b9eb;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    margin: 5% 0;
+}
+
+.whitedot-premium h2 {
+    color: #fff;
+    font-size: 22px;
+}
+
+.whitedot-premium p {
+    font-size: 16px;
+}
+
+.whitedot-premium .btns {
+    text-decoration: none;
+    color: #fff;
+    font-size: 17px;
+    margin: 1%;
+    display: inline-block;
+    background: #18ceff;
+    padding: 15px 20px;
+    box-shadow: 4px 4px 20px #00000020;
+    transition: .3s;
+}
+
+.whitedot-premium .btns:hover {
+    box-shadow: 4px 4px 30px #00000030;
+    background: #1dc3f0;
+}
+
+.whitedot-premium .notice-dismiss:before{
+    color: #fff;
+    font-size: 20px;
+}
+
+
+.whitedot-options-page .whitedot-settings-wrap {
+    background: #fff;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.07);
+    position: relative;
+}
+
+.whitedot-options-page .whitedot-setting-header{
+    min-height: 60px;
+    background: #555;
+}
+
+.whitedot-options-page .whitedot_icon,
+.whitedot-options-page #whitedot-icon {
+    height: 60px;
+    float: left;
+    margin-right: 15px;
+}
+
+.whitedot-options-page .whitedot_icon img,
+.whitedot-options-page #whitedot-icon img {
+    height: 60px;
+}
+
+.whitedot-options-page .whitedot-setting-header h1 {
+    line-height: 60px;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+
+.whitedot-options-page .nav-tab-wrapper {
+    padding: 0;
+    background: #6e6e6e;
+    border: 0;
+    margin-bottom: 25px;
+}
+
+.whitedot-options-page .nav-tab {
+    margin: 0;
+    background: transparent;
+    color: #fff;
+    border: 0;
+    padding: 10px 20px;
+}
+
+.whitedot-options-page .nav-tab-active {
+    background-color: #8e8e8e!important;
+    box-shadow: none;
+}
+
+.whitedot-options-page .whitedot-setting-content {
+    padding: 0 30px;
+    padding-bottom: 30px;
+}
+
+.whitedot-options-page .nav-tab:focus, .whitedot-options-page .nav-tab:hover {
+    background-color: #8e8e8e;
+    color: #fff;
+    border: 0;
+    box-shadow: none;
+    outline: none;
+}
+.whitedot-options-page .button-primary {
+    border: 0;
+    padding: 10px 30px;
+    width: auto;
+    height: auto;
+    background: #00b9eb;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.whitedot-options-page #setting-error-settings_updated {
+    border: 0;
+    position: absolute;
+    width: 300px;
+    bottom: 10px;
+    right: 30px;
+    background: #f0eeee;
+    box-shadow: none;
+    border-radius: 3px;
+}
+
+/*Options Page WhATS NEW*/
+.whitedot-whats-new {
+    margin: 20px;
+    padding: 30px;
+    padding-top: 10px;
+    background: #fbfbfb;
+    border-radius: 4px;
+    position: relative;
+}
+
+.whitedot-whats-new button.notice-dismiss:before {
+    font-size: 20px!important;
+}
+
+.whitedot-whats-new h2 {
+    font-size: 19px;
+}
+
+.new-feature {
+    margin: 15px 0;
+    border: 1px solid #ededed;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.new-feature a {
+    padding: 6px 15px!important;
+}
+
+/*Getting Started*/
+
+.whitedot-getting-started-wrap {
+    padding: 0 50px 50px;
+}
+
+h2.getting-started-head {
+    font-size: 20px;
+    text-align: center;
+}
+
+.whitedot-getting-started-wrap p {
+    font-size: 14px;
+    text-align: center;
+}
+
+.whitedot-customize-btns{
+    text-align: center;
+}
+
+.whitedot-customize-btn {
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 20px;
+    color: #555;
+    text-align: center;
+    font-size: 16px;
+    background: #ddd;
+    padding: 20px 30px;
+    border-radius: 3px;
+    transition: .3s;
+    width: 35%;
+}
+
+.whitedot-customize-btn:hover,
+.whitedot-customize-btn.customize:hover {
+    color: #fff;
+    background: #008ec2;
+}
+
+.whitedot-customize-btn.customize {
+    color: #fff;
+    background: #00b9eb;
+}
+
+.whitedot-branding-setting {
+    margin-top: 50px;
+}
+
+.whitedot-branding-options {
+    border-radius: 4px;
+}
+
+.whitedot-branding-options h4 {
+    font-size: 15px;
+    display: inline-block;
+    width: 15%;
+}
+
+.whitedot-branding-options-wrap {
+    display: inline-block;
+    padding: 15px 10px;
+    background: #eee;
+    border-radius: 4px;
+    width: 61%;
+    margin: 0 30px;
+    font-size: 15px;
+}
+
+.whitedot-logo-upload .whitedot-branding-options-wrap img {
+    height: 35px;
+    width: auto;
+}
+
+.branding-edit {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background: #333;
+    padding: 14px;
+    width: 6%;
+    text-align: center;
+    border-radius: 4px;
+    transition: .3s;
+}
+
+.branding-edit:hover {
+    color: #fff;
+    background: #444;
+}
+
+.whitedot-more-customization-setting {
+    margin-top: 50px;
+}
+
+.whitedot-more-customization-setting h3 {
+    margin-bottom: 30px;
+}
+
+.whitedot-customizer-options {
+    padding: 5px 0;
+    margin-right: 3%;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.whitedot-customizer-options h4 {
+    font-size: 16px;
+    width: 50%;
+    display: inline-block;
+}
+
+.whitedot-customizer-options .branding-edit {
+    display: block;
+    float: right;
+    margin-top: 15px;
+    padding: 8px 20px;
+}
+
+@media (max-width: 850px){
+
+    .whitedot-branding-options-wrap {
+        width: 55%;
+    }
+}
+
+@media (max-width: 767px){
+    .whitedot-branding-options h4 {
+        font-size: 15px;
+        display: block;
+        width: 100%;
+    }
+
+    .whitedot-branding-options-wrap {
+        margin-left: 0;
+        width: 75%;
+    }
+
+    .whitedot-customize-btn {
+        width: 60%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 550px){
+
+    .whitedot-branding-options-wrap {
+        display: block;
+        width: 102%;
+        margin-bottom: 15px;
+    }
+
+    .branding-edit {
+        display: block;
+        width: 100%;
+    }
+
+    .whitedot-customizer-options .branding-edit{
+        width: unset;
+    }
+
+    .whitedot-logo-upload .whitedot-branding-options-wrap {
+        text-align: center;
+    }
+
+    .whitedot-customizer-options {
+        margin-right: 0;
+    }
+}
+
+/*WhiteDot Addon Page*/
+.whitedot-addon-wrap {
+    padding: 0 30px;
+}
+
+.whitedot_addons_heading {
+    font-size: 22px;
+    margin-top: 35px;
+}
+
+.whitedot-addon-box-wrap {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.whitedot-addon-box {
+    width: 29%;
+    float: left;
+    margin: 2.15%;
+    background: #fbfbfb;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
+}
+
+.whitedot-addon-box img {
+    width: 100%;
+}
+
+.whitedot-addon-content {
+    padding: 0 10px 10px;
+    text-align: center;
+}
+
+.get-addon-btn {
+    text-decoration: none;
+    color: #fff;
+    background: #00b9eb;
+    padding: 8px 10px;
+    display: block;
+    transition: .3s;
+}
+
+.get-addon-btn:hover {
+    color: #fff;
+    background: #008ec2;
+}
+
+.addon-coming-soon {
+    padding: 8px 10px;
+    display: block;
+}
+
+@media (max-width: 767px){
+    .whitedot-addon-box {
+        width: 47%;
+        margin: 1.5%;
+    }
+}
+
+@media (max-width: 500px){
+    .whitedot-addon-box {
+        width: 100%
+    }
+}
+
+@media (max-width: 400px){
+    .whitedot-options-page .whitedot-setting-header h1 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 320px){
+    .whitedot-options-page.whitedot-setting-header h1 {
+        font-size: 14px;
+    }
+
+    .whitedot-options-page .nav-tab{
+        width: 100%;
+    }
+}

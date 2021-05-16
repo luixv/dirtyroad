@@ -410,19 +410,29 @@ class cbUsersList
 														);
 		}
 
+		$gidWhere								=	null;
+
+		if ( $userGroupIds && ( count( $userGroupIds ) != count( Application::CmsPermissions()->getAllGroups( false ) ) ) ) {
+			if ( count( $userGroupIds ) > 1 ) {
+				$gidWhere						=	" IN " . $_CB_database->safeArrayOfIntegers( $userGroupIds );
+			} else {
+				$gidWhere						=	" = " . (int) $userGroupIds[0];
+			}
+		}
+
 		if ( $legacyACLCheck ) {
 			$joinsSQL[]							=	"INNER JOIN " . $_CB_database->NameQuote( '#__user_usergroup_map' ) . " AS g"
 												.	" ON g." . $_CB_database->NameQuote( 'user_id' ) . " = u." . $_CB_database->NameQuote( 'id' );
 
-			if ( $userGroupIds ) {
-				$tablesWhereSQL['gid']			=	"g." . $_CB_database->NameQuote( 'group_id' ) . " IN " . $_CB_database->safeArrayOfIntegers( $userGroupIds );
+			if ( $gidWhere ) {
+				$tablesWhereSQL['gid']			=	"g." . $_CB_database->NameQuote( 'group_id' ) . $gidWhere;
 			}
-		} elseif ( $userGroupIds ) {
+		} elseif ( $gidWhere ) {
 			// using ue.id instead of u.id as we want to preserve the _users table index during COUNT:
 			$tablesWhereSQL['gid']				=	"("
 												.	" SELECT COUNT(*) FROM " . $_CB_database->NameQuote( '#__user_usergroup_map' ) . " AS g"
 												.	" WHERE g." . $_CB_database->NameQuote( 'user_id' ) . " = ue." . $_CB_database->NameQuote( 'id' )
-												.	" AND g." . $_CB_database->NameQuote( 'group_id' ) . " IN " . $_CB_database->safeArrayOfIntegers( $userGroupIds )
+												.	" AND g." . $_CB_database->NameQuote( 'group_id' ) . $gidWhere
 												.	" ) > 0";
 		}
 
@@ -476,7 +486,7 @@ class cbUsersList
 			}
 
 			// Prepare the actual userlist query to build a list of users:
-			$query					=	"SELECT ue.*, u.*, '' AS 'NA' " . ( $fieldsSQL ? ", " . $fieldsSQL . " " : '' )
+			$query					=	"SELECT " . ( $fieldsSQL ? "ue.*, u.*, " . $fieldsSQL : "*" )
 									.	$queryFrom
 									.	( $legacyACLCheck ? " GROUP BY u." . $_CB_database->NameQuote( 'id' ) : null )
 									.	" " . $orderBy;

@@ -60,45 +60,47 @@ class CBProfileView_html_default extends cbProfileView
 			if ( $canvasHeader ) {
 				$return					.=	'<div class="position-relative no-overflow border' . ( $canvasMenu ? ' border-top-0' : null ) . ( $canvasMain ? ' border-bottom-0' : null ) . ' cbPosCanvas cbCanvasLayout">';
 
-				if ( $canvasBackground || $canvasInfo ) {
-					$return				.=		'<div class="position-relative bg-light row no-gutters align-items-lg-end cbPosCanvasTop cbCanvasLayoutTop">';
-
-					if ( $canvasBackground ) {
-						$return			.=			'<div class="position-absolute col-12 cbPosCanvasBackground cbCanvasLayoutBackground">'
+				if ( $canvasBackground ) {
+					$return				.=		'<div class="position-relative bg-light row no-gutters align-items-lg-end cbPosCanvasTop cbCanvasLayoutTop">'
+										.			'<div class="position-absolute col-12 cbPosCanvasBackground cbCanvasLayoutBackground">'
 										.				$canvasBackground
-										.			'</div>';
-					}
-
-					if ( $canvasInfo ) {
-						$return			.=			'<div class="text-right p-2' . ( $canvasPhoto ? ' col-8 offset-4 col-sm-9 offset-sm-3' : ' col-12' ) . ' cbPosCanvasInfo cbCanvasLayoutInfo">'
-										.				$canvasInfo
-										.			'</div>';
-					}
-
-					$return				.=		'</div>';
+										.			'</div>'
+										.		'</div>';
 				}
 
-				if ( $canvasPhoto || $canvasTitle || $canvasStats ) {
-					$return				.=		'<div class="position-relative row no-gutters align-items-end bg-white' . ( $canvasBackground || $canvasInfo ? ' border-top' : null ) . ( ! $canvasMain ? ' border-bottom' : null ) . ( ! $canvasPhoto ? ' p-2' : null ) . ' cbPosCanvasBottom cbCanvasLayoutBottom">';
+				if ( $canvasPhoto || $canvasTitle || $canvasStats || $canvasInfo ) {
+					$return				.=		'<div class="position-relative row no-gutters align-items-end bg-white' . ( $canvasBackground ? ' border-top' : null ) . ( ! $canvasMain ? ' border-bottom' : null ) . ( ! $canvasPhoto ? ' p-2' : null ) . ' cbPosCanvasBottom cbCanvasLayoutBottom">';
 
 					if ( $canvasPhoto ) {
-						$return			.=			'<div class="col-4 col-sm-3">'
-										.				'<div class="' . ( $canvasBackground || $canvasInfo ? 'position-absolute' : 'p-2' ) . ' cbPosCanvasPhoto cbCanvasLayoutPhoto">'
+						$return			.=			'<div class="' . ( ! $canvasBackground ? 'col-12 col-sm-3 mh-none' : 'col-4 col-sm-3' ) . '">'
+										.				'<div class="' . ( $canvasBackground ? 'position-absolute' : 'p-2' ) . ' cbPosCanvasPhoto cbCanvasLayoutPhoto">'
 										.					$canvasPhoto
 										.				'</div>'
 										.			'</div>'
-										.			'<div class="col-8 col-sm-9">'
-										.				'<div class="row no-gutters p-2">';
+										.			'<div class="' . ( ! $canvasBackground ? 'col-12 col-sm-9 align-self-end' : 'col-8 col-sm-9' ) . '">'
+										.				'<div class="p-2">';
 					}
 
-					if ( $canvasTitle ) {
-						$return			.=					'<div class="col-12 text-primary text-overflow text-large font-weight-bold cbPosCanvasTitle cbCanvasLayoutTitle">'
-										.						$canvasTitle
-										.					'</div>';
+					if ( $canvasTitle || $canvasInfo ) {
+						$return			.=					'<div class="row no-gutters">';
+
+						if ( $canvasTitle ) {
+							$return		.=						'<div class="order-0 col text-primary text-large font-weight-bold cbPosCanvasTitle cbCanvasLayoutTitle">'
+										.							$canvasTitle
+										.						'</div>';
+						}
+
+						if ( $canvasInfo ) {
+							$return		.=						'<div class="ml-0 ml-sm-1 mt-2 mt-sm-0 order-last order-sm-1 col-12 col-sm-auto cbPosCanvasInfo cbCanvasLayoutInfo">'
+										.							$canvasInfo
+										.						'</div>';
+						}
+
+						$return			.=					'</div>';
 					}
 
 					if ( $canvasStats ) {
-						$return			.=					'<div class="col-12 text-muted text-overflow text-small cbPosCanvasStats cbCanvasLayoutCounters">'
+						$return			.=					'<div class="mt-2 mt-sm-1 text-muted text-overflow text-small cbPosCanvasStats cbCanvasLayoutCounters">'
 										.						$canvasStats
 										.					'</div>';
 					}
@@ -233,8 +235,8 @@ class CBProfileView_html_default extends cbProfileView
 		$return			.=	$this->tabContent
 						.	'<div class="row no-gutters' . ( $this->bottomIcons ?  ' mb-3' : null ) . ' cbProfileEditButtons">'
 						.		'<div class="offset-sm-3 col-sm-9">'
-						.			'<input class="btn btn-primary cbProfileEditSubmit" type="submit" id="cbbtneditsubmit" value="' . $this->submitValue . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
-						.			' <input class="btn btn-secondary cbProfileEditCancel" type="button" id="cbbtncancel" name="btncancel" value="' . $this->cancelValue . '" />'
+						.			'<input class="btn btn-primary btn-sm-block cbProfileEditSubmit" type="submit" id="cbbtneditsubmit" value="' . $this->submitValue . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
+						.			' <input class="btn btn-secondary btn-sm-block cbProfileEditCancel" type="button" id="cbbtncancel" name="btncancel" value="' . $this->cancelValue . '" />'
 						.		'</div>'
 						.	'</div>';
 
@@ -263,7 +265,7 @@ class CBRegisterFormView_html_default extends cbRegistrationView
 		global $_CB_framework, $ueConfig;
 
 		$this->regLayout			=	( isset( $ueConfig['reg_layout'] ) ? $ueConfig['reg_layout'] : 'flat' );
-		$titleCanvas				=	( isset( $ueConfig['reg_title_img'] ) ? $ueConfig['reg_title_img'] : 'general' );
+		$titleCanvas				=	( isset( $ueConfig['reg_title_img'] ) ? $ueConfig['reg_title_img'] : 'none' );
 
 		if ( $titleCanvas != 'none' ) {
 			if ( in_array( $titleCanvas, array( 'general' ) ) ) {
@@ -370,7 +372,7 @@ class CBRegisterFormView_html_default extends cbRegistrationView
 						.				$this->tabContent
 						.				'<div class="row no-gutters cbRegistrationButtons">'
 						.					'<div class="offset-sm-3 col-sm-9">'
-						.						'<input type="submit" value="' . $this->registerButton . '" class="btn btn-primary cbRegistrationSubmit"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
+						.						'<input type="submit" value="' . $this->registerButton . '" class="btn btn-primary btn-sm-block cbRegistrationSubmit"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
 						.					'</div>'
 						.				'</div>'
 						.			'</div>'
@@ -393,7 +395,7 @@ class CBRegisterFormView_html_default extends cbRegistrationView
 						.					'<tr class="cbRegistrationButtonRow">'
 						.						'<td>&nbsp;</td>'
 						.						'<td>'
-						.							'<input type="submit" value="' . $this->registerButton . '" class="btn btn-primary cbRegistrationSubmit"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
+						.							'<input type="submit" value="' . $this->registerButton . '" class="btn btn-primary btn-sm-block cbRegistrationSubmit"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
 						.						'</td>'
 						.					'</tr>'
 						.				'</tbody>'
@@ -503,10 +505,10 @@ class CBListView_html_default extends cbListView
 									.			'<div class="row no-gutters cbUserListSearchButtons">'
 									.				'<div class="offset-sm-3 col-sm-9">'
 											 																					// CBTxt::Th( 'UE_FIND_USERS', 'Find Users' )
-									.					'<input type="submit" class="btn btn-primary cbUserlistSubmit" value="' . CBTxt::Th( 'USERLIST_' . (int) $this->listId . '_FIND_USERS UE_FIND_USERS', 'Find Users', array( '[title]' => $this->listTitleHtml ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />';
+									.					'<input type="submit" class="btn btn-primary btn-sm-block cbUserlistSubmit" value="' . CBTxt::Th( 'USERLIST_' . (int) $this->listId . '_FIND_USERS UE_FIND_USERS', 'Find Users', array( '[title]' => $this->listTitleHtml ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />';
 
 			if ( $this->searchMode == 0 ) {
-				$return				.=					' <input type="button" class="btn btn-secondary cbUserlistCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" />';
+				$return				.=					' <input type="button" class="btn btn-secondary btn-sm-block cbUserlistCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" />';
 			}
 
 			$return					.=				'</div>'

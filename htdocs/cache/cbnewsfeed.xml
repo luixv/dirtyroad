@@ -5,10 +5,48 @@
 		<title>News</title>
 		<description><![CDATA[]]></description>
 		<link>https://www.joomlapolis.com/news</link>
-		<lastBuildDate>Mon, 22 Mar 2021 10:35:36 +0000</lastBuildDate>
+		<lastBuildDate>Tue, 11 May 2021 05:37:01 +0000</lastBuildDate>
 		<generator>Joomla! - Open Source Content Management</generator>
 		<atom:link rel="self" type="application/rss+xml" href="https://www.joomlapolis.com/news?format=feed&amp;type=rss"/>
 		<language>en-gb</language>
+		<item>
+			<title>CB Paid Subscriptions (CBSubs) 4.5.1 Release!</title>
+			<link>https://www.joomlapolis.com/news/18929-cb-paid-subscriptions-cbsubs-4-5-1-release</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18929-cb-paid-subscriptions-cbsubs-4-5-1-release</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn202104/cbsubs451_640.png" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomlapolis.com/addons/cb-paid-subscriptions" rel="alternate">CB Paid Subscriptions (CBSubs) 4.5.1 is here</a> with<strong> new features</strong> and<strong> bug fixes</strong>!</p>
+<p> </p>
+<p><a href="https://www.joomlapolis.com/addons/cb-paid-subscriptions" rel="alternate">CB Paid Subscriptions (CBSubs GPL) 4.5.1</a> is a features and bug fixes<strong> release </strong>that streamlines and modernizes the payment experience.<strong><br /></strong></p>
+<p>The main features in this release are:</p>
+<ul>
+<li><strong>Modernized look</strong> and user experience for checkouts with <strong>better display for baskets</strong> and modernized credit-card forms for Stripe and other on-site payment gateways</li>
+<li>New triggers for integrating <strong>CBSubs Family plans</strong> with CB Auto-actions workflows</li>
+<li><strong>Better user experience</strong> for payment method selections with <strong>radio selectors</strong></li>
+<li><strong>Faster</strong> payment confirmation with Stripe</li>
+<li>Possibility to have multiple Stripe gateways to separate various payment methods (e.g. in radio-selection)</li>
+</ul>
+<p><strong>CBSubs 4.5.1</strong> is available in our <a href="https://www.joomlapolis.com/downloads/cb-paid-subscriptions">Downloads</a> section and simply requires an active subscription to <a href="https://www.joomlapolis.com/addons/cb-paid-subscriptions">CBSubs</a>. It is a highly recommended upgrade and works great with latest CB 2.5 build.</p>
+<p><a href="https://forge.joomlapolis.com/projects/cb-paid-subscriptions/issues?query_id=160">Full changelog</a> is available and CBSubs 4.5.1 is also installed on our <a href="https://demo.cbdemosites.com/">demo</a> site.</p>]]></description>
+			<category>News</category>
+			<pubDate>Tue, 27 Apr 2021 22:18:52 +0000</pubDate>
+		</item>
+		<item>
+			<title>Joomla 3.9.26 Security and Bug Fixes Release</title>
+			<link>https://www.joomlapolis.com/news/18928-joomla-3-9-26-security-and-bug-fixes-release</link>
+			<guid isPermaLink="true">https://www.joomlapolis.com/news/18928-joomla-3-9-26-security-and-bug-fixes-release</guid>
+			<description><![CDATA[<p class="articleLeadImage" style="text-align: center;"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn202104/joomla-3926_640.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5835-joomla-3-9-26.html" target="_blank" rel="nofollow noopener noreferrer">Joomla 3.9.26 is here</a> - a security and bug fixes release!</p>
+<p> </p>
+<p>The Joomla project team has recently released version <strong>3.9.26</strong> as <strong>security and bug fixes release</strong>.</p>
+<p>Joomla 3.9.26 fixes 2 (low severity - low impact) security issues and over 30 bugs.</p>
+<p><a href="https://www.joomlapolis.com/{URLCommunityBuilder}">Community Builder</a> 2.5 (latest build) and all Joomlapolis <a href="https://www.joomlapolis.com/{URLAddons}">add-ons</a> <strong>work just fine with Joomla 3.9.26</strong>. You can see everything in action on our <a href="http://demo.cbdemosites.com/" target="_blank" rel="noopener noreferrer">demo site</a>.</p>
+<p><strong>Joomla 3.9.26</strong> is a recommended upgrade for all Joomla sites - you should <strong>upgrade</strong>.</p>
+<p><strong>As always</strong>, before any Joomla upgrade on your live website, <strong>take a backup</strong> just in case anything goes wrong.</p>
+<p>Also, it is always a good idea to review the specific <a href="https://docs.joomla.org/Category:Version_3.9.26_FAQ" target="_blank" rel="noopener noreferrer">Joomla 3.9.26 release FAQ article</a> for any release specific known issues.</p>
+<p>You can learn more about the fixed bugs by <a href="https://www.joomla.org/announcements/release-news/5835-joomla-3-9-26.html" target="_blank" rel="nofollow noopener noreferrer">reading the Joomla 3.9.26</a> announcement.</p>]]></description>
+			<category>News</category>
+			<pubDate>Tue, 20 Apr 2021 20:08:41 +0000</pubDate>
+		</item>
 		<item>
 			<title>Joomla 3.9.25 Security and Bug Fixes Release</title>
 			<link>https://www.joomlapolis.com/news/18923-joomla-3-9-25-security-and-bug-fixes-release</link>
@@ -255,49 +293,6 @@
 <p>You can learn more about the fixed bugs by <a href="https://www.joomla.org/announcements/release-news/5814-joomla-3-9-20.html" target="_blank" rel="nofollow noopener noreferrer">reading the Joomla 3.9.20</a> announcement.</p>]]></description>
 			<category>News</category>
 			<pubDate>Wed, 15 Jul 2020 01:16:02 +0000</pubDate>
-		</item>
-		<item>
-			<title>Joomla 4.0 beta 2 is awesome ­- CB compatibility plan</title>
-			<link>https://www.joomlapolis.com/news/18886-joomla-4-0-beta-2-is-here-and-it-s-awesome</link>
-			<guid isPermaLink="true">https://www.joomlapolis.com/news/18886-joomla-4-0-beta-2-is-here-and-it-s-awesome</guid>
-			<description><![CDATA[<p class="articleLeadImage" style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5813-joomla-4-0-0-beta2.html" target="_blank" rel="noopener noreferrer"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn202007/joomla-4-0-0-beta-v2.png" alt="" /></a></p>
-<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5813-joomla-4-0-0-beta2.html" target="_blank" rel="nofollow noopener noreferrer">Joomla 4.0 beta 2 is here</a> - and it's awesome!!</p>
-<p> </p>
-<p>We're really thrilled! The <strong>second beta</strong> of the new <strong>Joomla 4.0</strong> just got released, exactly one month after beta 1 with over 200 bug fixes, <strong>moving forward with great </strong><strong>momentum</strong>.</p>
-<h2>Joomla 4.0 is a major release</h2>
-<p>Joomla 4 is <strong>a huge step forward</strong> for the Joomla community and the Web, with a <strong>brand new</strong> <strong>user interface and experience</strong> (backend and frontend), that is extremely <strong>accessible for everyone</strong> (Level AA of WCAG 2.1). A fully rebuilt <strong>Media Manager</strong> with built-in <strong>image editing</strong>, a new <strong>customizable </strong>publishing <strong>workflow</strong>, customizable HTML <strong>Site </strong><strong>Mail templates</strong>, and much more makes it easier to use, and more powerful!</p>
-<p>Under the hood, the <strong>newest web techologies</strong> will enable robust and innovative applications like never before. The new powerfull and <strong>cleanly coded</strong> Joomla Framework now includes <strong>web services</strong> for mobile apps, Internet of things (<strong>IoT</strong>) automation and allows to make content and applications easily available to other websites. An enhanced events dispatcher, prepared SQL statements, new security features and an expanded CLI round up this superb new Joomla edition.</p>
-<h2>Our analysis</h2>
-<p>Our analysis is that <strong>Joomla 4 has a huge potential for a rapid growth</strong>, as it addresses a very broad range of users, from the quickly installed personal website up to online government services requiring highest security, accessibility and stability standards. Additionally it will simultaneously thrill <strong>developers</strong> of modern web and mobile apps, <strong>web designers</strong> needing creative flexibility and efficient configuration interface, and <strong>corporate webmasters</strong> relying on the power and stability of an established web platform.</p>
-<p>Give it a try, <a href="https://github.com/joomla/joomla-cms/releases/download/4.0.0-beta2/Joomla_4.0.0-beta2-Beta-Full_Package.zip">Download Joomla 4.0 beta 2</a>, it installs in the blink of an eye with its new user friendly installer, and you will quickly understand why we are so thrilled! Make sure to report to <a href="https://issues.joomla.org/">Joomla Isssues tracker</a> any bugs you find and help get Joomla 4.0 stable out quicker. But <strong>do not use a Joomla beta release on live sites</strong>, as stability and security are still being improved.</p>
-<h2>Community Builder compatibility plan</h2>
-<p><strong>Community Builder 2.4</strong> is <strong>not yet</strong> compatible with Joomla 4.0, but we are starting work on that front. We don't expect any major difficulties in making Community Builder compatible with Joomla 4.0, thanks to CB's <strong>CBLib abstraction layer</strong> and our AHAWOW <strong>XML administration framework</strong>, that will require mostly adaptations only in the AHAWOW engine and none in the abstract CB administration interface descriptions. We currently plan to make CB Joomla 4.0-compatible <strong>sometime between Joomla 4.0 RC and 4.0 Stable</strong> with a <strong>smooth upgrade process</strong>.</p>
-<h2>Easy upgrade path from Joomla 3.9 to 4.0</h2>
-<p><strong>Joomla 4.0 and extensions upgrade process</strong> should generally be smooth thanks to a well thought upgrade strategy, as <strong>Joomla 3.10 Long Term Support</strong> will be released simultaneously with Joomla 4.0, and will be simultaneously API-compatible both with Joomla 3.9 and with Joomla 4.0, allowing to upgrade Joomla 3.9 to 3.10, then extensinos one by one, before upgrading to Joomla 4.0. We expect all major Joomla extensions to also be compatible by Joomla 4.0 stable release, while some smaller ones will need to be replaced. For those, the Joomla 3.10 intermediate upgrade step is a really smart decision.</p>
-<p> </p>
-<h2>The new Joomla 4.0 administration dashboard</h2>
-<p>The new administration dashboard, powered by administration modules, has a fresh modern look and can be configured to your liking.</p>
-<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5813-joomla-4-0-0-beta2.html" target="_blank" rel="noopener noreferrer"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn202007/Joomla40-beta2-backend-screenshot.png" alt="" /></a></p>
-<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5813-joomla-4-0-0-beta2.html" target="_blank" rel="nofollow noopener noreferrer">Joomla 4.0 beta 2</a> administration dashboard</p>
-<p> </p>]]></description>
-			<category>News</category>
-			<pubDate>Thu, 02 Jul 2020 10:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>Joomla 3.9.19 Security and Bug Fixes Release</title>
-			<link>https://www.joomlapolis.com/news/18883-joomla-3-9-19-security-and-bug-fixes-release</link>
-			<guid isPermaLink="true">https://www.joomlapolis.com/news/18883-joomla-3-9-19-security-and-bug-fixes-release</guid>
-			<description><![CDATA[<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5812-joomla-3-9-19.html" target="_blank" rel="noopener noreferrer"><img src="https://www.joomlapolis.com/images/jpnewsletter/jpn202006/j3919_640.jpg" alt="" /></a></p>
-<p style="text-align: center;"><a href="https://www.joomla.org/announcements/release-news/5812-joomla-3-9-19.html" target="_blank" rel="nofollow noopener noreferrer">Joomla 3.9.19 is here</a> - a security and bug fixes release!</p>
-<p> </p>
-<p>The Joomla project team has recently released version <strong>3.9.19</strong> as <strong>security and bug fixes release</strong>.</p>
-<p>Joomla 3.9.19 addresses five (4 low priority and 1 moderate priority in the jQuery javascript library) security vulnerabilities and over 40 bugs.</p>
-<p><a href="https://www.joomlapolis.com/{URLCommunityBuilder}">Community Builder</a> 2.4.5 (latest build) and all Joomlapolis <a href="https://www.joomlapolis.com/addons">add-ons</a> <strong>work just fine with Joomla 3.9.19</strong>. You can see everything in action on our <a href="http://demo.cbdemosites.com/" target="_blank" rel="noopener noreferrer">demo site</a>.</p>
-<p><strong>Joomla 3.9.19</strong> is a recommended upgrade for all Joomla 3.x series sites - you should <strong>upgrade</strong>.</p>
-<p><strong>As always</strong>, before any Joomla upgrade on your live website, <strong>take a backup</strong> just in case anything goes wrong.</p>
-<p>You can learn more about the fixed bugs by <a href="https://www.joomla.org/announcements/release-news/5812-joomla-3-9-19.html" target="_blank" rel="nofollow noopener noreferrer">reading the Joomla 3.9.19</a> announcement.</p>]]></description>
-			<category>News</category>
-			<pubDate>Tue, 09 Jun 2020 19:47:13 +0000</pubDate>
 		</item>
 	</channel>
 </rss>

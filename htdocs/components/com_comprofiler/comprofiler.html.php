@@ -500,7 +500,7 @@ List Functions
 		// Prepare SEO URL for paging:
 		$pageNav->setStaticLimit( true );
 
-		$canPage						=	( $params->get( 'list_paging', 1 ) && ( ( $pageNav->limitstart != 0 ) || ( $pageNav->limit <= $pageNav->total ) ) );
+		$canPage						=	( $params->get( 'list_paging', 1 ) && ( $pageNav->total > $pageNav->limit ) );
 		$urlParts						=	array();
 
 		// Add search mode; defaults to 0 so don't bother adding if we don't have to:
@@ -990,7 +990,10 @@ Registration Functions
 			}
 		}
 
+		// Translations here for B/C as these 2 strings got removed in CB 2.6. Can be removed in CB 3.0.
+		// CBTxt::T( 'REGISTRATION_GREETING', 'Welcome to our community - tell us about yourself and sign up' )
 		$headerMessage					=	( isset( $ueConfig['reg_intro_msg'] ) ? CBTxt::T( $ueConfig['reg_intro_msg'] ) : null );
+		// CBTxt::T( 'REGISTRATION_CONCLUSION', 'Thanks for visiting our site! Hope you enjoy your stay!' )
 		$footerMessage					=	( isset( $ueConfig['reg_conclusion_msg'] ) ? CBTxt::T( $ueConfig['reg_conclusion_msg'] ) : null );
 
 		$registrationForm				=	'<form action="' . $_CB_framework->viewUrl( 'saveregisters', true, null, 'html', ( checkCBPostIsHTTPS( true ) ? 1 : 0 ) ) . '" method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="form-auto m-0 cb_form cbValidation">'
@@ -1253,13 +1256,9 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 			$return					.=			( $tabCount > 1 ? $tabs->startTab( 'myCon', CBTxt::Th( 'UE_MANAGEACTIONS', 'Manage Actions' ) . ' <span class="badge badge-pill badge-light border text-muted">' . count( $actions ) . '</span>', 'actions' ) : null )
 									.				'<form action="' . $_CB_framework->viewUrl( 'processconnectionactions' ) . '" method="post" id="adminForm" name="adminForm" class="form-auto m-0 cb_form cbValidation">'
 									.					( $description ? '<div class="mb-3 tab_description">' . $description . '</div>' : null )
-									.					'<div class="row no-gutters mb-2">';
-
-			$i						=	0;
+									.					'<div class="ml-n2 mr-n2 mb-n3 row no-gutters">';
 
 			foreach( $actions as $action ) {
-				$i++;
-
 				$cbUser				=	CBuser::getInstance( (int) $action->id, false );
 
 				$tooltip			=	CBTxt::Th( 'CONNECTION_TIP_CONNECTION_REQUESTED_ON', 'Connected Requested on [CONNECTION_DATE]', array( '[CONNECTION_DATE]' => cbFormatDate( $action->membersince, true, false ) ) );
@@ -1269,11 +1268,11 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 				}
 
 				$actionList			=	array();
-				$actionList[]		=	moscomprofilerHTML::makeOption( 'a', CBTxt::T( 'Accept' ) );
-				$actionList[]		=	moscomprofilerHTML::makeOption( 'd', CBTxt::Th( 'Reject' ) );
+				$actionList[]		=	moscomprofilerHTML::makeOption( 'a', CBTxt::T( 'Accept' ), 'value', 'text', null, 'flex-grow-1 btn-sm btn-success' );
+				$actionList[]		=	moscomprofilerHTML::makeOption( 'd', CBTxt::Th( 'Reject' ), 'value', 'text', null, 'flex-grow-1 btn-sm btn-danger' );
 
-				$return				.=						'<div class="pb-2 col-12 col-sm-6 col-md-4' . ( $i % 2 == 0 ? ' pl-sm-1' : ' pr-sm-1' ) . ( $i % 3 == 0 ? ' pr-md-0 pl-md-1' : ( $i % 3 == 2 ? ' pl-md-1 pr-md-1' : ' pl-md-0 pr-md-1' ) ) . '">'
-									.							'<div class="card no-overflow cbCanvasLayout cbCanvasLayoutSm">'
+				$return				.=						'<div class="col-12 col-md-6 col-lg-4 pb-3 pl-2 pr-2">'
+									.							'<div class="h-100 card no-overflow cbCanvasLayout cbCanvasLayoutSm">'
 									.								'<div class="card-header p-0 position-relative cbCanvasLayoutTop">'
 									.									'<div class="position-absolute cbCanvasLayoutBackground">'
 									.										$cbUser->getField( 'canvas', null, 'html', 'none', 'list', 0, true )
@@ -1287,10 +1286,10 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 									.								'<div class="card-body p-2 position-relative cbCanvasLayoutBody">'
 									.									'<div class="text-truncate cbCanvasLayoutContent">'
 									.										$cbUser->getField( 'onlinestatus', null, 'html', 'none', 'profile', 0, true, array( 'params' => array( 'displayMode' => 1 ) ) )
-									.										' ' . $cbUser->getField( 'formatname', null, 'html', 'none', 'list', 0, true, array( 'params' => array( 'fieldHoverCanvas' => false ) ) )
+									.										' <span class="text-large">' . $cbUser->getField( 'formatname', null, 'html', 'none', 'list', 0, true, array( 'params' => array( 'fieldHoverCanvas' => false ) ) ) . '</span>'
 									.									'</div>'
 									.									'<div class="mt-1 cbCanvasLayoutContent">'
-									.										moscomprofilerHTML::radioListTable( $actionList, (int) $action->id . 'action', null, 'value', 'text', 'a', 0, 0, 0, 0, null, null, false )
+									.										moscomprofilerHTML::radioListButtons( $actionList, (int) $action->id . 'action', null, 'value', 'text', 'a', 0, array( 'w-100' ), null, false )
 									.										'<input type="hidden" name="uid[]" value="' . (int) $action->id . '" />'
 									.									'</div>'
 									.								'</div>'
@@ -1299,9 +1298,9 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 			}
 
 			$return					.=					'</div>'
-									.					'<div class="cbMngConnButtons">'
-									.						'<input type="submit" class="btn btn-primary cbMngConnSubmit" value="' . htmlspecialchars( CBTxt::Th( 'UE_UPDATE', 'Update' ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
-									.						' <input type="button" class="btn btn-secondary cbMngConnCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" onclick="window.location=\'' . $_CB_framework->userProfileUrl() . '\'; return false;" />'
+									.					'<div class="mt-3 cbMngConnButtons">'
+									.						'<input type="submit" class="btn btn-primary btn-sm-block cbMngConnSubmit" value="' . htmlspecialchars( CBTxt::Th( 'UE_UPDATE', 'Update' ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
+									.						' <input type="button" class="btn btn-secondary btn-sm-block cbMngConnCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" onclick="window.location=\'' . $_CB_framework->userProfileUrl() . '\'; return false;" />'
 									.					'</div>'
 									.					cbGetSpoofInputTag( 'manageconnections' )
 									.				'</form>'
@@ -1316,13 +1315,9 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 			$return					.=			( $tabCount > 1 ? $tabs->startTab( 'myCon', CBTxt::Th( 'UE_MANAGECONNECTIONS', 'Manage Connections' ), 'connections' ) : null )
 									.				'<form action="' . $_CB_framework->viewUrl( 'saveconnections' ) . '" method="post" id="adminForm" name="adminForm" class="form-auto m-0 cb_form cbValidation">'
 									.					( $description ? '<div class="mb-3 tab_description">' . $description . '</div>' : null )
-									.					'<div class="row no-gutters mb-2">';
-
-			$i						=	0;
+									.					'<div class="ml-n2 mr-n2 mb-n3 row no-gutters">';
 
 			foreach( $connections as $connection ) {
-				$i++;
-
 				$cbUser				=	CBuser::getInstance( (int) $connection->id, false );
 
 				$tooltip			=	CBTxt::Th( 'CONNECTION_TIP_CONNECTED_SINCE_CONNECTION_DATE', 'Connected Since [CONNECTION_DATE]', array( '[CONNECTION_DATE]' => cbFormatDate( $connection->membersince, true, false ) ) );
@@ -1335,8 +1330,17 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 					$tooltip		.=	'<br />' . CBTxt::Th( 'CONNECTION_TIP_CONNECTION_COMMENT', 'Comment: [CONNECTION_DESCRIPTION]', array( '[CONNECTION_DESCRIPTION]' => htmlspecialchars( $connection->description ) ) );
 				}
 
-				$return				.=						'<div class="pb-2 col-12 col-sm-6 col-md-4' . ( $i % 2 == 0 ? ' pl-sm-1' : ' pr-sm-1' ) . ( $i % 3 == 0 ? ' pr-md-0 pl-md-1' : ( $i % 3 == 2 ? ' pl-md-1 pr-md-1' : ' pl-md-0 pr-md-1' ) ) . '">'
-									.							'<div class="card no-overflow cbCanvasLayout cbCanvasLayoutSm">'
+				$buttons			=	array();
+
+				if ( $connection->pending ) {
+					$buttons[]		=	'<button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) ) . '\'; })" class="h-100 btn btn-sm btn-light border btn-block">' . CBTxt::Th( 'Cancel Connection Request' ) . '</button>';
+				} elseif ( ! $connection->accepted  ) {
+					$buttons[]		=	'<a href="' . $_CB_framework->viewUrl( 'acceptconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) . '" class="h-100 btn btn-sm btn-success btn-block">' . CBTxt::T( 'Accept Connection' ) . '</a>';
+					$buttons[]		=	'<button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'denyconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) ) . '\'; })" class="h-100 btn btn-sm btn-light border btn-block">' . CBTxt::Th( 'Reject Connection' ) . '</button>';
+				}
+
+				$return				.=						'<div class="col-12 col-md-6 col-lg-4 pb-3 pl-2 pr-2">'
+									.							'<div class="h-100 card no-overflow cbCanvasLayout cbCanvasLayoutSm">'
 									.								'<div class="card-header p-0 position-relative cbCanvasLayoutTop">'
 									.									'<div class="position-absolute cbCanvasLayoutBackground">'
 									.										$cbUser->getField( 'canvas', null, 'html', 'none', 'list', 0, true )
@@ -1344,25 +1348,14 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 
 				if ( $connection->accepted && ( ! $connection->pending ) ) {
 					$menuItems		=	'<ul class="list-unstyled dropdown-menu cbCanvasLayoutMenuItems" style="display: block; position: relative; margin: 0;">'
-									.		'<li class="cbCanvasLayoutMenuItem"><a href="javascript: void(0);" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) ) . '\'; })" class="dropdown-item"><span class="fa fa-times-circle"></span> ' . CBTxt::T( 'Remove' ) . '</a></li>'
+									.		'<li class="cbCanvasLayoutMenuItem"><a href="javascript: void(0);" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) ) . '\'; })" class="dropdown-item"><span class="fa fa-times-circle"></span> ' . CBTxt::T( 'UE_REMOVECONNECTION', 'Remove Connection' ) . '</a></li>'
 									.	'</ul>';
 
-					$menuAttr		=	cbTooltip( 1, $menuItems, null, 'auto', null, null, null, 'class="cbCanvasLayoutMenu border btn btn-light btn-sm" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle" data-cbtooltip-open-classes="active"' );
+					$menuAttr		=	cbTooltip( null, $menuItems, null, 'auto', null, null, null, 'class="border btn btn-light btn-sm cbCanvasLayoutMenu" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle" data-cbtooltip-open-classes="active"' );
 
 					$return			.=									'<div class="position-absolute text-right p-1 cbCanvasLayoutActions">'
-									.										'<button type="button" ' . trim( $menuAttr ) . '><span class="fa fa-pencil"></span></button>'
+									.										'<button type="button" ' . trim( $menuAttr ) . '><span class="pl-2 pr-2 align-bottom text-large fa fa-ellipsis-v"></span></button>'
 									.									'</div>';
-				} elseif ( ( ! $connection->accepted ) || $connection->pending ) {
-					$return			.=									'<div class="position-absolute text-right p-1 cbCanvasLayoutActions">';
-
-					if ( $connection->pending ) {
-						$return		.=										'<button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) ) . '\'; })" class="btn btn-sm btn-danger">' . CBTxt::Th( 'Cancel Request' ) . '</button>';
-					} elseif ( ! $connection->accepted  ) {
-						$return		.=										'<button type="button" onclick="location.href=\'' . addslashes( $_CB_framework->viewUrl( 'acceptconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) ) . '\';" class="btn btn-sm btn-success">' . CBTxt::T( 'Accept' ) . '</button>'
-									.										' <button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'denyconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connection->memberid ) ) ) . '\'; })" class="btn btn-sm btn-danger">' . CBTxt::Th( 'Reject' ) . '</button>';
-					}
-
-					$return			.=									'</div>';
 				}
 
 				$return				.=								'</div>'
@@ -1371,23 +1364,30 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 									.										cbTooltip( 1, $tooltip, CBTxt::T( 'UE_CONNECTEDDETAIL', 'Connection Details' ), 300, null, $cbUser->getField( 'avatar', null, 'html', 'none', 'list', 0, true ), null, 'class="d-inline-block"' )
 									.									'</div>'
 									.								'</div>'
-									.								'<div class="card-body p-2 position-relative cbCanvasLayoutBody">'
-									.									'<div class="text-truncate cbCanvasLayoutContent">'
+									.								'<div class="d-flex flex-column card-body p-0 position-relative cbCanvasLayoutBody">'
+									.									'<div class="m-2 text-truncate cbCanvasLayoutContent">'
 									.										$cbUser->getField( 'onlinestatus', null, 'html', 'none', 'profile', 0, true, array( 'params' => array( 'displayMode' => 1 ) ) )
-									.										' ' . $cbUser->getField( 'formatname', null, 'html', 'none', 'list', 0, true, array( 'params' => array( 'fieldHoverCanvas' => false ) ) )
+									.										' <span class="text-large">' . $cbUser->getField( 'formatname', null, 'html', 'none', 'list', 0, true, array( 'params' => array( 'fieldHoverCanvas' => false ) ) ) . '</span>'
 									.									'</div>';
 
 				if ( $connectionTypes ) {
-					$return			.=									'<div class="mt-1 cbCanvasLayoutContent">'
+					$return			.=									'<div class="ml-2 mr-2 mb-2 cbCanvasLayoutContent">'
 									.										moscomprofilerHTML::selectList( $connectionTypes, $connection->id . 'connectiontype[]', 'class="w-100 form-control cbSelect" multiple="multiple" data-cbselect-placeholder="' . htmlspecialchars( CBTxt::T( 'UE_CONNECTIONTYPE', 'Type' ) ) . '"', 'value', 'text', explode( '|*|', trim( $connection->type ) ), 0 )
 									.									'</div>';
 				}
 
-				$return				.=									'<div class="mt-1 cbCanvasLayoutContent">'
-									.										'<textarea cols="25" class="w-100 form-control" rows="4" name="' . (int) $connection->id . 'description" placeholder="' . htmlspecialchars( CBTxt::T( 'UE_CONNECTIONCOMMENT', 'Comment' ) ) . '">' . htmlspecialchars( $connection->description ) . '</textarea>'
+				$return				.=									'<div class="ml-2 mr-2 mb-2 flex-grow-1 cbCanvasLayoutContent">'
+									.										'<textarea cols="25" class="h-100 w-100 form-control" rows="4" name="' . (int) $connection->id . 'description" placeholder="' . htmlspecialchars( CBTxt::T( 'UE_CONNECTIONCOMMENT', 'Comment' ) ) . '">' . htmlspecialchars( $connection->description ) . '</textarea>'
 									.										'<input type="hidden" name="uid[]" value="' . (int) $connection->id . '" />'
-									.									'</div>'
-									.								'</div>'
+									.									'</div>';
+
+				if ( $buttons ) {
+					$return			.=									'<div class="ml-1 mr-1 mb-1 mt-n1 row no-gutters cbCanvasLayoutContent">'
+									.										'<div class="p-1 mw-100 col-md-6 flex-grow-1 cbCanvasLayoutContent">' . implode( '</div><div class="p-1 mw-100 col-md-6 flex-grow-1 cbCanvasLayoutContent">', $buttons ) . '</div>'
+									.									'</div>';
+				}
+
+				$return				.=								'</div>'
 									.							'</div>'
 									.						'</div>';
 			}
@@ -1395,14 +1395,14 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 			$return					.=					'</div>';
 
 			if ( $perpage < $total ) {
-				$return				.=					'<div class="mb-3 text-center">'
+				$return				.=					'<div class="mt-3 text-center">'
 									.						$connMgmtTabs->_writePaging( $pagingParams, 'connections_', $perpage, $total, 'manageconnections' )
 									.					'</div>';
 			}
 
-			$return					.=					'<div class="cbMngConnButtons">'
-									.						'<input type="submit" class="btn btn-primary cbMngConnSubmit" value="' . htmlspecialchars( CBTxt::Th( 'UE_UPDATE', 'Update' ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
-									.						' <input type="button" class="btn btn-secondary cbMngConnCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" onclick="window.location=\'' . $_CB_framework->userProfileUrl() . '\'; return false;" />'
+			$return					.=					'<div class="mt-3 cbMngConnButtons">'
+									.						'<input type="submit" class="btn btn-primary btn-sm-block cbMngConnSubmit" value="' . htmlspecialchars( CBTxt::Th( 'UE_UPDATE', 'Update' ) ) . '"' . cbValidator::getSubmitBtnHtmlAttributes() . ' />'
+									.						' <input type="button" class="btn btn-secondary btn-sm-block cbMngConnCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" onclick="window.location=\'' . $_CB_framework->userProfileUrl() . '\'; return false;" />'
 									.					'</div>'
 									.					cbGetSpoofInputTag( 'manageconnections' )
 									.				'</form>'
@@ -1414,13 +1414,9 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 
 			$return					.=			( $tabCount > 1 ? $tabs->startTab( 'myCon', CBTxt::Th( 'UE_CONNECTEDWITH', 'Manage Connections With Me' ), 'connected' ) : null )
 									.				( $description ? '<div class="mb-3 tab_description">' . $description . '</div>' : null )
-									.				'<div class="row no-gutters mb-2">';
-
-			$i						=	0;
+									.				'<div class="ml-n2 mr-n2 mb-n3 row no-gutters">';
 
 			foreach( $connecteds as $connected ) {
-				$i++;
-
 				$cbUser				=	CBuser::getInstance( (int) $connected->id, false );
 
 				$tooltip			=	CBTxt::Th( 'CONNECTION_TIP_CONNECTED_SINCE_CONNECTION_DATE', 'Connected Since [CONNECTION_DATE]', array( '[CONNECTION_DATE]' => cbFormatDate( $connected->membersince, true, false ) ) );
@@ -1433,55 +1429,49 @@ static function manageConnections( $connections, $actions, $total, &$connMgmtTab
 					$tooltip		.=	'<br />' . CBTxt::Th( 'CONNECTION_TIP_CONNECTION_COMMENT', 'Comment: [CONNECTION_DESCRIPTION]', array( '[CONNECTION_DESCRIPTION]' => htmlspecialchars( $connected->description ) ) );
 				}
 
-				$return				.=					'<div class="pb-2 col-12 col-sm-6 col-md-4' . ( $i % 2 == 0 ? ' pl-sm-1' : ' pr-sm-1' ) . ( $i % 3 == 0 ? ' pr-md-0 pl-md-1' : ( $i % 3 == 2 ? ' pl-md-1 pr-md-1' : ' pl-md-0 pr-md-1' ) ) . '">'
-									.						'<div class="card no-overflow cbCanvasLayout cbCanvasLayoutSm">'
+				$buttons			=	array();
+
+				if ( $connected->pending ) {
+					$buttons[]		=	'<button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) ) . '\'; })" class="h-100 btn btn-sm btn-light border btn-block">' . CBTxt::Th( 'Cancel Connection Request' ) . '</button>';
+				} elseif ( ! $connected->accepted  ) {
+					$buttons[]		=	'<a href="' . $_CB_framework->viewUrl( 'acceptconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) . '" class="h-100 btn btn-sm btn-success btn-block">' . CBTxt::Th( 'Accept Connection' ) . '</a>';
+					$buttons[]		=	'<button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'denyconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) ) . '\'; })" class="h-100 btn btn-sm btn-light border btn-block">' . CBTxt::Th( 'Reject Connection' ) . '</button>';
+				} else {
+					$buttons[]		=	'<button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) ) . '\'; })" class="h-100 btn btn-sm btn-light border btn-block">' . CBTxt::Th( 'UE_REMOVECONNECTION', 'Remove Connection' ) . '</button>';
+				}
+
+				$return				.=					'<div class="col-12 col-md-6 col-lg-4 pb-3 pl-2 pr-2">'
+									.						'<div class="h-100 card no-overflow cbCanvasLayout cbCanvasLayoutSm">'
 									.							'<div class="card-header p-0 position-relative cbCanvasLayoutTop">'
 									.								'<div class="position-absolute cbCanvasLayoutBackground">'
 									.									$cbUser->getField( 'canvas', null, 'html', 'none', 'list', 0, true )
-									.								'</div>';
-
-				if ( $connected->accepted && ( ! $connected->pending ) ) {
-					$menuItems		=	'<ul class="list-unstyled dropdown-menu cbCanvasLayoutMenuItems" style="display: block; position: relative; margin: 0;">'
-									.		'<li class="cbCanvasLayoutMenuItem"><a href="javascript: void(0);" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) ) . '\'; })" class="dropdown-item"><span class="fa fa-times-circle"></span> ' . CBTxt::T( 'Remove' ) . '</a></li>'
-									.	'</ul>';
-
-					$menuAttr		=	cbTooltip( 1, $menuItems, null, 'auto', null, null, null, 'class="cbCanvasLayoutMenu border btn btn-light btn-sm" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle" data-cbtooltip-open-classes="active"' );
-
-					$return			.=								'<div class="position-absolute text-right p-1 cbCanvasLayoutActions">'
-									.									'<button type="button" ' . trim( $menuAttr ) . '><span class="fa fa-pencil"></span></button>'
-									.								'</div>';
-				} elseif ( ( ! $connected->accepted ) || $connected->pending ) {
-					$return			.=								'<div class="position-absolute text-right p-1 cbCanvasLayoutActions">';
-
-					if ( $connected->pending ) {
-						$return		.=								'<button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'removeconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) ) . '\'; })" class="btn btn-sm btn-danger">' . CBTxt::Th( 'Cancel Request' ) . '</button>';
-					} elseif ( ! $connected->accepted  ) {
-						$return		.=								'<button type="button" onclick="window.location.href=\'' . addslashes( $_CB_framework->viewUrl( 'acceptconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) ) . '\';" class="btn btn-sm btn-success">' . CBTxt::T( 'Accept' ) . '</button>'
-									.								' <button type="button" onclick="cbjQuery.cbconfirm( \'' . addslashes( CBTxt::T( 'UE_CONFIRMREMOVECONNECTION', 'Are you sure you want to remove this connection?' ) ) . '\' ).done( function() { window.location.href = \'' . addslashes( $_CB_framework->viewUrl( 'denyconnection', true, array( 'act' => 'connections', 'connectionid' => (int) $connected->memberid ) ) ) . '\'; })" class="btn btn-sm btn-danger">' . CBTxt::Th( 'Reject' ) . '</button>';
-					}
-
-					$return			.=								'</div>';
-				}
-
-				$return				.=							'</div>'
+									.								'</div>'
+									.							'</div>'
 									.							'<div class="position-relative cbCanvasLayoutBottom">'
 									.								'<div class="position-absolute cbCanvasLayoutPhoto">'
 									.									cbTooltip( 1, $tooltip, CBTxt::T( 'UE_CONNECTEDDETAIL', 'Connection Details' ), 300, null, $cbUser->getField( 'avatar', null, 'html', 'none', 'list', 0, true ), null, 'class="d-inline-block"' )
 									.								'</div>'
 									.							'</div>'
-									.							'<div class="card-body p-2 position-relative cbCanvasLayoutBody">'
-									.								'<div class="text-truncate cbCanvasLayoutContent">'
+									.							'<div class="d-flex flex-column card-body p-0 position-relative cbCanvasLayoutBody">'
+									.								'<div class="m-2 text-truncate cbCanvasLayoutContent">'
 									.									$cbUser->getField( 'onlinestatus', null, 'html', 'none', 'profile', 0, true, array( 'params' => array( 'displayMode' => 1 ) ) )
-									.									' ' . $cbUser->getField( 'formatname', null, 'html', 'none', 'list', 0, true, array( 'params' => array( 'fieldHoverCanvas' => false ) ) )
-									.								'</div>'
-									.							'</div>'
+									.									' <span class="text-large">' . $cbUser->getField( 'formatname', null, 'html', 'none', 'list', 0, true, array( 'params' => array( 'fieldHoverCanvas' => false ) ) ) . '</span>'
+									.								'</div>';
+
+				if ( $buttons ) {
+					$return			.=								'<div class="ml-1 mr-1 mb-1 mt-n1 row no-gutters cbCanvasLayoutContent">'
+									.									'<div class="p-1 mw-100 col-md-6 flex-grow-1 cbCanvasLayoutContent">' . implode( '</div><div class="p-1 mw-100 col-md-6 flex-grow-1 cbCanvasLayoutContent">', $buttons ) . '</div>'
+									.								'</div>';
+				}
+
+				$return				.=							'</div>'
 									.						'</div>'
 									.					'</div>';
 			}
 
 			$return					.=				'</div>'
-									.				'<div class="cbMngConnButtons">'
-									.					'<input type="button" class="btn btn-secondary cbMngConnCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" onclick="window.location=\'' . $_CB_framework->userProfileUrl() . '\'; return false;" />'
+									.				'<div class="mt-3 cbMngConnButtons">'
+									.					'<input type="button" class="btn btn-secondary btn-sm-block cbMngConnCancel" value="' . htmlspecialchars( CBTxt::Th( 'UE_CANCEL', 'Cancel' ) ) . '" onclick="window.location=\'' . $_CB_framework->userProfileUrl() . '\'; return false;" />'
 									.				'</div>'
 									.			( $tabCount > 1 ? $tabs->endTab() : null );
 		}

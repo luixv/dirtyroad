@@ -84,6 +84,8 @@ class cbforumsModel extends cbPluginHandler
 		$pageNav				=	new cbPageNav( $total, $limitstart, $limit );
 
 		$pageNav->setInputNamePrefix( 'tab_posts_' );
+		$pageNav->setStaticLimit( true );
+		$pageNav->setBaseURL( $_CB_framework->userProfileUrl( $user->get( 'id', 0, GetterInterface::INT ), false, $tab->get( 'tabid', 0, GetterInterface::INT ), 'html', 0, array( 'tab_posts_search' => ( $searching ? $filterSearch : null ) ) ) );
 
 		if ( $tab->params->get( 'tab_posts_paging', 1 ) ) {
 			$posts				=	KunenaForumMessageHelper::getLatestMessages( false, (int) $pageNav->limitstart, (int) $pageNav->limit, $params );
@@ -110,7 +112,7 @@ class cbforumsModel extends cbPluginHandler
 		}
 
 		$input					=	array();
-		$input['search']		=	'<input type="text" name="tab_posts_search" value="' . htmlspecialchars( $filterSearch ) . '" onchange="document.forumPostsForm.submit();" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Posts...' ) ) . '" class="form-control" />';
+		$input['search']		=	'<input type="text" name="tab_posts_search" value="' . htmlspecialchars( $filterSearch ) . '" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Posts...' ) ) . '" class="form-control" />';
 
 		return HTML_cbforumsTabPosts::showPosts( $rows, $pageNav, $searching, $input, $viewer, $user, $tab, $plugin );
 	}
@@ -175,6 +177,8 @@ class cbforumsModel extends cbPluginHandler
 		$pageNav				=	new cbPageNav( $total, $limitstart, $limit );
 
 		$pageNav->setInputNamePrefix( 'tab_favs_' );
+		$pageNav->setStaticLimit( true );
+		$pageNav->setBaseURL( $_CB_framework->userProfileUrl( $user->get( 'id', 0, GetterInterface::INT ), false, $tab->get( 'tabid', 0, GetterInterface::INT ), 'html', 0, array( 'tab_favs_search' => ( $searching ? $filterSearch : null ) ) ) );
 
 		if ( $tab->params->get( 'tab_favs_paging', 1 ) ) {
 			$topics				=	KunenaForumTopicHelper::getLatestTopics( false, (int) $pageNav->limitstart, (int) $pageNav->limit, $params );
@@ -201,7 +205,7 @@ class cbforumsModel extends cbPluginHandler
 		}
 
 		$input					=	array();
-		$input['search']		=	'<input type="text" name="tab_favs_search" value="' . htmlspecialchars( $filterSearch ) . '" onchange="document.forumFavsForm.submit();" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Favorites...' ) ) . '" class="form-control" />';
+		$input['search']		=	'<input type="text" name="tab_favs_search" value="' . htmlspecialchars( $filterSearch ) . '" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Favorites...' ) ) . '" class="form-control" />';
 
 		return HTML_cbforumsTabFavs::showFavorites( $rows, $pageNav, $searching, $input, $viewer, $user, $tab, $plugin );
 	}
@@ -266,6 +270,8 @@ class cbforumsModel extends cbPluginHandler
 		$pageNav				=	new cbPageNav( $total, $limitstart, $limit );
 
 		$pageNav->setInputNamePrefix( 'tab_subs_' );
+		$pageNav->setStaticLimit( true );
+		$pageNav->setBaseURL( $_CB_framework->userProfileUrl( $user->get( 'id', 0, GetterInterface::INT ), false, $tab->get( 'tabid', 0, GetterInterface::INT ), 'html', 0, array( 'tab_subs_search' => ( $searching ? $filterSearch : null ) ) ) );
 
 		if ( $tab->params->get( 'tab_subs_paging', 1 ) ) {
 			$topics				=	KunenaForumTopicHelper::getLatestTopics( false, (int) $pageNav->limitstart, (int) $pageNav->limit, $params );
@@ -292,7 +298,7 @@ class cbforumsModel extends cbPluginHandler
 		}
 
 		$input					=	array();
-		$input['search']		=	'<input type="text" name="tab_subs_search" value="' . htmlspecialchars( $filterSearch ) . '" onchange="document.forumSubsForm.submit();" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Subscriptions...' ) ) . '" class="form-control" />';
+		$input['search']		=	'<input type="text" name="tab_subs_search" value="' . htmlspecialchars( $filterSearch ) . '" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Subscriptions...' ) ) . '" class="form-control" />';
 
 		return HTML_cbforumsTabSubs::showSubscriptions( $rows, $pageNav, $searching, $input, $viewer, $user, $tab, $plugin );
 	}
@@ -344,6 +350,8 @@ class cbforumsModel extends cbPluginHandler
 		$pageNav				=	new cbPageNav( $total, $limitstart, $limit );
 
 		$pageNav->setInputNamePrefix( 'tab_subs_cats_' );
+		$pageNav->setStaticLimit( true );
+		$pageNav->setBaseURL( $_CB_framework->userProfileUrl( $user->get( 'id', 0, GetterInterface::INT ), false, $tab->get( 'tabid', 0, GetterInterface::INT ), 'html', 0, array( 'tab_subs_cats_search' => ( $searching ? $filterSearch : null ) ) ) );
 
 		if ( $tab->params->get( 'tab_subs_paging', 1 ) ) {
 			$categories			=	KunenaForumCategoryHelper::getLatestSubscriptions( (int) $user->id, (int) $pageNav->limitstart, (int) $pageNav->limit, $params );
@@ -366,7 +374,7 @@ class cbforumsModel extends cbPluginHandler
 		}
 
 		$input					=	array();
-		$input['search']		=	'<input type="text" name="tab_subs_cats_search" value="' . htmlspecialchars( $filterSearch ) . '" onchange="document.forumCatSubsForm.submit();" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Category Subscriptions...' ) ) . '" class="form-control" />';
+		$input['search']		=	'<input type="text" name="tab_subs_cats_search" value="' . htmlspecialchars( $filterSearch ) . '" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Category Subscriptions...' ) ) . '" class="form-control" />';
 
 		if ( ( ! $rows ) && ( ! $searching ) ) {
 			return false;

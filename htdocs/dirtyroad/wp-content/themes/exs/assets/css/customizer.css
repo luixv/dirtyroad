@@ -1,0 +1,24 @@
+[v-cloak],
+.exs-hidden {
+	display: none;
+}
+/*pro sections*/
+#accordion-section-section_special_categories .accordion-section-title:before,
+#accordion-section-section_skins .accordion-section-title:before,
+#accordion-section-section_exs_woocommerce_products .accordion-section-title:before,
+#accordion-section-section_messages .accordion-section-title:before,
+#accordion-section-section_animation .accordion-section-title:before,
+#accordion-section-section_side_nav .accordion-section-title:before,
+#accordion-section-section_fonts .accordion-section-title:before,
+#accordion-section-section_presets .accordion-section-title:before
+{
+	position: absolute;
+	content: 'PRO';
+	right: 45px;
+	top: 12px;
+	color: #fff;
+	background:#007cba;
+	font-size: 11px;
+	padding:0 4px;
+	border-radius: 3px;
+}

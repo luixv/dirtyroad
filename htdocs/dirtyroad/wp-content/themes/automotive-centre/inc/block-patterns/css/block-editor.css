@@ -1,0 +1,73 @@
+.banner-section p, .banner-section .block-editor-rich-text__editable.wp-block-button__link{ 
+  font-family: 'Roboto', sans-serif !important;
+}
+.banner-section h1, .banner-section h4, .about-outer-box h2, .about-outer-box h3, .about-outer-box p, .about-outer-box .block-editor-rich-text__editable.wp-block-button__link{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+/*Banner section*/
+.banner-section{
+  clip-path: polygon(50% 0, 100% 0, 100% 85%, 50% 100%, 0% 85%, 0 0);
+}
+.banner-section .wp-block-column.is-vertically-aligned-center {
+  left: 8%;
+}
+h4.banner-small-heading{
+  letter-spacing: 3px;
+  font-size: 15px !important;
+}
+h4.banner-small-heading:before {
+  content: "";
+  width: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  border: 1px solid #88d055;
+  border-width: 2px;
+}
+h1.banner-title {
+  letter-spacing: 1px;
+}
+.banner-section p {
+  line-height: 2 !important;
+}
+.banner-section .block-editor-rich-text__editable.wp-block-button__link:before {
+  content: "";
+  width: 60px;
+  display: inline-block;
+  margin-right: 10px;
+  border: 1px solid #88d055;
+  border-width: 2px;
+}
+.banner-section .wp-block-button.block-editor-block-list__block.wp-block, .banner-section .wp-block-buttons.block-editor-block-list__block.block-editor-block-list__layout, .about-outer-box .wp-block-buttons.block-editor-block-list__block.wp-block.block-editor-block-list__layout, .about-outer-box .wp-block-button.block-editor-block-list__block.wp-block{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.banner-section .block-editor-rich-text__editable.wp-block-button__link, .wp-block-button .block-editor-rich-text__editable.wp-block-button__link:hover {
+  background: transparent;
+  padding: 12px 0px;
+}
+/*About section*/
+h2.about-small-heading{
+  letter-spacing: 1px;
+  font-size: 1rem !important;
+}
+h3.about-heading{
+  letter-spacing: 1px;
+}
+h3.about-heading:after{
+  content: "";
+  border-bottom: solid 3px #88d055;
+  position: absolute;
+  left: 0px;
+  width: 10%;
+  bottom: 0px;
+}
+.about-outer-box .block-editor-rich-text__editable.wp-block-button__link {
+  padding: 12px 18px;
+  font-size: 12px !important;
+}
+.about-outer-box .block-editor-rich-text__editable.wp-block-button__link:hover {
+  padding: 12px 18px;
+  background-color: #010203 !important;
+  font-size: 12px !important;
+}
+

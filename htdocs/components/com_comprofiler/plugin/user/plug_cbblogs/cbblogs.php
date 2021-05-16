@@ -364,11 +364,13 @@ class cbblogsTab extends cbTabHandler
 		$pageNav			=	new cbPageNav( $total, $limitstart, $limit );
 
 		$pageNav->setInputNamePrefix( 'tab_blogs_' );
+		$pageNav->setStaticLimit( true );
+		$pageNav->setBaseURL( $_CB_framework->userProfileUrl( $user->get( 'id', 0, GetterInterface::INT ), false, $tab->get( 'tabid', 0, GetterInterface::INT ), 'html', 0, array( 'tab_blogs_search' => ( $searching ? $filterSearch : null ) ) ) );
 
 		$rows				=	cbblogsModel::getBlogs( ( $this->params->get( 'tab_paging', 1 ) ? array( $pageNav->limitstart, $pageNav->limit ) : null ), $where, $this->params->get( 'tab_orderby', 'created,desc' ), $viewer, $user, $plugin );
 
 		$input				=	array();
-		$input['search']	=	'<input type="text" name="tab_blogs_search" value="' . htmlspecialchars( $filterSearch ) . '" onchange="document.blogForm.submit();" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Blogs...' ) ) . '" class="form-control" />';
+		$input['search']	=	'<input type="text" name="tab_blogs_search" value="' . htmlspecialchars( $filterSearch ) . '" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Blogs...' ) ) . '" class="form-control" />';
 
 		$tab->params		=	$this->params;
 

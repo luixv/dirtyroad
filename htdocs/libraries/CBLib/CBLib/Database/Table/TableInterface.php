@@ -10,6 +10,7 @@
 namespace CBLib\Database\Table;
 
 use CBLib\Database\DatabaseDriverInterface;
+use CBLib\Registry\TypedGetterInterface;
 use CBLib\Registry\GetterInterface;
 use CBLib\Registry\SetterInterface;
 
@@ -18,7 +19,7 @@ use CBLib\Registry\SetterInterface;
  * CBLib\Database\Table Class implementation
  *
  */
-interface TableInterface extends GetterInterface, SetterInterface /* Always check for future compatibility with ParamsInterface */
+interface TableInterface extends GetterInterface, TypedGetterInterface, SetterInterface /* Always check for future compatibility with ParamsInterface */
 {
 	/**
 	 * Tells if this Table has the $feature (e.g. 'ordering', 'checkout')

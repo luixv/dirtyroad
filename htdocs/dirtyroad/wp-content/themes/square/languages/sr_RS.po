@@ -1,0 +1,552 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Square 1.0.0\n"
+"Report-Msgid-Bugs-To: http://hashthemes.com/\n"
+"POT-Creation-Date: 2015-06-12 21:51:31+0000\n"
+"PO-Revision-Date: Sat Apr 30 2016 14:16:15 GMT+0200 (Central Europe Daylight "
+"Time)\n"
+"Last-Translator: Gnjurac na triciklu <lombookssite@gmail.com>\n"
+"Language-Team: English <hashthemes@gmail.com>\n"
+"Language: Serbian\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: sr_RS\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: ../comments.php:36
+msgid "Older Comments"
+msgstr "Stariji komentari"
+
+#: ../404.php:12
+msgid "404 Error"
+msgstr "Greška 404"
+
+#: ../404.php:18
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ups! Nije pronađena ta strana."
+
+#: ../comments.php:26
+#, php-format
+msgctxt "comments title"
+msgid "One Comment"
+msgid_plural "%1$s Comments"
+msgstr[0] "Jedan komentar"
+msgstr[1] "%1$s komentara"
+
+#: ../comments.php:37
+msgid "Newer Comments"
+msgstr "Noviji komentari"
+
+#: ../comments.php:57
+msgid "Comments are closed."
+msgstr "Komentari su zatvoreni."
+
+#: ../comments.php:68
+msgid "Name"
+msgstr "Ime"
+
+#: ../comments.php:72
+msgid "Email"
+msgstr "Mejl adresa"
+
+#: ../comments.php:76
+msgid "Website"
+msgstr "Internet strana"
+
+#: ../comments.php:82
+msgid "Comment"
+msgstr "Komentar"
+
+#: ../footer.php:60
+msgid "WordPress Theme"
+msgstr "WordPress tema"
+
+#: ../footer.php:62
+#, php-format
+msgid "%1$s by %2$s"
+msgstr "%1$s po %2$s"
+
+#. Name of the template
+msgid "Home Page"
+msgstr "Početna strana"
+
+#: ../front-page.php:23 ../inc/customizer.php:176 ../templates/home-template.php:14
+msgid "Free WordPress Themes"
+msgstr "Besplatne WordPress teme"
+
+#: ../front-page.php:24 ../inc/customizer.php:195 ../templates/home-template.php:15
+msgid "Create website in no time"
+msgstr "Napravite web sajt brzo"
+
+#: ../functions.php:32
+msgid "Primary Menu"
+msgstr "Primarsni meni"
+
+#: ../functions.php:76
+msgid "Right Sidebar"
+msgstr "Desna bočna traka"
+
+#: ../functions.php:86
+msgid "Left Sidebar"
+msgstr "Leva bočna traka"
+
+#: ../functions.php:96
+msgid "Shop Sidebar"
+msgstr "Bočna traka prodavnice"
+
+#: ../functions.php:106
+msgid "Footer 1"
+msgstr "Podnožje 1"
+
+#: ../functions.php:116
+msgid "Footer 2"
+msgstr "Podnožje 2"
+
+#: ../functions.php:126
+msgid "Footer 3"
+msgstr "Podnožje 3"
+
+#: ../functions.php:136
+msgid "Footer 4"
+msgstr "Podnožje 4"
+
+#: ../functions.php:146
+msgid "About Footer"
+msgstr "Podnožje O nama"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Open Sans, translate this to 'off'. Do not translate into your own language.
+#: ../functions.php:174
+msgctxt "Open Sans font: on or off"
+msgid "on"
+msgstr "radi [Open Sans font: on ili off]"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Inconsolata, translate this to 'off'. Do not translate into your own language.
+#: ../functions.php:182
+msgctxt "Roboto Condensed font: on or off"
+msgid "on"
+msgstr "radi [Roboto Condensed font: on ili off]"
+
+#. Translators: To add an additional character subset specific to your language,
+#. translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
+#: ../functions.php:190
+msgctxt "Add new subset (greek, cyrillic, devanagari, vietnamese)"
+msgid "no-subset"
+msgstr "nema podskupa"
+
+#: ../search.php:11
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Rezultati pretrage za: %s"
+
+#: ../inc/customizer.php:26
+msgid "White"
+msgstr "Belo"
+
+#: ../inc/customizer.php:27
+msgid "Black"
+msgstr "Crno"
+
+#: ../inc/customizer.php:34
+msgid "General Settings"
+msgstr "Opšta podešavanja"
+
+#: ../inc/customizer.php:41
+msgid "Static Front Page"
+msgstr "Statična prednja strana"
+
+#: ../inc/customizer.php:43
+msgid "Your theme supports a static front page."
+msgstr "Vaša tema podržava statičnu prvu stranu."
+
+#: ../inc/customizer.php:48
+msgid "Site Title & Tagline"
+msgstr "Naziv mesta i slogan"
+
+#: ../inc/customizer.php:54
+msgid "Header Logo"
+msgstr "Logo zaglavlja"
+
+#: ../inc/customizer.php:62 ../inc/customizer.php:84
+msgid "Header Background Color"
+msgstr "Pozadinska boja zaglavlja"
+
+#: ../inc/customizer.php:95 ../inc/customizer.php:113
+msgid "Page Header Banner"
+msgstr "Baner zaglavlja strane"
+
+#: ../inc/customizer.php:116
+msgid "Recommended Image Size: 1800X400px"
+msgstr "Preporučena veličina: 1800x400px"
+
+#: ../inc/customizer.php:123
+msgid "Background Image"
+msgstr "Pozadinska slika"
+
+#: ../inc/customizer.php:128
+msgid "Colors"
+msgstr "Boje"
+
+#: ../inc/customizer.php:136
+msgid "Home Page Settings"
+msgstr "Podešavanja početne strane"
+
+#: ../inc/customizer.php:145
+msgid "Slider Section"
+msgstr "Sekcija klizača"
+
+#: ../inc/customizer.php:168
+msgid "Slider "
+msgstr "Klizač"
+
+#: ../inc/customizer.php:188
+msgid "Caption Title"
+msgstr "Naslov natpisa"
+
+#: ../inc/customizer.php:207
+msgid "Caption SubTitle"
+msgstr "Podnaslov natpisa"
+
+#: ../inc/customizer.php:224
+msgid "Slider Image"
+msgstr "Slika klizača"
+
+#: ../inc/customizer.php:227
+msgid "Recommended Image Size: 1800X800px"
+msgstr "Preporučena veličina: 1800x800px"
+
+#: ../inc/customizer.php:240
+msgid "Featured Section"
+msgstr "Sekcija Istaknuto"
+
+#: ../inc/customizer.php:258
+msgid "Enable Read More link "
+msgstr "Omogući vezu Saznaj više"
+
+#: ../inc/customizer.php:280
+msgid "Featured Page "
+msgstr "Strana Istaknuto"
+
+#: ../inc/customizer.php:299 ../inc/customizer.php:389 ../inc/customizer.php:540
+msgid "Select a Page"
+msgstr "Izaberi stranu"
+
+#: ../inc/customizer.php:320 ../inc/customizer.php:520
+msgid "FontAwesome Icon"
+msgstr "Ikona FontAwesome"
+
+#: ../inc/customizer.php:332
+msgid "About Us Section"
+msgstr "Sekcija O nama"
+
+#: ../inc/customizer.php:350
+msgid "Disable About Section "
+msgstr "Onemogući sekciju O nama"
+
+#: ../inc/customizer.php:370
+msgid "About Page "
+msgstr "Strana O nama"
+
+#: ../inc/customizer.php:408
+msgid "About Page Stack Images"
+msgstr "Skup slika strane O nama"
+
+#: ../inc/customizer.php:428
+msgid "About Us Stack Image"
+msgstr "Slika O nama"
+
+#: ../inc/customizer.php:429
+msgid "Recommended Image Size: 400X420px"
+msgstr "Preporučena veličina: 400x420px"
+
+#: ../inc/customizer.php:439
+msgid "Tab Section"
+msgstr "Sekcija Tabova"
+
+#: ../inc/customizer.php:457
+msgid "Disable Tab Section "
+msgstr "Onemogući sekciju Tabova"
+
+#: ../inc/customizer.php:479
+msgid "Tab "
+msgstr "Tab"
+
+#: ../inc/customizer.php:499
+msgid "Tab Title"
+msgstr "Naziva taba"
+
+#: ../inc/customizer.php:550
+msgid "Clients Logo Section"
+msgstr "Sekcija Logo klijenta"
+
+#: ../inc/customizer.php:568
+msgid "Disable Client Logo Section "
+msgstr "Onemogući sekciju Logo klijenta"
+
+#: ../inc/customizer.php:589
+msgid "Section Title & Logo"
+msgstr "Sekcija Naziv i logo"
+
+#: ../inc/customizer.php:609
+msgid "Title"
+msgstr "Naziv"
+
+#: ../inc/customizer.php:629
+msgid "Upload Clients Logos"
+msgstr "Otpremi klijentov logo"
+
+#: ../inc/customizer.php:630
+msgid "Recommended Image Size: 220X90px"
+msgstr "Preporučena veličina: 220x90px"
+
+#: ../inc/customizer.php:639
+msgid "Footer Social Icons"
+msgstr "Društvene ikone u podnožju"
+
+#: ../inc/customizer.php:658
+msgid "Facebook"
+msgstr "Facebook"
+
+#: ../inc/customizer.php:677
+msgid "Twitter"
+msgstr "Twitter"
+
+#: ../inc/customizer.php:696
+msgid "Google Plus"
+msgstr "Google Plus"
+
+#: ../inc/customizer.php:715
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: ../inc/customizer.php:734
+msgid "Youtube"
+msgstr "Youtube"
+
+#: ../inc/customizer.php:753
+msgid "Linkedin"
+msgstr "Linkedin"
+
+#: ../inc/customizer.php:825
+msgid "Upload"
+msgstr "Otpremi"
+
+#: ../inc/customizer.php:828
+msgid "Remove all images"
+msgstr "Ukloni sve slike"
+
+#: ../inc/square-functions.php:75
+msgid "Your comment is awaiting moderation."
+msgstr "Vaš komentar čeka na odobrenje."
+
+#: ../inc/square-functions.php:77
+msgid "Edit"
+msgstr "Uredi"
+
+#. translators: 1: comment date, 2: comment time
+#: ../inc/square-functions.php:89
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s u %2$s"
+
+#: ../inc/square-metabox.php:16
+msgid "Sidebar Layout"
+msgstr "Izgled bočne trake"
+
+#: ../inc/template-tags.php:28
+#, php-format
+msgctxt "post date"
+msgid "%s"
+msgstr "%s [datum posta]"
+
+#: ../inc/template-tags.php:33
+#, php-format
+msgctxt "post author"
+msgid "by %s"
+msgstr "od %s [autor]"
+
+#: ../inc/template-tags.php:41
+msgid "No Comments"
+msgstr "Bez komentara"
+
+#: ../inc/template-tags.php:43
+msgid " Comments"
+msgstr "Komentari"
+
+#: ../inc/template-tags.php:45
+msgid "1 Comment"
+msgstr "1 komentar"
+
+#: ../inc/template-tags.php:49
+msgid " Comment Closed"
+msgstr "Zatvoreno komentarisanje"
+
+#. translators: used between list items, there is a space after the comma
+#: ../inc/template-tags.php:65 ../inc/template-tags.php:71
+msgid ", "
+msgstr ","
+
+#: ../inc/template-tags.php:67 ../inc/template-tags.php:73
+#, php-format
+msgid "%1$s"
+msgstr "%1$s"
+
+#: ../template-parts/content-none.php:12
+msgid "Nothing Found"
+msgstr "Ništa nije pronađeno"
+
+#: ../template-parts/content-none.php:18
+#, php-format
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Spremni za prvu objavu? <a href=\"%1$s\">Počnite ovde</a>."
+
+#: ../template-parts/content-none.php:22
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+"Oprostite, ali ništa ne odgovara uslovima pretrage. Molimo, pokušajte ponovo "
+"sa različitim ključnim rečima."
+
+#: ../template-parts/content-none.php:27
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+"Izgleda da ne možemo da pronađemo to šta ste tražili. Možda će pretraga "
+"pomoći."
+
+#: ../template-parts/content-page.php:16 ../template-parts/content-single.php:20 .
+#: ./template-parts/content.php:40
+msgid "Pages:"
+msgstr "Strane:"
+
+#. translators: %s: Name of current post
+#: ../template-parts/content-page.php:27
+#, php-format
+msgid "Edit %s"
+msgstr "Uredi %s"
+
+#: ../template-parts/content.php:35
+msgid "Continue reading &rarr;"
+msgstr "Nastavi s čitanjem &rarr;"
+
+#: ../woocommerce/single-product-reviews.php:49
+msgid "There are no reviews yet."
+msgstr "Još nema komentara."
+
+#: ../woocommerce/single-product-reviews.php:62
+msgid "Add a review"
+msgstr "Dodaj komentar"
+
+#: ../woocommerce/single-product-reviews.php:62
+#, php-format
+msgid "Be the first to review &ldquo;%s&rdquo;"
+msgstr "Budi prvi koji će komentarisati &ldquo;%s&rdquo;"
+
+#: ../woocommerce/single-product-reviews.php:63
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr "Odgovorite %s"
+
+#: ../woocommerce/single-product-reviews.php:67
+msgid "Name*"
+msgstr "Ime*"
+
+#: ../woocommerce/single-product-reviews.php:68
+msgid "Email*"
+msgstr "Mejl*"
+
+#: ../woocommerce/single-product-reviews.php:70
+msgid "Submit"
+msgstr "Pošalji"
+
+#: ../woocommerce/single-product-reviews.php:76
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post a review."
+msgstr "Morate biti <a href=\"%s\">prijavljeni</a> da biste poslali kritiku."
+
+#: ../woocommerce/single-product-reviews.php:80
+msgid "Your Rating"
+msgstr "Vaša ocena"
+
+#: ../woocommerce/single-product-reviews.php:81
+msgid "Rate&hellip;"
+msgstr "Oceni..."
+
+#: ../woocommerce/single-product-reviews.php:82
+msgid "Perfect"
+msgstr "Savršeno"
+
+#: ../woocommerce/single-product-reviews.php:83
+msgid "Good"
+msgstr "Dobro"
+
+#: ../woocommerce/single-product-reviews.php:84
+msgid "Average"
+msgstr "Prosečno"
+
+#: ../woocommerce/single-product-reviews.php:85
+msgid "Not that bad"
+msgstr "Ne tako loše"
+
+#: ../woocommerce/single-product-reviews.php:86
+msgid "Very Poor"
+msgstr "Prilično jadno"
+
+#: ../woocommerce/single-product-reviews.php:90
+msgid "Your Review"
+msgstr "Vaša ocena"
+
+#: ../woocommerce/single-product-reviews.php:99
+msgid "Only logged in customers who have purchased this product may leave a review."
+msgstr "Samo prijavljeni kupci koju su kupili ovaj proizvod mogu da ostave ocenu."
+
+#. Name of the theme
+msgid "Square"
+msgstr "Kvadrat"
+
+#. Theme URI of the theme
+msgid "http://demo.hashthemes.com/square"
+msgstr "http://demo.hashthemes.com/square"
+
+#. Description of the theme
+msgid ""
+"Square is a flexible responsive multipurpose theme compatible with all "
+"browsers and devices, fully mobile friendly, loaded with lots of features. "
+"It is a minimal theme based on WordPress Customizer that allows you to "
+"customize with live preview. The theme can be used for business, corporate, "
+"digital agency, personal, portfolio, photography, parallax, blogs and "
+"magazines. Square is eCommerce (WooCommerce) Compatible, Polylang Compatible,"
+" WPML, RTL, Retina Ready, SEO Friendly and Support bbPress and BuddyPress. "
+"More over it is a complete theme. For demo http://demo.hashthemes.com/square"
+msgstr ""
+"Kvadrat je fleksibilna višenamenska tema, kompatibilna sa svim "
+"pretraživačima i svim uređajima, potpuno prijateljska ka mobilnim uređajima, "
+"puna funkcijama. Ovo je minimalistička tema zasnovana na WordPress "
+"prilagođivaču, koji dopušta prilagođavanje uz živi prikaz.  Može biti "
+"korišćena za biznis, korporativne, agencijske, lične, portfolio, fotografske,"
+" paralaks, blog i magazin sajtove. Kvadrat je eCommerce (WooCommerce) "
+"kompatibilna, WPML kompatibilna, RTL, Retina Ready, SEO prijateljska i "
+"podržava bbPress i BuddyPress. Štaviše, Kvadrat je kompletna tema. "
+"Pogledajte demo na http://demo.hashthemes.com/square"
+
+#. Author of the theme
+msgid "HashThemes"
+msgstr "HashThemes"
+
+#. Author URI of the theme
+msgid "http://hashthemes.com"
+msgstr "http://hashthemes.com"

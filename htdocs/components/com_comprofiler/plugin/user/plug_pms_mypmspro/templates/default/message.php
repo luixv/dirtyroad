@@ -46,17 +46,13 @@ if ( $row->get( 'from_user', 0, GetterInterface::INT ) == $user->get( 'user_id',
 	}
 
 	$avatar				=	$row->getTo( 'avatar' );
-	$name				=	$row->getTo( 'profile' );
+	$name				=	'<span class="text-large">' . $row->getTo( 'profile' ) . '</span>';
 	$status				=	$row->getTo( 'status' );
 } else {
 	$read				=	$row->getRead( $user->get( 'user_id', 0, GetterInterface::INT ) );
 	$avatar				=	$row->getFrom( 'avatar' );
-	$name				=	$row->getFrom( 'profile' );
+	$name				=	'<span class="text-large">' . $row->getFrom( 'profile' ) . '</span>';
 	$status				=	$row->getFrom( 'status' );
-}
-
-if ( $status ) {
-	$name				.=	' <span class="text-small">' . $status . '</span>';
 }
 
 $readTooltip			=	cbTooltip( null, ( $read ? CBTxt::T( 'Read' ) : CBTxT::T( 'Unread' ) ), null, 'auto', null, null, null, 'data-hascbtooltip="true" data-cbtooltip-position-my="bottom center" data-cbtooltip-position-at="top center" data-cbtooltip-classes="qtip-simple" aria-label="' . htmlspecialchars( ( $read ? CBTxt::T( 'Read' ) : CBTxT::T( 'Unread' ) ) ) . '"' );
@@ -83,16 +79,17 @@ if ( $menu ) {
 		<div class="p-2 media-body row no-gutters pmMessageHeaderDetails">
 			<div class="col">
 				<div class="text-wrap pmMessageHeaderUser">
-					<span class="fa fa-envelope<?php echo ( $read ? '-open text-muted' : ' text-primary' ); ?>"<?php echo $readTooltip; ?>></span>
+					<span class="ml-n1 pl-1 pt-1 pb-1 pr-1 text-large fa fa-envelope<?php echo ( $read ? '-open text-muted' : ' text-primary' ); ?>"<?php echo $readTooltip; ?>></span>
 					<?php echo $name; ?>
+					<?php echo $status; ?>
 				</div>
-				<div class="pmMessageHeaderDate">
+				<div class="mt-1 pmMessageHeaderDate">
 					<?php echo cbFormatDate( $row->get( 'date', null, GetterInterface::STRING ), true, true ); ?>
 				</div>
 			</div>
 			<?php if ( $menu ) { ?>
-			<div class="col-auto pmMessageHeaderMenu">
-				<a href="javascript: void(0);" <?php echo trim( $menuAttr ); ?>><span class="ml-2 fa fa-ellipsis-v"></span></a>
+			<div class="col-auto mr-n2 pmMessageHeaderMenu">
+				<a href="javascript: void(0);" <?php echo trim( $menuAttr ); ?>><span class="pt-1 pb-1 pl-3 pr-3 text-large fa fa-ellipsis-v"></span></a>
 			</div>
 			<?php } ?>
 		</div>

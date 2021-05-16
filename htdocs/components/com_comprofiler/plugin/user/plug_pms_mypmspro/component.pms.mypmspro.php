@@ -23,10 +23,10 @@ class CBplug_pmsmypmspro extends cbPluginHandler
 {
 
 	/**
-	 * @param null      $tab
-	 * @param UserTable $user
-	 * @param int       $ui
-	 * @param array     $postdata
+	 * @param null           $tab
+	 * @param null|UserTable $user
+	 * @param int            $ui
+	 * @param array          $postdata
 	 */
 	public function getCBpluginComponent( $tab, $user, $ui, $postdata )
 	{
@@ -320,7 +320,7 @@ class CBplug_pmsmypmspro extends cbPluginHandler
 		$input['search']		=	null;
 
 		if ( ( $type != 'modal' ) && $this->params->get( 'messages_search', true, GetterInterface::BOOLEAN ) && ( $searching || $pageNav->total ) ) {
-			$input['search']	=	'<input type="text" name="pmsearch" value="' . htmlspecialchars( $search ) . '" onchange="document.pmMessagesForm.submit();" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Messages...' ) ) . '" class="form-control pmSearch" role="combobox" />';
+			$input['search']	=	'<input type="text" name="pmsearch" value="' . htmlspecialchars( $search ) . '" placeholder="' . htmlspecialchars( CBTxt::T( 'Search Messages...' ) ) . '" class="form-control pmSearch" role="combobox" />';
 		}
 
 		$input['type']			=	null;

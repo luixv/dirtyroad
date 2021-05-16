@@ -129,10 +129,10 @@ class cbTabHandler extends cbPluginHandler
 	 * WARNING: UNCHECKED ACCESS! On purpose unchecked access for M2M operations
 	 * Generates the HTML to display for a specific component-like page for the tab. WARNING: unchecked access !
 	 *
-	 * @param  TabTable   $tab       the tab database entry
-	 * @param  UserTable  $user      the user being displayed
-	 * @param  int        $ui        1 for front-end, 2 for back-end
-	 * @param  array      $postdata  _POST data for saving edited tab content as generated with getEditTab
+	 * @param TabTable       $tab      the tab database entry
+	 * @param null|UserTable $user     the user being displayed
+	 * @param int            $ui       1 for front-end, 2 for back-end
+	 * @param array          $postdata _POST data for saving edited tab content as generated with getEditTab
 	 * @return string|boolean        Either string HTML for tab content, or false if ErrorMSG generated
 	 */
 	public function getTabComponent( /** @noinspection PhpUnusedParameterInspection */ $tab,

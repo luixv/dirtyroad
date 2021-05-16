@@ -24,10 +24,10 @@ if ( ! ( defined( '_VALID_CB' ) || defined( '_JEXEC' ) || defined( '_VALID_MOS' 
 class CBplug_cbblogs extends cbPluginHandler
 {
 	/**
-	 * @param  TabTable   $tab       Current tab
-	 * @param  UserTable  $user      Current user
-	 * @param  int        $ui        1 front, 2 admin UI
-	 * @param  array      $postdata  Raw unfiltred POST data
+	 * @param TabTable       $tab      Current tab
+	 * @param null|UserTable $user     Current user
+	 * @param int            $ui       1 front, 2 admin UI
+	 * @param array          $postdata Raw unfiltred POST data
 	 * @return string                HTML
 	 */
 	public function getCBpluginComponent( /** @noinspection PhpUnusedParameterInspection */ $tab, $user, $ui, $postdata )

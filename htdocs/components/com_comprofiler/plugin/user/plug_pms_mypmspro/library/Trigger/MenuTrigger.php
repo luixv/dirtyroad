@@ -25,6 +25,7 @@ class MenuTrigger extends \cbPluginHandler
 	 * Displays frontend messages icon on cb menu bar
 	 *
 	 * @param UserTable $user
+	 * @return null|string
 	 */
 	public function getMessages( $user )
 	{
@@ -32,7 +33,7 @@ class MenuTrigger extends \cbPluginHandler
 
 		if ( ( ! $this->params->get( 'messages_icon', true, GetterInterface::BOOLEAN ) )
 			 || ( Application::MyUser()->getUserId() != $user->get( 'id', 0, GetterInterface::INT ) ) ) {
-			return;
+			return null;
 		}
 
 		$unread					=	$_CB_PMS->getPMSunreadCount( $user->get( 'id', 0, GetterInterface::INT ) );
@@ -125,19 +126,6 @@ class MenuTrigger extends \cbPluginHandler
 
 		ob_start();
 		require PMSHelper::getTemplate( null, 'messages_icon' );
-		$return					=	ob_get_contents();
-		ob_end_clean();
-
-		$menu					=	array();
-		$menu['arrayPos']		=	array( '_UE_MENU_PMS_MSGS' => null );
-		$menu['position']		=	'menuBar';
-		$menu['caption']		=	'';
-		$menu['url']			=	$return;
-		$menu['target']			=	'';
-		$menu['img']			=	'';
-		$menu['tooltip']		=	'';
-		$menu['class']			=	'flex-grow-1 order-last text-sm-right';
-
-		$this->addMenu( $menu );
+		return ob_get_clean();
 	}
 }

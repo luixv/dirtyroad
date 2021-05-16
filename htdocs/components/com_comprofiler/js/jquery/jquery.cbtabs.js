@@ -51,6 +51,7 @@
 
 				cbtabs.selected = false;
 				cbtabs.tabsNav = cbtabs.element.find( '.cbTabsNav:first' );
+				cbtabs.tabsToggle = cbtabs.element.find( '.cbNavBarOverflowToggle:first' );
 				cbtabs.tabsContent = cbtabs.element.find( '.cbTabsContent:first' );
 				cbtabs.tabPanes = cbtabs.tabsContent.children( '.cbTabPane' );
 				cbtabs.tabNavs = cbtabs.tabPanes.children( '.cbTabNav' );
@@ -92,6 +93,10 @@
 							}
 
 							cbtabs.selected = tab;
+
+							if ( cbtabs.tabsToggle.length ) {
+								cbtabs.tabsToggle.prop( 'checked', false );
+							}
 
 							cbtabs.element.triggerHandler( 'cbtabs.selected', [event, cbtabs, tab] );
 						}

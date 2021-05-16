@@ -792,6 +792,24 @@
 			});
 		});
 
+		var rowCount = $( this ).find( '.cbRepeatCount' ).filter( function() {
+			return $( this ).closest( '.cbRepeat' ).is( cbrepeat.element );
+		});
+
+		if ( rowCount.length ) {
+			rowCount.each( function() {
+				if ( $( this ).is( 'input' ) ) {
+					if ( $( this ).is( '[type="hidden"]' ) ) {
+						$( this ).val( row.length );
+					} else {
+						$( this ).val( row.length );
+					}
+				} else {
+					$( this ).html( row.length );
+				}
+			});
+		}
+
 		if ( rowUpdated ) {
 			if ( row.length == cbrepeat.settings.min ) {
 				cbrepeat.element.addClass( 'cbRepeatMin' );

@@ -48,11 +48,11 @@ if ( $type != 'modal' ) {
 	<?php if ( $pageTitle ) { ?>
 	<div class="mb-3 border-bottom cb-page-header pmMessagesTitle"><h3 class="m-0 p-0 mb-2 cb-page-header-title"><?php echo $pageTitle; ?></h3></div>
 	<?php } ?>
-	<div class="<?php echo ( $type == 'modal' ? 'm-2 flex-shrink-0' : 'mb-2' ); ?> row no-gutters pkbHeader pmMessagesHeader">
+	<div class="<?php echo ( $type == 'modal' ? 'm-2 flex-shrink-0' : 'mb-3' ); ?> row no-gutters pkbHeader pmMessagesHeader">
 		<?php if ( PMSHelper::canMessage( $user->get( 'id', 0, GetterInterface::INT ), false ) || ( ( $type != 'sent' ) && $unread ) ) { ?>
-		<div class="col-sm text-center text-sm-left">
+		<div class="col-12 col-sm-6 text-center text-sm-left">
 			<?php if ( PMSHelper::canMessage( $user->get( 'id', 0, GetterInterface::INT ), false ) ) { ?>
-			<button type="button" onclick="window.location.href='<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'messages', 'func' => 'new', 'return' => $returnUrl ) ); ?>';" class="btn<?php echo ( $type == 'modal' ? ' btn-sm' : null ); ?> btn-sm-block btn-success pmButton pmButtonNew"><span class="fa fa-plus-circle"></span> <?php echo CBTxt::T( 'New Message' ); ?></button>
+			<button type="button" onclick="window.location.href='<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'messages', 'func' => 'new', 'return' => $returnUrl ) ); ?>';" class="btn<?php echo ( $type == 'modal' ? ' btn-sm' : null ); ?> btn-sm-block btn-success pmButton pmButtonNew"><span class="fa fa-plus-circle"></span> <?php echo CBTxt::T( 'Create New Message' ); ?></button>
 			<?php } ?>
 			<?php if ( ( $type != 'sent' ) && $unread ) { ?>
 			<a href="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => 'read', 'return' => $returnUrl ) ); ?>" class="align-middle pmButton pmButtonRead"><?php echo CBTxt::T( 'Mark All Read' ); ?></a>
@@ -60,20 +60,20 @@ if ( $type != 'modal' ) {
 		</div>
 		<?php } ?>
 		<?php if ( $type == 'modal' ) { ?>
-		<div class="col-sm-6 mt-1 mt-sm-0 text-center text-sm-right">
+		<div class="col-12 col-sm-6 mt-2 mt-sm-0 text-center text-sm-right">
 			<a href="javascript:void(0);" class="align-middle pmButton pmButtonClose cbTooltipClose"><span class="fa fa-times"></span> <span class="d-inline-block d-sm-none"><?php echo CBTxt::T( 'Close' ); ?></span></a>
 		</div>
 		<?php } elseif ( $input['search'] || $input['type'] ) { ?>
-		<div class="col-sm-<?php echo ( $input['search'] && $input['type'] ? '6' : '4' ); ?> mt-1 mt-sm-0 text-sm-right" role="search">
+		<div class="col-12 col-sm-6 mt-2 mt-sm-0 text-sm-right" role="search">
 			<form action="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'messages', 'func' => ( ! $allowTypeFilter ? $type : null ) ) ); ?>" method="post" name="pmMessagesForm" class="m-0 pmMessagesForm">
 				<?php echo $pageNav->getLimitBox( false ); ?>
 				<?php if ( $input['search'] ) { ?>
 				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><span class="fa fa-search"></span></span>
-					</div>
 					<?php echo $input['search']; ?>
 					<?php echo $input['type']; ?>
+					<div class="input-group-append">
+						<button type="submit" class="btn btn-light border" aria-label="<?php echo htmlspecialchars( CBTxt::T( 'Search' ) ); ?>"><span class="fa fa-search"></span></button>
+					</div>
 				</div>
 				<?php } else { ?>
 					<?php echo $input['type']; ?>
@@ -112,10 +112,6 @@ if ( $type != 'modal' ) {
 				$status				=	$row->getFrom( 'status' );
 			}
 
-			if ( $status ) {
-				$status				=	' <span class="text-small">' . $status . '</span>';
-			}
-
 			$_PLUGINS->trigger( 'pm_onDisplayMessage', array( &$row, &$avatar, &$name, &$menu, $user ) );
 
 			if ( ( $row->get( 'from_user', 0, GetterInterface::INT ) == $user->get( 'user_id', 0, GetterInterface::INT ) ) || ( $row->get( 'to_user', 0, GetterInterface::INT ) == $user->get( 'user_id', 0, GetterInterface::INT ) ) || Application::MyUser()->isGlobalModerator() ) {
@@ -131,33 +127,33 @@ if ( $type != 'modal' ) {
 			}
 		?>
 		<?php if ( ( $i > 1 ) || ( ( $i > 1 ) && ( $i == count( $rows ) ) ) ) { ?>
-		<hr class="mt-1 mb-1" role="presentation" />
+		<hr class="mt-2 mb-2" role="presentation" />
 		<?php } ?>
 		<div class="media pmMessagesRow <?php echo ( $read ? 'pmMessagesRowRead' : 'pmMessagesRowUnread' ); ?>" data-pm-url="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => 'show', 'id' => $row->get( 'id', 0, GetterInterface::INT ), 'return' => $returnUrl ) ); ?>" role="row">
 			<div class="media-left pmMessagesRowImg" role="gridcell">
 				<?php echo $avatar; ?>
 			</div>
-			<div class="pl-2 media-body pmMessagesRowMsg" role="gridcell">
+			<div class="pl-3 media-body pmMessagesRowMsg" role="gridcell">
 				<div class="row no-gutters">
 					<div class="text-wrap col pmMessagesRowMsgUser">
 						<?php if ( $row->get( 'from_user', 0, GetterInterface::INT ) == $user->get( 'user_id', 0, GetterInterface::INT ) ) { ?>
-						<span class="fa fa-envelope<?php echo ( $read ? '-open text-muted' : ' text-primary' ); ?>"<?php echo $readTooltip; ?>></span>
+						<span class="ml-n1 pl-1 pt-1 pb-1 pr-1 text-large fa fa-envelope<?php echo ( $read ? '-open text-muted' : ' text-primary' ); ?>"<?php echo $readTooltip; ?>></span>
 						<?php } else { ?>
-						<a href="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => ( $read ? 'unread' : 'read' ), 'id' => $row->get( 'id', 0, GetterInterface::INT ), 'return' => $returnUrl ) ); ?>"<?php echo $readTooltip; ?>><span class="fa fa-envelope<?php echo ( $read ? '-open text-muted' : ' text-primary' ); ?>"></span></a>
+						<a href="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => ( $read ? 'unread' : 'read' ), 'id' => $row->get( 'id', 0, GetterInterface::INT ), 'return' => $returnUrl ) ); ?>"<?php echo $readTooltip; ?>><span class="ml-n1 pl-1 pt-1 pb-1 pr-1 text-large fa fa-envelope<?php echo ( $read ? '-open text-muted' : ' text-primary' ); ?>"></span></a>
 						<?php } ?>
-						<a href="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => 'show', 'id' => $row->get( 'id', 0, GetterInterface::INT ), 'return' => $returnUrl ) ); ?>"><?php echo $name; ?></a>
+						<a href="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => 'show', 'id' => $row->get( 'id', 0, GetterInterface::INT ), 'return' => $returnUrl ) ); ?>" class="text-large"><?php echo $name; ?></a>
 						<?php echo $status; ?>
 					</div>
 					<?php if ( $menu ) { ?>
 					<div class="col-auto pmMessagesRowMsgMenu">
-						<span class="d-none d-sm-inline pmMessagesRowDate"><?php echo cbFormatDate( $row->get( 'date', null, GetterInterface::STRING ), true, false ); ?></span>
-						<a href="javascript: void(0);" <?php echo trim( $menuAttr ); ?>><span class="ml-2 fa fa-ellipsis-v"></span></a>
+						<span class="d-none d-sm-inline align-text-bottom pmMessagesRowDate"><?php echo cbFormatDate( $row->get( 'date', null, GetterInterface::STRING ), true, false ); ?></span>
+						<a href="javascript: void(0);" <?php echo trim( $menuAttr ); ?>><span class="pt-1 pb-1 pl-3 pr-3 text-large fa fa-ellipsis-v"></span></a>
 					</div>
 					<?php } ?>
 				</div>
-				<div class="row no-gutters">
+				<div class="mt-1 row no-gutters">
 					<div class="col-sm text-wrap pmMessagesRowMsgIntro" tabindex="0">
-						<a href="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => 'show', 'id' => $row->get( 'id', 0, GetterInterface::INT ), 'return' => $returnUrl ) ); ?>" class="text-inherit text-plain"><?php echo $row->getMessage( 100 ); ?></a>
+						<a href="<?php echo $_CB_framework->pluginClassUrl( $this->element, true, array( 'action' => 'message', 'func' => 'show', 'id' => $row->get( 'id', 0, GetterInterface::INT ), 'return' => $returnUrl ) ); ?>" class="text-inherit text-plain"><?php echo $row->getMessage( 200 ); ?></a>
 					</div>
 					<div class="col-sm-auto d-block d-sm-none pmMessagesRowDate">
 						<?php echo cbFormatDate( $row->get( 'date', null, GetterInterface::STRING ), true, false ); ?>

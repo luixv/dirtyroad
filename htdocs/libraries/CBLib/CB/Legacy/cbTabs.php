@@ -458,7 +458,7 @@ class cbTabs extends cbTabHandler
 						$i++;
 						break;
 					case "menu":
-						$oMenu[$pos]		.=	$this->startTab( 'CBMenu' . $pos, $tabTitle, $oTab->tabid, array( 'tab' => 'cbTabNavMenu' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'pane' => 'tab-pane cbTabPaneMenu' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'override' => true ) )
+						$oMenu[$pos]		.=	$this->startTab( 'CBMenu' . $pos, $tabTitle, $oTab->tabid, array( 'tab' => 'cbNavBarItem' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'pane' => 'tab-pane cbTabPaneMenu' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'link' => 'cbNavBarLink', 'override' => true ) )
 											.		'<div class="cb_tab_content cb_tab_menu" id="cb_tabid_' . $oTab->tabid . '">'
 											.			$tabContent
 											.		'</div>'
@@ -466,7 +466,7 @@ class cbTabs extends cbTabHandler
 						$i++;
 						break;
 					case "menunested":
-						$oMenuNest[$pos]	.=	$this->startTab( 'CBMenu' . $pos, $tabTitle, $oTab->tabid, array( 'tab' => 'cbTabNavMenuNested' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'pane' => 'tab-pane cbTabPaneMenuNested' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'override' => true ) )
+						$oMenuNest[$pos]	.=	$this->startTab( 'CBMenu' . $pos, $tabTitle, $oTab->tabid, array( 'tab' => 'cbNavBarItem cbNavBarItemNested' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'pane' => 'tab-pane cbTabPaneMenuNested' . ( $oTab->cssclass ? ' ' . $oTab->cssclass : null ), 'link' => 'cbNavBarLink', 'override' => true ) )
 											.		'<div class="cb_tab_content cb_tab_menu_nested" id="cb_tabid_' . $oTab->tabid . '">'
 											.			$tabContent
 											.		'</div>'
@@ -567,19 +567,7 @@ class cbTabs extends cbTabHandler
 				static $oMenuJS	=	0;
 
 				if ( ! $oMenuJS++ ) {
-					$js			=	"$( '.cbTabsMenuNavBar' ).on( 'click', '.cbTabsMenuNavBarToggle', function() {"
-								.		"var navbar = $( this ).siblings( '.navbar-collapse' );"
-								.		"if ( ! navbar.hasClass( 'show' ) ) {"
-								.			"navbar.addClass( 'show' );"
-								.			"$( this ).removeClass( 'collapsed' );"
-								.			"$( this ).attr( 'aria-expanded', true );"
-								.		"} else {"
-								.			"navbar.removeClass( 'show' );"
-								.			"$( this ).addClass( 'collapsed' );"
-								.			"$( this ).attr( 'aria-expanded', false );"
-								.		"}"
-								.	"});"
-								.	"$( '.cbTabsMenu' ).on( 'cbtabs.selected', function( e, event, cbtabs, tab ) {"
+					$js			=	"$( '.cbTabsMenu' ).on( 'cbtabs.selected', function( e, event, cbtabs, tab ) {"
 								.		"if ( tab.tabIndex == 1 ) {"
 								.			"cbtabs.element.find( '.cbTabsMenuLeft,.cbTabsMenuRight' ).removeClass( 'hidden' );"
 								.			"cbtabs.element.find( '.cbTabsMenuLeft + .cbTabsMenuLeftStatic,.cbTabsMenuRight + .cbTabsMenuRightStatic' ).addClass( 'hidden' );"
@@ -606,7 +594,7 @@ class cbTabs extends cbTabHandler
 								.		"if ( api.elements.content ) {"
 								.			"var selected = $( this ).closest( '.cbTabsMenu' ).cbtabs( 'selected' );"
 								.			"api.elements.content.find( '.cbTabNavLink.active' ).removeClass( 'active' );"
-								.			"if ( selected && selected.tabNav.hasClass( 'cbTabNavMenuNested' ) ) {"
+								.			"if ( selected && selected.tabNav.hasClass( 'cbNavBarItemNested' ) ) {"
 								.				"api.elements.content.find( '#' + selected.tabNav.attr( 'id' ) + ' .cbTabNavLink' ).addClass( 'active' );"
 								.			"}"
 								.		"}"
@@ -621,10 +609,10 @@ class cbTabs extends cbTabHandler
 								.				"$( this ).find( '.cbTabsMenuLeft,.cbTabsMenuRight' ).addClass( 'hidden' );"
 								.				"$( this ).find( '.cbTabsMenuLeftStatic,.cbTabsMenuRightStatic' ).removeClass( 'hidden' );"
 								.			"}"
-								.			"var nested = cbtabs.tabsNav.find( '.cbTabNavMenuNested' );"
+								.			"var nested = cbtabs.tabsNav.find( '.cbNavBarItemNested' );"
 								.			"if ( nested.length ) {"
 								.				"cbtabs.tabsNav.siblings( '.cbTabNavMore' ).find( '.cbTabsSubMenuNav' ).append( nested.clone( true ) ).find( '.nav-item' ).removeClass( 'nav-item' ).find( '.nav-link' ).removeClass( 'nav-link' ).addClass( 'dropdown-item' );"
-								.				"nested.addClass( 'd-block d-sm-none' );"
+								.				"nested.addClass( 'd-block d-md-none' );"
 								.			"}"
 								.		"}"
 								.	"});";
@@ -635,21 +623,27 @@ class cbTabs extends cbTabHandler
 				$more			=	null;
 
 				if ( $oMenuNest[$pos] ) {
-					$more		=	'<div class="cbTabNavMore cbTabNavMenuMore cbTooltip cbDropdownMenu nav-item dropdown mb-auto" data-cbtooltip-tooltip-target="#cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'More" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbTabNavMoreDropdown" data-cbtooltip-open-classes="show">'
-								.		'<a href="javascript: void(0);" class="cbTabNavMenuMoreBtn text-body border-transparent nav-link navbar-toggler d-none d-sm-block">'
+					$more		=	'<div class="ml-auto d-none d-md-block nav-item dropdown mb-auto cbTooltip cbDropdownMenu cbTabNavMore cbTabNavMenuMore" data-cbtooltip-tooltip-target="#cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'More" data-cbtooltip-menu="true" data-cbtooltip-classes="qtip-nostyle cbTabNavMoreDropdown" data-cbtooltip-open-classes="show">'
+								.		'<a href="javascript: void(0);" class="d-block text-body border-transparent nav-link navbar-toggler cbTabNavMenuMoreBtn">'
 								.			'<span class="fa fa-ellipsis-v"></span>'
 								.		'</a>'
-								.		'<ul id="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'More" class="cbTabsNav cbTabsSubMenuNav list-unstyled dropdown-menu"></ul>'
+								.		'<ul id="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'More" class="list-unstyled dropdown-menu cbTabsNav cbTabsSubMenuNav"></ul>'
 								.	'</div>';
 				}
 
 				$posHtml		=	'<div class="cbTabs cbTabsMenu" id="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . '">'
-								.		'<div class="cbTabsMenuNavBar navbar navbar-expand-sm navbar-light bg-light mb-3 border" role="navigation">'
-								.			'<button type="button" class="cbTabsMenuNavBarToggle navbar-toggler ml-auto" aria-controls="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'Menu" aria-expanded="false" aria-label="' . htmlspecialchars( CBTxt::T( 'Toggle Menu' ) ) . '">'
-								.				'<span class="navbar-toggler-icon"></span>'
-								.			'</button>'
-								.			'<div class="collapse navbar-collapse h-auto" id="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'Menu">'
-								.				'<ul class="cbTabsNav cbTabsMenuNav navbar-nav flex-wrap m-0 mr-auto"></ul>'
+								.		'<div class="navbar navbar-expand navbar-light bg-light mb-3 border cbNavBar cbTabsMenuNavBar" role="navigation">'
+								.			'<input type="checkbox" id="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'overflow" aria-hidden="true" tabindex="-1" class="d-none cbNavBarOverflowToggle" />'
+								.			'<div class="collapse navbar-collapse cbNavBarContainer" id="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'Menu">'
+								.				'<ul class="navbar-nav flex-wrap flex-grow-1 m-0 cbNavBarMenu cbTabsNav">'
+								.					'<li class="position-absolute nav-item cbNavBarItem cbNavBarOverflow">'
+								.						'<label for="cbtabs' . htmlspecialchars( 'CBMenu' . $pos ) . 'overflow" aria-hidden="true" class="m-0 nav-link cbNavBarLink">'
+								.							'<span class="fa fa-bars cbNavBarOverflowMoreIcon"></span>'
+								.							'<span class="fa fa-times cbNavBarOverflowCloseIcon"></span>'
+								.							' ' . CBTxt::T( 'CBNAV_MORE', 'More' )
+								.						'</label>'
+								.					'</li>'
+								.				'</ul>'
 								.				$more
 								.			'</div>'
 								.		'</div>';

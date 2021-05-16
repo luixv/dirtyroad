@@ -876,6 +876,7 @@ namespace
 
 		$pageNav						=	new cbPageNav( $total, $limitstart, $limit );
 
+		$pageNav->setStaticLimit( true );
 		$pageNav->setInputNamePrefix( $prefix );
 		$pageNav->setBaseURL( $pagingUrl );
 

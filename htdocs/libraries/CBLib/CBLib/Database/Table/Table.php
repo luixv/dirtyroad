@@ -13,6 +13,7 @@ use CBLib\Application\Application;
 use CBLib\Database\DatabaseDriverInterface;
 use CBLib\Input\Get;
 use CBLib\Language\CBTxt;
+use CBLib\Registry\GetterInterface;
 
 defined('CBLIB') or die();
 
@@ -199,6 +200,162 @@ class Table implements TableInterface
 		}
 
 		return Get::clean( $this->$var, $type );
+	}
+
+	/**
+	 * Gets the cmd value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  string|null   $default  The value to return if no value is found
+	 * @return string|null
+	 */
+	public function getCmd( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::COMMAND );
+		}
+
+		return $this->get( $var, $default, GetterInterface::COMMAND );
+	}
+
+	/**
+	 * Gets the int value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  int|null      $default  The value to return if no value is found
+	 * @return int|null
+	 */
+	public function getInt( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::INT );
+		}
+
+		return $this->get( $var, $default, GetterInterface::INT );
+	}
+
+	/**
+	 * Gets the uint value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  int|null      $default  The value to return if no value is found
+	 * @return int|null
+	 */
+	public function getUint( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::UINT );
+		}
+
+		return $this->get( $var, $default, GetterInterface::UINT );
+	}
+
+	/**
+	 * Gets the numeric value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  string|null   $default  The value to return if no value is found
+	 * @return string|null
+	 */
+	public function getNum( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::NUMERIC );
+		}
+
+		return $this->get( $var, $default, GetterInterface::NUMERIC );
+	}
+
+	/**
+	 * Gets the float value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  float|null    $default  The value to return if no value is found
+	 * @return float|null
+	 */
+	public function getFloat( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::FLOAT );
+		}
+
+		return $this->get( $var, $default, GetterInterface::FLOAT );
+	}
+
+	/**
+	 * Gets the boolean value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  bool|null     $default  The value to return if no value is found
+	 * @return bool|null
+	 */
+	public function getBool( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::BOOLEAN );
+		}
+
+		return $this->get( $var, $default, GetterInterface::BOOLEAN );
+	}
+
+	/**
+	 * Gets the string value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  string|null   $default  The value to return if no value is found
+	 * @return string|null
+	 */
+	public function getString( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::STRING );
+		}
+
+		return $this->get( $var, $default, GetterInterface::STRING );
+	}
+
+	/**
+	 * Gets the html value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  string|null   $default  The value to return if no value is found
+	 * @return string|null
+	 */
+	public function getHtml( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::HTML );
+		}
+
+		return $this->get( $var, $default, GetterInterface::HTML );
+	}
+
+	/**
+	 * Gets the base64 value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  string|null   $default  The value to return if no value is found
+	 * @return string|null
+	 */
+	public function getBase64( $var, $default = null )
+	{
+		if ( $default !== null ) {
+			$default	=	Get::clean( $default, GetterInterface::BASE64 );
+		}
+
+		return $this->get( $var, $default, GetterInterface::BASE64 );
+	}
+
+	/**
+	 * Gets the raw value of the class variable
+	 *
+	 * @param  string        $var      The name of the class variable
+	 * @param  mixed         $default  The value to return if no value is found
+	 * @return mixed
+	 */
+	public function getRaw( $var, $default = null )
+	{
+		return $this->get( $var, $default, GetterInterface::RAW );
 	}
 
 	/**

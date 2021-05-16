@@ -2,12 +2,12 @@
 <cbinstall version="1.0" type="plugin" group="user" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:../../../../../validation/ahawow.xsd">
 	<name>CB Core</name>
 	<author>JoomlaJoe and Beat</author>
-	<creationDate>2021-03-15</creationDate>
+	<creationDate>2021-05-10</creationDate>
 	<copyright>(C) 2004-2021 www.joomlapolis.com / Lightning MultiCom SA - and its licensors, all rights reserved</copyright>
 	<license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
 	<authorEmail>beat@joomlapolis.com</authorEmail>
 	<authorUrl>www.joomlapolis.com</authorUrl>
-	<version>2.5.0+build.2021.03.15.20.56.55.bab0ba330</version>
+	<version>2.5.0+build.2021.05.10.20.17.45.e2ddb4ef9</version>
 	<description>Core CB Tabs and Events.</description>
 	<files>
 		<filename plugin="cb.core">cb.core.php</filename>
@@ -624,6 +624,11 @@
 											<then>
 												<param name="" default="640" type="string" />
 											</then>
+											<else>
+												<if name="parent/name" type="condition" operator="=" value="avatar" valuetype="const:string">
+													<param name="" default="160" type="string" />
+												</if>
+											</else>
 										</if>
 									</attribute>
 								</attributes>
@@ -635,6 +640,11 @@
 											<then>
 												<param name="" default="1280" type="string" />
 											</then>
+											<else>
+												<if name="parent/name" type="condition" operator="=" value="avatar" valuetype="const:string">
+													<param name="" default="160" type="string" />
+												</if>
+											</else>
 										</if>
 									</attribute>
 								</attributes>
@@ -647,6 +657,11 @@
 											<then>
 												<param name="" default="320" type="string" />
 											</then>
+											<else>
+												<if name="parent/name" type="condition" operator="=" value="avatar" valuetype="const:string">
+													<param name="" default="80" type="string" />
+												</if>
+											</else>
 										</if>
 									</attribute>
 								</attributes>
@@ -658,11 +673,28 @@
 											<then>
 												<param name="" default="640" type="string" />
 											</then>
+											<else>
+												<if name="parent/name" type="condition" operator="=" value="avatar" valuetype="const:string">
+													<param name="" default="80" type="string" />
+												</if>
+											</else>
 										</if>
 									</attribute>
 								</attributes>
 							</param>
 							<param name="avatarMaintainRatio" type="list" default="" label="Maintain Aspect Ratio" description="Optionally override global image maintain aspect ratio.">
+								<attributes>
+									<attribute name="default">
+										<if name="parent/name" type="condition" operator="=" value="avatar" valuetype="const:string">
+											<then>
+												<param name="" default="3" type="string" />
+											</then>
+											<else>
+												<param name="" default="" type="string" />
+											</else>
+										</if>
+									</attribute>
+								</attributes>
 								<option value="">Normal CB Default</option>
 								<option value="1">Yes</option>
 								<option value="2">Yes, with Cropping</option>
@@ -697,14 +729,40 @@
 						</if>
 					</tabpanetab>
 					<tabpanetab label="Image Display">
-						<param name="imageStyle" type="list" default="roundedbordered" translate-default="no" label="Style" description="Select the styling applied to the image. Note for best results use squared images. Circles can display as ovals if the image is not squared.">
-							<option value="">None</option>
-							<option value="rounded">Rounded</option>
-							<option value="roundedbordered">Rounded Bordered</option>
-							<option value="circle">Circle</option>
-							<option value="circlebordered">Circle Bordered</option>
-						</param>
+						<if name="parent/name" type="condition" operator="!=" value="canvas" valuetype="const:string">
+							<param name="imageStyle" type="list" default="circlebordered" translate-default="no" label="Style" description="Select the styling applied to the image. Note for best results use squared images. Circles can display as ovals if the image is not squared.">
+								<attributes>
+									<attribute name="default">
+										<if name="parent/name" type="condition" operator="=" value="avatar" valuetype="const:string">
+											<then>
+												<param name="" default="circlebordered" type="string" />
+											</then>
+											<else>
+												<param name="" default="" type="string" />
+											</else>
+										</if>
+									</attribute>
+								</attributes>
+								<option value="">None</option>
+								<option value="rounded">Rounded</option>
+								<option value="roundedbordered">Rounded Bordered</option>
+								<option value="circle">Circle</option>
+								<option value="circlebordered">Circle Bordered</option>
+							</param>
+						</if>
 						<param name="pendingDefaultAvatar" type="list" default="" label="Pending Default" description="Optionally specify the default image if the field is pending approval.">
+							<attributes>
+								<attribute name="default">
+									<if name="parent/name" type="condition" operator="in" value="avatar|*|canvas" valuetype="const:string">
+										<then>
+											<param name="" default="initial" type="string" />
+										</then>
+										<else>
+											<param name="" default="" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
 							<if name="parent/name" type="condition" operator="=" value="canvas" valuetype="const:string">
 								<then>
 									<data name="" type="custom" class="CBfield_image" method="loadDefaultCanvasImages" />
@@ -715,6 +773,18 @@
 							</if>
 						</param>
 						<param name="defaultAvatar" type="list" default="" label="Empty Default" description="Optionally specify the default image if the field has no value.">
+							<attributes>
+								<attribute name="default">
+									<if name="parent/name" type="condition" operator="in" value="avatar|*|canvas" valuetype="const:string">
+										<then>
+											<param name="" default="initial" type="string" />
+										</then>
+										<else>
+											<param name="" default="" type="string" />
+										</else>
+									</if>
+								</attribute>
+							</attributes>
 							<if name="parent/name" type="condition" operator="=" value="canvas" valuetype="const:string">
 								<then>
 									<data name="" type="custom" class="CBfield_image" method="loadDefaultCanvasImages" />
@@ -724,13 +794,15 @@
 								</else>
 							</if>
 						</param>
-						<param name="altText" type="list" default="" label="Alt" description="Optionally change the display of image Alt text.">
-							<option value="">Normal CB Default</option>
-							<option value="1">None</option>
-							<option value="2">Custom</option>
-						</param>
-						<if name="altText" type="showhide" operator="=" value="2" valuetype="const:int">
-							<param name="altTextCustom" type="text" default="" label="Alt Text" description="Optionally supply substitution supported image Alt text." />
+						<if name="parent/name" type="condition" operator="!=" value="canvas" valuetype="const:string">
+							<param name="altText" type="list" default="" label="Alt" description="Optionally change the display of image Alt text.">
+								<option value="">Normal CB Default</option>
+								<option value="1">None</option>
+								<option value="2">Custom</option>
+							</param>
+							<if name="altText" type="showhide" operator="=" value="2" valuetype="const:int">
+								<param name="altTextCustom" type="text" default="" label="Alt Text" description="Optionally supply substitution supported image Alt text." />
+							</if>
 						</if>
 						<param name="titleText" type="list" default="" label="Title" description="Optionally change the display of image Title text.">
 							<option value="">Normal CB Default</option>
