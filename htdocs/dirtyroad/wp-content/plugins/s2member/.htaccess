@@ -1,5 +1,0 @@
-Options -Indexes
-<IfModule dir_module>
-	DirectoryIndex disabled
-	DirectoryIndex index.php
-</IfModule>
