@@ -39,6 +39,3 @@ mysql/backup/performance_schema
 
 # But not these files...
 !htdocs/
-!mysql/data/bitnami_joomla
-!mysql/data/ibdata1
-!mysql/backup
