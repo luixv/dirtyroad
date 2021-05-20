@@ -943,7 +943,7 @@ class Cookie_Law_Info_Cookies {
 				'sensitivity' => 'necessary',
 			),
 			'cookielawinfo-checkbox-functional'  => array(
-				'title'       => 'cookielawinfo-checbox-functional',
+				'title'       => 'cookielawinfo-checkbox-functional',
 				'description' => 'The cookie is set by GDPR cookie consent to record the user consent for the cookies in the category "Functional".',
 				'category'    => 'necessary',
 				'type'        => 0,
@@ -959,7 +959,7 @@ class Cookie_Law_Info_Cookies {
 				'sensitivity' => 'necessary',
 			),
 			'cookielawinfo-checkbox-analytics'   => array(
-				'title'       => 'cookielawinfo-checbox-analytics',
+				'title'       => 'cookielawinfo-checkbox-analytics',
 				'description' => 'This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Analytics".',
 				'category'    => 'necessary',
 				'type'        => 0,
@@ -967,7 +967,7 @@ class Cookie_Law_Info_Cookies {
 				'sensitivity' => 'necessary',
 			),
 			'cookielawinfo-checkbox-others'      => array(
-				'title'       => 'cookielawinfo-checbox-others',
+				'title'       => 'cookielawinfo-checkbox-others',
 				'description' => 'This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Other.',
 				'category'    => 'necessary',
 				'type'        => 0,

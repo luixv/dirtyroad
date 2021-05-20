@@ -30,7 +30,7 @@ if (!defined('WPINC')) {
 						<?php do_action('wt_cli_ccpa_settings'); ?>
 					</div>
 				</div>
-			<table class="form-table">
+			<table class="form-table" style="border-top: 2px dotted #e2e4e7;">
 				<!-- SHOW ONCE / TIMER -->
 				<tr valign="top">
 					<th scope="row"><label for="show_once_yn_field"><?php _e('Auto-hide(Accept) cookie bar after delay?', 'cookie-law-info'); ?></label></th>

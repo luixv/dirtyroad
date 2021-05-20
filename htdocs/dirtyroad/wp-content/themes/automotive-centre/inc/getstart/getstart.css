@@ -249,6 +249,10 @@ a.doc-links {
 a.doc-links:hover {
     color: #00a0d2;
 }
+/* -------- Ibtana gutenberg link to customizer --------- */
+.link-customizer-with-guternberg-ibtana {
+    width: 50%;
+}
 /* -------- Block pattern link to customizer--------- */
 .block-pattern-img {
     width: 55%;
@@ -266,4 +270,33 @@ a.doc-links:hover {
 }
 .block-pattern-link-customizer h3{
     margin: 25px 0 10px;
+}
+/* -------- Plugin Activation Css --------- */
+.automotive-centre-recommended-plugins .automotive-centre-action-list{
+    max-width: 735px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 10px #e2e2e2;
+    margin-top: 31px;
+}
+.automotive-centre-recommended-plugins .action-link,.automotive-centre-recommended-plugins a.button{
+    padding: 10px 56px;
+    display: inline-block;
+    margin-top: 20px;
+}
+.automotive-centre-recommended-plugins .action-link span{
+    position: relative;
+    top: 5px;
+}
+.automotive-centre-recommended-plugins .ibtana-skip-btn{
+    padding: 16px 56px;
+    display: inline-block;
+    margin-top: 20px;
+    color: #0071a1;
+    background: #eaf0f3;
+    text-decoration: none;
+    margin-left: 10px;
+}
+.lite-theme-tab,.gutenberg-editor-tab{
+    display: none;
 }

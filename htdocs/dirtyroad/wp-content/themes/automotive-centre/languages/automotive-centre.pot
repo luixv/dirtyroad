@@ -671,20 +671,12 @@ msgstr ""
 msgid 'Pre-Loader'
 msgstr ""
 
-#: inc/customizer.php:127
-msgid 'Pre-Loader Type'
+#: inc/customizer.php:126
+msgid 'Pre-Loader Background Color'
 msgstr ""
 
-#: inc/customizer.php:130
-msgid 'Two Way'
-msgstr ""
-
-#: inc/customizer.php:131
-msgid 'Dots'
-msgstr ""
-
-#: inc/customizer.php:132
-msgid 'Rotate'
+#: inc/customizer.php:129
+msgid 'Pre-Loader Border Color'
 msgstr ""
 
 #: inc/customizer.php:138
@@ -856,7 +848,11 @@ msgstr ""
 msgid 'Comments'
 msgstr ""
 
-#: inc/customizer.php:413
+#: inc/customizer.php:417
+msgid 'Time'
+msgstr ""
+
+#: inc/customizer.php:420
 msgid 'Tags'
 msgstr ""
 

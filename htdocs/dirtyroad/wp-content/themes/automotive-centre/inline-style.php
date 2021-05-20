@@ -12,7 +12,7 @@
 		$automotive_centre_custom_css .='}';
 	}
 	if($automotive_centre_first_color != false){
-		$automotive_centre_custom_css .='#sidebar ul li a:hover,.info-box i,a,.post-navigation a:hover .post-title, .post-navigation a:focus .post-title,.post-main-box:hover h2,#footer h3,.serv-box a,#footer li a:hover,a.scrollup, #footer .custom-social-icons i:hover, .main-navigation a:hover, .main-navigation ul.sub-menu a:hover, .entry-content a, .sidebar .textwidget p a, .textwidget p a, #comments p a, .slider .inner_carousel p a, #footer a.custom_read_more:hover, .post-main-box:hover h2 a, .post-main-box:hover .post-info a, .single-post .post-info:hover a, .info-box p a:hover{';
+		$automotive_centre_custom_css .='#sidebar ul li a:hover,.info-box i,a,.post-navigation a:hover .post-title, .post-navigation a:focus .post-title,.post-main-box:hover h2,#footer h3,.serv-box a,#footer li a:hover,a.scrollup, #footer .custom-social-icons i:hover, .main-navigation a:hover, .main-navigation ul.sub-menu a:hover, .entry-content a, .sidebar .textwidget p a, .textwidget p a, #comments p a, .slider .inner_carousel p a, #footer a.custom_read_more:hover, .post-main-box:hover h2 a, .post-main-box:hover .post-info a, .single-post .post-info:hover a, .info-box p a:hover, .logo .site-title a:hover{';
 			$automotive_centre_custom_css .='color: '.esc_attr($automotive_centre_first_color).';';
 		$automotive_centre_custom_css .='}';
 	}
@@ -398,5 +398,21 @@
 	if($automotive_centre_products_border_radius != false){
 		$automotive_centre_custom_css .='.woocommerce ul.products li.product, .woocommerce-page ul.products li.product{';
 			$automotive_centre_custom_css .='border-radius: '.esc_attr($automotive_centre_products_border_radius).'px;';
+		$automotive_centre_custom_css .='}';
+	}
+
+	/*------------------ Preloader Background Color  -------------------*/
+
+	$automotive_centre_preloader_bg_color = get_theme_mod('automotive_centre_preloader_bg_color');
+	if($automotive_centre_preloader_bg_color != false){
+		$automotive_centre_custom_css .='#preloader{';
+			$automotive_centre_custom_css .='background-color: '.esc_attr($automotive_centre_preloader_bg_color).';';
+		$automotive_centre_custom_css .='}';
+	}
+
+	$automotive_centre_preloader_border_color = get_theme_mod('automotive_centre_preloader_border_color');
+	if($automotive_centre_preloader_border_color != false){
+		$automotive_centre_custom_css .='.loader-line{';
+			$automotive_centre_custom_css .='border-color: '.esc_attr($automotive_centre_preloader_border_color).'!important;';
 		$automotive_centre_custom_css .='}';
 	}

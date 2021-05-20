@@ -110,20 +110,23 @@ function automotive_centre_customize_register( $wp_customize ) {
         'section' => 'automotive_centre_left_right'
     )));
 
-	$wp_customize->add_setting('automotive_centre_loader_icon',array(
-        'default' => 'Two Way',
-        'sanitize_callback' => 'automotive_centre_sanitize_choices'
+	$wp_customize->add_setting('automotive_centre_preloader_bg_color', array(
+		'default'           => '#ffffff',
+		'sanitize_callback' => 'sanitize_hex_color',
 	));
-	$wp_customize->add_control('automotive_centre_loader_icon',array(
-        'type' => 'select',
-        'label' => __('Pre-Loader Type','automotive-centre'),
-        'section' => 'automotive_centre_left_right',
-        'choices' => array(
-            'Two Way' => __('Two Way','automotive-centre'),
-            'Dots' => __('Dots','automotive-centre'),
-            'Rotate' => __('Rotate','automotive-centre')
-        ),
-	) );
+	$wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'automotive_centre_preloader_bg_color', array(
+		'label'    => __('Pre-Loader Background Color', 'automotive-centre'),
+		'section'  => 'automotive_centre_left_right',
+	)));
+
+	$wp_customize->add_setting('automotive_centre_preloader_border_color', array(
+		'default'           => '#88d055',
+		'sanitize_callback' => 'sanitize_hex_color',
+	));
+	$wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'automotive_centre_preloader_border_color', array(
+		'label'    => __('Pre-Loader Border Color', 'automotive-centre'),
+		'section'  => 'automotive_centre_left_right',
+	)));
 
 	//Topbar
 	$wp_customize->add_section( 'automotive_centre_topbar', array(
@@ -607,6 +610,16 @@ function automotive_centre_customize_register( $wp_customize ) {
     ) );
     $wp_customize->add_control( new Automotive_Centre_Toggle_Switch_Custom_Control( $wp_customize, 'automotive_centre_toggle_comments',array(
 		'label' => esc_html__( 'Comments','automotive-centre' ),
+		'section' => 'automotive_centre_post_settings'
+    )));
+
+    $wp_customize->add_setting( 'automotive_centre_toggle_time',array(
+		'default' => 1,
+		'transport' => 'refresh',
+		'sanitize_callback' => 'automotive_centre_switch_sanitization'
+    ) );
+    $wp_customize->add_control( new Automotive_Centre_Toggle_Switch_Custom_Control( $wp_customize, 'automotive_centre_toggle_time',array(
+		'label' => esc_html__( 'Time','automotive-centre' ),
 		'section' => 'automotive_centre_post_settings'
     )));
 

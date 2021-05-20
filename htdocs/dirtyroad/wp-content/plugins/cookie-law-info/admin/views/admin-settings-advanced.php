@@ -10,10 +10,10 @@ if ( ! defined( 'WPINC' ) ) {
 
     <table class="form-table">
         <tr valign="top">
-            <th scope="row"><?php _e('Reset all values', 'cookie-law-info'); ?></th>
+            <th scope="row"><?php _e('Reset settings', 'cookie-law-info'); ?></th>
             <td>
                 <input type="submit" name="delete_all_settings" value="<?php _e('Delete settings and reset', 'cookie-law-info'); ?>" class="button-secondary" onclick="cli_store_settings_btn_click(this.name); if(confirm('<?php _e('Are you sure you want to delete all your settings?', 'cookie-law-info'); ?>')){  }else{ return false;};" />
-                <span class="cli_form_help"><?php _e('Warning: this will actually delete your current settings.', 'cookie-law-info'); ?></span>
+                <span class="cli_form_help"><?php _e('Warning: Resets all your current settings to default.', 'cookie-law-info'); ?></span>
             </td>
         </tr>
     </table>

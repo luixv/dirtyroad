@@ -29,7 +29,7 @@ function buddyforms_display_form_element( $args )
         $field_unique = $_POST['unique'];
     }
     $form_slug = ( !empty($post->post_name) ? $post->post_name : '' );
-    $post_type = ( !empty($post->post_type) ? $post->post_type : '' );
+    $post_type = ( !empty($buddyform['post_type']) ? $buddyform['post_type'] : '' );
     if ( isset( $field_unique ) && $field_unique == 'unique' ) {
         if ( isset( $buddyform['form_fields'] ) ) {
             foreach ( $buddyform['form_fields'] as $key => $form_field ) {
@@ -232,6 +232,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'user_login':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'Username', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'      => $field_id,
@@ -257,6 +258,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'user_email':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'User eMail', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'     => $field_id,
@@ -285,6 +287,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'user_first':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'First Name', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'     => $field_id,
@@ -309,6 +312,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'user_last':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'Last Name', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'     => $field_id,
@@ -333,6 +337,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'display_name':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'Display Name', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'     => $field_id,
@@ -357,6 +362,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'user_pass':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'Password', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'     => $field_id,
@@ -395,6 +401,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'user_website':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'Website', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'     => $field_id,
@@ -419,6 +426,7 @@ function buddyforms_display_form_element( $args )
             break;
         case 'user_bio':
             unset( $form_fields['advanced']['slug'] );
+            unset( $form_fields['advanced']['metabox_enabled'] );
             $name = ( isset( $customfield['name'] ) ? stripcslashes( $customfield['name'] ) : __( 'Bio', 'buddyforms' ) );
             $form_fields['general']['name'] = new Element_Textbox( '<b>' . __( 'Label', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][name]", array(
                 'data'     => $field_id,
@@ -1146,7 +1154,7 @@ function buddyforms_display_form_element( $args )
                     'category' => 'Categories',
                 );
                 
-                if ( isset( $post_type ) ) {
+                if ( !empty($post_type) ) {
                     $error = '<table style="width:100%;"id="table_row_' . $field_id . '_post_type_no_taxonomy_error" class="wp-list-table posts fixed">
                         <td colspan="2">
                             <div class="post_type_no_taxonomy_error bf-error">' . __( 'This Post Type does not have any ' . $error_field_type_name . '.', 'buddyforms' ) . '</div>
@@ -1619,8 +1627,28 @@ JS;
                 'value'     => $post_status,
                 'id'        => "buddyforms_options[form_fields][" . $field_id . "][post_status]",
                 'shortDesc' => __( "This Post Field allows users to override this form’s Status setting (find the setting above in the Form Settings bock).", 'buddyforms' ),
+                'onclick'   => "setStatusDateFormat(this)",
             )
             );
+            //More formats in https://trentrichardson.com/examples/timepicker
+            $date_format_class = "";
+            if ( !is_array( $post_status ) ) {
+                $date_format_class = "bf-hidden";
+            }
+            $status_date_format = ( isset( $customfield['status_date_format'] ) ? ( !empty($customfield['status_date_format']) ? stripcslashes( $customfield['status_date_format'] ) : 'dd/mm/yy' ) : 'dd/mm/yy' );
+            $status_date_format_element = new Element_Textbox( '<b>' . __( 'Date Format', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][status_date_format]", array(
+                'value'     => $status_date_format,
+                'shortDesc' => __( 'Read more about the format <a target="_blank" href="https://api.jqueryui.com/datepicker/#utility-formatDate">at.</a>', 'buddyforms' ),
+                'class'     => "status-date-format " . $date_format_class,
+            ) );
+            $status_time_format = ( isset( $customfield['status_time_format'] ) ? ( !empty($customfield['status_time_format']) ? stripcslashes( $customfield['status_time_format'] ) : 'hh:mm:ss' ) : 'hh:mm:ss' );
+            $status_time_format_element = new Element_Textbox( '<b>' . __( 'Time Format', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][status_time_format]", array(
+                'value'     => $status_time_format,
+                'shortDesc' => __( 'Read more about the format <a target="_blank" href="https://api.jqueryui.com/datepicker/#utility-formatDate">at.</a>', 'buddyforms' ),
+                'class'     => "status-time-format " . $date_format_class,
+            ) );
+            $form_fields['general']['status_date_format'] = $status_date_format_element;
+            $form_fields['general']['status_time_format'] = $status_time_format_element;
             $form_fields['hidden']['type'] = new Element_Hidden( "buddyforms_options[form_fields][" . $field_id . "][type]", $field_type );
             break;
         case 'featured_image':

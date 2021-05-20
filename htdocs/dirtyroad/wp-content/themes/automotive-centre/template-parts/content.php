@@ -35,7 +35,11 @@
               <?php } ?>
 
               <?php if(get_theme_mod('automotive_centre_toggle_comments',true)==1){ ?>
-                <i class="fa fa-comments" aria-hidden="true"></i><span class="entry-comments"><?php comments_number( __('0 Comment', 'automotive-centre'), __('0 Comments', 'automotive-centre'), __('% Comments', 'automotive-centre') ); ?> </span>
+                <i class="fa fa-comments" aria-hidden="true"></i><span class="entry-comments"><?php comments_number( __('0 Comment', 'automotive-centre'), __('0 Comments', 'automotive-centre'), __('% Comments', 'automotive-centre') ); ?> </span><span>|</span>
+              <?php } ?>
+
+              <?php if(get_theme_mod('automotive_centre_toggle_time',true)==1){ ?>
+                <i class="fas fa-clock"></i><span class="entry-time"><?php echo esc_html( get_the_time() ); ?></span>
               <?php } ?>
               <hr>
             </div>      
@@ -77,7 +81,11 @@
             <?php } ?>
 
             <?php if(get_theme_mod('automotive_centre_toggle_comments',true)==1){ ?>
-              <i class="fa fa-comments" aria-hidden="true"></i><span class="entry-comments"><?php comments_number( __('0 Comment', 'automotive-centre'), __('0 Comments', 'automotive-centre'), __('% Comments', 'automotive-centre') ); ?> </span>
+              <i class="fa fa-comments" aria-hidden="true"></i><span class="entry-comments"><?php comments_number( __('0 Comment', 'automotive-centre'), __('0 Comments', 'automotive-centre'), __('% Comments', 'automotive-centre') ); ?> </span><span>|</span>
+            <?php } ?>
+
+            <?php if(get_theme_mod('automotive_centre_toggle_time',true)==1){ ?>
+              <i class="fas fa-clock"></i><span class="entry-time"><?php echo esc_html( get_the_time() ); ?></span>
             <?php } ?>
             <hr>
           </div>      
@@ -118,7 +126,11 @@
             <?php } ?>
 
             <?php if(get_theme_mod('automotive_centre_toggle_comments',true)==1){ ?>
-              <i class="fa fa-comments" aria-hidden="true"></i><span class="entry-comments"><?php comments_number( __('0 Comment', 'automotive-centre'), __('0 Comments', 'automotive-centre'), __('% Comments', 'automotive-centre') ); ?> </span>
+              <i class="fa fa-comments" aria-hidden="true"></i><span class="entry-comments"><?php comments_number( __('0 Comment', 'automotive-centre'), __('0 Comments', 'automotive-centre'), __('% Comments', 'automotive-centre') ); ?> </span><span>|</span>
+            <?php } ?>
+
+            <?php if(get_theme_mod('automotive_centre_toggle_time',true)==1){ ?>
+              <i class="fas fa-clock"></i><span class="entry-time"><?php echo esc_html( get_the_time() ); ?></span>
             <?php } ?>
             <hr>
           </div>      

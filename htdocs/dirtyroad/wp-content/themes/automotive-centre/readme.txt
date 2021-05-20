@@ -2,9 +2,9 @@
 Contributors: VWthemes
 Tags: left-sidebar, right-sidebar, one-column, two-columns, three-columns, four-columns, grid-layout, wide-blocks, block-styles, flexible-header, block-patterns, custom-colors, custom-background, custom-logo, custom-menu, custom-header, editor-style, featured-images, footer-widgets, sticky-post, full-width-template, theme-options, translation-ready, threaded-comments, post-formats, rtl-language-support, blog, portfolio, e-commerce
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.7.1
 Requires PHP: 7.2.14
-Stable tag: 0.5.3
+Stable tag: 0.5.4
 License: GPLv3.0 or later
 License URI: http://www.gnu.org/licenses/gpl-v3.0.html
 
@@ -12,7 +12,7 @@ Our Automotive WordPress Theme is designed to be stylish and classy, much like a
 
 == Description ==
 
-Our Automotive WordPress Theme is designed to be stylish and classy, much like all our beloved cars. This exclusive theme is developed especially for car dealership, Motorhome, Travel Trailer, Lifts, Trators, Forklift, Campers, Lift Trucks, MotoSnow, Snow Motorcycle, Auto wash, Automobiles, Buses, Car Repair Shops, Car Wash, Garages, Mechanic Workshops, Auto Painting Car Service, car dealers, Brakes shop, Hire taxi, Mectronic, Auto Centres, Tyres, Auto Inspections, Handyman, Serviceman, Maintenance, Vehicle Diagnostics, Auto Glass, Body Shops, Motorbike Motor Full, Shuttle Service, Auto Accessories Store, Auto Detailing, Automobile AC Repairing Service bodyshop business,  car dealer, inventory management, search, vehicle, vehicle listing, vehicle search, Agriculture Equipment and similar businesses. We aid this multi-purpose responsive theme while keeping the motor-heads in mind and what will appeal to the people the most. Our WordPress theme makes the use of secure and clean codes, you can easily customize our theme as per your wishes. You can even add or remove anything that you may or may not like. With ample of personalization options, optimized codes, call to action button (CTA), custom colors, beautiful banners, useful shortcodes, numerous styling options, it is the best professional WordPress theme to grab. You will get an interactive demo, Post Formats, responsive slider, display options, SEO friendly features, social media icons, and a bunch of other phenomenal features with this supreme theme. Furthermore, built on Bootstrap framework, the theme will ease the web development. No matter what kind of automobile industry or services you offer, our Automobile theme is made for the gear-heads like you. Whether you sell used car, deal in motorbikes, motorcycles, small cars, trucks, cab service, automobile blogger, own a car review website, run a garage, repair service, own a showroom, run a driving school and etc., this highly interactive, WooCommerce compatible, user-friendly, Tested on real devices, and multipurpose ecommerce theme will fit perfectly for you.
+Our Automotive WordPress Theme is designed to be stylish and classy, much like all our beloved cars. This exclusive theme is developed especially for car dealership, Motorhome, Travel Trailer, Lifts, Trators, Forklift, Campers, Lift Trucks, MotoSnow, Snow Motorcycle, Auto wash, Automobiles, Buses, Car Repair Shops, Car Wash, Garages, Mechanic Workshops, Auto Painting Car Service, car dealers, Brakes shop, Hire taxi, Mectronic, Auto Centres, Tyres, Auto Inspections, Handyman, Serviceman, Maintenance, Vehicle Diagnostics, Auto Glass, Body Shops, Motorbike Motor Full, Automobile Magazine, Auto Spare Parts Selling, Mobile Oil Change, Service Station, Shuttle Service, Auto Accessories Store, Auto Detailing, Automobile AC Repairing Service bodyshop business,  car dealer, inventory management, search, vehicle, vehicle listing, vehicle search, Agriculture Equipment and similar businesses. We aid this multi-purpose responsive theme while keeping the motor-heads in mind and what will appeal to the people the most. Our WordPress theme makes the use of secure and clean codes, you can easily customize our theme as per your wishes. You can even add or remove anything that you may or may not like. With ample of personalization options, optimized codes, call to action button (CTA), custom colors, beautiful banners, useful shortcodes, numerous styling options, it is the best professional WordPress theme to grab. You will get an interactive demo, Post Formats, responsive slider, display options, SEO friendly features, social media icons, and a bunch of other phenomenal features with this supreme theme. Furthermore, built on Bootstrap framework, the theme will ease the web development. No matter what kind of automobile industry or services you offer, our Automobile theme is made for the gear-heads like you. Whether you sell used car, deal in motorbikes, motorcycles, small cars, trucks, cab service, automobile blogger, own a car review website, run a garage, repair service, own a showroom, run a driving school and etc., this highly interactive, WooCommerce compatible, user-friendly, Tested on real devices, and multipurpose ecommerce theme will fit perfectly for you.
 
 == Changelog ==
 
@@ -201,6 +201,16 @@ Our Automotive WordPress Theme is designed to be stylish and classy, much like a
 * Remove content-vw p: text-align:justify class from style.css
 * Added link to customizer links in block pattern.
 * Done the css of link to customizer links in block pattern.
+
+= 0.5.4 =
+* Added show / hide blog post time & single post time option in customizer.
+* Added gutenberg tab in get started.
+* Added css for tab in get started.
+* Checked logo and header image on other pages.
+* Added hover on logo.
+* Changed preloader.
+* Added pre-Loader bg & border Color option in customizer.
+* Updated language folder.
 
 == Resources ==
 

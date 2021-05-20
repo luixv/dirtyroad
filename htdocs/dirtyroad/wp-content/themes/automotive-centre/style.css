@@ -3,10 +3,10 @@ Theme Name: Automotive Centre
 Theme URI: https://www.vwthemes.com/themes/free-automotive-wordpress-theme/
 Author: VW Themes
 Author URI: https://www.vwthemes.com/
-Description: Our Automotive WordPress Theme is designed to be stylish and classy, much like all our beloved cars. This exclusive theme is developed especially for car dealership, Motorhome, Travel Trailer, Lifts, Trators, Forklift, Campers, Lift Trucks, MotoSnow, Snow Motorcycle, Auto wash, Automobiles, Buses, Car Repair Shops, Car Wash, Garages, Mechanic Workshops, Auto Painting Car Service, car dealers, Brakes shop, Hire taxi, Mectronic, Auto Centres, Tyres, Auto Inspections, Handyman, Serviceman, Maintenance, Vehicle Diagnostics, Auto Glass, Body Shops, Motorbike Motor Full, Shuttle Service, Auto Accessories Store, Auto Detailing, Automobile AC Repairing Service bodyshop business,  car dealer, inventory management, search, vehicle, vehicle listing, vehicle search, Agriculture Equipment and similar businesses. We aid this multi-purpose responsive theme while keeping the motor-heads in mind and what will appeal to the people the most. Our WordPress theme makes the use of secure and clean codes, you can easily customize our theme as per your wishes. You can even add or remove anything that you may or may not like. With ample of personalization options, optimized codes, call to action button (CTA), custom colors, beautiful banners, useful shortcodes, numerous styling options, it is the best professional WordPress theme to grab. You will get an interactive demo, Post Formats, responsive slider, display options, SEO friendly features, social media icons, and a bunch of other phenomenal features with this supreme theme. Furthermore, built on Bootstrap framework, the theme will ease the web development. No matter what kind of automobile industry or services you offer, our Automobile theme is made for the gear-heads like you. Whether you sell used car, deal in motorbikes, motorcycles, small cars, trucks, cab service, automobile blogger, own a car review website, run a garage, repair service, own a showroom, run a driving school and etc., this highly interactive, WooCommerce compatible, user-friendly, Tested on real devices, and multipurpose ecommerce theme will fit perfectly for you. Demo at: https://www.vwthemes.net/vw-automotive-pro/
-Tested up to: 5.7
+Description: Our Automotive WordPress Theme is designed to be stylish and classy, much like all our beloved cars. This exclusive theme is developed especially for car dealership, Motorhome, Travel Trailer, Lifts, Trators, Forklift, Campers, Lift Trucks, MotoSnow, Snow Motorcycle, Auto wash, Automobiles, Buses, Car Repair Shops, Car Wash, Garages, Mechanic Workshops, Auto Painting Car Service, car dealers, Brakes shop, Hire taxi, Mectronic, Auto Centres, Tyres, Auto Inspections, Handyman, Serviceman, Maintenance, Vehicle Diagnostics, Auto Glass, Body Shops, Motorbike Motor Full, Automobile Magazine, Auto Spare Parts Selling, Mobile Oil Change, Service Station, Shuttle Service, Auto Accessories Store, Auto Detailing, Automobile AC Repairing Service bodyshop business,  car dealer, inventory management, search, vehicle, vehicle listing, vehicle search, Agriculture Equipment and similar businesses. We aid this multi-purpose responsive theme while keeping the motor-heads in mind and what will appeal to the people the most. Our WordPress theme makes the use of secure and clean codes, you can easily customize our theme as per your wishes. You can even add or remove anything that you may or may not like. With ample of personalization options, optimized codes, call to action button (CTA), custom colors, beautiful banners, useful shortcodes, numerous styling options, it is the best professional WordPress theme to grab. You will get an interactive demo, Post Formats, responsive slider, display options, SEO friendly features, social media icons, and a bunch of other phenomenal features with this supreme theme. Furthermore, built on Bootstrap framework, the theme will ease the web development. No matter what kind of automobile industry or services you offer, our Automobile theme is made for the gear-heads like you. Whether you sell used car, deal in motorbikes, motorcycles, small cars, trucks, cab service, automobile blogger, own a car review website, run a garage, repair service, own a showroom, run a driving school and etc., this highly interactive, WooCommerce compatible, user-friendly, Tested on real devices, and multipurpose ecommerce theme will fit perfectly for you. Demo at: https://www.vwthemes.net/vw-automotive-pro/
+Tested up to: 5.7.1
 Requires PHP: 7.2.14
-Version: 0.5.3
+Version: 0.5.4
 License: GPLv3.0 or later
 License URI: http://www.gnu.org/licenses/gpl-v3.0.html
 Text Domain: automotive-centre
@@ -323,6 +323,9 @@ input[type="submit"] {
   margin: 0;
   line-height: 1;
   padding: 3px 0px;
+}
+.logo .site-title a:hover{
+  color: #88d055;
 }
 p.site-description {
   font-weight: 500;
@@ -708,26 +711,88 @@ body.page-template-custom-home-page.admin-bar .header-fixed, body.admin-bar .hea
   margin-top: 20px !important;
 }
 /*----------- PRELOADER ----------*/
-
-#preloader  {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+#preloader {
+  background-color: #ffffff;
   bottom: 0;
-  background-color: #fff;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
   z-index: 999999;
   height: 100%;
 }
-#status  {
-  width: 200px;
-  height: 200px;
+.loader-inner {
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  margin: auto;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: -100px 0 0 -100px;
+  right: 0;
+  top: 0;
+  width: 100px;
+}
+.loader-line-wrap {
+  animation: spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  box-sizing: border-box;
+  height: 50px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transform-origin: 50% 100%;
+  width: 100px;
+}
+.loader-line {
+  border: 4px solid #88d055;
+  border-radius: 100%;
+  box-sizing: border-box;
+  height: 100px;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
+}
+.loader-line-wrap:nth-child(1) { animation-delay: -50ms; }
+.loader-line-wrap:nth-child(2) { animation-delay: -100ms; }
+.loader-line-wrap:nth-child(3) { animation-delay: -150ms; }
+.loader-line-wrap:nth-child(4) { animation-delay: -200ms; }
+.loader-line-wrap:nth-child(5) { animation-delay: -250ms; }
+
+.loader-line-wrap:nth-child(1) .loader-line {
+  height: 90px;
+  width: 90px;
+  top: 7px;
+}
+.loader-line-wrap:nth-child(2) .loader-line {
+  height: 76px;
+  width: 76px;
+  top: 14px;
+}
+.loader-line-wrap:nth-child(3) .loader-line {
+  height: 62px;
+  width: 62px;
+  top: 21px;
+}
+.loader-line-wrap:nth-child(4) .loader-line {
+  height: 48px;
+  width: 48px;
+  top: 28px;
+}
+.loader-line-wrap:nth-child(5) .loader-line {
+  height: 34px;
+  width: 34px;
+  top: 35px;
+}
+@keyframes spin {
+  0%, 15% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 /* Footer Section */
 .scrollup i {

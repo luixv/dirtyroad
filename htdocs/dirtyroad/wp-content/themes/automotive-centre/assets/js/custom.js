@@ -80,7 +80,7 @@ jQuery(document).ready(function () {
 
 (function( $ ) {
 	jQuery(window).load(function() {
-	    jQuery("#status").fadeOut();
+	    jQuery(".loader-inner").delay(1000).fadeOut("slow");
 	    jQuery("#preloader").delay(1000).fadeOut("slow");
 	})
 	$(window).scroll(function(){

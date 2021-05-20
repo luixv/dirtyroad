@@ -406,3 +406,9 @@ require get_template_directory() . '/inc/getstart/getstart.php';
 
 /* Block Pattern */
 require get_template_directory() . '/inc/block-patterns/block-patterns.php';
+
+/* TGM Plugin Activation */
+require get_template_directory() . '/inc/tgm/tgm.php';
+
+/* Plugin Activation */
+require get_template_directory() . '/inc/getstart/plugin-activation.php';

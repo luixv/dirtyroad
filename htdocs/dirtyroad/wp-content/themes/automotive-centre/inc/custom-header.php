@@ -30,7 +30,7 @@ function automotive_centre_header_style() {
 	//Check if user has defined any header image.
 	if ( get_header_image() ) :
 	$custom_css = "
-        .page-template-custom-home-page .home-page-header, .home-page-header{
+        .home-page-header{
 			background-image:url('".esc_url(get_header_image())."');
 			background-position: center top;
 		}";

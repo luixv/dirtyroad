@@ -5,11 +5,11 @@ Tags: GDPR, CCPA, cookie notice, DSGVO, RGPD, LGPD, PIPEDA, cookies , cookie law
 Requires at least: 4.4.0
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Easily set up cookie notice and get GDPR Cookie Consent as per EU GDPR/Cookie Law regulations. The plugin supports GDPR (DSGVO, RGPD), LGPD, CCPA Do Not Sell, and CNIL of France.
+Easily set up cookie notice, cookie policy and get GDPR cookie compliance with our cookie scan. Supports GDPR, DSGVO, RGPD, LGPD, CCPA Do Not Sell and CNIL.
 
 GDPR CookieConsent' plugin is getting renamed as ‘CookieYes - GDPR Cookie Consent & Compliance Notice' plugin. WebToffee will continue to develop and maintain this plugin. In addition to the current features, we have integrated a free Automatic Cookie Scan service into the plugin. You need an account with CookieYes in order to use the scan service, but no worries, we will automatically create an account for you when you initiate the scan.
 
@@ -188,6 +188,11 @@ For every update of the plugin, you will be notified of the installed plugins pa
 13. Add a privacy policy overview
 
 == Changelog ==
+
+= 2.0.2 =
+
+* Enhancement - Added reject button by default
+* Enhancement - Help text improvements
 
 = 2.0.1 =
 
@@ -504,10 +509,7 @@ For every update of the plugin, you will be notified of the installed plugins pa
 
 == Upgrade Notice ==
 
-= 2.0.1 =
+= 2.0.2 =
 
-* Enhancement - New shortcode [cookie_accept_all] to add accept all button to the banner
-* Enhancement - MonsterInsights integration
-* Enhancement - New filter `wt_cli_set_secure_cookies` to set plugin cookies as secure
-* Fix - Site map issue with cookie category
-* Fix - Cookie categories are not ordered properly in secondary languages
+* Enhancement - Added reject button by default
+* Enhancement - Help text improvements

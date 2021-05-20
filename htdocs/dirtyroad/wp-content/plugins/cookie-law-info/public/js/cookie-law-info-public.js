@@ -146,7 +146,8 @@ var CLI=
 				new_window=CLI.settings.button_7_new_win ? true : false;
 			}
 			else if(button_action=='reject')
-			{
+			{	
+				CLI.disableAllCookies();
 				CLI.reject_close();
 				new_window= Boolean( CLI.settings.button_3_new_win ) ? true : false;
 			}
@@ -859,6 +860,20 @@ var CLI=
 			{
 				cli_chkbox_elm.prop('checked',true);
 				CLI_Cookie.set('cookielawinfo-'+cli_chkbox_data_id,'yes',CLI_ACCEPT_COOKIE_EXPIRE);
+			}
+		});
+	},
+	disableAllCookies:function()
+    {	
+    	jQuery('.cli-user-preference-checkbox').each(function(){
+
+			var cli_chkbox_elm=jQuery(this);
+			var cli_chkbox_data_id=cli_chkbox_elm.attr('data-id');
+			cliCategorySlug = cli_chkbox_data_id.replace('checkbox-','');			
+			if(Cli_Data.strictlyEnabled.indexOf(cliCategorySlug) === -1)
+			{
+				cli_chkbox_elm.prop('checked',false);
+				CLI_Cookie.set('cookielawinfo-'+cli_chkbox_data_id,'no',CLI_ACCEPT_COOKIE_EXPIRE);
 			}
 		});
 	},

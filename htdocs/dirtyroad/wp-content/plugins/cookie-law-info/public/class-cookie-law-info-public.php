@@ -184,6 +184,7 @@ class Cookie_Law_Info_Public
 				'ccpaEnabled' => $ccpa_enabled,
 				'ccpaRegionBased' => $ccpa_region_based,
 				'ccpaBarEnabled' => $ccpa_enable_bar,
+				'strictlyEnabled' => Cookie_Law_Info_Cookies::get_instance()->get_strictly_necessory_categories(),
 				'ccpaType' => $ccpa_type,
 				'js_blocking' => $js_blocking_enabled,
 				'custom_integration' => $enable_custom_integration,
