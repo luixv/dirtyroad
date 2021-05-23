@@ -326,6 +326,20 @@ if ( ! function_exists( 'exs_customizer_settings_array' ) ) :
 						'meta-icons-dark-muted' => esc_html__( 'Darker color', 'exs' ),
 					),
 				),
+				'color_meta_text'                      => array(
+					'type'    => 'select',
+					'section' => 'colors',
+					'label'   => esc_html__( 'Color for text and links in a post meta', 'exs' ),
+					'default' => esc_html( exs_option( 'color_meta_text', '' ) ),
+					'choices' => array(
+						''                     => esc_html__( 'Default', 'exs' ),
+						'meta-text-main'       => esc_html__( 'Accent color', 'exs' ),
+						'meta-text-main2'      => esc_html__( 'Accent color 2', 'exs' ),
+						'meta-text-border'     => esc_html__( 'Borders color', 'exs' ),
+						'meta-text-dark'       => esc_html__( 'Dark color', 'exs' ),
+						'meta-text-dark-muted' => esc_html__( 'Darker color', 'exs' ),
+					),
+				),
 				///////////////////////////
 				//homepage slider section//
 				///////////////////////////

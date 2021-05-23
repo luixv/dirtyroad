@@ -1,2 +1,0 @@
-<?php
- namespace tk\Psr\Http\Client; use tk\Psr\Http\Message\RequestInterface; use tk\Psr\Http\Message\ResponseInterface; interface ClientInterface { public function sendRequest(\tk\Psr\Http\Message\RequestInterface $request) : \tk\Psr\Http\Message\ResponseInterface; } 

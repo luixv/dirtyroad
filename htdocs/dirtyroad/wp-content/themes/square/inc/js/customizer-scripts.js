@@ -32,55 +32,88 @@ jQuery(document).ready(function ($) {
     });
 
     // Gallery Control
-    $('.upload_gallery_button').click(function (event) {
-        var current_gallery = $(this).closest('label');
+    $('.square-gallery-button').click(function (e) {
+        e.preventDefault();
 
-        if ($(this).hasClass('clear_gallery')) {
-            //remove value from input
-            current_gallery.find('.gallery_values').val('').trigger('change');
-
-            //remove preview images
-            current_gallery.find('.gallery-screenshot').html('');
-            return;
-        }
-
-        // Make sure the media gallery API exists
-        if (typeof wp === 'undefined' || !wp.media || !wp.media.gallery) {
-            return;
-        }
-        event.preventDefault();
-
-        // Activate the media editor
-        var val = current_gallery.find('.gallery_values').val();
-        var final;
-
-        if (!val) {
-            final = '[gallery ids="0"]';
+        var button = $(this);
+        var hiddenfield = button.prev();
+        if (hiddenfield.val()) {
+            var hiddenfieldvalue = hiddenfield.val().split(",");
         } else {
-            final = '[gallery ids="' + val + '"]';
+            var hiddenfieldvalue = new Array();
         }
-        var frame = wp.media.gallery.edit(final);
 
-        frame.state('gallery-edit').on(
-                'update', function (selection) {
+        var frame = wp.media({
+            title: 'Insert Images',
+            library: {
+                type: 'image',
+                post__not_in: hiddenfieldvalue
+            },
+            button: {text: 'Use Images'},
+            multiple: 'add'
+        });
 
-                    //clear screenshot div so we can append new selected images
-                    current_gallery.find('.gallery-screenshot').html('');
+        frame.on('select', function () {
+            var attachments = frame.state().get('selection').map(function (a) {
+                a.toJSON();
+                return a;
+            });
+            var i;
+            /* loop through all the images */
+            for (i = 0; i < attachments.length; ++i) {
+                /* add HTML element with an image */
+                $('ul.square-gallery-container').append('<li data-id="' + attachments[i].id + '"><span style="background-image:url(' + attachments[i].attributes.url + ')"></span><a href="#" class="square-gallery-remove">×</a></li>');
+                /* add an image ID to the array of all images */
+                hiddenfieldvalue.push(attachments[i].id);
+            }
+            /* refresh sortable */
+            $("ul.square-gallery-container").sortable("refresh");
+            /* add the IDs to the hidden field value */
+            hiddenfield.val(hiddenfieldvalue.join()).trigger('change');
+        }).open();
+    });
 
-                    var element, preview_html = '', preview_img;
-                    var ids = selection.models.map(
-                            function (e) {
-                                element = e.toJSON();
-                                preview_img = typeof element.sizes.thumbnail !== 'undefined' ? element.sizes.thumbnail.url : element.url;
-                                preview_html = "<div class='screen-thumb'><img src='" + preview_img + "'/></div>";
-                                current_gallery.find('.gallery-screenshot').append(preview_html);
-                                return e.id;
-                            }
-                    );
+    $('ul.square-gallery-container').sortable({
+        items: 'li',
+        cursor: '-webkit-grabbing', /* mouse cursor */
+        stop: function (event, ui) {
+            ui.item.removeAttr('style');
 
-                    current_gallery.find('.gallery_values').val(ids.join(',')).trigger('change');
-                }
-        );
+            var sort = new Array(), /* array of image IDs */
+                    gallery = $(this); /* ul.square-gallery-container */
+
+            /* each time after dragging we resort our array */
+            gallery.find('li').each(function (index) {
+                sort.push($(this).attr('data-id'));
+            });
+            /* add the array value to the hidden input field */
+            gallery.next().val(sort.join()).trigger('change');
+        }
+    });
+    
+    /*
+     * Remove certain images
+     */
+    $('body').on('click', '.square-gallery-remove', function () {
+        var id = $(this).parent().attr('data-id'),
+                gallery = $(this).parent().parent(),
+                hiddenfield = gallery.next(),
+                hiddenfieldvalue = hiddenfield.val().split(","),
+                i = hiddenfieldvalue.indexOf(id);
+
+        $(this).parent().remove();
+
+        /* remove certain array element */
+        if (i != -1) {
+            hiddenfieldvalue.splice(i, 1);
+        }
+
+        /* add the IDs to the hidden field value */
+        hiddenfield.val(hiddenfieldvalue.join()).trigger('change');
+
+        /* refresh sortable */
+        gallery.sortable("refresh");
+
         return false;
     });
 

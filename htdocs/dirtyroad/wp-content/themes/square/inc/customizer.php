@@ -78,7 +78,7 @@ function square_customize_register($wp_customize) {
 
     $wp_customize->add_section(new Square_Customize_Section_Pro($wp_customize, 'square-demo-import-section', array(
         'title' => esc_html__('Import Demo Content', 'square'),
-        'priority' => 1001,
+        'priority' => 0,
         'pro_text' => esc_html__('Import', 'square'),
         'pro_url' => admin_url('admin.php?page=square-welcome')
     )));
@@ -112,7 +112,7 @@ function square_customize_register($wp_customize) {
     $wp_customize->add_control(new Square_Toggle_Control($wp_customize, 'square_enable_frontpage', array(
         'section' => 'static_front_page',
         'label' => esc_html__('Enable FrontPage', 'square'),
-        'description' => esc_html__('Overwrites the homepage displays setting and shows the frontpage', 'square')
+        'description' => sprintf(esc_html__('Overwrites the homepage displays setting and shows the frontpage for Customizer %s', 'square'), '<a href="javascript:wp.customize.panel(\'square_home_settings_panel\').focus()">' . esc_html__('Front Page Sections', 'square') . '</a>') . '<br/><br/>' . esc_html__('Do not enable this option if you want to use Elementor in home page.', 'square')
     )));
 
     /* ============GENERAL SETTINGS PANEL============ */
@@ -783,7 +783,8 @@ function square_customizer_script() {
     wp_enqueue_script('square-customizer-script', get_template_directory_uri() . '/inc/js/customizer-scripts.js', array('jquery'), SQUARE_VERSION, true);
     wp_enqueue_script('square-customizer-chosen-script', get_template_directory_uri() . '/inc/js/chosen.jquery.js', array('jquery'), SQUARE_VERSION, true);
     wp_enqueue_style('square-customizer-chosen-style', get_template_directory_uri() . '/inc/css/chosen.css', array(), SQUARE_VERSION);
-    wp_enqueue_style('square-customizer-font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array(), SQUARE_VERSION);
+    wp_enqueue_style('font-awesome-4.7.0', get_template_directory_uri() . '/css/font-awesome-4.7.0.css', array(), SQUARE_VERSION);
+    wp_enqueue_style('font-awesome-5.2.0', get_template_directory_uri() . '/css/font-awesome-5.2.0.css', array(), SQUARE_VERSION);
     wp_enqueue_style('square-customizer-style', get_template_directory_uri() . '/inc/css/customizer-style.css', array(), SQUARE_VERSION);
 }
 
@@ -889,20 +890,21 @@ if (class_exists('WP_Customize_Control')) {
                     </span>
                 <?php } ?>
 
-                <div class="gallery-screenshot clearfix">
-                    <?php {
-                        $ids = explode(',', $this->value());
-                        foreach ($ids as $attachment_id) {
-                            $img = wp_get_attachment_image_src($attachment_id, 'thumbnail');
-                            echo '<div class="screen-thumb"><img src="' . esc_url($img[0]) . '" /></div>';
+                <ul class="square-gallery-container">
+                    <?php
+                    if ($this->value()) {
+                        $images = explode(',', $this->value());
+                        foreach ($images as $image) {
+                            $image_src = wp_get_attachment_image_src($image, 'thumbnail');
+                            echo '<li data-id="' . $image . '"><span style="background-image:url(' . $image_src[0] . ')"></span><a href="#" class="square-gallery-remove">×</a></li>';
                         }
                     }
                     ?>
-                </div>
+                </ul>
 
-                <input class="button upload_gallery_button" type="button" value="<?php esc_attr_e('Add/Edit Gallery', 'square') ?>" />
-                <input class="button upload_gallery_button clear_gallery" type="button" value="<?php esc_attr_e('Clear', 'square') ?>" />
-                <input type="hidden" class="gallery_values" <?php echo esc_attr($this->link()) ?> value="<?php echo esc_attr($this->value()); ?>">
+                <input type="hidden" <?php echo esc_attr($this->link()) ?> value="<?php echo esc_attr($this->value()); ?>" />
+
+                <a href="#" class="button square-gallery-button"><?php esc_html_e('Add Images', 'square') ?></a>
             </label>
             <?php
         }
@@ -950,7 +952,7 @@ if (class_exists('WP_Customize_Control')) {
                 <span class="customize-control-title square-toggle-title"><?php echo esc_html($this->label); ?></span>
                 <?php if (!empty($this->description)) { ?>
                     <span class="description customize-control-description">
-                        <?php echo wp_kses_post($this->description); ?>
+                        <?php echo $this->description; ?>
                     </span>
                 <?php } ?>
             </div>

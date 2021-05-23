@@ -199,6 +199,28 @@
 				}
 			});
 		});
+		// 'meta text color'
+		api('color_meta_text', function (control) {
+			control.bind(function () {
+				if (!control) {
+					return;
+				}
+				var val = control.get();
+				var btnFsClasses = [
+					'meta-text-main',
+					'meta-text-main2',
+					'meta-text-border',
+					'meta-text-dark',
+					'meta-text-dark-muted'
+				];
+				btnFsClasses.forEach(function (val) {
+					previewWrap.firstChild.contentWindow.document.body.classList.remove(val);
+				});
+				if (control.get()) {
+					previewWrap.firstChild.contentWindow.document.body.classList.add(val);
+				}
+			});
+		});
 
 		///////////
 		//presets//

@@ -42,10 +42,11 @@ if ( ! function_exists( 'exs_customize_register' ) ) :
 		$wp_customize->get_setting( 'header_menu_bold' )->transport          = 'postMessage';
 		$wp_customize->get_setting( 'post_thumbnails_fullwidth' )->transport = 'postMessage';
 
-		////////////////////
-		//color meta icons//
-		////////////////////
+		//////////////
+		//color meta//
+		//////////////
 		$wp_customize->get_setting( 'color_meta_icons' )->transport = 'postMessage';
+		$wp_customize->get_setting( 'color_meta_text' )->transport = 'postMessage';
 
 		//////////////
 		//containers//

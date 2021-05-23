@@ -340,6 +340,7 @@ if ( ! function_exists( 'exs_get_feed_layout_options' ) ) :
 			'exs_feed_layout_options',
 			array(
 				''                                => $exs_first_element,
+				'default-centered'                => esc_html__( 'Center aligned', 'exs' ),
 				'default-wide-image'              => esc_html__( 'Wide featured image', 'exs' ),
 				'meta-top'                        => esc_html__( 'Meta above image', 'exs' ),
 				'meta-side'                       => esc_html__( 'Side post meta', 'exs' ),

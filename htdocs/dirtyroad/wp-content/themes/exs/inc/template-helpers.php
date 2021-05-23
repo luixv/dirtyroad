@@ -771,6 +771,12 @@ if ( ! function_exists( 'exs_body_classes' ) ) :
 			$exs_classes[] = esc_attr( $exs_meta_icons_color );
 		}
 
+		//meta text color class
+		$exs_meta_icons_color = exs_option( 'color_meta_text', '' );
+		if ( $exs_meta_icons_color ) {
+			$exs_classes[] = esc_attr( $exs_meta_icons_color );
+		}
+
 		//shop class
 		if ( class_exists( 'WooCommerce' ) ) {
 			$exs_classes[] = 'woo woocommerce';
@@ -1703,7 +1709,10 @@ if ( ! function_exists( 'exs_entry_meta' ) ) :
 		 */
 		do_action( 'exs_entry_meta_before' );
 
-		if ( ! empty( $exs_show_comments ) ) :
+		$show_comments_first = ( 'default-centered' !== exs_option( 'blog_layout' ) ) && ( ! is_singular() );
+
+		//float right comments
+		if ( ! empty( $exs_show_comments ) && ! empty( $show_comments_first ) ) :
 			exs_comment_count( $exs_title_section );
 		endif; //comments
 
@@ -1722,6 +1731,11 @@ if ( ! function_exists( 'exs_entry_meta' ) ) :
 		if ( ! empty( $exs_show_tags ) ) :
 			exs_the_tags( $exs_title_section );
 		endif; //tags
+
+		//centered comments in archive are last in order
+		if ( ! empty( $exs_show_comments ) && empty( $show_comments_first ) ) :
+			exs_comment_count( $exs_title_section );
+		endif; //comments
 
 		/**
 		 * Fires after entry meta.

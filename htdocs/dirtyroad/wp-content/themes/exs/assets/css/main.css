@@ -4327,6 +4327,7 @@ ul a:not([href]):empty{
 .entry-footer a:focus,
 .entry-footer a:hover{
 	color: var(--colorMain);
+	opacity: .8;
 }
 
 .entry-footer .author-avatar{
@@ -4366,8 +4367,53 @@ ul a:not([href]):empty{
 	margin-left: 1.5em;
 }
 
+.text-center .entry-footer .comments-link{
+	float: none;
+	margin: 0;
+}
+
 .post-thumbnail + .entry-footer{
 	margin-top: 0;
+}
+
+.meta-text-main .entry-footer{
+	color: var(--colorMain);
+}
+
+.meta-text-main .entry-footer a{
+	color: var(--colorMain);
+}
+
+.meta-text-main2 .entry-footer{
+	color: var(--colorMain2);
+}
+
+.meta-text-main2 .entry-footer a{
+	color: var(--colorMain2);
+}
+
+.meta-text-border .entry-footer{
+	color: var(--colorBorder);
+}
+
+.meta-text-border .entry-footer a{
+	color: var(--colorBorder);
+}
+
+.meta-text-dark .entry-footer{
+	color: var(--colorDark);
+}
+
+.meta-text-dark .entry-footer a{
+	color: var(--colorDark);
+}
+
+.meta-text-dark-muted .entry-footer{
+	color: var(--colorDarkMuted);
+}
+
+.meta-text-dark-muted .entry-footer a{
+	color: var(--colorDarkMuted);
 }
 
 .categories-list,

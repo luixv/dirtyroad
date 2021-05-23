@@ -52,6 +52,10 @@ License: CC0 1.0 Universal (CC0 1.0)
 Source: https://exsthemewp.com/free-images/
 
 == Changelog ==
+= 1.3.8, May 20, 2021 =
++ New center aligned blog layout
++ New Customizer option for post meta text color
+
 = 1.3.7, April 26, 2021 =
 * Fixes for youtube lightbox selector
 * Fixes for TAB navigation for mobile menu

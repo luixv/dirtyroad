@@ -82,7 +82,7 @@ h3.comments-title:after,
 
 a,
 .sq-featured-post .sq-featured-readmore:hover,
-.sq-tab li.sq-active .fa,
+.sq-tab li.sq-active i,
 .widget-area a:hover,
 .woocommerce nav.woocommerce-pagination ul li a:focus, 
 .woocommerce nav.woocommerce-pagination ul li a:hover, 
