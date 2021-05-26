@@ -181,7 +181,11 @@ function bps_before_directory ()
 	if (isset ($data['order_by']))  bps_set_sort_options ($data['order_by']);
 
 	add_action ('bp_members_directory_order_options', 'bps_display_sort_options');
+}
 
+add_action ('bp_before_directory_members_content', 'bps_add_filters');
+function bps_add_filters ()
+{
 	$request = bps_get_request ('filters');
 	if (!empty ($request))
 		bps_call_template ('members/bps-filters');

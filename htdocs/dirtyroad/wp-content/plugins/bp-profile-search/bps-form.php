@@ -34,14 +34,11 @@ function bps_add_form ()
 		)
 	);
 
-	$args = apply_filters ('bps_form_order', $args);
+	$args = apply_filters ('bps_form_query', $args);
 	$posts = get_posts ($args);
 
 	foreach ($posts as $post)
-	{
-		$meta = bps_meta ($post->ID);
 		bps_display_form ($post->ID, 'directory');
-	}
 }
 
 add_action ('bps_display_form', 'bps_display_form', 10, 2);

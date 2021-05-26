@@ -22,6 +22,7 @@ buddyx()->print_styles( 'buddyx-sidebar', 'buddyx-widgets' );
 $buddypress_sidebar = get_theme_mod( 'buddypress_sidebar_option', buddyx_defaults( 'buddypress-sidebar-option' ) );
 
 ?>
+
 	<?php do_action( 'buddyx_sub_header' ); ?>
 
 	<?php do_action( 'buddyx_before_content' ); ?>

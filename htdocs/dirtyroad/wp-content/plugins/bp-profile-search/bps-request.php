@@ -169,7 +169,8 @@ function bps_get_form_fields ($form)
 		$f = clone $fields[$code];
 
 		$filter = $meta['field_mode'][$k];
-		$f->display = bps_Fields::get_display ($f, $filter);
+		if (empty ($f->display))
+			$f->display = bps_Fields::get_display ($f, $filter);
 		if ($f->display == false)  continue;
 
 		switch ($f->display)

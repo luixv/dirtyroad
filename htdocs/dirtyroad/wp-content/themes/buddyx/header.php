@@ -22,7 +22,9 @@ namespace BuddyX\Buddyx;
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body 
+
+<?php body_class(); ?>>
 <?php buddyx_site_loader(); ?>
 <?php buddyx_wp_body_open(); ?>
 <div id="page" class="site">
