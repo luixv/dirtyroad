@@ -7,8 +7,8 @@ if ( ! defined( 'WPINC' ) ) {
 <div class="cookie-law-info-tab-content" data-id="<?php echo $target_id; ?>">
 	
 	<ul class="cli_sub_tab">
-		<li style="border-left:none; padding-left: 0px;" data-target="accept-button"><a><?php _e( 'Accept Button', 'cookie-law-info' ); ?></a></li>
-        <li data-target="accept-all-button"><a><?php _e('Accept All Button', 'cookie-law-info'); ?></a></li>
+		<li style="border-left:none; padding-left: 0px;" data-target="accept-all-button"><a><?php _e('Accept All Button', 'cookie-law-info'); ?></a></li>
+		<li data-target="accept-button"><a><?php _e( 'Accept Button', 'cookie-law-info' ); ?></a></li>
 		<li data-target="reject-button"><a><?php _e( 'Reject Button', 'cookie-law-info' ); ?></a></li>
 		<li data-target="settings-button"><a><?php _e( 'Settings Button', 'cookie-law-info' ); ?></a></li>
 		<li data-target="read-more-button"><a><?php _e( 'Read more', 'cookie-law-info' ); ?></a></li>

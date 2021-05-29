@@ -28,7 +28,7 @@ if (!defined('WPINC')) {
                             echo '<textarea name="notify_message_field" class="vvv_textbox">';
                             echo apply_filters('format_to_edit', stripslashes($the_options['notify_message'])) . '</textarea>';
                             ?>
-                            <span class="cli_form_help"><?php _e('Modify/edit the content of the cookie consent bar.', 'cookie-law-info'); ?> <br /><em><?php _e('Supports shortcodes.(link shortcodes to help link) e.g. [cookie_button] for accept button, [cookie_reject] for reject button, [cookie_link] for Read more, [cookie_settings] for cookie settings.', 'cookie-law-info'); ?></em></span>
+                            <span class="cli_form_help"><?php _e('Modify/edit the content of the cookie consent bar.', 'cookie-law-info'); ?> <br /><em><?php _e('Supports shortcodes.(link shortcodes to help link) e.g. [cookie_accept_all] for accept all button, [cookie_button] for accept button, [cookie_reject] for reject button, [cookie_link] for Read more, [cookie_settings] for cookie settings.', 'cookie-law-info'); ?></em></span>
                         </td>
                     </tr>
                     <tr valign="top">

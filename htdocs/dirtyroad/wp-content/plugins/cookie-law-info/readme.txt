@@ -5,7 +5,7 @@ Tags: GDPR, CCPA, cookie notice, DSGVO, RGPD, LGPD, PIPEDA, cookies , cookie law
 Requires at least: 4.4.0
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -188,6 +188,10 @@ For every update of the plugin, you will be notified of the installed plugins pa
 13. Add a privacy policy overview
 
 == Changelog ==
+
+= 2.0.3 =
+
+* Enhancement - Default cookie banner message update.
 
 = 2.0.2 =
 
@@ -509,7 +513,6 @@ For every update of the plugin, you will be notified of the installed plugins pa
 
 == Upgrade Notice ==
 
-= 2.0.2 =
+= 2.0.3 =
 
-* Enhancement - Added reject button by default
-* Enhancement - Help text improvements
+* Enhancement - Default cookie banner message update.

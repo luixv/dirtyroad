@@ -78,7 +78,7 @@ class Cookie_Law_Info {
 		} 
 		else 	
 		{
-			$this->version = '2.0.2';
+			$this->version = '2.0.3';
 		}
 		$this->plugin_name = 'cookie-law-info';
 
@@ -382,7 +382,7 @@ class Cookie_Law_Info {
 			'border' 						=> '#b1a6a6c2',
 			'border_on'						=> true,
 			'bar_style'				=> array(),
-			'button_1_text'					=> 'ACCEPT',
+			'button_1_text'					=> 'Accept',
 			'button_1_url' 					=> '#',
 			'button_1_action' 				=> '#cookie_action_close_header',
 			'button_1_link_colour' 			=> '#fff',
@@ -405,7 +405,7 @@ class Cookie_Law_Info {
 			'button_2_hidebar'					=>false,
 			'button_2_style'				=> array(),
 	            
-	        'button_3_text'					=> 'REJECT ALL',
+	        'button_3_text'					=> 'Reject All',
 			'button_3_url' 					=> '#',
 			'button_3_action' 				=> '#cookie_action_close_header_reject',
 			'button_3_link_colour' 			=> '#333333',
@@ -420,13 +420,13 @@ class Cookie_Law_Info {
 			'button_4_action' 				=> '#cookie_action_settings',
 			'button_4_link_colour' 			=> '#333333',
 			'button_4_new_win' 				=> false,
-			'button_4_as_button' 			=> false,
-			'button_4_button_colour' 		=> '#000',
+			'button_4_as_button' 			=> true,
+			'button_4_button_colour' 		=> '#dedfe0',
 			'button_4_button_size' 			=> 'medium',
 			'button_4_style'				=> array(),
 			'button_5_style'				=> array(),   
 
-			'button_7_text'					=> 'ACCEPT ALL',
+			'button_7_text'					=> 'Accept All',
 			'button_7_url' 					=> '#',
 			'button_7_action' 				=> '#cookie_action_close_header',
 			'button_7_link_colour' 			=> '#fff',
@@ -446,7 +446,7 @@ class Cookie_Law_Info {
 			'notify_div_id' 				=> '#cookie-law-info-bar',
 			'notify_position_horizontal'	=> 'right',	// left | right
 			'notify_position_vertical'		=> 'bottom', // 'top' = header | 'bottom' = footer
-			'notify_message'				=> addslashes ( '<div class="cli-bar-container cli-style-v2"><div class="cli-bar-message">We use cookies on our website to give you the most relevant experience by remembering your preferences and repeat visits. By clicking “ACCEPT ALL”, you consent to the use of ALL the cookies. However, you may visit "Cookie Settings" to provide a controlled consent.</div><div class="cli-bar-btn_container">[cookie_settings margin="0px 10px 0px 5px"][cookie_reject margin="5px 10px 5px 5px"][cookie_accept_all]</div></div>'),
+			'notify_message'				=> addslashes ( '<div class="cli-bar-container cli-style-v2"><div class="cli-bar-message">We use cookies on our website to give you the most relevant experience by remembering your preferences and repeat visits. By clicking “Accept All”, you consent to the use of ALL the cookies. However, you may visit "Cookie Settings" to provide a controlled consent.</div><div class="cli-bar-btn_container">[cookie_settings margin="0px 5px 0px 0px"][cookie_accept_all]</div></div>'),
 			'scroll_close'                  => false,
 			'scroll_close_reload'           => false,
 	        'accept_close_reload'           => false,

@@ -1,4 +1,4 @@
-/*! elementor - v3.2.3 - 05-05-2021 */
+/*! elementor - v3.2.4 - 26-05-2021 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["video"],{
 
 /***/ "../assets/dev/js/frontend/handlers/video.js":
