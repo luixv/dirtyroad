@@ -81,10 +81,11 @@
 
 							<div class="user-info">
 
+
 								<?php do_action( 'gmw_search_results_before_avatar', $gmw, $member ); ?>
 
 								<?php gmw_search_results_bp_avatar( $member, $gmw ); ?>
-
+						<!--		
 								<?php if ( function_exists( 'bp_member_last_active' ) ) { ?>
 									<span class="activity">
 										<?php bp_member_last_active(); ?>
@@ -96,6 +97,7 @@
 								<?php if ( function_exists( 'bp_get_member_latest_update' ) && bp_get_member_latest_update() ) : ?>
 									<div class="update"><?php bp_member_latest_update(); ?></div>
 								<?php endif; ?>
+							-->	
 
 								<?php do_action( 'gmw_search_results_before_get_directions', $gmw, $member ); ?>
 
