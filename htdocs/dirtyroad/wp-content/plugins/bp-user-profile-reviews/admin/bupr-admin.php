@@ -81,7 +81,7 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 				add_menu_page( esc_html__( 'WB Plugins', 'bp-member-reviews' ), esc_html__( 'WB Plugins', 'bp-member-reviews' ), 'manage_options', 'wbcomplugins', array( $this, 'bupr_admin_options_page' ), 'dashicons-lightbulb', 59 );
 				add_submenu_page( 'wbcomplugins', esc_html__( 'General', 'bp-member-reviews' ), esc_html__( 'General', 'bp-member-reviews' ), 'manage_options', 'wbcomplugins' );
 			}
-			add_submenu_page( 'wbcomplugins', esc_html__( 'Admin Settings For Reviews', 'bp-member-reviews' ), esc_html__( 'User Reviews', 'bp-member-reviews' ), 'manage_options', 'bp-member-review-settings', array( $this, 'bupr_admin_options_page' ) );
+			add_submenu_page( 'wbcomplugins', esc_html__( 'Admin Settings For Reviews', 'bp-member-reviews' ), esc_html__( 'BP Member Reviews', 'bp-member-reviews' ), 'manage_options', 'bp-member-review-settings', array( $this, 'bupr_admin_options_page' ) );
 		}
 
 		/**
@@ -92,6 +92,9 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 		 * @author   Wbcom Designs
 		 */
 		public function bupr_plugin_settings() {
+			$this->plugin_settings_tabs['bupr-welcome'] = esc_html__( 'Welcome', 'bp-member-reviews' );
+			add_settings_section( 'bupr-welcome', ' ', array( $this, 'bupr_admin_welcome_content' ), 'bupr-welcome' );
+
 			$this->plugin_settings_tabs['bupr-general'] = esc_html__( 'General', 'bp-member-reviews' );
 			register_setting( 'bupr_admin_general_options', 'bupr_admin_general_options' );
 			add_settings_section( 'bupr-general', ' ', array( $this, 'bupr_admin_general_content' ), 'bupr-general' );
@@ -105,6 +108,9 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 			add_settings_section( 'bupr-display', ' ', array( $this, 'bupr_admin_display_content' ), 'bupr-display' );
 		}
 
+		public function bupr_admin_welcome_content() {
+			include 'tab-templates/bupr-welcome-page.php';
+		}
 		public function bupr_admin_general_content() {
 			include 'tab-templates/bupr-setting-general-tab.php';
 		}
@@ -129,9 +135,11 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 		 */
 		public function bupr_admin_options_page() {
 			global $allowedposttags;
-			$tab = filter_input( INPUT_GET, 'tab' ) ? filter_input( INPUT_GET, 'tab' ) : 'bupr-general';
+			$tab = filter_input( INPUT_GET, 'tab' ) ? filter_input( INPUT_GET, 'tab' ) : 'bupr-welcome';
 			?>
 			<div class="wrap">
+                            <hr class="wp-header-end">
+                            <div class="wbcom-wrap">
 				<div class="bupr-header">
 					<?php echo do_shortcode( '[wbcom_admin_setting_header]' ); ?>
 					<h1 class="wbcom-plugin-heading">
@@ -146,6 +154,7 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 					do_settings_sections( $tab );
 					?>
 				</div>
+                            </div>
 			</div>
 			<?php
 		}
@@ -157,14 +166,14 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 		 * @access public
 		 */
 		public function bupr_plugin_settings_tabs() {
-			$current_tab = filter_input( INPUT_GET, 'tab' ) ? filter_input( INPUT_GET, 'tab' ) : 'bupr-general';
+			$current_tab = filter_input( INPUT_GET, 'tab' ) ? filter_input( INPUT_GET, 'tab' ) : 'bupr-welcome';
 			// xprofile setup tab.
-			echo '<div class="wbcom-tabs-section"><h2 class="nav-tab-wrapper">';
+			echo '<div class="wbcom-tabs-section"><div class="nav-tab-wrapper"><div class="wb-responsive-menu"><span>' . esc_html( 'Menu' ) . '</span><input class="wb-toggle-btn" type="checkbox" id="wb-toggle-btn"><label class="wb-toggle-icon" for="wb-toggle-btn"><span class="wb-icon-bars"></span></label></div><ul>';
 			foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
 				$active = $current_tab === $tab_key ? 'nav-tab-active' : '';
-				echo '<a class="nav-tab ' . esc_attr( $active ) . '" id="' . esc_attr( $tab_key ) . '-tab" href="?page=bp-member-review-settings' . '&tab=' . esc_attr( $tab_key ) . '">' . esc_attr( $tab_caption ) . '</a>';
+				echo '<li><a class="nav-tab ' . esc_attr( $active ) . '" id="' . esc_attr( $tab_key ) . '-tab" href="?page=bp-member-review-settings' . '&tab=' . esc_attr( $tab_key ) . '">' . esc_attr( $tab_caption ) . '</a></li>';
 			}
-			echo '</h2></div>';
+			echo '</div></ul></div>';
 		}
 
 		/**
@@ -223,7 +232,7 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 		 */
 		public function bupr_get_review_count() {
 			global $bupr, $menu;
-			if ( $bupr['auto_approve_reviews'] != 'yes' ) {
+			if ( 'yes' !== $bupr['auto_approve_reviews'] ) {
 
 				foreach ( $menu as $each_menu ) {
 					if ( $each_menu[2] == 'edit.php?post_type=review' ) {

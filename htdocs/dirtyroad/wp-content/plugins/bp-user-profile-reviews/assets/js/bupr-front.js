@@ -102,7 +102,7 @@ jQuery( document ).ready(
 				var rating_exist       = [];
 				var bupr_member_id     = jQuery( '#bupr_member_review_id' ).val();
 				var bupr_current_user  = jQuery( '#bupr_current_user_id' ).val();
-				var bupr_review_title  = 'Review ' + jQuery.now();
+				var bupr_review_title  = mail_title.cur_username + ' recieved a ' + mail_title.review_title;
 				var bupr_review_desc   = jQuery( '#review_desc' ).val();
 				var bupr_review_count  = jQuery( '#member_rating_field_counter' ).val();
 				var bupr_review_rating = {};

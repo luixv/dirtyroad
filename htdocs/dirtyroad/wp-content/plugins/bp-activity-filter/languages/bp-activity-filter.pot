@@ -1,14 +1,14 @@
-# Copyright (C) 2020
+# Copyright (C) 2021
 # This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 19:18:27+00:00\n"
+"POT-Creation-Date: 2021-05-30 10:15:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Varun Dubey\n"
 "Language-Team: Wbcom Designs\n"
 "Language: en\n"
@@ -24,83 +24,153 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: admin/class-bp-activity-filter-admin-setting.php:49
+#: admin/bp-welcome-page.php:15
+msgid "Wbcom Designs - BuddyPress Activity Filter"
+msgstr ""
+
+#: admin/bp-welcome-page.php:16
+msgid ""
+"BuddyPress Activity Filter allows to set your default option for "
+"activities. You can change the default from everything to Post Updates. The "
+"site administrator can remove some specific activity types from their "
+"BuddyPress Activity. It will also allow setting your default option for "
+"activities."
+msgstr ""
+
+#: admin/bp-welcome-page.php:27
+msgid "Help &amp; Support Resources"
+msgstr ""
+
+#: admin/bp-welcome-page.php:28
+msgid ""
+"Here are all the resources you may need to get help from us. Documentation "
+"is usually the best place to start. Should you require help anytime, our "
+"customer care team is available to assist you at the support center."
+msgstr ""
+
+#: admin/bp-welcome-page.php:34
+msgid "Documentation"
+msgstr ""
+
+#: admin/bp-welcome-page.php:35
+msgid ""
+"We have prepared an extensive guide on BuddyPress Activity Filter to learn "
+"all aspects of the plugin. You will find most of your answers here."
+msgstr ""
+
+#: admin/bp-welcome-page.php:36
+msgid "Read Documentation"
+msgstr ""
+
+#: admin/bp-welcome-page.php:40
+msgid "Support Center"
+msgstr ""
+
+#: admin/bp-welcome-page.php:41
+msgid ""
+"We strive to offer the best customer care via our support center. Once your "
+"theme is activated, you can ask us for help anytime."
+msgstr ""
+
+#: admin/bp-welcome-page.php:42
+msgid "Get Support"
+msgstr ""
+
+#: admin/bp-welcome-page.php:46
+msgid "Got Feedback?"
+msgstr ""
+
+#: admin/bp-welcome-page.php:47
+msgid ""
+"We want to hear about your experience with the plugin. We would also love "
+"to hear any suggestions you may for future updates."
+msgstr ""
+
+#: admin/bp-welcome-page.php:48
+msgid "Send Feedback"
+msgstr ""
+
+#: admin/class-bp-activity-filter-admin-setting.php:42
 msgid "WB Plugins"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:50
+#: admin/class-bp-activity-filter-admin-setting.php:43
 msgid "General"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:52
+#: admin/class-bp-activity-filter-admin-setting.php:45
 msgid "BP Activity Filter"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:71
+#: admin/class-bp-activity-filter-admin-setting.php:65
 msgid "BuddyPress Activity Filter Settings"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:77
+#: admin/class-bp-activity-filter-admin-setting.php:71
 msgid "Settings saved."
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:81
+#: admin/class-bp-activity-filter-admin-setting.php:75
 msgid "Dismiss this notice."
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:171
+#: admin/class-bp-activity-filter-admin-setting.php:165
+msgid "Welcome"
+msgstr ""
+
+#: admin/class-bp-activity-filter-admin-setting.php:166
 msgid "Default Filter"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:172
-#: admin/class-bp-activity-filter-admin-setting.php:398
+#: admin/class-bp-activity-filter-admin-setting.php:167
+#: admin/class-bp-activity-filter-admin-setting.php:397
 msgid "Remove Activity"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:173
+#: admin/class-bp-activity-filter-admin-setting.php:168
 msgid "CPT Activites"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:241
+#: admin/class-bp-activity-filter-admin-setting.php:251
 msgid "Apply Default Filter on Activity Page"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:261
-#: admin/class-bp-activity-filter-admin-setting.php:315
+#: admin/class-bp-activity-filter-admin-setting.php:257
+#: admin/class-bp-activity-filter-admin-setting.php:313
 msgid "Everything"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:294
+#: admin/class-bp-activity-filter-admin-setting.php:293
 msgid "Apply Default Filter on Profile Activity Page"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:351
-#: admin/class-bp-activity-filter-admin-setting.php:439
-#: admin/class-bp-activity-filter-admin-setting.php:538
+#: admin/class-bp-activity-filter-admin-setting.php:352
+#: admin/class-bp-activity-filter-admin-setting.php:420
+#: admin/class-bp-activity-filter-admin-setting.php:519
 msgid "Save Settings"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:437
+#: admin/class-bp-activity-filter-admin-setting.php:418
 msgid "Any checked activity type will not be recorded as a new activity. "
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:459
+#: admin/class-bp-activity-filter-admin-setting.php:440
 msgid "Enable Post Type Activites"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:463
+#: admin/class-bp-activity-filter-admin-setting.php:444
 msgid "Post Type"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:464
+#: admin/class-bp-activity-filter-admin-setting.php:445
 msgid "Enable/Disable"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:465
+#: admin/class-bp-activity-filter-admin-setting.php:446
 msgid "Name for activities"
 msgstr ""
 
-#: admin/class-bp-activity-filter-admin-setting.php:528
+#: admin/class-bp-activity-filter-admin-setting.php:509
 msgid ""
 "Sorry, it seems you do not have any custom post type available to allow in "
 "the activity stream."
@@ -186,143 +256,143 @@ msgstr ""
 msgid "No thanks / I already have"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-plugins-page.php:8
+#: admin/wbcom/templates/wbcom-plugins-page.php:10
+msgid "Paid Addons"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:28
+#: admin/wbcom/templates/wbcom-themes-page.php:118
+#: admin/wbcom/templates/wbcom-themes-page.php:139
+msgid "View"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-plugins-page.php:37
 msgid "Free Addons"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-plugins-page.php:14
+#: admin/wbcom/templates/wbcom-plugins-page.php:43
 msgid "Install"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-plugins-page.php:18
+#: admin/wbcom/templates/wbcom-plugins-page.php:47
 #: admin/wbcom/wbcom-admin-settings.php:471
 msgid "Activate"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-plugins-page.php:22
+#: admin/wbcom/templates/wbcom-plugins-page.php:51
 #: admin/wbcom/wbcom-admin-settings.php:472
 msgid "Deactivate"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-plugins-page.php:50
-msgid "Paid Addons"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-plugins-page.php:67
-msgid "View"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-support-page.php:3
+#: admin/wbcom/templates/wbcom-support-page.php:5
 #: admin/wbcom/wbcom-admin-settings.php:508
 #: admin/wbcom/wbcom-admin-settings.php:593
 msgid "Support"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-support-page.php:5
-msgid "Do you have any questions or issues?"
-msgstr ""
-
 #: admin/wbcom/templates/wbcom-support-page.php:7
-msgid ""
-"Our team is here to help you out at any time. If you have any idea about "
-"how we could improve, you can contact our support."
+msgid "Having any question or issue ?"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-support-page.php:19
+#: admin/wbcom/templates/wbcom-support-page.php:9
+msgid ""
+"Our team is here to help you out at anytime. If you have any idea about how "
+"we could improve. You can share access to your site on our helpdesk if it "
+"can help getting faster. There are two ways to in touch with us :"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-support-page.php:21
 msgid "Tickets Support"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-support-page.php:20
+#: admin/wbcom/templates/wbcom-support-page.php:22
 msgid ""
-"Please open a ticket on our helpdesk, and we'll try to respond within 24 "
-"hours during working days. "
+"Open a ticket on our helpdesk, we don't guarantee a fast response but "
+"within a week. Except if you've purchased one of our product we'll reply "
+"within 24 hours."
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-support-page.php:24
+#: admin/wbcom/templates/wbcom-support-page.php:26
 msgid "Open a ticket"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-support-page.php:39
-#: admin/wbcom/templates/wbcom-support-page.php:44
+#: admin/wbcom/templates/wbcom-support-page.php:41
+#: admin/wbcom/templates/wbcom-support-page.php:46
 msgid "Contact Us"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-support-page.php:40
+#: admin/wbcom/templates/wbcom-support-page.php:42
 msgid ""
-"Don’t be a stranger, just say hello. Our support is minimal at "
-"wordpress.org threads. "
+"Create a new thread on our plugin page, participation is open to anyone "
+"from all around the world. We'll be there to help as well but can't "
+"guarantee any delay."
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:4
-msgid "Reign BuddyPress"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-themes-page.php:12
-msgid "REIGN Community"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-themes-page.php:14
-msgid "Multiple Member Directory Layout"
+#: admin/wbcom/templates/wbcom-themes-page.php:13
+msgid "Reign Theme"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:15
-msgid "Multiple Member Header Layout"
+msgid "Multiple Member Directory Layout"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:16
-msgid "Multiple Group Directory Layout"
+msgid "Multiple Member Header Layout"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:17
-msgid "Multiple Group Header Layout"
+msgid "Multiple Group Directory Layout"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:18
-msgid "BuddyPress Customization Options"
+msgid "Multiple Group Header Layout"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:19
-msgid "BuddyPress Extra Widgets"
+msgid "BuddyPress Customization Options"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:20
+msgid "BuddyPress Extra Widgets"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:21
 msgid "Inbuilt Social Profile Module"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:23
+#: admin/wbcom/templates/wbcom-themes-page.php:24
 #: admin/wbcom/templates/wbcom-themes-page.php:49
-#: admin/wbcom/templates/wbcom-themes-page.php:73
-#: admin/wbcom/templates/wbcom-themes-page.php:96
+#: admin/wbcom/templates/wbcom-themes-page.php:72
+#: admin/wbcom/templates/wbcom-themes-page.php:94
 msgid "Purchase"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:24
+#: admin/wbcom/templates/wbcom-themes-page.php:25
 #: admin/wbcom/templates/wbcom-themes-page.php:50
-#: admin/wbcom/templates/wbcom-themes-page.php:74
-#: admin/wbcom/templates/wbcom-themes-page.php:97
+#: admin/wbcom/templates/wbcom-themes-page.php:73
+#: admin/wbcom/templates/wbcom-themes-page.php:95
 msgid "Preview"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:30
 #: admin/wbcom/templates/wbcom-themes-page.php:38
-msgid "LearnMate"
+msgid "LearnMate Solution"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:40
-msgid "Add review to your course"
+msgid "Add Review to your course"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:41
-msgid "Course coming soon"
+msgid "Course Coming Soon"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:42
-#: admin/wbcom/templates/wbcom-themes-page.php:69
-msgid "Grid & List Layout"
+#: admin/wbcom/templates/wbcom-themes-page.php:68
+msgid "Grid And List Layout"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:43
-msgid "LearnDash/LifterLMS Extra Widgets"
+msgid "Learndash/LifterLMS Extra Widgets"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:44
@@ -330,59 +400,93 @@ msgid "Unparalleled Course Layout"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:45
-msgid "Awesome LearnDash/LifterLMS Pages"
+msgid "Awesome Learndash/LifterLMS Pages"
 msgstr ""
 
 #: admin/wbcom/templates/wbcom-themes-page.php:46
 msgid "Distraction Free Reading"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:56
-msgid "StoreMate"
+#: admin/wbcom/templates/wbcom-themes-page.php:63
+msgid "StoreMate Solution"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:64
-msgid "ShopMate Dokan"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-themes-page.php:66
+#: admin/wbcom/templates/wbcom-themes-page.php:65
 msgid "Dokan Extra Widgets"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:67
+#: admin/wbcom/templates/wbcom-themes-page.php:66
 msgid "Unique Single Product Page Customization"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:68
+#: admin/wbcom/templates/wbcom-themes-page.php:67
 msgid "Awesome WooCommerce Pages"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:70
+#: admin/wbcom/templates/wbcom-themes-page.php:69
 msgid "Automated Mega Menu Support"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:80
-msgid "Jobmate"
-msgstr ""
-
-#: admin/wbcom/templates/wbcom-themes-page.php:88
+#: admin/wbcom/templates/wbcom-themes-page.php:86
 msgid "Jobmate Theme"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:90
+#: admin/wbcom/templates/wbcom-themes-page.php:88
 msgid "Simple live searching and filtering"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:91
+#: admin/wbcom/templates/wbcom-themes-page.php:89
 msgid "Unique Job listing Page"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:92
+#: admin/wbcom/templates/wbcom-themes-page.php:90
 msgid "Awesome Resume list Page"
 msgstr ""
 
-#: admin/wbcom/templates/wbcom-themes-page.php:93
-msgid "Outstanding all job maanger pages layout"
+#: admin/wbcom/templates/wbcom-themes-page.php:91
+msgid "Outstanding all job maanger pagesLayout"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:108
+msgid "BuddyX Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:110
+msgid "Responsive BuddyPress Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:111
+#: admin/wbcom/templates/wbcom-themes-page.php:134
+msgid "Site Ready In One-Click"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:112
+msgid "Members and Groups Layout"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:113
+msgid "WooCommerce Ready"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:114
+msgid "Supported Muitiple Plugins"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:115
+#: admin/wbcom/templates/wbcom-themes-page.php:136
+msgid "Suitable for All Devices"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:131
+msgid "KnowX Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:133
+msgid "Free WordPress Theme"
+msgstr ""
+
+#: admin/wbcom/templates/wbcom-themes-page.php:135
+msgid "Create Knowledge base"
 msgstr ""
 
 #: admin/wbcom/wbcom-admin-settings.php:179
@@ -657,15 +761,23 @@ msgstr ""
 
 #: admin/wbcom/wbcom-admin-settings.php:502
 #: admin/wbcom/wbcom-admin-settings.php:581
-msgid "Components"
+msgid "Our Plugins"
 msgstr ""
 
 #: admin/wbcom/wbcom-admin-settings.php:505
 #: admin/wbcom/wbcom-admin-settings.php:587
+msgid "Our Themes"
+msgstr ""
+
+#: admin/wbcom/wbcom-admin-settings.php:505
 msgid "Themes"
 msgstr ""
 
-#: admin/wbcom/wbcom-admin-settings.php:575 buddypress-activity-filter.php:162
+#: admin/wbcom/wbcom-admin-settings.php:508
+msgid "Our Support"
+msgstr ""
+
+#: admin/wbcom/wbcom-admin-settings.php:575 buddypress-activity-filter.php:146
 msgid "Settings"
 msgstr ""
 
@@ -677,13 +789,13 @@ msgstr ""
 msgid "%1$s is ineffective now as it requires %2$s to be installed and active."
 msgstr ""
 
-#: buddypress-activity-filter.php:213 buddypress-activity-filter.php:237
+#: buddypress-activity-filter.php:197 buddypress-activity-filter.php:221
 msgid ""
 "BuddyPress Activity Filter requires to be activated on the blog where "
 "BuddyPress is activated."
 msgstr ""
 
-#: buddypress-activity-filter.php:218 buddypress-activity-filter.php:243
+#: buddypress-activity-filter.php:202 buddypress-activity-filter.php:227
 msgid ""
 "BuddyPress Activity Filter and BuddyPress need to share the same network "
 "configuration."

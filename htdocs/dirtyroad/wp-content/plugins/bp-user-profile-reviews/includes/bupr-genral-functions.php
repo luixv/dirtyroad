@@ -83,11 +83,27 @@ function bupr_profile_review_tab_name() {
  *
  * @return string Tab name
  */
-function bupr_profile_review_tab_slug() {
+function bupr_profile_review_tab_plural_slug() {
 	global $bupr;
 
 	if ( isset( $bupr['review_label_plural'] ) ) {
 		$tab_slug = sanitize_title( $bupr['review_label_plural'] );
 	}
-	return apply_filters( 'bupr_review_tab_slug', esc_html( $tab_slug ) );
+	return apply_filters( 'bupr_review_tab_plural_slug', esc_html( $tab_slug ) );
+}
+
+
+/**
+ * Get Review tab slug on memeber profile.
+ *
+ * @return string Tab name
+ */
+function bupr_profile_review_tab_singular_slug() {
+	global $bupr;
+
+	if ( isset( $bupr['review_label'] ) ) {
+		$tab_slug = sanitize_title( $bupr['review_label'] );
+	}
+
+	return apply_filters( 'bupr_review_tab_singular_slug', esc_html( $tab_slug ) );
 }

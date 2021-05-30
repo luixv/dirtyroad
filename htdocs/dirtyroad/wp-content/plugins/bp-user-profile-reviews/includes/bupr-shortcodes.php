@@ -6,6 +6,7 @@
  * @author   Wbcom Designs
  * @package  BuddyPress_Member_Reviews
  */
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -90,7 +91,7 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 				$bupr_total_rating       = $rate_counter             = 0;
 				$bupr_reviews_count      = count( $reviews );
 				$bupr_total_review_count = '';
-				if ( $bupr_reviews_count != 0 ) {
+				if ( 0 !== $bupr_reviews_count ) {
 					foreach ( $reviews as $review ) {
 						$rate                = 0;
 						$reviews_field_count = 0;
@@ -104,7 +105,7 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 										$reviews_field_count++;
 									}
 								}
-								if ( $reviews_field_count != 0 ) {
+								if ( 0 !== $reviews_field_count ) {
 									$bupr_total_rating += (int) $rate / $reviews_field_count;
 									$bupr_total_review_count ++;
 									$rate_counter++;
@@ -113,13 +114,13 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 						}
 					}
 
-					if ( $bupr_total_review_count != 0 ) {
+					if ( 0 !== $bupr_total_review_count && 0 !== $bupr_total_rating ) {
 						$bupr_avg_rating = $bupr_total_rating / $bupr_total_review_count;
 						$bupr_type       = gettype( $bupr_avg_rating );
 					}
 
 					$bupr_stars_on = $stars_off        = $stars_half       = '';
-					if ( $bupr_total_review_count != 0 ) {
+					if ( 0 !== $bupr_total_review_count && 0 !== $bupr_total_rating ) {
 						$bupr_avg_rating = $bupr_total_rating / $bupr_total_review_count;
 						$bupr_type       = gettype( $bupr_avg_rating );
 					}
@@ -145,10 +146,10 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 			}
 
 			$bupr_members_ratings_data = array();
-			if ( $topMember === 'top rated' ) {
+			if ( 'top rated' === $topMember ) {
 				usort( $bupr_star_rating, array( $this, 'bupr_get_sort_max_stars' ) );
 				$bupr_members_ratings_data = $bupr_star_rating;
-			} elseif ( $topMember === 'top reviewed' ) {
+			} elseif ( 'top reviewed' === $topMember ) {
 				usort( $bupr_max_review, array( $this, 'bupr_get_sort_max_review' ) );
 				$bupr_members_ratings_data = $bupr_max_review;
 			}
@@ -158,13 +159,13 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 			$bupr_user_count = 0;
 			$output         .= '<h2>' . esc_html( $bupr_title ) . '</h2>';
 			$output         .= '<ul class="bupr-member-main">';
-			if ( $bupr_member_count != 0 ) {
+			if ( 0 !== $bupr_member_count ) {
 				foreach ( $bupr_members_ratings_data as $buprKey => $buprValue ) {
-					if ( $bupr_user_count == $memberLimit ) {
+					if ( $bupr_user_count === $memberLimit ) {
 						break;
 					} else {
 
-						if ( $avatar == 'show' ) {
+						if ( 'show' === $avatar ) {
 							$output .= '<li class="bupr-members"><div class="bupr-img-widget">';
 							$output .= get_avatar( $buprValue['user_id'], 50 );
 							$output .= '</div>';
@@ -257,7 +258,6 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 		public function bupr_get_sort_max_stars( $bupr_rating1, $bupr_rating2 ) {
 			return strcmp( $bupr_rating2['avg_rating'], $bupr_rating1['avg_rating'] );
 		}
-
 		/**
 		 * Display add review form on front-end.
 		 *
@@ -277,7 +277,7 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 			$bupr_flag          = false;
 			$bupr_member        = array();
 			foreach ( get_users() as $user ) {
-				if ( $user->ID !== get_current_user_id() ) {
+				if ( get_current_user_id() !== $user->ID ) {
 					$bupr_member[] = array(
 						'member_id'   => $user->ID,
 						'member_name' => $user->data->display_name,
@@ -306,7 +306,7 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 			$reviews_args = new WP_Query( $member_args );
 			if ( ! bp_is_members_component() && ! bp_is_user() ) {
 				$bp_template_option = bp_get_option( '_bp_theme_package_id' );
-				if ( 'nouveau' == $bp_template_option ) {
+				if ( 'nouveau' === $bp_template_option ) {
 					?>
 					<div id="message" class="success success_review_msg bp-feedback bp-messages bp-template-notice">
 						<span class="bp-icon" aria-hidden="true"></span>
@@ -321,41 +321,40 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 			if ( 0 === bp_displayed_user_id() ) {
 				$this->bupr_review_form( $login_user, $bupr_spinner_src, $bupr_review_succes, $bupr_flag, $bupr_member );
 			} else {
-				if ( 'no' == $bupr['multi_reviews'] ) {
+				if ( 'no' === $bupr['multi_reviews'] ) {
 					$user_post_count = $reviews_args->post_count;
 				} else {
 					$user_post_count = 0;
 				}
-				if ( $user_post_count == 0 ) {
+				if ( 0 === $user_post_count ) {
 					$this->bupr_review_form( $login_user, $bupr_spinner_src, $bupr_review_succes, $bupr_flag, $bupr_member );
 				} else {
 					$bp_template_option = bp_get_option( '_bp_theme_package_id' );
-					if ( 'nouveau' == $bp_template_option ) {
+					if ( 'nouveau' === $bp_template_option ) {
 						?>
 							<div id="message" class="success bp-feedback bp-messages bp-template-notice">
 								<span class="bp-icon" aria-hidden="true"></span>
 					<?php } else { ?>
 								<div id="message" class="info">
 										<?php } ?>
-										<?php
-										if ( 'publish' === $reviews_args->posts[0]->post_status ) {
-											$message = sprintf( __( 'You already posted a %1$s for this member.', 'bp-member-reviews' ), $review_label );
-										} else {
-											if ( $auto_approve_reviews === 'yes' ) {
-												$message = sprintf( esc_html__( 'Thank you for taking time to write this wonderful %1$s.', 'bp-member-reviews' ), $review_label );
-											} else {
-												$message = sprintf( esc_html__( 'Thank you for taking time to write this wonderful %1$s. Your %1$s will display after moderator\'s approval.', 'bp-member-reviews' ), $review_label );
-											}
-										}
-										?>
+								<?php
+								if ( 'publish' === $reviews_args->posts[0]->post_status ) {
+									$message = sprintf( __( 'You already posted a %1$s for this member.', 'bp-member-reviews' ), $review_label );
+								} else {
+									if ( 'yes' === $auto_approve_reviews ) {
+										$message = sprintf( esc_html__( 'Thank you for taking time to write this wonderful %1$s.', 'bp-member-reviews' ), $review_label );
+									} else {
+										$message = sprintf( esc_html__( 'Thank you for taking time to write this wonderful %1$s. Your %1$s will display after moderator\'s approval.', 'bp-member-reviews' ), $review_label );
+									}
+								}
+								?>
 										<p><?php echo $message; ?> </p>
 							</div>
 						</div>
-					<?php
+							<?php
 				}
 			}
 		}
-
 		/**
 		 * Bupr review form.
 		 *
@@ -364,17 +363,17 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 		 * @param    string $bupr_spinner_src       Spinner  User.
 		 * @param    string $bupr_review_succes     Review Success.
 		 * @param    int    $bupr_flag              Flag.
-		 * @param    array  $bupr_member            Member array
+		 * @param    array  $bupr_member            Member array.
 		 * @author   Wbcom Designs
 		 */
 		public function bupr_review_form( $login_user, $bupr_spinner_src, $bupr_review_succes, $bupr_flag, $bupr_member ) {
 			global $bupr;
 			$flag = false;
-			if ( 'yes' == $bupr['anonymous_reviews'] ) {
+			if ( 'yes' === $bupr['anonymous_reviews'] ) {
 				$flag = true;
 			}
 			$bp_template_option = bp_get_option( '_bp_theme_package_id' );
-			if ( 'nouveau' == $bp_template_option ) {
+			if ( 'nouveau' === $bp_template_option ) {
 				?>
 				<div id="message" class="success add_review_msg success_review_msg bp-feedback bp-messages bp-template-notice">
 					<span class="bp-icon" aria-hidden="true"></span>
@@ -388,7 +387,7 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 						<input type="hidden" id="reviews_pluginurl" value="<?php echo esc_url( BUPR_PLUGIN_URL ); ?>">
 						<div class="bp-member-add-form">
 							<p><?php echo sprintf( esc_html__( 'Fill in details to submit %s', 'bp-member-reviews' ), esc_html( $bupr['review_label'] ) ); ?></p>
-							<?php if ( 0 === bp_displayed_user_id() ) { ?>
+					<?php if ( 0 === bp_displayed_user_id() ) { ?>
 								<p>
 										<select name="bupr_member_id" id="bupr_member_review_id">
 											<option value=""><?php esc_html_e( '--Select--', 'bp-member-reviews' ); ?></option>
@@ -407,16 +406,16 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 								<p class="bupr-hide-subject">
 									<input name="review-subject" id="review_subject" type="text" placeholder="<?php esc_html_e( 'Review Subject', 'bp-member-reviews' ); ?>" ><br/><span class="bupr-error-fields">*<?php esc_html_e( 'This field is required.', 'bp-member-reviews' ); ?></span>
 								</p>
-								<textarea name="review-desc" id="review_desc" placeholder="<?php echo sprintf( esc_html__( '%s Description', 'bp-member-reviews' ), esc_html( $bupr['review_label'] ) ); ?>" rows="4" cols="50"></textarea><br/><span class="bupr-error-fields">*<?php esc_html_e( 'This field is required.', 'bp-member-reviews' ); ?></span>
+								<textarea name="review-desc" id="review_desc" placeholder="<?php echo sprintf( esc_html__( 'Enter your %s', 'bp-member-reviews' ), esc_html( $bupr['review_label'] ) ); ?>" rows="4" cols="50"></textarea><br/><span class="bupr-error-fields">*<?php esc_html_e( 'This field is required.', 'bp-member-reviews' ); ?></span>
 
-			<?php
-			if ( ! empty( $bupr['active_rating_fields'] ) ) {
-				$field_counter = 1;
-				$flage         = true;
-				if ( $bupr['multi_criteria_allowed'] ) {
-					foreach ( $bupr['active_rating_fields'] as $bupr_rating_fields => $bupr_criteria_setting ) :
-						if ( 'yes' == $bupr_criteria_setting ) {
-							?>
+					<?php
+					if ( ! empty( $bupr['active_rating_fields'] ) ) {
+						$field_counter = 1;
+						$flage         = true;
+						if ( $bupr['multi_criteria_allowed'] ) {
+							foreach ( $bupr['active_rating_fields'] as $bupr_rating_fields => $bupr_criteria_setting ) :
+								if ( 'yes' === $bupr_criteria_setting ) {
+									?>
 							<div class="multi-review">
 								<div class="bupr-col-4 bupr-criteria-label">
 									<?php esc_html_e( html_entity_decode( $bupr_rating_fields ), 'bp-member-reviews' ); ?>
@@ -430,31 +429,31 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 								</div>
 								<div class="bupr-col-12 bupr-error-fields">*<?php esc_html_e( 'This field is required.', 'bp-member-reviews' ); ?></div>
 							</div>
-							<?php
-							$field_counter++;
+									<?php
+									$field_counter++;
+								}
+							endforeach;
 						}
-					endforeach;
-				}
-				?>
+						?>
 				<input type="hidden" id="member_rating_field_counter" value="<?php echo esc_attr( --$field_counter ); ?>">
-			<?php } ?>
-			<?php if ( $flag ) { ?>
+					<?php } ?>
+					<?php if ( $flag ) { ?>
 									<p>
 										<label for="bupr_anonymous_review"><input style="width:auto !important" type="checkbox" id="bupr_anonymous_review" value="value"><?php echo sprintf( esc_html__( 'Send %s anonymously.', 'bp-member-reviews' ), esc_html( $bupr['review_label'] ) ); ?></label>
 									</p>
 			<?php } ?>
 								<p>
-								<?php wp_nonce_field( 'save-bp-member-review', 'security-nonce' ); ?>
+						<?php wp_nonce_field( 'save-bp-member-review', 'security-nonce' ); ?>
 
 									<button type="button" class="btn btn-default" id="bupr_save_review" name="submit-review">
-			<?php echo sprintf( esc_html__( 'Submit %s', 'bp-member-reviews' ), esc_html( $bupr['review_label'] ) ); ?>
+					<?php echo sprintf( esc_html__( 'Submit %s', 'bp-member-reviews' ), esc_html( $bupr['review_label'] ) ); ?>
 									</button>
 									<input type="hidden" value="<?php echo esc_attr( $login_user ); ?>" id="bupr_current_user_id" />
 									<img src="<?php echo esc_url( $bupr_spinner_src ); ?>" class="bupr-save-reivew-spinner" />
 								</p>
 							</div>
 						</form>
-			<?php
+					<?php
 		}
 
 		/**
@@ -464,9 +463,10 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 		 * @author   Wbcom Designs
 		 */
 		public function bupr_shortcode_review_form() {
+			ob_start();
 			$this->bupr_display_review_form();
+			return ob_get_clean();
 		}
-
 	}
 
 	new BUPR_Shortcodes();

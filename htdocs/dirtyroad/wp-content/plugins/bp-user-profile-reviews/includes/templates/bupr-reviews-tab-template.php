@@ -75,7 +75,7 @@ $reviews = new WP_Query( $args ); ?>
 								<div class="item-avatar">
 									<?php
 									$author = $reviews->post->post_author;
-									if ( $anonymous_post_review == 'yes' ) {
+									if ( 'yes' === $anonymous_post_review ) {
 										$avatar_url = bp_core_avatar_default(
 											$type   = 'local',
 											array(
@@ -100,7 +100,7 @@ $reviews = new WP_Query( $args ); ?>
 								<div class="reviewer">
 									<h4>
 										<?php
-										if ( $anonymous_post_review == 'yes' ) {
+										if ( 'yes' === $anonymous_post_review ) {
 											esc_html_e( 'anonymous', 'bp-member-reviews' );
 										} else {
 											echo wp_kses( bp_core_get_userlink( $author ), $allowedtags );
@@ -234,7 +234,7 @@ $reviews = new WP_Query( $args ); ?>
 					wp_reset_postdata();
 				} else {
 					$bp_template_option = bp_get_option( '_bp_theme_package_id' );
-					if ( 'nouveau' == $bp_template_option ) {
+					if ( 'nouveau' === $bp_template_option ) {
 						?>
 					<div id="message" class="info bp-feedback bp-messages bp-template-notice">
 						<span class="bp-icon" aria-hidden="true"></span>

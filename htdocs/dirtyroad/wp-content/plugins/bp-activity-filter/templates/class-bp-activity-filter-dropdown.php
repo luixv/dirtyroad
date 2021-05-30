@@ -17,16 +17,14 @@ if (!class_exists('WbCom_BP_Activity_Filter_Public_Setting')) {
 			/**
 			 * Showing selected filters in dropdown
 			 */
-
 			add_filter('bp_get_activity_show_filters', array($this, 'getting_all_filters_function'), 11, 3);
-
+			
 			/* Clearing cookie for correct result */
-
 			$past = time() - 3600;
 
-			if (isset($_COOKIE['bp-activity-filter']))
-
+			if (isset($_COOKIE['bp-activity-filter'])){
 				setcookie('bp-activity-filter', ' ', $past, '/');
+			}
 
 		}
 
@@ -48,15 +46,11 @@ if (!class_exists('WbCom_BP_Activity_Filter_Public_Setting')) {
 
 			if( !empty( $filters_db ) ) {
 				foreach ($filters as  $key => $value) {
-
-					if (in_array($key, $filters_db))
-
+					if (in_array($key, $filters_db)){
 						unset($filters[$key]);
-
+					}
 				}
 			}
-
-
 
 			if (!empty($filters)) {
 				$defult_activity_stream = bp_get_option('bp-default-filter-name');

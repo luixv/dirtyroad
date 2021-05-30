@@ -38,7 +38,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<strong>
 								<?php echo esc_attr( '[bupr_display_top_members]' ); ?>
 							</strong>
-							
 						</div>
 						<div class="bupr-admin-col-6">
 							<p class="description">
@@ -51,7 +50,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<li><p><b><?php echo esc_html( 'type' ) . '</b>:  ' . esc_html__( "Using this parameter you can display members according to 'top reviewed' or 'top rated'. For example: ", 'bp-member-reviews' ) . "[bupr_display_top_members type='top reviewed']"; ?></p></li>
 								<li><p><b><?php echo esc_html( 'avatar' ) . '</b>:  ' . esc_html__( "This parameter gives you flexibility to 'show' or 'hide' member avatar in the listing. For example: ", 'bp-member-reviews' ) . "[bupr_display_top_members avatar='hide']"; ?></p></li>
 							</ul>
-							
 						</div>
 					</div>
 				</div>

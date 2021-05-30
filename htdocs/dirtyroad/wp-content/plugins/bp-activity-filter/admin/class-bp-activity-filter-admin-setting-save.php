@@ -58,14 +58,6 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Admin_Setting_Save' ) ) {
 					bp_update_option( 'bp-default-profile-filter-name', filter_var( $bp_default_profile_filter_name, FILTER_SANITIZE_STRING ) );
 
 				}
-
-				if ( isset($_POST['bp-hidden-profile-filters-name']) && is_array( $_POST['bp-hidden-profile-filters-name'] ) ) {
-
-					$hidden_profile_filters = array_map( 'sanitize_text_field', wp_unslash( $_POST['bp-hidden-profile-filters-name'] ) );
-				}
-
-				bp_update_option( 'bp-hidden-profile-filters-name', $hidden_profile_filters );
-
 			}
 
 		}

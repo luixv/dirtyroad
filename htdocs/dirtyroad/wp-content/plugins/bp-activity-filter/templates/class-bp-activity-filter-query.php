@@ -3,6 +3,7 @@
  * Defining class for Filtering activity stream
  */
 if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
+
 	class WbCom_BP_Activity_Filter_Activity_Stream {
 		/**
 		 * Constructor
@@ -15,7 +16,7 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'bpaf_enqueue_scripts' ) );
 			add_action( 'bp_activity_before_save', array( $this, 'bpaf_activity_do_not_save' ), 5, 1 );
 			add_action( 'friends_friendship_accepted', array( $this, 'bpaf_bp_friends_friendship_accepted_activity' ), 5, 4 );
-			
+
 			add_action( 'bp_template_redirect', array( $this, 'bpaf_bp_set_default_activity_filter' ) );
 		}
 
@@ -32,17 +33,16 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 			 * between the defined hooks and the functions defined in this
 			 * class.
 			 */
-			global $bp;			
-			if (  bp_is_user_activity() ) {
+			global $bp;
+			if ( bp_is_user_activity() ) {
 				$defult_activity_stream = bp_get_option( 'bp-default-profile-filter-name' );
 			} else {
 				$defult_activity_stream = bp_get_option( 'bp-default-filter-name' );
 			}
-			
-			
-			if ( empty( $defult_activity_stream ) ) {
-				$defult_activity_stream = -1;
-			}	
+
+			if ( empty( $defult_activity_stream ) || $defult_activity_stream == -1 ) {
+				$defult_activity_stream = 0;
+			}
 
 			wp_enqueue_script( 'bp-activity-filter-public', plugin_dir_url( __FILE__ ) . 'js/buddypress-activity-filter-public.js', array( 'jquery' ), time(), false );
 
@@ -63,70 +63,48 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 		 */
 		public function filtering_activity_default( $query, $object ) {
 			global $bp;
-			$query_size = '';
-
+			$query_size = '';			
 			if ( 'activity' != $object ) {
 				return $query;
 			}
-			
 
-			if ( ! empty( $_POST['cookie'] ) )
+			if ( ! empty( $_POST['cookie'] ) ) {
 				$_BP_COOKIE = wp_parse_args( str_replace( '; ', '&', urldecode( $_POST['cookie'] ) ) );
-			else
+			} else {
 				$_BP_COOKIE = &$_COOKIE;
-			
-			if( !empty( $query ) ) {
+			}
+
+			if ( ! empty( $query ) ) {
 				$bp_query     = explode( '&', $query );
 				$bp_query_arr = $bp_query;
-				$page     = array_pop( $bp_query_arr );
-				$qs       = explode( '=', $page );
-				if( 'page' == $qs[0] ) {
-					$size = $qs[1];
+				$page         = array_pop( $bp_query_arr );
+				$qs           = explode( '=', $page );
+				if ( 'page' == $qs[0] ) {
+					$size       = $qs[1];
 					$query_size = sizeof( $bp_query );
 				}
 			} else {
 				$bp_query = array();
-				$size = sizeof( $bp_query );
+				$size     = sizeof( $bp_query );
 			}
 
-			if( bp_is_group_activity() ) {
+			if ( bp_is_group_activity() ) {
 				$defult_activity_stream = -1;
-				$page_actions = bp_activity_get_actions_for_context();
-				if( !empty( $page_actions ) ) {
-					$selected_activity_stream = bp_get_option( 'bp-default-filter-name' );
-					foreach( $page_actions as $gakey => $gavalue ) {
-						if( $selected_activity_stream == $gavalue['key'] ) {
-							$defult_activity_stream = $selected_activity_stream;
-						}
-					}
-				}
-			} else if ( bp_is_user_activity() ) {
-				$defult_activity_stream = -1;
-				$page_actions = bp_activity_get_actions_for_context();
-				if( !empty( $page_actions ) ) {
-					$selected_activity_stream = bp_get_option( 'bp-default-profile-filter-name' );
-					foreach( $page_actions as $gakey => $gavalue ) {
-						if( $selected_activity_stream == $gavalue['key'] ) {
-							$defult_activity_stream = $selected_activity_stream;
-						}
-					}
-				}
-			
+			} elseif ( bp_is_user_activity() ) {
+				$defult_activity_stream = bp_get_option( 'bp-default-profile-filter-name' );
 			} else {
 				$defult_activity_stream = bp_get_option( 'bp-default-filter-name' );
 				$page_actions           = bp_activity_get_actions_for_context( 'activity' );
 			}
 
-			$hidden_activity_stream = bp_get_option( 'bp-hidden-filters-name' );
 			$hidden_activity_stream = array();
+			$hidden_activity_stream = bp_get_option( 'bp-hidden-filters-name' );
+			
 			if ( ( $defult_activity_stream != -1 ) && ( 1 == $_BP_COOKIE['bpaf-default-filter'] ) ) {
 				$query = wp_parse_args( $query, array() );
 
-				$count  = 0;
-				$action = '';
-				if ( empty( $hidden_activity_stream ) ) {
-					$hidden_activity_stream = array();
-				}
+				$count                = 0;
+				$action               = '';
 				$admin_setting_object = new WbCom_BP_Activity_Filter_Admin_Setting();
 				$labels               = $admin_setting_object->bpaf_get_labels();
 				foreach ( $labels as $l_key => $l_value ) {
@@ -146,22 +124,24 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 				}
 				if ( $defult_activity_stream != -1 ) {
 					$query = 'action=' . $defult_activity_stream;
-					if( !empty( $page ) ) {
-						$query .= '&'.$page;
-					}					
+					if ( isset($_POST['scope']) && $_POST['scope'] != '' ) {
+						$query .= '&scope=' . $_POST['scope'];
+					}
+					if ( ! empty( $page ) ) {
+						$query .= '&' . $page;
+					}
 				} else {
 					$query = 'action=' . $action;
 				}
-				
-			} else if( $defult_activity_stream == -1 && ( 1 == $_BP_COOKIE['bpaf-default-filter'] ) || empty( $query ) || ( 1 == $query_size ) ) {
-				$count  = 0;
-				$action = '';
+			} elseif ( $defult_activity_stream == -1 && ( 1 == $_BP_COOKIE['bpaf-default-filter'] ) || empty( $query ) || ( 1 == $query_size ) ) {
+				$count                = 0;
+				$action               = '';
 				$admin_setting_object = new WbCom_BP_Activity_Filter_Admin_Setting();
 				$labels               = $admin_setting_object->bpaf_get_labels();
-				if( !empty( $labels ) ) {
+				if ( ! empty( $labels ) ) {
 					foreach ( $labels as $l_key => $l_value ) {
 						if ( ! empty( $l_value ) ) {
-						    if( !empty( $hidden_activity_stream ) ) {		 						
+							if ( ! empty( $hidden_activity_stream ) ) {
 								if ( in_array( $l_key, $hidden_activity_stream ) ) {
 
 								} else {
@@ -173,16 +153,18 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 										$count++;
 									}
 								}
-							}	
+							}
 						}
 					}
 				}
 				$query = 'action=' . $action;
-				if( !empty( $page ) ) {
-					$query .= '&'.$page;
-				}				
+				if ( isset($_POST['scope']) && $_POST['scope'] != '' ) {
+					$query .= '&scope=' . $_POST['scope'];
+				}
+				if ( ! empty( $page ) ) {
+					$query .= '&' . $page;
+				}
 			}
-					
 			return $query;
 		}
 
@@ -192,11 +174,11 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 		 * @param $activity_object
 		 */
 		public function bpaf_activity_do_not_save( $activity_object ) {
-		    $hidden_activity_stream = bp_get_option( 'bp-hidden-filters-name' );
-		    if( ! empty( $hidden_activity_stream ) && is_array( $hidden_activity_stream ) ) {
-			    if( in_array( $activity_object->type, $hidden_activity_stream ) ) {
-			        $activity_object->type = false;
-			    }
+			$hidden_activity_stream = bp_get_option( 'bp-hidden-filters-name' );
+			if ( ! empty( $hidden_activity_stream ) && is_array( $hidden_activity_stream ) ) {
+				if ( in_array( $activity_object->type, $hidden_activity_stream ) ) {
+					$activity_object->type = false;
+				}
 			}
 		}
 
@@ -207,21 +189,21 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 		 */
 		public function bpaf_bp_friends_friendship_accepted_activity( $friendship_id, $initiator_user_id, $friend_user_id, $friendship = false ) {
 			$hidden_activity_stream = bp_get_option( 'bp-hidden-filters-name' );
-		    if( ! empty( $hidden_activity_stream ) && is_array( $hidden_activity_stream ) ) {
-			    if( in_array( 'friendship_accepted,friendship_created', $hidden_activity_stream ) ) {
-			        remove_action( 'friends_friendship_accepted', 'bp_friends_friendship_accepted_activity', 10, 4 );
-			    }
+			if ( ! empty( $hidden_activity_stream ) && is_array( $hidden_activity_stream ) ) {
+				if ( in_array( 'friendship_accepted,friendship_created', $hidden_activity_stream ) ) {
+					remove_action( 'friends_friendship_accepted', 'bp_friends_friendship_accepted_activity', 10, 4 );
+				}
 			}
-		}		
-		
+		}
+
 		public function bpaf_bp_set_default_activity_filter() {
 			// If the filter is already set, do not do anything ok.
-			if (  isset( $_COOKIE['bp-activity-filter'] ) ) {
-				return ;
+			if ( isset( $_COOKIE['bp-activity-filter'] ) ) {
+				return;
 			}
 			// additional check for activity dir and profile activity.
 			if ( ! bp_is_activity_directory() && ! bp_is_user_activity() ) {
-				return ;
+				return;
 			}
 			if ( bp_is_user_activity() ) {
 				$filter = bp_get_option( 'bp-default-profile-filter-name' );
@@ -233,7 +215,7 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {
 			setcookie( 'bp-activity-filter', $filter, null, '/' );
 			$_COOKIE['bp-activity-filter'] = $filter;
 		}
-		
+
 	}
 }
 if ( class_exists( 'WbCom_BP_Activity_Filter_Activity_Stream' ) ) {

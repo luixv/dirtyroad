@@ -31,7 +31,7 @@ if ( ! empty( $review_id ) ) {
 	$anonymous_post_review = get_post_meta( $review_id, 'bupr_anonymous_review_post', true );
 	$member_review_ratings = get_post_meta( $review->ID, 'profile_star_rating', false );
 	/* Hide user avatar and username if it was a anonymous review. */
-	if ( $anonymous_post_review == 'yes' ) {
+	if ( 'yes' === $anonymous_post_review ) {
 			$avatar   = bp_core_avatar_default(
 				$type = 'local',
 				array(

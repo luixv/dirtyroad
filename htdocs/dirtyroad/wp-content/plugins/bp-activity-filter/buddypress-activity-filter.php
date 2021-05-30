@@ -8,7 +8,7 @@
  * Plugin Name:       Wbcom Designs - BuddyPress Activity Filter
  * Plugin URI:        https://wbcomdesigns.com/downloads/buddypress-activity-filter/
  * Description:       It will help set the default filter option with BuddyPress Activity, & also allow disabling selected activity types.
- * Version:           2.5.1
+ * Version:           2.6.0
  * Author:            Wbcom Designs<admin@wbcomdesigns.com>
  * Author URI:        https://wbcomdesigns.com/
  * License:           GPL-2.0+
@@ -66,16 +66,11 @@ function bp_activity_filter_required_plugin_admin_notice() {
 
 if ( ! class_exists( 'WbCom_BP_Activity_Filter' ) ) {
 
-
-
 	class WbCom_BP_Activity_Filter {
-
-
 
 		/**
 		 * Constructor
 		 */
-
 		public function __construct() {
 			global $bp;
 			/**
@@ -135,28 +130,17 @@ if ( ! class_exists( 'WbCom_BP_Activity_Filter' ) ) {
 			require_once plugin_dir_path( __FILE__ ) . 'templates/class-bp-activity-filter-query.php';
 		}
 
-
-
 		// Load plugin textdomain.
-
 		public function bp_activity_filter_load_textdomain() {
-
 			$domain = 'bp-activity-filter';
-
 			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-
 			load_textdomain( $domain, 'languages/' . $domain . '-' . $locale . '.pot' );
-
 			$var = load_plugin_textdomain( $domain, false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
-
 		}
-
-
 
 		/**
 		 * @desc Adds the Settings link to the plugin activate/deactivate page
 		 */
-
 		public function bp_activity_filter_plugin_actions( $links, $file ) {
 
 			$settings_link = '<a href="' . admin_url( 'admin.php?page=bp_activity_filter_settings' ) . '">' . __( 'Settings', 'bp-activity-filter' ) . '</a>';
@@ -242,4 +226,18 @@ function bpfilter_same_network_config() {
 	echo '<div class="error"><p>'
 	. esc_html__( 'BuddyPress Activity Filter and BuddyPress need to share the same network configuration.', 'bp-activity-filter' )
 	. '</p></div>';
+}
+
+
+/**
+ * redirect to plugin settings page after activated
+ */
+
+add_action( 'activated_plugin', 'bpfilter_activation_redirect_settings' );
+function bpfilter_activation_redirect_settings( $plugin ){
+
+	if( $plugin == plugin_basename( __FILE__ ) ) {
+		wp_redirect( admin_url( 'admin.php?page=bp_activity_filter_settings' ) ) ;
+		exit;
+	}
 }

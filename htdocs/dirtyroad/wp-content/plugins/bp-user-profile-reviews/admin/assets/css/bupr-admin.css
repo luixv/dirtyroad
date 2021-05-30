@@ -1,319 +1,344 @@
 @CHARSET "ISO-8859-1";
 
 @font-face {
-  font-family: FontAwesome;
-  src: url('../fonts/FontAwesome.otf');
+    font-family: FontAwesome;
+    src: url('../fonts/FontAwesome.otf');
 }
 
 .bupr-admin-settings-header p {
-  font-size: 24px;
-  /*	border-bottom:;*/
+    font-size: 24px;
+    /*	border-bottom:;*/
 }
 
 .bupr-admin-settings-spinner {
-  vertical-align: middle;
-  display: none;
+    vertical-align: middle;
+    display: none;
 }
 
 .bupr-btn-ajax {
-  color: #66c6e4 !important;
+    color: #66c6e4 !important;
 }
 
 #bupr_settings_updated {
-  display: none;
-  margin-left: 0;
-  margin-bottom: 15px;
+    display: none;
+    margin-left: 0;
+    margin-bottom: 15px;
 }
 
 .bupr-review-fields input {
-  width: 100%;
+    width: 100%;
 }
 
 .bupr-remove {
-  margin: 10px 0px !important;
+    margin: 10px 0px !important;
 }
 
 .bupr-widget-class p {
-  width: 100%;
+    width: 100%;
 }
 
 .bupr-widget-class p label {
-  width: 50%;
+    width: 50%;
 }
 
 .bupr-widget-class p input {
-  width: 50%;
+    width: 50%;
 }
 
 .bupr-widget-class p select {
-  width: 50%;
+    width: 50%;
 }
 
 .bupr-adming-setting {
-  float: left;
-  width: 90%;
-  padding-top: 10px;
+    float: left;
+    width: 90%;
+    padding-top: 10px;
 }
 
 .bupr-border {
-  border-right: 1px solid hsl(0, 0%, 87%);
+    border-right: 1px solid hsl(0, 0%, 87%);
 }
 
 .bupr-shortcode {
-  font-size: 16px;
-  font-weight: normal;
+    font-size: 16px;
+    font-weight: normal;
 }
 
-/* check box design */
+/* Admin Switch Toggle : Start */
 .bupr-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
 .bupr-switch input {
-  display: none;
+    display:none;
 }
 
 .bupr-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .bupr-slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
-input:checked+.bupr-slider {
-  background-color: #2196F3;
+input:checked + .bupr-slider {
+    background-color: #1d76da;
 }
 
-input:focus+.bupr-slider {
-  box-shadow: 0 0 1px #2196F3;
+input:focus + .bupr-slider {
+    box-shadow: 0 0 1px #1d76da;
 }
 
-input:checked+.bupr-slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+input:checked + .bupr-slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }
 
 /* Rounded sliders */
 .bupr-slider.bupr-round {
-  border-radius: 34px;
+    border-radius: 34px;
+}
+.bupr-slider.bupr-round:before {
+    border-radius: 50%;
 }
 
 .bupr_excluding_member {
-  width: 70%;
+    width: 70%;
 }
 
 .bupr_adding_member {
-  width: 70%;
-}
-
-.bupr-slider.bupr-round:before {
-  border-radius: 50%;
+    width: 70%;
 }
 
 .bupr-label {
-  font-size: 15px;
-  font-weight: 600;
+    font-size: 15px;
+    font-weight: 600;
 }
+
+@media (min-width: 782px) {
+    .bupr-switch {
+        width: 30px;
+        height: 17px;
+    }
+    .bupr-slider:before {
+        height: 13px;
+        width: 13px;
+        left: 2px;
+        bottom: 2px;
+    }
+    input:checked + .bupr-slider:before {
+        -webkit-transform: translateX(13px);
+        -ms-transform: translateX(13px);
+        transform: translateX(13px);
+    }
+}
+/* Admin Switch Toggle : End */
 
 /* setting page criteria tab */
 .bupr-criteria input[type=text] {
-  width: 95%;
+    width: 95%;
 }
 
 .bupr-criteria input[type=button] {
-  margin: 0 !important;
-  padding: 0 26px;
+    margin: 0 !important;
+    padding: 0 26px;
 }
 
 /*** css classes for admin setting page ***/
 [class*="bupr-admin-col-"] {
-  float: left;
-  padding: 10px 0;
+    float: left;
+    padding: 10px 0;
 }
 
 .bupr-admin-row {
-  clear: both;
-  border-top: 1px solid #ddd;
-  padding-bottom: 5px;
+    clear: both;
+    border-top: 1px solid #ddd;
+    padding-bottom: 5px;
 }
 
 .bupr-admin-col-1 {
-  width: 8.33%;
+    width: 8.33%;
 }
 
 .bupr-admin-col-2 {
-  width: 16.66%;
+    width: 16.66%;
 }
 
 .bupr-admin-col-3 {
-  width: 25%;
+    width: 25%;
 }
 
 .bupr-admin-col-4 {
-  width: 33.33%;
+    width: 33.33%;
 }
 
 .bupr-admin-col-5 {
-  width: 41.66%;
+    width: 41.66%;
 }
 
 .bupr-admin-col-6 {
-  width: 50%;
+    width: 50%;
 }
 
 .bupr-admin-col-7 {
-  width: 58.33%;
+    width: 58.33%;
 }
 
 .bupr-admin-col-8 {
-  width: 66.66%;
+    width: 66.66%;
 }
 
 .bupr-admin-col-9 {
-  width: 75%;
+    width: 75%;
 }
 
 .bupr-admin-col-10 {
-  width: 83.33%;
+    width: 83.33%;
 }
 
 .bupr-admin-col-11 {
-  width: 91.66%;
+    width: 91.66%;
 }
 
 .bupr-admin-col-12 {
-  width: 100%;
+    width: 100%;
 }
 
 @media(max-width: 767px) {
-  [class*="bupr-admin-col-"] {
-	width: 100%;
-  }
+    [class*="bupr-admin-col-"] {
+        width: 100%;
+    }
 }
 
 button.bupr-accordion {
-  background-color: hsl(0, 0%, 87%);
-  border: medium none;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  color: hsl(0, 0%, 27%);
-  cursor: pointer;
-  font-size: 15px;
-  margin: 0 5%;
-  outline: medium none;
-  padding: 15px 20px;
-  text-align: left;
-  transition: all 0.4s ease 0s;
-  width: 90%;
+    background-color: hsl(0, 0%, 87%);
+    border: medium none;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    color: hsl(0, 0%, 27%);
+    cursor: pointer;
+    font-size: 15px;
+    margin: 0 5%;
+    outline: medium none;
+    padding: 15px 20px;
+    text-align: left;
+    transition: all 0.4s ease 0s;
+    width: 90%;
 }
 
 button.bupr-accordion.active, button.bupr-accordion:hover {
-  background-color: hsl(207, 90%, 54%);
-  color: white;
+    background-color: hsl(207, 90%, 54%);
+    color: white;
 }
 
 div.panel {
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  margin: 0px 5%;
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin: 0px 5%;
 }
 
 button.bupr-accordion::after {
-  color: hsl(0, 0%, 47%);
-  content: "+";
-  float: right;
-  font-size: 13px;
-  font-weight: bold;
-  margin-left: 5px;
+    color: hsl(0, 0%, 47%);
+    content: "+";
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 5px;
 }
 
 button.bupr-accordion::after:hover {
-  color: white;
+    color: white;
 }
 
 button.bupr-accordion.active::after {
-  content: "−";
-  color: white;
+    content: "−";
+    color: white;
 }
 
 /* custom css for switch */
 .bupr-switch-custom {
-  height: 30px !important;
-  margin: 0 10px !important;
-}
-
-.bupr-switch-custom .bupr-slider::before {
-  height: 23px !important;
-}
-
-.buprcriteria input:checked+.bupr-slider::before {
-  transform: translateX(35px) !important;
+    height: 30px !important;
+    margin: 0 10px !important;
 }
 
 .buprcriteria .bupr-switch {
-  width: 70px !important;
+    margin-right: 40px;
+}
+
+@media(max-width: 781px) {
+    .bupr-switch-custom .bupr-slider::before {
+        height: 23px !important;
+    }
+
+    .buprcriteria input:checked+.bupr-slider::before {
+        transform: translateX(35px) !important;
+    }
+
+    .buprcriteria .bupr-switch {
+        width: 70px !important;
+        margin-right: 0;
+    }
 }
 
 .bupr-delete-tag {
-  margin-top: 0px;
-  margin-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 .bupr-criteria-remove-button {
-  border-radius: 20px !important;
-  height: 34px !important;
-  margin: 0 !important;
-  padding: 2px !important;
-  width: 70px !important;
+    border-radius: 20px !important;
+    height: 34px !important;
+    margin: 0 !important;
+    padding: 2px !important;
+    width: 70px !important;
 }
 
 .bupr-criteria-remove-button::hover {
-  background-color: hsl(207, 90%, 54%);
-  color: white;
+    background-color: hsl(207, 90%, 54%);
+    color: white;
 }
 
 .buprcriteria span {
-  margin: 0px 20px;
+    margin: 0px 20px;
 }
 
 .bupr-display-info {
-  font-weight: normal;
-  font-size: 14px;
-  margin-left: 10px;
+    font-weight: normal;
+    font-size: 14px;
+    margin-left: 10px;
 }
 
 .bupr-show-if-allowed {
-  display: none;
+    display: none;
 }
 
 .bupr-approve-review {
-  color: green;
+    color: green;
 }
 
 .bupr-extra-actions {
-  float: right;
+    float: right;
 }
