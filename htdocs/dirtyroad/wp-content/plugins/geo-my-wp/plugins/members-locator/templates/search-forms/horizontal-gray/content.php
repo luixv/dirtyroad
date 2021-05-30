@@ -36,11 +36,13 @@
 			
 		<?php gmw_search_form_locator_button( $gmw ); ?>
 						
+<!--
 		<span class="xfield-trigger" onclick="jQuery(this).closest( 'form' ).find( '.gmw-search-form-xprofile-fields' ).slideToggle();">
 			
 			<?php _e( 'Advanced options', 'geo-my-wp' ); ?>
 		</span>
-									
+							
+-->							
 		<?php do_action( 'gmw_search_form_before_distance', $gmw ); ?>
 
 		<?php gmw_search_form_radius( $gmw ); ?>
