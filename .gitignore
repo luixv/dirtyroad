@@ -36,6 +36,7 @@ xampp-*
 mysql/*
 mysql/backup/test
 mysql/backup/performance_schema
+htdocs/dirtyroad/wp-content/backups-dup-lite
 
 # But not these files...
 !htdocs/
