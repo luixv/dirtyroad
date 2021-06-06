@@ -1,0 +1,743 @@
+# Copyright (C) 2019 ZeeTheme
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WhiteDot 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/tags/whitedot\n"
+"POT-Creation-Date: 2018-05-18 19:25+0000\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2019-09-29 17:50+0000\n"
+"Last-Translator: Vishal Ranjan <support@zeetheme.com>\n"
+"Language-Team: ZeeTheme\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#. used between list items, there is a space after the comma
+#: inc/template-tags.php:56
+msgid ", "
+msgstr ""
+
+#: inc/woocommerce.php:258
+msgid "Add Widgets"
+msgstr ""
+
+#: inc/customizer.php:1108
+msgid "Author Box Below Post"
+msgstr ""
+
+#: inc/customizer.php:21
+msgid "Background"
+msgstr ""
+
+#: inc/customizer.php:506
+msgid "Base Typography"
+msgstr ""
+
+#: inc/customizer.php:730
+msgid "Blog & Page Settings"
+msgstr ""
+
+#: inc/customizer.php:419
+msgid "Blog Archive"
+msgstr ""
+
+#: inc/customizer.php:737
+msgid "Blog Home/Archive"
+msgstr ""
+
+#: inc/customizer.php:806 inc/customizer.php:836 inc/customizer.php:864
+msgid "Blog Layout"
+msgstr ""
+
+#: inc/customizer.php:617
+msgid "Body Font Size"
+msgstr ""
+
+#: inc/customizer.php:403 inc/customizer.php:439 inc/customizer.php:495
+msgid "Boxed"
+msgstr ""
+
+#: inc/customizer.php:380
+msgid "Boxed Page Inner Container Width"
+msgstr ""
+
+#: inc/hooks/general-hooks.php:142
+msgid "By"
+msgstr ""
+
+#: inc/template-tags.php:40
+msgid "by "
+msgstr ""
+
+#: inc/customizer.php:1460
+msgid "Cart"
+msgstr ""
+
+#: inc/hooks/general-hooks.php:149
+msgid "Category : "
+msgstr ""
+
+#: inc/customizer.php:1516
+msgid "Checkout"
+msgstr ""
+
+#: inc/customizer.php:222 inc/customizer.php:231
+msgid "Color Options"
+msgstr ""
+
+#: inc/customizer.php:205
+msgid "Colors & Backgrounds"
+msgstr ""
+
+#: comments.php:63
+msgid "Comments are closed."
+msgstr ""
+
+#. 1: comment count number, 2: title.
+#: comments.php:39
+#, php-format
+msgctxt "comments title"
+msgid "%1$s Comment"
+msgid_plural "%1$s Comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/customizer.php:404 inc/customizer.php:440 inc/customizer.php:496
+msgid "Contained"
+msgstr ""
+
+#: inc/customizer.php:36
+msgid "Contained Layout Backgroung Color"
+msgstr ""
+
+#: inc/customizer.php:329 inc/customizer.php:400 inc/customizer.php:436
+#: inc/customizer.php:492
+msgid "Container Layout"
+msgstr ""
+
+#: inc/customizer.php:343
+msgid "Container Width"
+msgstr ""
+
+#: inc/meta-box.php:47
+msgid "Content Layout"
+msgstr ""
+
+#: inc/hooks/general-hooks.php:443
+msgid "COPYRIGHT"
+msgstr ""
+
+#: inc/customizer.php:1651
+msgid "Course Catalog Columns"
+msgstr ""
+
+#: inc/customizer.php:1587
+msgid "Course Catelog"
+msgstr ""
+
+#: inc/customizer.php:1739
+msgid "Dashboard"
+msgstr ""
+
+#: inc/hooks/general-hooks.php:452
+msgid "Designed By"
+msgstr ""
+
+#: inc/meta-box.php:83
+msgid "Disable Above Header Bar"
+msgstr ""
+
+#: inc/meta-box.php:74
+msgid "Disable Elements"
+msgstr ""
+
+#: inc/meta-box.php:94
+msgid "Disable Featured Image"
+msgstr ""
+
+#: inc/meta-box.php:99
+msgid "Disable Footer Branding"
+msgstr ""
+
+#: inc/meta-box.php:109
+msgid "Disable Footer Copyright"
+msgstr ""
+
+#: inc/meta-box.php:104
+msgid "Disable Footer Widgets"
+msgstr ""
+
+#: inc/meta-box.php:78
+msgid "Disable Primary Header"
+msgstr ""
+
+#: inc/meta-box.php:89
+msgid "Disable Title"
+msgstr ""
+
+#: inc/function-parts/setup.php:132
+msgid "Displays on the side of pages and posts with a sidebar."
+msgstr ""
+
+#: inc/function-parts/setup.php:150
+msgid "Displays widgets in the footer of pages and posts."
+msgstr ""
+
+#: inc/customizer.php:2116
+msgid "Don't forget to configure 'Social Icons' Menu in Menus Settings."
+msgstr ""
+
+#. %s: Name of current post. Only visible to screen readers
+#: inc/template-tags.php:93
+#, php-format
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#. Description of the theme
+msgid ""
+"Experience the perfection in design of this Responsive, Fast and SEO-"
+"Friendly WordPress Theme. Your website is guaranteed to look and function "
+"great in any kind of display or device, from large TV monitors to the "
+"smallest mobile phones.This theme uses the latest and most stable coding "
+"practices to make your site is clean, efficient and Secure. WhiteDot is "
+"compatible with all the popular plugins from trusted and reliable developers "
+", including WooCommerce, LifterLMS, WPML, BuddyPress, bbPress and all major "
+"Page Builders. All the non-essential features used by bloated and slow "
+"multipurpose themes has been stripped away, to optimize your website "
+"performance and make your website lighter than a feather, and fast as a "
+"rocket. The Theme is fully schema.org microdata integrated WordPress theme, "
+"which boosts your communication with search engines. The visual customizer "
+"will allow you to quickly customize your theme and reach amazing results."
+msgstr ""
+
+#: inc/woocommerce.php:247
+msgid "Filter"
+msgstr ""
+
+#: inc/customizer.php:535
+msgid "Font"
+msgstr ""
+
+#: inc/customizer.php:2099
+msgid "Footer Branding"
+msgstr ""
+
+#: inc/customizer.php:2085
+msgid "Footer Settings"
+msgstr ""
+
+#: inc/function-parts/setup.php:148
+msgid "Footer Widgets"
+msgstr ""
+
+#. Name of the template
+msgid "Full Width (Page Builder)"
+msgstr ""
+
+#: inc/customizer.php:1149
+msgid "General"
+msgstr ""
+
+#: inc/customizer.php:889
+msgid "Grid Columns"
+msgstr ""
+
+#: inc/customizer.php:268
+msgid "Header Color"
+msgstr ""
+
+#: inc/customizer.php:1164
+msgid "Header Mini Cart"
+msgstr ""
+
+#: inc/customizer.php:114
+msgid "Header Search"
+msgstr ""
+
+#: inc/customizer.php:73
+msgid "Header Settings"
+msgstr ""
+
+#: inc/customizer.php:92
+msgid "Header Styles"
+msgstr ""
+
+#: inc/customizer.php:154 inc/customizer.php:174
+msgid "Header Text Color"
+msgstr ""
+
+#: inc/customizer.php:55
+msgid "Hide Tagline"
+msgstr ""
+
+#. URI of the theme
+msgid "http://zeetheme.com/whitedot"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://zeetheme.com/"
+msgstr ""
+
+#: inc/woocommerce.php:260
+msgid ""
+"If you don't need product filter, then you can replace the Filter Button "
+"with Product Count. "
+msgstr ""
+
+#: 404.php:24
+msgid ""
+"It looks like nothing was found at this location. Maybe try to search here?"
+msgstr ""
+
+#: template-parts/content-none.php:44
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: inc/hooks/header-hooks.php:423 inc/hooks/header-hooks.php:449
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#. %s: post title
+#: inc/template-tags.php:76
+#, php-format
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#: inc/customizer.php:1356
+msgid "Left"
+msgstr ""
+
+#. Name of the template
+#: inc/customizer.php:688 inc/customizer.php:757 inc/customizer.php:1001
+#: inc/customizer.php:1191 inc/customizer.php:1384 inc/customizer.php:1480
+#: inc/customizer.php:1536 inc/customizer.php:1607 inc/customizer.php:1683
+#: inc/customizer.php:1759 inc/customizer.php:1810 inc/customizer.php:1908
+#: inc/customizer.php:2006
+msgid "Left Sidebar"
+msgstr ""
+
+#. Name of the template
+msgid "Left Sidebar Boxed"
+msgstr ""
+
+#: inc/customizer.php:1580
+msgid "LifterLMS Settings"
+msgstr ""
+
+#: inc/customizer.php:637
+msgid "Line Height"
+msgstr ""
+
+#: inc/customizer.php:286
+msgid "Link Color"
+msgstr ""
+
+#: inc/customizer.php:304
+msgid "Link Hover Color"
+msgstr ""
+
+#. used between list items, there is a space after the comma
+#: inc/template-tags.php:63
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#: inc/customizer.php:214
+msgid "Main Color Palette"
+msgstr ""
+
+#: inc/customizer.php:67
+msgid "Main Header"
+msgstr ""
+
+#: inc/customizer.php:1727
+msgid "Membership Catalog Columns"
+msgstr ""
+
+#: inc/customizer.php:1663
+msgid "Membership Catelog"
+msgstr ""
+
+#: inc/customizer.php:954
+msgid "Next-Previous"
+msgstr ""
+
+#: inc/woocommerce.php:258
+msgid ""
+"No Product Filter added.  Here, you can add Product Filter widgets for your "
+"customers to filter there products. "
+msgstr ""
+
+#. Name of the template
+#: inc/customizer.php:692 inc/customizer.php:761 inc/customizer.php:1005
+#: inc/customizer.php:1195 inc/customizer.php:1388 inc/customizer.php:1484
+#: inc/customizer.php:1540 inc/customizer.php:1611 inc/customizer.php:1687
+#: inc/customizer.php:1763 inc/customizer.php:1814 inc/customizer.php:1912
+#: inc/customizer.php:2010
+msgid "No Sidebar"
+msgstr ""
+
+#. Name of the template
+msgid "No Sidebar Boxed"
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#. 1: title.
+#: comments.php:34
+msgid "One Comment"
+msgstr ""
+
+#: 404.php:20
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: inc/customizer.php:363 inc/customizer.php:668 template-parts/content.php:52
+#: inc/hooks/general-hooks.php:203 inc/hooks/general-hooks.php:401
+msgid "Page"
+msgstr ""
+
+#: inc/customizer.php:955
+msgid "Page Numbers"
+msgstr ""
+
+#: inc/customizer.php:683
+msgid "Page Sidebar Layout"
+msgstr ""
+
+#: inc/customizer.php:712
+msgid "Page Sidebar Width"
+msgstr ""
+
+#: inc/customizer.php:951
+msgid "Pageination Style"
+msgstr ""
+
+#: template-parts/content.php:48 inc/hooks/general-hooks.php:199
+msgid "Pages:"
+msgstr ""
+
+#: inc/hooks/header-hooks.php:424 inc/hooks/header-hooks.php:450
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+
+#. 1: list of categories.
+#: inc/template-tags.php:59
+#, php-format
+msgid "Posted in %1$s"
+msgstr ""
+
+#: inc/template-tags.php:27
+msgid "Posted on "
+msgstr ""
+
+#: inc/customizer.php:837 inc/customizer.php:865
+msgid "Premium Layout Designs are available in Whitedot Designer Premium Adoon"
+msgstr ""
+
+#: inc/customizer.php:807
+msgid "Premium Layout Designs Unlocked!"
+msgstr ""
+
+#: inc/function-parts/setup.php:43
+msgid "Primary"
+msgstr ""
+
+#: inc/customizer.php:134
+msgid "Primary Menu Color"
+msgstr ""
+
+#: inc/customizer.php:1301
+msgid "Product Column (Mobile)"
+msgstr ""
+
+#: inc/customizer.php:1277
+msgid "Product Column (Tablet)"
+msgstr ""
+
+#: inc/customizer.php:1235
+msgid "Product Columns"
+msgstr ""
+
+#: inc/function-parts/setup.php:166
+msgid "Product Filter Widgets"
+msgstr ""
+
+#: inc/customizer.php:1255
+msgid "Product Per Page "
+msgstr ""
+
+#: inc/hooks/general-hooks.php:378
+msgid "Read the Post"
+msgstr ""
+
+#. 1: link to WP admin new post page.
+#: template-parts/content-none.php:24
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: inc/customizer.php:1428
+msgid "Related Product Columns"
+msgstr ""
+
+#: inc/customizer.php:1448
+msgid "Related Product Per Page"
+msgstr ""
+
+#: inc/woocommerce.php:260
+msgid "Replace It"
+msgstr ""
+
+#: inc/customizer.php:1357
+msgid "Right"
+msgstr ""
+
+#. Name of the template
+#: inc/customizer.php:696 inc/customizer.php:765 inc/customizer.php:1009
+#: inc/customizer.php:1199 inc/customizer.php:1392 inc/customizer.php:1488
+#: inc/customizer.php:1544 inc/customizer.php:1615 inc/customizer.php:1691
+#: inc/customizer.php:1767 inc/customizer.php:1818 inc/customizer.php:1916
+#: inc/customizer.php:2014
+msgid "Right Sidebar"
+msgstr ""
+
+#. Name of the template
+msgid "Right Sidebar Boxed"
+msgstr ""
+
+#: inc/customizer.php:2132
+msgid "Scroll to Top Button"
+msgstr ""
+
+#. %s: search query.
+#: inc/hooks/general-hooks.php:19
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: inc/customizer.php:1171
+msgid "Shop"
+msgstr ""
+
+#: inc/customizer.php:1353
+msgid "Shop Filter Layout"
+msgstr ""
+
+#: inc/customizer.php:1323
+msgid "Show Add to Cart Button"
+msgstr ""
+
+#: inc/customizer.php:933 inc/customizer.php:1069
+msgid "Show Meta Author"
+msgstr ""
+
+#: inc/customizer.php:1857 inc/customizer.php:1955 inc/customizer.php:2053
+msgid "Show Meta Author(Below Title)"
+msgstr ""
+
+#: inc/customizer.php:1090
+msgid "Show Meta Category"
+msgstr ""
+
+#: inc/customizer.php:912 inc/customizer.php:1048
+msgid "Show Meta Date"
+msgstr ""
+
+#: inc/customizer.php:1878 inc/customizer.php:1976 inc/customizer.php:2074
+msgid "Show Meta Date(Below Title)"
+msgstr ""
+
+#: inc/customizer.php:1783
+msgid "Show Navigation Icons"
+msgstr ""
+
+#: inc/customizer.php:1338
+msgid "Show Product Filter"
+msgstr ""
+
+#: inc/meta-box.php:39 inc/function-parts/setup.php:130
+msgid "Sidebar"
+msgstr ""
+
+#: inc/customizer.php:752 inc/customizer.php:995 inc/customizer.php:1186
+#: inc/customizer.php:1379 inc/customizer.php:1475 inc/customizer.php:1531
+#: inc/customizer.php:1602 inc/customizer.php:1678 inc/customizer.php:1754
+#: inc/customizer.php:1805 inc/customizer.php:1903 inc/customizer.php:2001
+msgid "Sidebar Layout"
+msgstr ""
+
+#: inc/customizer.php:781 inc/customizer.php:1025 inc/customizer.php:1215
+#: inc/customizer.php:1408 inc/customizer.php:1504 inc/customizer.php:1560
+#: inc/customizer.php:1631 inc/customizer.php:1707 inc/customizer.php:1834
+#: inc/customizer.php:1932 inc/customizer.php:2030
+msgid "Sidebar Width"
+msgstr ""
+
+#: inc/customizer.php:455
+msgid "Single Blog"
+msgstr ""
+
+#: inc/customizer.php:472
+msgid "Single Blog Inner Container Width"
+msgstr ""
+
+#: inc/customizer.php:1790
+msgid "Single Course"
+msgstr ""
+
+#: inc/customizer.php:1888
+msgid "Single Lesson"
+msgstr ""
+
+#: inc/customizer.php:1986
+msgid "Single Membership"
+msgstr ""
+
+#: inc/customizer.php:980
+msgid "Single Post"
+msgstr ""
+
+#: inc/customizer.php:1364
+msgid "Single Product"
+msgstr ""
+
+#: header.php:25
+msgid "Skip to content"
+msgstr ""
+
+#: inc/customizer.php:2115 inc/function-parts/setup.php:48
+msgid "Social Icons"
+msgstr ""
+
+#: template-parts/content-none.php:37
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: inc/customizer/custom-controls.php:300
+msgid "Start Free Trial"
+msgstr ""
+
+#: inc/function-parts/setup.php:304
+msgid ""
+"Start your 7-day free trial for WhiteDot Premium Add-on - WHITEDOT DESIGNER. "
+"No credit card is required!! Just Download and install the plugin and "
+"activate your free trial. The trial gives you access to all the premium "
+"features that you would get as a paying customer."
+msgstr ""
+
+#: inc/meta-box.php:65
+msgid "Sticky Header"
+msgstr ""
+
+#. 1: list of tags.
+#: inc/template-tags.php:66
+#, php-format
+msgid "Tagged %1$s"
+msgstr ""
+
+#: inc/customizer.php:250
+msgid "Text Color"
+msgstr ""
+
+#: inc/customizer.php:320
+msgid ""
+"There are a lot more color optons in our premium add-on - WHITEDOT DESIGNER. "
+"Start your 7 days Free Trial (No Credit Card Required) and unlock all the "
+"premium features now."
+msgstr ""
+
+#: inc/customizer.php:658
+msgid ""
+"There are a lot more Typography optons in our premium add-on - WHITEDOT "
+"DESIGNER. Start your 7 days Free Trial (No Credit Card Required) and unlock "
+"all the premium features now."
+msgstr ""
+
+#: inc/customizer.php:971 inc/customizer.php:1125
+msgid ""
+"There are a lot of awesome customization optons and premium blog layouts in "
+"our premium add-on - WHITEDOT DESIGNER. Start your 7 days Free Trial (No "
+"Credit Card Required) and unlock all the premium features now."
+msgstr ""
+
+#: inc/customizer.php:2149
+msgid ""
+"There are a lot of awesome customization optons for footer in our premium "
+"add-on - WHITEDOT DESIGNER. Start your 7 days Free Trial (No Credit Card "
+"Required) and unlock all the premium features now."
+msgstr ""
+
+#: inc/customizer.php:192
+msgid ""
+"There are a lot of awesome customization optons in our premium add-on - "
+"WHITEDOT DESIGNER. - <ul><li>Sticky Header</li><li>Transparent Header</li>"
+"<li>Above Header Bar</li><li>Color Options</li><li>Social Icons</li><li>"
+"Mobile Header Customization</li><li>Mobile Hamburger Animation</li></ul> and "
+"a lot more.... Start your 7 days Free Trial (No Credit Card Required) and "
+"unlock all the premium features now."
+msgstr ""
+
+#: inc/woocommerce.php:261
+msgid "This Message is only visible to Admin."
+msgstr ""
+
+#: inc/function-parts/setup.php:168
+msgid ""
+"This widget displays Product Filter on your shop page. You can add "
+"Woocommerce product filter widgets here."
+msgstr ""
+
+#: inc/hooks/header-hooks.php:198
+msgid "toggle menu"
+msgstr ""
+
+#: inc/meta-box.php:58
+msgid "Transparent Header"
+msgstr ""
+
+#: inc/customizer.php:191 inc/customizer.php:319 inc/customizer.php:657
+#: inc/customizer.php:970 inc/customizer.php:1124 inc/customizer.php:2148
+msgid "Try WhiteDot Premium"
+msgstr ""
+
+#: inc/customizer.php:512 inc/customizer.php:518
+msgid "Typography"
+msgstr ""
+
+#: inc/woocommerce.php:186 inc/hooks/header-hooks.php:367
+#: inc/hooks/header-hooks.php:396
+msgid "View your shopping cart"
+msgstr ""
+
+#. Name of the theme
+msgid "WhiteDot"
+msgstr ""
+
+#: inc/meta-box.php:26
+msgid "WhiteDot Settings"
+msgstr ""
+
+#: inc/customizer.php:1142
+msgid "WooCommerce Settings"
+msgstr ""
+
+#: inc/woocommerce.php:321
+msgid "Your cart is currently empty."
+msgstr ""
+
+#. Author of the theme
+#: inc/hooks/general-hooks.php:454
+msgid "ZeeTheme"
+msgstr ""

@@ -1,0 +1,109 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ .wb_shortcodes_description{
+ 	margin-bottom: 20px;
+ }
+.wb_shortcodes_description .description-title {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 20px 0 8px;
+}
+.wb_shortcodes_description p{
+	margin: 0 0 3px;
+}
+
+.bpsh-admin-content {
+	max-width: 70%;
+	margin: 0 auto;
+	background: #fff;
+	padding: 45px;
+}
+.bpsh-admin-screen h3 {
+	text-align: center;
+}
+.bpsh-admin-content .bpsh-admin-shortcode {
+	text-align: center;
+	margin-top: 2%;
+}
+.bpsh-admin-shortcode-title {
+	margin-top: 1%;
+	font-weight: bold;
+}
+.bpsh-admin-shortcode-content ul li {
+	line-height: 1.2;
+	border: 1px solid;
+	padding: 10px;
+}
+
+.nav-tab-active, .nav-tab-active:focus,
+.nav-tab-active:focus:active,
+.nav-tab-active:hover {
+    background: #ffffff !important;
+}
+
+/**
+* Shortcode Lists
+*/
+.buddypress-shortcode-lists thead td {
+	background: #0073aa;
+	color: #fff !important;
+}
+
+.buddypress-shortcode-lists td {
+	border-left: 1px solid #e5e5e5;
+}
+
+.buddypress-shortcode-lists td:first-child {
+	border-left: 0;
+}
+
+@media (min-width: 768px) {
+	.buddypress-shortcode-lists thead td:first-child {
+		width: 25%;
+	}
+
+	.buddypress-shortcode-lists thead td:nth-child(2) {
+		width: 25%;
+	}
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px)  {
+	.settings_page_bpsh-shortcodes .nav-tab-wrapper .nav-tab {
+	    margin: 3px 0;
+	    border-bottom: 1px solid #ccc;
+	    width: 93%;
+	}
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	.buddypress-shortcode-lists thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	.buddypress-shortcode-lists td { 
+		border: none;
+		border-bottom: 1px solid #e2e2e2; 
+		position: relative;
+		padding-left: 32%; 
+	}
+	
+	.buddypress-shortcode-lists td:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 28%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+
+	.buddypress-shortcode-lists tbody td:nth-child(1):before { content: "Attribute"; }
+	.buddypress-shortcode-lists tbody td:nth-child(2):before { content: "Type"; }
+	.buddypress-shortcode-lists tbody td:nth-child(3):before { content: "Default"; }
+	.buddypress-shortcode-lists tbody td:nth-child(4):before { content: "Description"; }
+
+}

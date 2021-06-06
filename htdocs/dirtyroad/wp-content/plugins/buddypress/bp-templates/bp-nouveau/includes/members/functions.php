@@ -14,6 +14,9 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 3.0.0
  */
+
+include_once( GMW_PATH .'/includes/gmw-user-location-functions.php' );
+
 function bp_nouveau_members_enqueue_scripts() {
 	// Neutralize Ajax when using BuddyPress Groups & member widgets on default front page
 	if ( ! bp_is_user_front() || ! bp_nouveau_get_appearance_settings( 'user_front_page' ) ) {
@@ -148,6 +151,7 @@ function bp_nouveau_members_catch_button_args( $button = array() ) {
 	 * Globalize the arguments so that we can use it
 	 * in bp_nouveau_get_member_header_buttons().
 	 */
+	 
 	bp_nouveau()->members->button_args = $button;
 
 	// return an empty array to stop the button creation process
@@ -164,9 +168,10 @@ function bp_nouveau_members_catch_button_args( $button = array() ) {
  *
  * @return string|false HTML Output if hooked. False otherwise.
  */
-function bp_nouveau_get_hooked_member_meta() {
+function bp_nouveau_get_hooked_member_meta() {	
 	ob_start();
 
+	
 	if ( ! empty( $GLOBALS['members_template'] ) ) {
 		/**
 		 * Fires inside the display of metas in the directory member item.
@@ -207,6 +212,7 @@ function bp_nouveau_get_hooked_member_meta() {
  * @return array The same list with the default front template if needed.
  */
 function bp_nouveau_member_reset_front_template( $templates = array() ) {
+	
 	$use_default_front = bp_nouveau_get_appearance_settings( 'user_front_page' );
 
 	// Setting the front template happens too early, so we need this!
@@ -238,6 +244,7 @@ function bp_nouveau_member_reset_front_template( $templates = array() ) {
  * @return array Only the global front templates.
  */
 function bp_nouveau_member_restrict_user_front_templates( $templates = array() ) {
+	
 	return array_intersect( array(
 		'members/single/front.php',
 		'members/single/default-front.php',
@@ -466,6 +473,7 @@ function bp_nouveau_get_wp_profile_fields( $user = null ) {
 	 * @param array   $value Array of user contact methods.
 	 * @param WP_User $user  WordPress user to get contact methods for.
 	 */
+	 
 	$contact_methods = (array) apply_filters( 'bp_nouveau_get_wp_profile_field', wp_get_user_contact_methods( $user ), $user );
 
 	$wp_fields = array(

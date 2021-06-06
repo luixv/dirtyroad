@@ -1,0 +1,161 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Shortcode For BuddyPress\n"
+"POT-Creation-Date: 2019-10-10 15:24+0530\n"
+"PO-Revision-Date: 2019-10-10 15:24+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: shortcodes-for-buddypress.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: admin/class-shortcodes-for-buddypress-admin.php:104
+msgid "BP Shortcodes"
+msgstr ""
+
+#: admin/class-shortcodes-for-buddypress-admin.php:111
+msgid "Documentation"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:2
+msgid "Wbcom Designs – Shortcodes & Elementor Widgets For BuddyPress"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:6
+msgid ""
+"BuddyPress Shortcode plugin allows you to embed BuddyPress Activities, "
+"BuddyPress Members and Groups in posts/pages using shortcodes."
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:12
+msgid "Block"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:13
+msgid "Shortcode"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:14
+msgid "Description"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:19
+msgid "Activities"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:24
+msgid ""
+"BuddyPress Activity Shortcode allows you to embed BuddyPress activities in "
+"posts/pages using shortcodes."
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:26
+#: templates/bp-shortcodes-template.php:38
+#: templates/bp-shortcodes-template.php:50
+#: templates/bp-shortcodes-template.php:62
+msgid "read more"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:31
+msgid "Members"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:36
+msgid ""
+"BuddyPress Members Shortcode allows you to embed BuddyPress members in posts/"
+"pages using shortcodes."
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:43
+msgid "Groups"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:48
+msgid ""
+"BuddyPress Groups Shortcode allows you to embed BuddyPress groups in posts/"
+"pages using shortcodes."
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:55
+msgid "User Notification"
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:60
+msgid ""
+"BuddyPress Notification Shortcode allows you to embed BuddyPress "
+"notificaition list in posts/pages using shortcodes."
+msgstr ""
+
+#: templates/bp-shortcodes-template.php:69
+msgid "Well guys, It's up to you to explore the possibilities"
+msgstr ""
+
+#. translators: accessibility text
+#: templates/legacy/groups/bp-shortcodes-groups.php:49
+msgid "Groups directory"
+msgstr ""
+
+#. translators: accessibility text
+#: templates/legacy/members/bp-shortcodes-members.php:34
+msgid "Members directory"
+msgstr ""
+
+#. translators: accessibility text
+#: templates/legacy/notifications/notifications-loop.php:31
+msgid "Unread notifications"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:32
+msgid "Select all"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:33
+msgid "Notification"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:35
+msgid "Date Received"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:38
+msgid "Actions"
+msgstr ""
+
+#: templates/nouveau/notifications/notifications-loop.php:51
+msgid "Select this notification"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Shortcode For BuddyPress"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/wbcomdesigns/shortcodes-for-buddypress"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"This plugin will add an extended feature to the big name “BuddyPress” that "
+"will generate Shortcode for Listing Activity Streams, Members and Groups on "
+"any post/page in website."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Wbcom Designs"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://wbcomdesigns.com/plugins"
+msgstr ""

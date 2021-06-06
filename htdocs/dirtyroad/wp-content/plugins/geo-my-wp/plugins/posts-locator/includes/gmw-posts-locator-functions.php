@@ -653,6 +653,8 @@ function gmw_update_post_location( $post_id = 0, $location = array(), $user_id =
 	);
 
 	// update post location.
+	    $geocoded_address = GEO_my_WP::geocoder($address, $force_refresh);
+
 	return gmw_update_location( $args, $location, $force_refresh );
 }
 
