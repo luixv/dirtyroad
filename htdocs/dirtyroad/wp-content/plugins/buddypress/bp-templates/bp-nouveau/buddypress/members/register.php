@@ -3,7 +3,7 @@
  * BuddyPress - Members/Blogs Registration forms
  *
  * @since 3.0.0
- * @version 4.0.0
+ * @version 8.0.0
  */
 
 ?>
@@ -18,7 +18,7 @@
 
 			<form action="" name="signup_form" id="signup-form" class="standard-form signup-form clearfix" method="post" enctype="multipart/form-data">
 
-			<div class="layout-wrap">
+			<div class="layout-wrap"  align="left">
 
 			<?php if ( 'request-details' === bp_get_current_signup_step() ) : ?>
 
@@ -38,7 +38,7 @@
 
 				<?php /***** Extra Profile Details ******/ ?>
 
-				<?php if ( bp_is_active( 'xprofile' ) && bp_nouveau_base_account_has_xprofile() ) : ?>
+				<?php if ( bp_is_active( 'xprofile' ) && bp_nouveau_has_signup_xprofile_fields( true ) ) : ?>
 
 					<?php bp_nouveau_signup_hook( 'before', 'signup_profile' ); ?>
 

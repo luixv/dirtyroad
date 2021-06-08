@@ -28,11 +28,11 @@
 
 				<?php do_action( 'bp_before_account_details_fields' ); ?>
 
-				<div class="register-section" id="basic-details-section">
+				<div class="register-section" id="basic-details-section"  align="left">
 
 					<?php /***** Basic Account Details ******/ ?>
 
-					<h4><?php _e( 'Account Details', 'buddypress' ); ?></h4>
+					<h4  align="left"><?php _e( 'Account Details', 'buddypress' ); ?></h4>
 
 					<label for="signup_username"><?php _e( 'Username', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
 					<?php do_action( 'bp_signup_username_errors' ); ?>
@@ -62,7 +62,7 @@
 
 					<?php do_action( 'bp_before_signup_profile_fields' ); ?>
 
-					<div class="register-section" id="profile-details-section">
+					<div class="register-section" id="profile-details-section" align="left">
 
 						<h4><?php _e( 'Profile Details', 'buddypress' ); ?></h4>
 
@@ -212,7 +212,7 @@
 
 					<?php /***** Blog Creation Details ******/ ?>
 
-					<div class="register-section" id="blog-details-section">
+					<div class="register-section" id="blog-details-section"  align="left">
 
 						<h4><?php _e( 'Blog Details', 'buddypress' ); ?></h4>
 
