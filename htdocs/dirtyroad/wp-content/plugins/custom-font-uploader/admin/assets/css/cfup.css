@@ -1,0 +1,127 @@
+#wpbody .file-success-msg {
+ background: #fff none repeat scroll 0 0;
+ border-left: 5px solid green;
+ height: 25px;
+ padding-left: 5px;
+ padding-top: 8px;
+ text-align: center;
+ width: 45%;
+}
+.cfup-admin-loader{
+  display: none;
+}
+.gfupdate {
+	background: #fff none repeat scroll 0 0;
+	border-left: 5px solid green;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	text-align: center;
+	width: 30%;
+	margin-top: 10px;
+}
+
+/** The preview screen **/
+
+.font-preview-section {
+	width: 70%;
+	padding: 25px 10%;
+	background: #ffffff;
+	border: 1px solid #aaa;
+	margin: 10px 0 30px 0;
+	box-shadow: 2px 2px 1px rgba(0,0,0,0.3);
+}
+
+.googletbl {
+	width: 100%;
+}
+
+#googlefonts_options {
+	overflow: hidden;
+	width: 100%;
+}
+
+.gfont {
+  float: left;
+  width: 37%;
+}
+
+.font-preview-section {
+  float: right;
+  width: 36%;
+}
+
+.cfup-google-font-disabled{
+  pointer-events: none;
+  opacity: 0.3;
+  background: #CCC;
+}
+.cfup-google-font-disabled-msg{
+  color: red;
+  font-size: large;
+}
+.cfup-google-font-disabled-msg a{
+  color: red;
+}
+
+div#s2id_googlefont-select {
+	width: 100%;
+}
+.delete-googlefont{
+  color: red;
+}
+/*SUPPORT*/
+.cfup-adming-setting{
+	float: left;
+	width: 90%;
+}
+button.cfup-accordion {
+	background-color: hsl(0, 0%, 87%);
+	border: medium none;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	color: hsl(0, 0%, 27%);
+	cursor: pointer;
+	font-size: 15px;
+	margin: 0 5%;
+	outline: medium none;
+	padding: 15px 20px;
+	text-align: left;
+	transition: all 0.4s ease 0s;
+	width: 90%;
+}
+button.cfup-accordion.active, button.cfup-accordion:hover {
+  background-color: hsl(207, 90%, 54%);
+  color:white;
+}
+div.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  margin:0px 5%;
+}
+button.cfup-accordion::after {
+  color: hsl(0, 0%, 47%);
+  content: "+";
+  float: right;
+  font-size: 13px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+button.cfup-accordion::after:hover {
+  color: white;
+}
+button.cfup-accordion.active::after {
+  content: "−";
+  color:white;
+}
+.cfup-admin-row{
+  clear: both;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+.cfup-tab-header h3{
+	margin-left: 5%;
+}
+/*SUPPORT*/

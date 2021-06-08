@@ -3,7 +3,7 @@
 Plugin Name: Force Login
 Plugin URI: https://wordpress.org/plugins/wp-force-login/
 Description: Easily hide your WordPress site from public viewing by requiring visitors to log in first. Activate to turn on.
-Version: 5.6.1
+Version: 5.6.2
 Author: Kevin Vess
 Author URI: http://vess.me/
 
@@ -29,6 +29,11 @@ function v_forcelogin() {
 	// Get visited URL
 	$schema = isset( $_SERVER['HTTPS'] ) && 'on' === $_SERVER['HTTPS'] ? 'https://' : 'http://';
 	$url = $schema . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+	// Bail if visiting the login URL. Fix for custom login URLs
+	if ( wp_login_url() === preg_replace( '/\?.*/', '', $url ) ) {
+		return;
+	}
 
 	/**
 	 * Whitelist filter.
@@ -101,34 +106,3 @@ function v_forcelogin_load_textdomain() {
 	load_plugin_textdomain( 'wp-force-login', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'v_forcelogin_load_textdomain' );
-
-
-/**
- * Bypass Force Login to allow for exceptions.
- *
- * @param bool $bypass Whether to disable Force Login. Default false.
- * @param string $visited_url The visited URL.
- * @return bool
- */
-function my_forcelogin_bypass( $bypass, $visited_url ) {
-  // Allow all single posts
-  if ( is_single() ) {
-    $bypass = true;
-  }
-
-  // Allow these absolute URLs
-  $allowed = array(
-    home_url( '/register/' ),
-    home_url( '/about/' ),
-	home_url( '/faq/' ),
-	home_url( '/impressum/' ),
-	home_url( '/photos/' ),
-	home_url( '/photos/' ),
-  );
-  if ( ! $bypass ) {
-    $bypass = in_array( $visited_url, $allowed );
-  }
-
-  return $bypass;
-}
-add_filter( 'v_forcelogin_bypass', 'my_forcelogin_bypass', 10, 2 );

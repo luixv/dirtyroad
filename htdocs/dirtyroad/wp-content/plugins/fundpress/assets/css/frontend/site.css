@@ -142,7 +142,7 @@ body {
     right: 0;
     left: 0;
     bottom: 0;
-    text-align: center;
+
     vertical-align: -webkit-baseline-middle;
 }
 .campaign_archive .campaign_thumbnail_overlay{
@@ -237,7 +237,7 @@ body {
     font-size: 24px;
     margin-bottom: 10px;
     text-transform: uppercase;
-    text-align: center;
+
     margin: 0;
     line-height: 1;
 }
@@ -250,7 +250,7 @@ body {
 }
 #donate_hidden .description{
     font-size: 18px;
-    text-align: center;
+
     /* margin-bottom: 0; */
     line-height: 1;
     margin: 8px 0;
@@ -268,7 +268,7 @@ body {
     padding: 10px 0;
 }
 #donate_hidden .donate_form_footer.center{
-    text-align: center;
+
 }
 .donate_compensates ul{
     margin: 0;
@@ -296,7 +296,7 @@ body {
 .donate_form .donate_form_input.payment{
     width: 94%;
     max-width: 100%;
-    text-align: center;
+
 }
 .donate_form .donate_form_input{
     width: 79%;
@@ -323,7 +323,7 @@ body {
     overflow: hidden;
 }
 .donate_donor_info .donate_form_footer.center{
-    text-align: center;
+
 }
 .donate_donor_info .donate_submit{
     background-color: #020202;
@@ -344,7 +344,7 @@ body {
     width: auto;
 }
 .donate_donor_info h3{
-    text-align: center;
+
 }
 .donate_donor_info .donate_field{
     width: 50%;
@@ -515,7 +515,7 @@ body {
 .donate_cart .donate_action_remove,
 .donate_cart .donate_cart_foot_total_amount,
 .donate_cart .donate_cart_foot_total{
-    text-align: center;
+
 }
 .donate_button,
 .donate_submit{
@@ -542,7 +542,7 @@ body {
     float: right;
 }
 .donate_payment_button_process{
-    text-align: center;
+
 }
 /**
  * donate now button
