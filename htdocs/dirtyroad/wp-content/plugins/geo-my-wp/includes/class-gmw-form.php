@@ -477,7 +477,7 @@ class GMW_Form {
 		$gmw      = $this->form;
 		$gmw_form = $this;
 
-		include $search_form['content_path'];
+		include wp_normalize_path($search_form['content_path']);
 
 		do_action( 'gmw_after_search_form', $this->form, $this );
 		do_action( "gmw_{$this->form['prefix']}_after_search_form", $this->form, $this );
@@ -1078,7 +1078,7 @@ class GMW_Form {
 		// This global should now be at the begining of the results template file.
 		global $members_template, $groups_template;
 
-		include $results_template['content_path'];
+		include wp_normalize_path($results_template['content_path']);
 
 		do_action( 'gmw_have_locations_end', $this->form, $this );
 		do_action( 'gmw_have_' . $this->form['prefix'] . '_locations_end', $this->form, $this );
