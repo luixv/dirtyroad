@@ -529,3 +529,24 @@ function bp_nouveau_member_customizer_nav() {
 
 	return $nav->get_primary();
 }
+
+function rt_change_profile_tab_order() {
+global $bp;
+
+$bp->bp_nav['profile']['position'] = 10;
+$bp->bp_nav['location']['position'] = 20;
+$bp->bp_nav['activity']['position'] = 40;
+$bp->bp_nav['notifications']['position'] = 50;
+$bp->bp_nav['messages']['position'] = 60;
+$bp->bp_nav['friends']['position'] = 70;
+$bp->bp_nav['groups']['position'] = 80;
+$bp->bp_nav['settings']['position'] = 90;
+
+}
+add_action( 'bp_setup_nav', 'rt_change_profile_tab_order', 999 );
+
+
+
+
+
+
