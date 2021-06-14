@@ -106,3 +106,33 @@ function v_forcelogin_load_textdomain() {
 	load_plugin_textdomain( 'wp-force-login', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'v_forcelogin_load_textdomain' );
+
+/**
+ * Bypass Force Login to allow for exceptions.
+ *
+ * @param bool $bypass Whether to disable Force Login. Default false.
+ * @param string $visited_url The visited URL.
+ * @return bool
+ */
+function my_forcelogin_bypass( $bypass, $visited_url ) {
+  // Allow all single posts
+  if ( is_single() ) {
+    $bypass = true;
+  }
+
+  // Allow these absolute URLs
+  $allowed = array(
+    home_url( '/register/' ),
+    home_url( '/about/' ),
+	home_url( '/faq/' ),
+	home_url( '/impressum/' ),
+	home_url( '/photos/' ),
+	home_url( '/terms/' ),
+  );
+  if ( ! $bypass ) {
+    $bypass = in_array( $visited_url, $allowed );
+  }
+
+  return $bypass;
+}
+add_filter( 'v_forcelogin_bypass', 'my_forcelogin_bypass', 10, 2 );

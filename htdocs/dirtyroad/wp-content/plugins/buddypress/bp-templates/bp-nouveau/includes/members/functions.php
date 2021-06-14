@@ -530,6 +530,7 @@ function bp_nouveau_member_customizer_nav() {
 	return $nav->get_primary();
 }
 
+/**
 function rt_change_profile_tab_order() {
 global $bp;
 
@@ -546,7 +547,7 @@ $bp->bp_nav['settings']['position'] = 90;
 add_action( 'bp_setup_nav', 'rt_change_profile_tab_order', 999 );
 
 
-
+*/
 
 
 
