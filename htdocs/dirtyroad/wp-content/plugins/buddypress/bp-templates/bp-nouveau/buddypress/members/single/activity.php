@@ -16,7 +16,7 @@
 </nav><!-- .item-list-tabs#subnav -->
 
 <h2 class="bp-screen-title<?php echo ( bp_displayed_user_has_front_template() ) ? ' bp-screen-reader-text' : ''; ?>">
-	<?php esc_html_e( 'Member Activities', 'buddypress' ); ?>
+	<?php esc_html_e( 'Member Timeline', 'buddypress' ); ?>
 </h2>
 
 <?php bp_nouveau_activity_member_post_form(); ?>

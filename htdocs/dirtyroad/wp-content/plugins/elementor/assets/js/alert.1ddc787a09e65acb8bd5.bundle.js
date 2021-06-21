@@ -1,4 +1,4 @@
-/*! elementor - v3.2.4 - 26-05-2021 */
+/*! elementor - v3.2.5 - 16-06-2021 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["alert"],{
 
 /***/ "../assets/dev/js/frontend/handlers/alert.js":

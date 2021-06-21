@@ -1,0 +1,326 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bp-group-maps\n"
+"POT-Creation-Date: 2019-03-27 13:25-0700\n"
+"PO-Revision-Date: 2019-04-15 20:54+0000\n"
+"Last-Translator: Paul Hagiu <dragos.hagiu@gmail.com>\n"
+"Language-Team: Français\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n:1,2;_x:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Poedit-SearchPath-0: ..\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: fr_FR\n"
+"X-Loco-Version: 2.2.2; wp-5.1.1"
+
+#: ../bp-maps-for-members.php:60
+msgid ""
+"BP Maps for Members requires the BuddyPress plugin. Please install "
+"BuddyPress or deactivate BP Maps for Members."
+msgstr ""
+"BP Maps for Members nécessite le plug-in BuddyPress. Veuillez installer "
+"BuddyPress ou désactiver BP Maps for Members."
+
+#: ../bp-maps-for-members.php:66
+msgid ""
+"BP Maps for Members requires the free BP xProfile Location plugin from "
+"PhiloPress. Please install BP xProfile Location or deactivate BP Maps for "
+"Members."
+msgstr ""
+"BP Maps for Members nécessite le plug-in BP xProfile Location gratuit de "
+"PhiloPress. Veuillez installer l'emplacement du fichier xProfile du "
+"partenaire ou désactiver BP Maps pour les membres."
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:189
+#, php-format
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+msgstr ""
+"Il y a une nouvelle version %1$s disponible. %2$sVoir la version %3$s "
+"details%4$s."
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:197
+#, php-format
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s "
+"or %5$supdate now%6$s."
+msgstr ""
+"Il y a une nouvelle version %1$s disponible. %2$sVoir la version %3$s "
+"details%4$s ou %5$smettre a jour%6$s."
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:340
+msgid "You do not have permission to install plugin updates"
+msgstr "Vous n'êtes pas autorisé à installer les mises à jour du plugin"
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:340
+msgid "Error"
+msgstr "Erreur"
+
+#: ../inc/admin/pp-mm-maps-admin.php:32 ../inc/admin/pp-mm-maps-admin.php:36
+msgid "BP Maps for Members"
+msgstr "BP Maps pour membres"
+
+#: ../inc/admin/pp-mm-maps-admin.php:32 ../inc/admin/pp-mm-maps-admin.php:36
+msgid "BP Maps - Members"
+msgstr "BP Maps - Membres"
+
+#: ../inc/admin/pp-mm-maps-admin.php:64
+msgid "Security check failed"
+msgstr "Echec de la vérification de sécurité"
+
+#: ../inc/admin/pp-mm-maps-admin.php:173
+msgid "Settings Updated"
+msgstr "Paramètres mis à jour"
+
+#: ../inc/admin/pp-mm-maps-admin.php:318
+msgid "BP Maps for Members License Options"
+msgstr "BP Maps pour membres options de licence"
+
+#: ../inc/admin/pp-mm-maps-admin.php:326
+msgid "License Key"
+msgstr "Clé de licence"
+
+#: ../inc/admin/pp-mm-maps-admin.php:330
+msgid "Enter your license key"
+msgstr "Entrez votre clé de licence"
+
+#: ../inc/admin/pp-mm-maps-admin.php:340 ../inc/admin/pp-mm-maps-admin.php:349
+msgid "Activate License"
+msgstr "Activez la licence"
+
+#: ../inc/admin/pp-mm-maps-admin.php:344
+msgid "Your License is Active"
+msgstr "Votre licence est active"
+
+#: ../inc/admin/pp-mm-maps-admin.php:346
+msgid "Deactivate License"
+msgstr "Désactiver la licence"
+
+#: ../inc/admin/pp-mm-maps-admin.php:358
+msgid "Save License Key"
+msgstr "enregistrer la clé de licence"
+
+#: ../inc/admin/pp-mm-maps-admin.php:360
+msgid "You must Save your Key before you can Activate your License"
+msgstr "Vous devez sauvegarder la clé avant l'activation de votre licence "
+
+#: ../inc/admin/pp-mm-maps-admin.php:371
+msgid "BP Maps for Members Settings"
+msgstr "Paramètres BP Maps for Members"
+
+#: ../inc/admin/pp-mm-maps-admin.php:383
+msgid "Google Maps API Key"
+msgstr "Clé Google Maps API"
+
+#: ../inc/admin/pp-mm-maps-admin.php:386
+msgid "Your Key"
+msgstr "Votre clé"
+
+#: ../inc/admin/pp-mm-maps-admin.php:390
+msgid "A Key is required. If you do not have one, follow these instructions:"
+msgstr "Une clé est requise. Si vous n'en avez pas, suivez ces instructions:"
+
+#: ../inc/admin/pp-mm-maps-admin.php:396
+msgid "Validate Google API Key"
+msgstr "Validez votre clé Google API"
+
+#: ../inc/admin/pp-mm-maps-admin.php:399
+msgid "Start typing an address..."
+msgstr "Commencer a ecrire une adresse."
+
+#: ../inc/admin/pp-mm-maps-admin.php:400
+msgid ""
+"If Google displays a list of addresses as you type - your Google Maps API "
+"Key is <strong>valid</strong>."
+msgstr ""
+"Si Google affiche une liste d'adresses en cours de frappe, votre clé d'API "
+"Google Maps est <strong> valide </ strong>."
+
+#: ../inc/admin/pp-mm-maps-admin.php:401
+msgid ""
+"Otherwise there is a <strong>problem</strong> with your key. Open your "
+"browser's javascript console for error info supplied by Google."
+msgstr ""
+"sinon, vous rencontrez un <strong> problème </ strong> avec votre clé. "
+"Ouvrez la console javascript de votre navigateur pour les informations "
+"d'erreur fournies par Google."
+
+#: ../inc/admin/pp-mm-maps-admin.php:405
+msgid "Single BuddyPress Member Map"
+msgstr "Carte de membre seul BuddyPress"
+
+#: ../inc/admin/pp-mm-maps-admin.php:408 ../inc/admin/pp-mm-maps-admin.php:502
+msgid "Map Type"
+msgstr "Type de carte"
+
+#: ../inc/admin/pp-mm-maps-admin.php:412 ../inc/admin/pp-mm-maps-admin.php:506
+msgid "Roadmap"
+msgstr "Carte routière"
+
+#: ../inc/admin/pp-mm-maps-admin.php:413 ../inc/admin/pp-mm-maps-admin.php:507
+msgid "Satellite"
+msgstr "Satellite"
+
+#: ../inc/admin/pp-mm-maps-admin.php:414 ../inc/admin/pp-mm-maps-admin.php:508
+msgid "Terrain"
+msgstr "Terrain"
+
+#: ../inc/admin/pp-mm-maps-admin.php:415 ../inc/admin/pp-mm-maps-admin.php:509
+msgid "Hybrid"
+msgstr "Hybride"
+
+#: ../inc/admin/pp-mm-maps-admin.php:421
+msgid "Zoom Level"
+msgstr "Le niveau de zoom"
+
+#: ../inc/admin/pp-mm-maps-admin.php:433 ../inc/admin/pp-mm-maps-admin.php:530
+msgid "Map Width"
+msgstr "Largeur de la carte"
+
+#: ../inc/admin/pp-mm-maps-admin.php:435 ../inc/admin/pp-mm-maps-admin.php:532
+msgid "Required so that map is responsive"
+msgstr "Requis pour que la carte soit reactive"
+
+#: ../inc/admin/pp-mm-maps-admin.php:439 ../inc/admin/pp-mm-maps-admin.php:536
+msgid "Map Height"
+msgstr "Hauteur de la carte"
+
+#: ../inc/admin/pp-mm-maps-admin.php:442 ../inc/admin/pp-mm-maps-admin.php:539
+msgid "Cannot be less than 50 or greater than 640"
+msgstr "Ne peut être inférieur à 50 ni supérieur à 640"
+
+#: ../inc/admin/pp-mm-maps-admin.php:448 ../inc/admin/pp-mm-maps-admin.php:546
+msgid "Location Fields"
+msgstr "Champ de localisation"
+
+#: ../inc/admin/pp-mm-maps-admin.php:453 ../inc/admin/pp-mm-maps-admin.php:565
+msgid ""
+"There are no Location profile fields, so maps will not be created. Please go "
+"to wpadmin > Users > Profile Fields and add a Location field."
+msgstr ""
+"Il n'y a pas de champs de profil d'emplacement, les cartes ne seront donc "
+"pas créées. Veuillez accéder à wpadmin> Utilisateurs> Champs de profil et "
+"ajouter un champ Emplacement."
+
+#: ../inc/admin/pp-mm-maps-admin.php:461
+msgid "Select Location field for use on Individual Member Maps:"
+msgstr ""
+"Sélectionnez le champ Emplacement à utiliser sur les cartes de membre "
+"individuel:"
+
+#: ../inc/admin/pp-mm-maps-admin.php:499
+msgid "BuddyPress Members Directory Map"
+msgstr "Annuaire des membres BuddyPress - Carte"
+
+#: ../inc/admin/pp-mm-maps-admin.php:516
+msgid "Max Zoom Level"
+msgstr "Niveau de zoom maximum"
+
+#: ../inc/admin/pp-mm-maps-admin.php:524
+msgid "Recommended setting is 16"
+msgstr "Le réglage recommandé est 16"
+
+#: ../inc/admin/pp-mm-maps-admin.php:572
+msgid "Select Location field for use on Members Directory Map:"
+msgstr ""
+"Sélectionnez le champ Emplacement à utiliser sur la carte du répertoire des "
+"membres:"
+
+#: ../inc/admin/pp-mm-maps-admin.php:606
+msgid "Limit Number of Members"
+msgstr "Limitez le nombre des membres"
+
+#: ../inc/admin/pp-mm-maps-admin.php:618
+msgid "Member Type Filter"
+msgstr "Filtre de type de membre"
+
+#: ../inc/admin/pp-mm-maps-admin.php:628
+msgid ""
+"This setting is unavailable because there are no BuddyPress member types."
+msgstr ""
+"Ce paramètre n'est pas disponible car il n'y a pas de type de membre "
+"BuddyPress."
+
+#: ../inc/admin/pp-mm-maps-admin.php:650
+msgid "Member Distance Filter"
+msgstr "Filtre de distance des membres"
+
+#: ../inc/admin/pp-mm-maps-admin.php:684
+msgid "BP Profile Search"
+msgstr "Recherche profile BP"
+
+#: ../inc/admin/pp-mm-maps-admin.php:707
+msgid "Save Settings"
+msgstr "enregistrer les paramètres"
+
+#: ../inc/class-pp-mm-theme-compat.php:32
+msgid "Members Map"
+msgstr "Carte des membres"
+
+#: ../inc/pp-mm-functions.php:32 ../inc/pp-mm-functions.php:33
+#: ../inc/pp-mm-functions.php:61
+msgid "Map"
+msgstr "Carte"
+
+#: ../inc/pp-mm-profile.php:21
+msgid "Location"
+msgstr "Localisation"
+
+#: ../templates/members/members-map-filters.php:31
+msgid "Member Types"
+msgstr "Types de membres"
+
+#: ../templates/members/members-map-filters.php:64
+msgid "Search From: "
+msgstr "Rechercher de:"
+
+#: ../templates/members/members-map-filters.php:66
+msgid "Type - then Select..."
+msgstr "Tapez - puis sélectionnez ..."
+
+#: ../templates/members/members-map-filters.php:74
+msgid "Miles: "
+msgstr "Miles:"
+
+#: ../templates/members/members-map-filters.php:78
+msgid "Kilometers: "
+msgstr "Kilométres:"
+
+#: ../templates/members/members-map-filters.php:111
+msgid "Submit"
+msgstr "Soumettre"
+
+#: ../templates/members/members-map-filters.php:113
+msgid "Reset"
+msgstr "réinitialiser"
+
+#: ../templates/members/members-map.php:28
+msgid ""
+"You have not set a Location Field for use with this Map. Please go to wp-"
+"admin > Settings > BP Maps for Members, select a Location field and Save "
+"Settings."
+msgstr ""
+"Vous n'avez pas défini de champ de localisation à utiliser avec cette carte. "
+"Veuillez accéder à wp-admin> Paramètres> BP Maps for Members, sélectionner "
+"un champ Emplacement et enregistrer les paramètres."
+
+#: ../templates/members/members-map.php:30
+msgid ""
+"A Location Field has not been set for use with this Map. Please contact the "
+"Site Administrator."
+msgstr ""
+"Un champ de localisation n'a pas été défini pour être utilisé avec cette "
+"carte. Veuillez contacter l'administrateur du site."
+
+#: ../templates/members/members-map.php:286
+msgid "No Members with valid locations were found."
+msgstr "Aucun membre avec des emplacements valides n'a été trouvé."
+
+#: ../templates/members/single/member-single-map.php:73
+msgid "A map cannot be created for this Member. The geocode does not exist."
+msgstr ""
+"Une carte ne peut pas être créée pour ce membre. Le géocode n'existe pas."

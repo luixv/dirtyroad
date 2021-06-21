@@ -1,0 +1,411 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: bp-group-maps\n"
+"POT-Creation-Date: 2020-09-25 12:15-0700\n"
+"PO-Revision-Date: 2016-07-17 08:36-0800\n"
+"Last-Translator: \n"
+"Language-Team: PhiloPress\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n:1,2;_x:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../bp-maps-for-members.php:48
+msgid ""
+"BP Maps for Members requires the BuddyPress plugin or the BuddyBoss Platform "
+"plugin. Please install either of those plugins or deactivate the BP xProfile "
+"Location plugin."
+msgstr ""
+
+#: ../bp-maps-for-members.php:54
+msgid ""
+"BP Maps for Members requires the free BP xProfile Location plugin from "
+"PhiloPress. Please install BP xProfile Location or deactivate BP Maps for "
+"Members."
+msgstr ""
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:189
+#, php-format
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+msgstr ""
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:197
+#, php-format
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s "
+"or %5$supdate now%6$s."
+msgstr ""
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:340
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: ../inc/admin/PP_Members_Maps_Plugin_Updater.php:340
+msgid "Error"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:45
+#: ../inc/admin/class-pp-mm-maps-admin.php:49
+msgid "BP Maps for Members"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:45
+#: ../inc/admin/class-pp-mm-maps-admin.php:49
+msgid "BP Maps - Members"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:77
+msgid "Security check failed"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:202
+msgid "Settings Updated"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:276
+msgid "BP Maps for Members License Options"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:284
+msgid "License Key"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:288
+msgid "Enter your license key"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:298
+#: ../inc/admin/class-pp-mm-maps-admin.php:307
+msgid "Activate License"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:302
+msgid "Your License is Active"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:304
+msgid "Deactivate License"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:316
+msgid "Save License Key"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:318
+msgid "You must Save your Key before you can Activate your License"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:329
+msgid "BP Maps for Members Settings"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:341
+msgid "Google Maps API Key"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:344
+msgid "Your Key"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:348
+msgid "A Key is required. If you do not have one, follow these instructions:"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:354
+msgid "Validate Google API Key"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:357
+msgid "Start typing an address..."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:358
+msgid ""
+"If Google displays a list of addresses as you type - your Google Maps API "
+"Key is <strong>valid</strong>."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:359
+msgid ""
+"Otherwise there is a <strong>problem</strong> with your key. Open your "
+"browser's javascript console for error info supplied by Google."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:363
+msgid "Member Profile Map"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:366
+msgid "Skip Location Tab"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:370
+msgid "Do <strong>NOT</strong> show a <em>Location</em> tab on member profiles"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:376
+#: ../inc/admin/class-pp-mm-maps-admin.php:487
+msgid "Map Type"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:380
+#: ../inc/admin/class-pp-mm-maps-admin.php:491
+msgid "Roadmap"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:381
+#: ../inc/admin/class-pp-mm-maps-admin.php:492
+msgid "Satellite"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:382
+#: ../inc/admin/class-pp-mm-maps-admin.php:493
+msgid "Terrain"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:383
+#: ../inc/admin/class-pp-mm-maps-admin.php:494
+msgid "Hybrid"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:389
+msgid "Zoom Level"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:401
+#: ../inc/admin/class-pp-mm-maps-admin.php:515
+msgid "Map Width"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:403
+#: ../inc/admin/class-pp-mm-maps-admin.php:517
+msgid "Required so that map is responsive"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:407
+#: ../inc/admin/class-pp-mm-maps-admin.php:521
+msgid "Map Height"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:410
+#: ../inc/admin/class-pp-mm-maps-admin.php:524
+msgid "Cannot be less than 50 or greater than 640"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:416
+#: ../inc/admin/class-pp-mm-maps-admin.php:531
+msgid "Location Fields"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:421
+msgid ""
+"There are no Location profile fields, so maps will not be created. Please go "
+"to wpadmin > Users > Profile Fields and add a Location field."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:429
+msgid "Select Location field for use on Individual Member Maps:"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:475
+msgid "All Members Map"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:478
+msgid "Skip Directory Map"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:482
+msgid "Do <strong>NOT</strong> add a Members Map to the Members Directory."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:501
+msgid "Max Zoom Level"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:509
+msgid ""
+"Recommended setting is 16, but increase it if some members are very close "
+"together"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:536
+msgid ""
+"There are no Location profile fields, so maps will not be created. Please go "
+"to Profile Fields and add a Location field."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:543
+msgid "Select Location field for use on Members Directory Map:"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:582
+msgid "Limit Number of Members"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:585
+msgid ""
+"If you have many members with Location data, you may want to limit the "
+"number of members shown."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:587
+msgid "Enter an integer."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:588
+msgid "Zero means there is no limit."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:590
+msgid "Members will be culled based on their 'Recently Active' status."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:595
+msgid "Member Type Display"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:605
+#: ../inc/admin/class-pp-mm-maps-admin.php:650
+msgid "This setting is unavailable because there are no Member Types."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:612
+msgid ""
+"Select Member Types to be shown on the All Members Map. <br>If none are "
+"selected, all member types will be shown."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:640
+msgid "Member Type Filter"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:658
+msgid "Show a dropdown selector to filter by Member Type"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:669
+msgid "Member Distance Filter"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:674
+msgid "Show a Distance filter."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:675
+msgid "Measurement:"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:683
+msgid "Member Keyword Filter"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:688
+msgid "Show text input for keyword search. Will search xProfile fields."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:707
+msgid "BP Profile Search"
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:713
+msgid ""
+"Use the <em>BP Profile Search</em> form interface to filter members on the "
+"All Members Map page."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:715
+msgid ""
+"Selecting this option means that the <em>Member Type</em>, <em>Member "
+"Distance</em> and <em>Member Keyword</em> filters will <strong>not</strong> "
+"be used."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:717
+msgid "See the FAQs in the readme file for more info."
+msgstr ""
+
+#: ../inc/admin/class-pp-mm-maps-admin.php:728
+msgid "Save Settings"
+msgstr ""
+
+#: ../inc/class-pp-mm-theme-compat.php:40
+msgid "Members Map"
+msgstr ""
+
+#: ../inc/pp-mm-functions.php:25 ../inc/pp-mm-functions.php:26
+#: ../inc/pp-mm-functions.php:62
+msgid "Map"
+msgstr ""
+
+#: ../inc/pp-mm-functions.php:185
+msgid "The \"membersmap-single\" shortcode can only be used on a Profile page."
+msgstr ""
+
+#: ../inc/pp-mm-profile.php:21
+msgid "Location"
+msgstr ""
+
+#: ../inc/pp-mm-template-tags.php:175
+msgid ""
+"You have not set a Location Field for use with this Map. Please go to wp-"
+"admin > Settings > BP Maps for Members, select a Location field and Save "
+"Settings."
+msgstr ""
+
+#: ../inc/pp-mm-template-tags.php:177
+msgid ""
+"A Location Field has not been set for use with this Map. Please contact the "
+"Site Administrator."
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:53
+msgid "Member Types"
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:61
+msgid "All"
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:105
+msgid "Distance From: "
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:118
+msgid "Type - then Select..."
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:124
+msgid "Miles: "
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:128
+msgid "Kilometers: "
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:188
+msgid "Keywords: "
+msgstr ""
+
+#: ../templates/members/members-map-filters.php:208
+msgid "Submit"
+msgstr ""
+
+#: ../templates/members/members-map.php:30
+#: ../templates/members/members-map.php:48
+msgid "All Members"
+msgstr ""
+
+#: ../templates/members/members-map.php:192
+msgid "No Members with valid locations were found."
+msgstr ""
+
+#: ../templates/members/single/member-single-map.php:79
+msgid "A map cannot be created for this Member. The geocode does not exist."
+msgstr ""

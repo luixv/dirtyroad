@@ -530,6 +530,20 @@ function bp_nouveau_member_customizer_nav() {
 	return $nav->get_primary();
 }
 
+function pp_mm_item_extra( $args, $member_id ) {
+	$available = xprofile_get_field_data( 'Available', $member_id, 'comma' );
+	if ( ! empty( $available ) ) {
+			$args['available'] = $available;
+	}
+	$guests = xprofile_get_field_data( 'Guests', $member_id, 'comma' );
+	if ( ! empty( $guests ) ) {
+			$args['guests'] = $guests;
+	}
+	
+	return $args;
+}
+add_filter( 'pp_mm_item_filter', 'pp_mm_item_extra', 10, 2 );
+
 /**
 function rt_change_profile_tab_order() {
 global $bp;
