@@ -129,6 +129,10 @@ function pp_mm_load_dot() {
 	return plugin_dir_url(__FILE__) . 'icons/red-dot.png';
 }
 
+function pp_mm_load_green_dot() {
+	return plugin_dir_url(__FILE__) . 'icons/green-dot.png';
+}
+
 
 // cluster icon for map
 function pp_mm_load_cluster_icons() {

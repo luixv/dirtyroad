@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Daimler AG</title>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+
+
+  <script>
+      window['adrum-start-time'] = new Date().getTime();
+      window['adrum-use-strict-domain-cookies'] = true;
+      window["adrum-config"] = { useHTTPSAlways: true };
+  </script>
+  <script async src='https://places.mercedes-benz.com/CloudWebLogin-DEV-EUM/adrum.js'></script>
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/pub/css/bootstrap.min-a15c2ac3234aa8f6064ef9c1f7383c37.css" charset="UTF-8">
+
+
+<link type="text/css" rel="stylesheet" href="/pub/css/daimler.bundle.min-f114c16f50cbef33e8a03e91c36296bb.css" charset="UTF-8">
+
+
+
+<script type="text/javascript" src="/pub/js/jquery.min-dc5e7f18c8d36ac1d3d4753a87c98d0a.js"></script>
+<script type="text/javascript" src="/pub/js/bootstrap.bundle.min-a454220fc07088bf1fdd19313b6bfd50.js"></script>
+</head>
+
+<body class="text-center">
+<div class="wrapper">
+    
+    <header id="header" class="bs-docs-nav"><div class="container-fluid page-header">
+    <div class="row">
+        <div class="col-12 page-header-nav d-none d-md-block">
+            <nav class="meta-nav">
+                <ul id="navigator">
+                    <li class="navi-item-list">
+                        <div id="languageselector" class="btn-group">
+                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split btn-responsive">
+                                
+                                <span>EN</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+    
+    
+    
+    
+    
+    <a class="dropdown-item lang-de" href="?lang=de&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Deutsch</a><a class="dropdown-item lang-en" href="?lang=en&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">English</a><a class="dropdown-item lang-da" href="?lang=da&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Dansk</a><a class="dropdown-item lang-es" href="?lang=es&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Español</a><a class="dropdown-item lang-fr" href="?lang=fr&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Français</a><a class="dropdown-item lang-it" href="?lang=it&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Italiano</a><a class="dropdown-item lang-ja" href="?lang=ja&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">日本語</a><a class="dropdown-item lang-ko" href="?lang=ko&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">한국의</a><a class="dropdown-item lang-nl" href="?lang=nl&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Nederlands</a><a class="dropdown-item lang-pt" href="?lang=pt&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Português</a><a class="dropdown-item lang-ru" href="?lang=ru&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Русский</a><a class="dropdown-item lang-sv" href="?lang=sv&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Svenska</a><a class="dropdown-item lang-tr" href="?lang=tr&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Türkçe</a><a class="dropdown-item lang-zh" href="?lang=zh&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">中文</a>
+</div>
+                        </div>
+                    </li>
+                    <li class="navi-item-list">
+                        <div id="faqitemlist" class="btn-group">
+                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split btn-responsive">
+                                <span>FAQ</span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right ">
+                                <a class="dropdown-item faq-userid" target="_blank"
+                                   href="/pub/faq/user-id-en.html">Determine User ID</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item faq-password" target="_blank"
+                                   href="/pub/faq/determine-password-en.html">Determine initial password</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="meta-standard d-none d-md-inline">
+                        <a href="#" class="disclaimer privacy-disclaimer"><span
+                                class="hidden-xs">Provider/Data Privacy</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-xs-8 col-xs-offset-2 col-sm-12 col-sm-offset-3 col-md-12 col-md-offset-0 col-lg-12 text-center logo-wrapper">
+            <div id="header_image_wrapper"></div>
+        </div>
+    </div>
+</div>
+</header>
+    <main class="container-fluid full-content ">
+        
+        <div class="center-small-devices row flex">
+            <div class="offset-xl-1 offset-lg-1 col-md-6 col-lg-4  col-xl-3 col-sm-8 col-12 my-auto">
+                <div class="ie11-wrapper">
+                    
+                    
+<div class="card">
+    <div class="card-body pb-1">
+        <form action="/" method="post" class="form-signin" autocomplete="off"
+              id="loginform"><input type="hidden" name="_csrf" value="0c70de14-29fc-40b5-bd71-0bdf74698b2c"/>
+            
+            
+
+            <div class="form-signin__header d-flex">
+                <div class="text-left d-md-none">
+                    <div id="faqitemlistmobile" class="btn-group d-md-none align-top">
+                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split btn-responsive">
+                            <span>FAQ</span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item faq-userid" target="_blank"
+                               href="/pub/faq/user-id-en.html">Determine User ID</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item faq-password" target="_blank"
+                               href="/pub/faq/determine-password-en.html">Determine initial password</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h2 class="h2 font-weight-normal">Welcome</h2>
+                </div>
+                <div class="text-right d-md-none">
+                    <div id="languageselectormobile" class="btn-group d-md-none align-top">
+                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split btn-responsive">
+                            <span>EN</span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+    
+    
+    
+    
+    
+    <a class="dropdown-item lang-de" href="?lang=de&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Deutsch</a><a class="dropdown-item lang-en" href="?lang=en&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">English</a><a class="dropdown-item lang-da" href="?lang=da&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Dansk</a><a class="dropdown-item lang-es" href="?lang=es&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Español</a><a class="dropdown-item lang-fr" href="?lang=fr&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Français</a><a class="dropdown-item lang-it" href="?lang=it&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Italiano</a><a class="dropdown-item lang-ja" href="?lang=ja&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">日本語</a><a class="dropdown-item lang-ko" href="?lang=ko&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">한국의</a><a class="dropdown-item lang-nl" href="?lang=nl&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Nederlands</a><a class="dropdown-item lang-pt" href="?lang=pt&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Português</a><a class="dropdown-item lang-ru" href="?lang=ru&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Русский</a><a class="dropdown-item lang-sv" href="?lang=sv&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Svenska</a><a class="dropdown-item lang-tr" href="?lang=tr&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">Türkçe</a><a class="dropdown-item lang-zh" href="?lang=zh&amp;pingResume=/as/t3Phy/resume/as/authorization.ping">中文</a>
+</div>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+
+            
+            
+
+            <noscript>
+                <div class="alert alert-danger noscript">JavaScript is required to sign in. Please enable JavaScript in your browser.</div>
+            </noscript>
+
+            <div id="app" v-cloak>
+                <input type="hidden" id="username" name="username" v-model="login.username">
+                
+                
+                <input type="hidden" id="pingResume" name="pingResume" value="/as/t3Phy/resume/as/authorization.ping">
+                
+                
+                
+                
+                <transition v-on:after-enter="afterEnter" mode="out-in" name="fade">
+                    <div key="1" v-if="step === 1">
+                        
+                        <h1 style="visibility: hidden">
+                            <span class="badge badge-pill badge-dark">
+                                <span class="icon-basic-person-2"></span>
+                                <button type="button" class="close-icon" aria-label="Close">&times;</button>
+                            </span>
+                        </h1>
+                        <label for="userid" class="sr-only">User ID</label>
+                        <div class="form-group label-wrapper">
+                            <input maxlength="20" id="userid" type="text" name="userid" class="form-control"
+                                   v-bind:class="{'is-invalid':login.usernameEmpty}"
+                                   ref="inputField" v-model="login.userid" autocomplete="username"
+                                   autofocus/>
+                            <div class="label-text"><span>User ID</span></div>
+                            <small v-if="login.usernameEmpty===true" class="text-danger float-left"
+                                   id="error-empty">Please provide your UserID</small>
+                        </div>
+                        <div class="form-check-inline float-left pb-3"
+                             style="visibility: hidden">
+                            <div class="onoffswitch">
+                                <input type="checkbox" v-model="login.rememberme" name="dummy"
+                                       class="onoffswitch-checkbox" id="dummy" ref="switchRememberMe">
+                                <label class="onoffswitch-label" for="dummy">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+
+                            </div>
+                            <span class="ml-2">Remember me</span>
+                        </div>
+                        <button id="next-btn" @click.prevent="next()" class="btn btn-lg btn-primary btn-block">Next</button>
+                    </div>
+                    <div key="2" v-if="step === 2">
+                        <h1>
+                            <span class="badge badge-pill badge-dark">
+                                <span class="icon-basic-person-2"></span>
+                                <span> {{login.username}}</span>
+                                <button id="username_back_btn" type="button" @click.prevent="back()" class="close-icon"
+                                        aria-label="Close">&times;</button>
+                            </span>
+                        </h1>
+                        <label for="password" class="sr-only">Password</label>
+                        <div class="form-group label-wrapper">
+                            <input id="password" type="password" name="password" ref="inputField" class="form-control"
+                                   autocomplete="current-password" required
+                                   v-model="login.password"/>
+                            <div class="label-text"><span>Password</span></div>
+                        </div>
+                        
+                        <div class="form-check-inline float-left pb-3"
+                             style="visibility:visible">
+                            <div class="onoffswitch">
+                                <input type="checkbox" v-model="login.rememberme" name="onoffswitch"
+                                       class="onoffswitch-checkbox" id="rememberme" ref="switchRememberMe">
+                                <label class="onoffswitch-label" for="rememberme">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+
+                            </div>
+                            <span class="ml-2">Remember me</span>
+                        </div>
+                        <button id="loginSubmitButton" class="btn btn-lg btn-primary btn-block" type="submit">
+                            <span id="loadingSpinner" class="spinner-border" role="status" aria-hidden="true"></span>
+                            Log on
+                        </button>
+                    </div>
+                </transition>
+                <div class="row">
+                    <div class="col-5 text-right p-0">
+                        <small class="form-text text-muted mr-n4">
+                            <a href="https://login.daimler.com/password/cd/modify" target="_blank"
+                               class="password-change">Modify password</a>
+                        </small>
+                    </div>
+                    <div class="col-2 p-0">
+                        <small class="form-text text-muted">
+                            <span>|</span>
+                        </small>
+                    </div>
+                    <div class="col-5 text-left p-0">
+                        <small class="form-text text-muted ml-n4">
+                            <a href="https://login.daimler.com/password/reset" target="_blank"
+                               class="password-reset">Forgot password?</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid mb-3 ie11-height-fix">
+        <div class="row card-padding">
+
+            <div class="col-8 p-0 my-auto d-flex align-items-center">
+                <h4 class="">One login. All brands.</h4>
+            </div>
+            <div class="col-4 pb-1 pr-2 pl-0">
+                <img class="img-fluid"
+                     src="/pub/img/iam_logo-06295550b745bb64bc6b31f84aa5f0bf.png">
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer d-md-none show-height">
+        <div class="row">
+            <div class="col-sm-12 col-centered text-center">
+                <a href="#" class="disclaimer privacy-disclaimer-mobile">
+                    <small>Provider/Data Privacy</small>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-centered text-center">
+              
+                <small>&copy; 2021 Daimler AG. All rights reserved.</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript" src="/pub/js/vue.min-fb192338844efe86ec759a40152fcb8e.js"></script>
+    <script type="text/javascript" src="/pub/js/cwl_main-min-7454f267560d485a13db7869fa01a65f.js"></script>
+
+
+
+
+                </div>
+            </div>
+            
+            <div class="modal fade" id="hint" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Remember me</h2>
+            </div>
+            <div class="modal-body">
+                <p>Please note: Using this feature will keep you logged in, even after closing your browser. Don&#39;t activate this feature on shared devices.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="enableRememberMe()" data-dismiss="modal"
+                        class="btn btn-danger">Ok</button>
+                <button type="button" onclick="disableRememberMe()" class="btn btn-primary "
+                        data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            <div class="modal fade" id="modal-disclaimer" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl  modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title w-100 text-center">Provider/Data Privacy</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row p-3">
+                    <div id="company-info" class="col-lg-3 col-md-4 col-sm-12">
+                        <h2>Daimler AG</h2>
+                        <p>Mercedesstraße 137<br>70327 Stuttgart<br>Germany</p>
+                        <p>Phone: <a href="tel:+49711170">+49 711 17 0</a><br>E-mail: <a href="mailto:dialog@daimler.com">dialog@daimler.com</a></p>
+                    </div>
+                    <div id="legal-info" class="col-lg-6 col-md-4 col-sm-12">
+                        <p><strong>Represented by the Management Board:</strong> Ola Källenius (Chairman), Martin Daum, Renata Jungo Brüngger, Wilfried Porth, Markus Schäfer, Britta Seeger, Hubertus Troska, Harald Wilhelm</p>
+                        <p><strong>Chairman of the Supervisory Board:</strong> Bernd Pischetsrieder</p>
+                        <p>Commercial Register at the District Court Stuttgart, Commercial Register Number 19360<br>Sales Tax ID Number: DE 81 25 26 315</p>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12">
+                        <ul>
+                            <li><a class="external-link" href="http://www.daimler.com/provider/" target="_blank">Legal Notes</a>
+                            </li>
+                            <li><a class="external-link" href="http://www.daimler.com/cookies/en"
+                                   target="_blank">Cookies</a>
+                            </li>
+                            <li><a class="external-link" href="http://www.daimler.com/privacy/" target="_blank">Data Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </main>
+    
+    <footer class="footer d-none d-md-block hidden-height"><div id="footer" class="footer-content-wrapper">
+  <div class="container-fluid" id="footer-brands">
+    <div class="row h-100 justify-content-center">
+      <div class="col-12">
+        <picture>
+          <source sizes="(max-width: 1920px) 100vw, 1920px"
+                  type="image/webp" srcset="/pub/img/Daimler_Product_Brands_WEBP/brands_w_768-23b57b49fd0832ae2e325114b67a9e63.webp 768w,
+                    /pub/img/Daimler_Product_Brands_WEBP/brands_w_1920-68c530f8c0a01e5a6eccb388610491c4.webp 1920w">
+          <source sizes="(max-width: 1920px) 100vw, 1920px"
+                  type="image/png" srcset="/pub/img/Daimler_Product_Brands_PNG/brands_w_768-adb8bdb45081e0d7235f371e33f0f8ca.png 768w,
+                    /pub/img/Daimler_Product_Brands_PNG/brands_w_1181-d23a8ace4854744915e4696f42c59d75.png 1181w,
+                    /pub/img/Daimler_Product_Brands_PNG/brands_w_1530-0772f21b2a1269db12624a3116bc040d.png 1530w,
+                    /pub/img/Daimler_Product_Brands_PNG/brands_w_1920-9894de26320f8adaeb11a05b9749073e.png 1920w">
+
+          <img class="img-responsive mx-auto" src="/pub/img/Daimler_Product_Brands_PNG/brands_w_1920-9894de26320f8adaeb11a05b9749073e.png"
+               alt="Daimler Brands">
+        </picture>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="container footer-copy">
+    <div class="row h-100">
+      <div class="col-md-12 col-lg-12 text-center">
+        <span id="copyright">
+          <small>&copy; 2021 Daimler AG. All rights reserved.</small>
+        </span>
+        <span>
+          <small>1.31.0</small>
+        </span>
+      </div>
+    </div>
+  </div>
+</div></footer>
+</div>
+
+
+
+
+
+
+
+
+<script> $(document).ready(function () {
+    if (typeof addLoadedElement == 'function') {
+        addLoadedElement();
+    }
+});
+</script>
+</body>
+</html>

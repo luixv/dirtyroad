@@ -49,12 +49,15 @@ if ( ! empty( $latlng ) ) {
 			var map_<?php echo $map_id; ?>;
 			function pp_run_map_<?php echo $map_id ; ?>(){
 				var location = new google.maps.LatLng(<?php echo $latlng; ?>);
-				var icon = "<?php echo pp_mm_load_dot(); ?>";
+				
+				var icon = "<?php echo pp_mm_load_green_dot(); ?>";
+				
 				var map_options = {
 					zoom: <?php echo $map_zoom_level; ?>,
 					center: location,
 					mapTypeId: google.maps.MapTypeId.<?php echo strtoupper( $map_type ); ?>
 				}
+				
 				map_<?php echo $map_id ; ?> = new google.maps.Map(document.getElementById("<?php echo $map_id; ?>"), map_options);
 				var marker = new google.maps.Marker({
 				position: location,
