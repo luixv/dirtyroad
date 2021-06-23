@@ -123,7 +123,6 @@ extract($settings);	//var_dump( $settings );
 					function pp_run_map_<?php echo $map_id ; ?>(){
 
 						var locations = <?php echo json_encode( $members['geo_locations'] ); ?>;
-						
 						var titles = <?php echo json_encode( $members['geo_names'] ); ?>;
 						var markers_content = <?php echo json_encode( $members['geo_content'] ); ?>;
 						var infoWindow = new google.maps.InfoWindow( { maxWidth: 200 });
@@ -143,14 +142,6 @@ extract($settings);	//var_dump( $settings );
 							var lng = locations[i][1];
 							var location = new google.maps.LatLng(lat,lng);
 							var icon = "<?php echo pp_mm_load_green_dot(); ?>";
-							var icon = "<?php 								
-								if ( ! empty( $available ) ) {
-									echo pp_mm_load_green_dot(); }
-								else {
-									echo pp_mm_load_dot(); 
-								}
-								?>"; 
-							
 							var marker = new google.maps.Marker({
 								position: location,
 								title: decode_title( titles[i] ),
