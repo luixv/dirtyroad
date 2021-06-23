@@ -20,16 +20,10 @@
 	<?php if ( isset( $title ) ) echo $title; ?>
 
 	<p>
+
 		<?php if ( isset( $address ) ) echo $address; ?>
+
 	</p>
 
-	
-	<p>
-	<b>
-		<?php if ( isset( $available ) ) echo $available . ','; ?>
-		<?php if ( isset( $guests ) ) echo $guests . ' guest(s)';  ?>
-	</b>
-	</p>
-	
 </div>
 

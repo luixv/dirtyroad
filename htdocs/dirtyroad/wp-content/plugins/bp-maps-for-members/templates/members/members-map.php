@@ -141,7 +141,7 @@ extract($settings);	//var_dump( $settings );
 							var lat = locations[i][0];
 							var lng = locations[i][1];
 							var location = new google.maps.LatLng(lat,lng);
-							var icon = "<?php echo pp_mm_load_green_dot(); ?>";
+							var icon = "<?php echo pp_mm_load_dot(); ?>";
 							var marker = new google.maps.Marker({
 								position: location,
 								title: decode_title( titles[i] ),
