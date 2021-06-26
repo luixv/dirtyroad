@@ -20,20 +20,15 @@
 
 	<?php if ( isset( $title ) ) echo $title; ?>
 
-	<p>
-		<?php if ( isset( $address ) ) echo $address; ?>
-	</p>
-	
-	
-		<?php if ( isset( $available ) ) 
-					if (substr_count($available, 'Yes') >0) {
-						echo "<p style='color:green'><b>" . $available . "</b></p>"; 
-					} else {
-						echo "<p style='color:tomato'><b>" . $available . "</b></p>";
-					}
+	<?php if ( isset( $address ) ) echo "<p>" . $address . "</p>" ?>
 		
-		?>
-	
-
+	<?php if ( isset( $available ) ) 
+			if (substr_count($available, 'Yes') > 0) {
+					echo "<p style='color:LimeGreen; font-weight: bolder' >" . $available . ", " . $guests . " guest(s)</p>"; 
+			} else {
+					echo "<p style='color:crimson; font-weight: bolder' >" . $available . "</p>";
+			}		
+		
+	?>
 </div>
 
