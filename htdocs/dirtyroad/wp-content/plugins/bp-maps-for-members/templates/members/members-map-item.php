@@ -27,8 +27,7 @@
 					echo "<p style='color:LimeGreen; font-weight: bolder' >" . $available . ", " . $guests . " guest(s)</p>"; 
 			} else {
 					echo "<p style='color:crimson; font-weight: bolder' >" . $available . "</p>";
-			}		
-		
+			}				
 	?>
 </div>
 
