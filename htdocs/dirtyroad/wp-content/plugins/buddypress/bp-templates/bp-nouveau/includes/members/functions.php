@@ -559,9 +559,20 @@ $bp->bp_nav['settings']['position'] = 90;
 
 }
 add_action( 'bp_setup_nav', 'rt_change_profile_tab_order', 999 );
-
-
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
