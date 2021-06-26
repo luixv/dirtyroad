@@ -6,10 +6,8 @@ Description: Easily hide your WordPress site from public viewing by requiring vi
 Version: 5.6.2
 Author: Kevin Vess
 Author URI: http://vess.me/
-
 Text Domain: wp-force-login
 Domain Path: /languages
-
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */

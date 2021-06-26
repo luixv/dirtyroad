@@ -1,25 +1,13 @@
-# BEGIN s2Member GZIP exclusions
-<IfModule rewrite_module>
-	RewriteEngine On
-	RewriteBase /dirtyroad/
-	RewriteCond %{QUERY_STRING} (^|\?|&)s2member_file_download\=.+ [OR]
-	RewriteCond %{QUERY_STRING} (^|\?|&)no-gzip\=1
-	RewriteRule .* - [E=no-gzip:1]
-</IfModule>
-# END s2Member GZIP exclusions
+#This Apache config file was created by Duplicator Installer on 2021-06-26 14:51:36.
+#The original can be found in archived file with the name .htaccess__[HASH]
 
 # BEGIN WordPress
-# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
-# dynamically generated, and should only be modified via WordPress filters.
-# Any changes to the directives between these markers will be overwritten.
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /dirtyroad/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /dirtyroad/index.php [L]
 </IfModule>
-
 # END WordPress
