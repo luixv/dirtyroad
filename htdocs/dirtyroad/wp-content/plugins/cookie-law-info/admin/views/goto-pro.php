@@ -59,24 +59,24 @@
 <div class="cli_gopro_block" style="margin-top: 43px;">
 <!----sidebar starts----->
   <div class="wt-ier-sidebar-wrapper" style="padding:35px 50px;">
-      <img src="<?php echo CLI_PLUGIN_URL . 'images/crown.svg'; ?>" class="wt-ier-sidebar-img">
+      <img src="<?php echo esc_url( CLI_PLUGIN_URL . 'images/crown.svg' ); ?>" class="wt-ier-sidebar-img">
       <h3 class="wt-ier-sidebar-title wt-ier-center"><?php echo __('Get access to advanced features for GDPR compliance.','cookie-law-info'); ?></h3>
       <div class="wt-ier-row">
         <div class="wt-ier-col-12 wt-ier-col-md-6 wt-ier-border-md-right">
           <div class="wt-ier-flex wt-ier-v-center ">
-            <img src="<?php echo CLI_PLUGIN_URL . 'images/money-back-badge.svg'; ?>" class="wt-ier-icon">
+            <img src="<?php echo esc_url( CLI_PLUGIN_URL . 'images/money-back-badge.svg' ); ?>" class="wt-ier-icon">
             <p class="wt-ier-sidebar-p"><?php echo __('30 Day Money Back Guarantee','cookie-law-info'); ?></p>
           </div>
         </div>
         <div class="wt-ier-col-12 wt-ier-col-md-6">
          <div class="wt-ier-flex wt-ier-v-center">
-           <img src="<?php echo CLI_PLUGIN_URL . 'images/support.svg'; ?>" class="wt-ier-icon">
+           <img src="<?php echo esc_url( CLI_PLUGIN_URL . 'images/support.svg' ); ?>" class="wt-ier-icon">
            <p class="wt-ier-sidebar-p"><?php echo __('Fast and Superior Support','cookie-law-info'); ?></p>
          </div>
        </div>
      </div>
      <div class="wt-ier-center wt-ier-pt-4">
-      <a href="https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=free_plugin_sidebar&utm_medium=gdpr_basic&utm_campaign=GDPR&utm_content=<?php echo CLI_VERSION;?>" class="wt-ier-green-btn" target="_blank"><?php echo __('Upgrade to Premium','cookie-law-info'); ?></a>
+      <a href="https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=free_plugin_sidebar&utm_medium=gdpr_basic&utm_campaign=GDPR&utm_content=<?php echo esc_url( CLI_VERSION );?>" class="wt-ier-green-btn" target="_blank"><?php echo __('Upgrade to Premium','cookie-law-info'); ?></a>
     </div>
   </div>
   <!----sidebar ends----->

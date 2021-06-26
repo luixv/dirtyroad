@@ -454,7 +454,7 @@ class Cookie_Law_Info_Cookie_Scanner_Ajax extends Cookie_Law_Info_Cookie_Scaner 
 							if ( empty( $cli_post->post_content ) ) {
 								$post_data = array(
 									'ID'           => $cli_post->ID,
-									'post_content' => $cookie['description'],
+									'post_content' => wp_kses_post( trim( wp_unslash( $cookie['description'] ) ) ),
 								);
 								wp_update_post( $post_data );
 							}
@@ -466,19 +466,19 @@ class Cookie_Law_Info_Cookie_Scanner_Ajax extends Cookie_Law_Info_Cookie_Scaner 
 						$added++;
 						$cookie_data = array(
 							'post_type'    => CLI_POST_TYPE,
-							'post_title'   => $cookie['cookie_id'],
-							'post_content' => $cookie['description'],
+							'post_title'   => sanitize_text_field( wp_unslash( $cookie['cookie_id'] ) ),
+							'post_content' => wp_kses_post( trim( wp_unslash( $cookie['description'] ) ) ),
 							'post_status'  => 'publish',
 							'ping_status'  => 'closed',
-							'post_excerpt' => $cookie['cookie_id'],
+							'post_excerpt' => sanitize_text_field( wp_unslash( $cookie['cookie_id'] ) ),
 							'post_author'  => 1,
 						);
 						$post_id     = wp_insert_post( $cookie_data );
-						// update_post_meta( $post_id, '_cli_cookie_type', $cookie['type'] );
-						update_post_meta( $post_id, '_cli_cookie_duration', $cookie['expiry'] );
+
+						update_post_meta( $post_id, '_cli_cookie_duration', sanitize_text_field( wp_unslash( $cookie['expiry'] ) ) );
 						update_post_meta( $post_id, '_cli_cookie_sensitivity', 'non-necessary' );
-						update_post_meta( $post_id, '_cli_cookie_slugid', $cookie['cookie_id'] );
-						wp_set_object_terms( $post_id, array( $cookie['category'] ), 'cookielawinfo-category', true );
+						update_post_meta( $post_id, '_cli_cookie_slugid', sanitize_text_field( wp_unslash( $cookie['cookie_id'] ) ) );
+						wp_set_object_terms( $post_id, array( sanitize_text_field( wp_unslash( $cookie['category'] ) ) ), 'cookielawinfo-category', true );
 
 						// Import Categories.
 						$category = get_term_by( 'name', $cookie['category'], 'cookielawinfo-category' );
@@ -490,7 +490,7 @@ class Cookie_Law_Info_Cookie_Scanner_Ajax extends Cookie_Law_Info_Cookie_Scaner 
 
 							// Check if catgory has description.
 							if ( empty( $category_description ) ) {
-								$description            = $cookie['cli_cookie_category_description'];
+								$description            = wp_kses_post( trim( wp_unslash( $cookie['cli_cookie_category_description'] ) ) );
 								$category_slug          = $category->slug;
 								$cookie_audit_shortcode = sprintf( '[cookie_audit category="%s" style="winter" columns="cookie,duration,description"]', $category_slug );
 								$description           .= "\n";

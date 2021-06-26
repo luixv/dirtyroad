@@ -114,6 +114,9 @@ class Cookie_Law_Info_CCPA
         }
     }
     public function wt_cli_ccpa_optout_callback() {
+        
+        $cookie_options = Cookie_Law_Info::get_settings();
+        $this->ccpa_text = Cookie_Law_Info::sanitise_settings('button_6_text', ( isset( $cookie_options['button_6_text'] ) ? $cookie_options['button_6_text'] : 'Do not sell my personal information' ) );
 
         $ccpa_data           = '';
         $ccpa_enabled        = $this->ccpa_enabled;

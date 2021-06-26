@@ -36,7 +36,7 @@ $all_pages=get_pages($args_for_get_pages);
                 <tr valign="middle" class="cli_bar_on" style="<?php echo $the_options['is_on'] == true ? '' : 'display:none;';?>">
                     <td style="padding-left: 10px;">
                         <div class="wt-cli-gdpr-plugin-status wt-cli-gdpr-plugin-status-active">
-                            <img id="cli-plugin-status-icon" src="<?php echo $cli_img_path;?>add.svg" />
+                            <img id="cli-plugin-status-icon" src="<?php echo esc_url( $cli_img_path );?>add.svg" />
                             <span><?php _e('Cookie bar is currently active', 'cookie-law-info'); ?></span>
                         </div>
                     </td>
@@ -44,7 +44,7 @@ $all_pages=get_pages($args_for_get_pages);
                 <tr valign="middle" class="cli_bar_off" style="<?php echo $the_options['is_on'] == true ? 'display:none;' : '';?>">
                     <td style="padding-left: 10px;">
                         <div class="wt-cli-gdpr-plugin-status wt-cli-gdpr-plugin-status-active">
-                            <img id="cli-plugin-status-icon" src="<?php echo $cli_img_path;?>cross.png" />
+                            <img id="cli-plugin-status-icon" src="<?php echo esc_url( $cli_img_path );?>cross.png" />
                             <span><?php _e('Cookie bar is currently inactive', 'cookie-law-info'); ?></span>
                         </div>
                     </td>
@@ -53,7 +53,7 @@ $all_pages=get_pages($args_for_get_pages);
         </div>
         <div class="wt-cli-gdpr-plugin-branding">
             <div class="wt-cli-gdpr-plugin-branding-logo">
-                <a href="https://www.cookieyes.com" target="_blank"><img src="<?php echo $cli_img_path;?>logo-cookieyes.svg" alt="CookieYes Logo"></a>
+                <img src="<?php echo esc_url( $cli_img_path );?>logo-cookieyes.svg" alt="CookieYes Logo">
             </div>
             <div class="wt-cli-gdpr-plugin-branding-tagline">
                 

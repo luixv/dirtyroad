@@ -271,34 +271,28 @@ class Cookie_Law_Info_Shortcode {
         }
 
         // Get custom fields:
-        if($posts)
-        {
-            foreach( $posts as $post )
-            {
-                $custom = get_post_custom( $post->ID );
-                $cookie_type = ( isset ( $custom["_cli_cookie_type"][0] ) ) ? $custom["_cli_cookie_type"][0] : '';
-                $cookie_duration = ( isset ( $custom["_cli_cookie_duration"][0] ) ) ? $custom["_cli_cookie_duration"][0] : '';
-                $ret.='<tr class="cookielawinfo-row">';
-                if(in_array('cookie',$columns))
-                {
-                    $ret .= '<td class="cookielawinfo-column-1">' . $post->post_title . '</td>';
-                }
-                if(in_array('type',$columns))
-                {
-                    $ret .= '<td class="cookielawinfo-column-2">' . $cookie_type .'</td>';
-                }
-                if(in_array('duration',$columns))
-                {
-                    $ret .= '<td class="cookielawinfo-column-3">' . $cookie_duration .'</td>';
-                }
-                if(in_array('description',$columns))
-                {
-                    $ret .= '<td class="cookielawinfo-column-4">' . $post->post_content .'</td>';
-                }
-                $ret = apply_filters('cli_new_column_values_to_audit_table',$ret, $custom);
-                $ret .= '</tr>';
-            }
-        }
+        if ( $posts ) {
+			foreach ( $posts as $post ) {
+				$custom          = get_post_custom( $post->ID );
+				$cookie_type     = ( isset( $custom['_cli_cookie_type'][0] ) ) ? esc_html( sanitize_text_field( $custom['_cli_cookie_type'][0] ) ) : '';
+				$cookie_duration = ( isset( $custom['_cli_cookie_duration'][0] ) ) ? esc_html( sanitize_text_field( $custom['_cli_cookie_duration'][0] ) ) : '';
+				$ret            .= '<tr class="cookielawinfo-row">';
+				if ( in_array( 'cookie', $columns ) ) {
+					$ret .= '<td class="cookielawinfo-column-1">' . esc_html( sanitize_text_field( $post->post_title ) ) . '</td>';
+				}
+				if ( in_array( 'type', $columns ) ) {
+					$ret .= '<td class="cookielawinfo-column-2">' . $cookie_type . '</td>';
+				}
+				if ( in_array( 'duration', $columns ) ) {
+					$ret .= '<td class="cookielawinfo-column-3">' . $cookie_duration . '</td>';
+				}
+				if ( in_array( 'description', $columns ) ) {
+					$ret .= '<td class="cookielawinfo-column-4">' . wp_kses_post( $post->post_content ). '</td>';
+				}
+				$ret  = apply_filters( 'cli_new_column_values_to_audit_table', $ret, $custom );
+				$ret .= '</tr>';
+			}
+		}
         $ret .= '</tbody></table>';
         if(count($posts)>0)
         {

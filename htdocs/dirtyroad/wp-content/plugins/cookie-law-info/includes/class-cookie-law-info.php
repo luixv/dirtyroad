@@ -78,7 +78,7 @@ class Cookie_Law_Info {
 		} 
 		else 	
 		{
-			$this->version = '2.0.3';
+			$this->version = '2.0.4';
 		}
 		$this->plugin_name = 'cookie-law-info';
 
@@ -342,7 +342,7 @@ class Cookie_Law_Info {
 				$v=__($v, 'cookie-law-info');
 			}
 		?>
-			<a class="nav-tab" href="#<?php echo $k;?>"><?php echo $v; ?></a>
+			<a class="nav-tab" href="#<?php echo esc_attr( $k ); ?>"><?php echo esc_html( $v ); ?></a>
 		<?php
 		}
 	}
@@ -354,7 +354,7 @@ class Cookie_Law_Info {
 	public static function envelope_settings_tabcontent($target_id,$view_file="",$html="")
 	{
 	?>
-		<div class="cookie-law-info-tab-content" data-id="<?php echo $target_id;?>">
+		<div class="cookie-law-info-tab-content" data-id="<?php echo esc_attr( $target_id );?>">
 			<?php
 			if($view_file!="" && file_exists($view_file))
 			{
@@ -677,6 +677,8 @@ class Cookie_Law_Info {
 	    global $wpdb;	    
 	    $args = array(
 	            'post_type' => CLI_POST_TYPE, 
+				'posts_per_page' => -1, 
+				'suppress_filters' => false,
 	            'meta_query' => array(
 								    array(
 								      'key' => '_cli_cookie_sensitivity',
@@ -983,7 +985,7 @@ class Cookie_Law_Info {
 
 		$js_blocking_enabled = false;
 		$js_option = self::get_js_option();
-		if( $js_option === true ) {
+		if( $js_option === true && !self::is_divi_enabled() ) {
 			$js_blocking_enabled = true;
 		}   
 		return apply_filters('wt_cli_enable_js_blocking',$js_blocking_enabled);
@@ -1030,6 +1032,17 @@ class Cookie_Law_Info {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	* Check whether DIVI builder is active or not
+	*
+	* @since  2.0.4
+	* @return bool
+	*/
+	public static function is_divi_enabled() {
+
+		return isset($_GET['et_fb']) ? true : false;
 	}
 	
 }

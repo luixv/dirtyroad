@@ -5,7 +5,7 @@ Tags: GDPR, CCPA, cookie notice, DSGVO, RGPD, LGPD, PIPEDA, cookies , cookie law
 Requires at least: 4.4.0
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -188,6 +188,12 @@ For every update of the plugin, you will be notified of the installed plugins pa
 13. Add a privacy policy overview
 
 == Changelog ==
+
+= 2.0.4 =
+
+* Bug fix: Do not sell option appears before Accept all button option on the admin settings.
+* Enhancement: Translation support for "Do not sell" link text.
+* Enhancement: Added escaping to input attributes.
 
 = 2.0.3 =
 
@@ -513,6 +519,8 @@ For every update of the plugin, you will be notified of the installed plugins pa
 
 == Upgrade Notice ==
 
-= 2.0.3 =
+= 2.0.4 =
 
-* Enhancement - Default cookie banner message update.
+* Bug fix: Do not sell option appears before Accept all button option on the admin settings.
+* Enhancement: Translation support for "Do not sell" link text.
+* Enhancement: Added escaping to input attributes.

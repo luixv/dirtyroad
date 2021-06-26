@@ -4,7 +4,7 @@ if (!defined('WPINC')) {
     die;
 }
 ?>
-<div class="cookie-law-info-tab-content" data-id="<?php echo $target_id; ?>">
+<div class="cookie-law-info-tab-content" data-id="<?php echo esc_attr( $target_id ); ?>">
     <ul class="cli_sub_tab">
         <li style="border-left:none; padding-left: 0px;" data-target="cookie-message"><a><?php _e('Cookie bar', 'cookie-law-info'); ?></a></li>
         <li data-target="show-again-tab"><a><?php _e('Revisit consent', 'cookie-law-info'); ?></a></li>
@@ -16,7 +16,7 @@ if (!defined('WPINC')) {
                     <tr valign="top">
                         <th scope="row"><label for="bar_heading_text_field"><?php _e('Message Heading', 'cookie-law-info'); ?></label></th>
                         <td>
-                            <input type="text" name="bar_heading_text_field" value="<?php echo stripslashes($the_options['bar_heading_text'])  ?>" />
+                            <input type="text" name="bar_heading_text_field" value="<?php echo esc_attr( stripslashes( $the_options['bar_heading_text'] ) );  ?>" />
                             <span class="cli_form_help"><?php _e('Input text to have a heading for the cookie consent bar. Leave it blank if you do not need one.', 'cookie-law-info'); ?>
                             </span>
                         </td>
@@ -37,7 +37,7 @@ if (!defined('WPINC')) {
                             <?php
                             /** RICHARDASHBY EDIT */
                             //echo '<input type="text" name="background_field" id="cli-colour-background" value="' .$the_options['background']. '" />';
-                            echo '<input type="text" name="background_field" id="cli-colour-background" value="' . $the_options['background'] . '" class="my-color-field" data-default-color="#fff" />';
+                            echo '<input type="text" name="background_field" id="cli-colour-background" value="' . esc_attr( $the_options['background'] ) . '" class="my-color-field" data-default-color="#fff" />';
                             ?>
                         </td>
                     </tr>
@@ -46,7 +46,7 @@ if (!defined('WPINC')) {
                         <td>
                             <?php
                             /** RICHARDASHBY EDIT */
-                            echo '<input type="text" name="text_field" id="cli-colour-text" value="' . $the_options['text'] . '" class="my-color-field" data-default-color="#000" />';
+                            echo '<input type="text" name="text_field" id="cli-colour-text" value="' . esc_attr( $the_options['text'] ) . '" class="my-color-field" data-default-color="#000" />';
                             ?>
                         </td>
                     </tr>
@@ -54,7 +54,7 @@ if (!defined('WPINC')) {
                         <th scope="row"><label for="font_family_field"><?php _e('Font', 'cookie-law-info'); ?></label></th>
                         <td>
                             <select name="font_family_field" class="vvv_combobox">
-                                <?php $this->print_combobox_options($this->get_fonts(), $the_options['font_family']) ?>
+                                <?php $this->print_combobox_options( $this->get_fonts(), $the_options['font_family'] ) ?>
                             </select>
                         </td>
                     </tr>
@@ -74,8 +74,8 @@ if (!defined('WPINC')) {
                         <td>
                             <?php $widget_position = $the_options['widget_position']; ?>
                             <select name="widget_position_field" id="widget_position_field" class="vvv_combobox">
-                                <option value="left" <?php echo $widget_position == 'left' ? 'selected' : ''; ?>>Left</option>
-                                <option value="right" <?php echo $widget_position == 'right' ? 'selected' : ''; ?>>Right</option>
+                                <option value="left" <?php echo $widget_position == 'left' ? 'selected' : ''; ?>><?php echo __( 'Left', 'cookie-law-info' ); ?></option>
+                                <option value="right" <?php echo $widget_position == 'right' ? 'selected' : ''; ?>><?php echo __( 'Right', 'cookie-law-info' ); ?></option>
                             </select>
                         </td>
                     </tr>
@@ -194,7 +194,7 @@ if (!defined('WPINC')) {
                             <tr valign="top">
                                 <th scope="row"><label id="wt-cli-revisit-consent-margin-label" for="showagain_x_position_field" data-cli-right-text="<?php _e('From Right Margin', 'cookie-law-info'); ?>" data-cli-left-text="<?php _e('From Left Margin', 'cookie-law-info'); ?>"><?php _e('From Left Margin', 'cookie-law-info'); ?></label></th>
                                 <td>
-                                    <input type="text" name="showagain_x_position_field" value="<?php echo $the_options['showagain_x_position'] ?>" />
+                                    <input type="text" name="showagain_x_position_field" value="<?php echo esc_attr( $the_options['showagain_x_position'] ) ?>" />
                                     <span class="cli_form_help"><?php _e('Specify the widget distance from margin in ‘px’ or  ‘%’ . e.g. 100px or 30%', 'cookie-law-info'); ?></span>
                                 </td>
                             </tr>
@@ -206,7 +206,7 @@ if (!defined('WPINC')) {
                         <tr valign="top">
                             <th scope="row"><label for="showagain_text"><?php _e('Text on the widget', 'cookie-law-info'); ?></label></th>
                             <td>
-                                <input type="text" name="showagain_text_field" value="<?php echo $the_options['showagain_text'] ?>" />
+                                <input type="text" name="showagain_text_field" value="<?php echo esc_attr( $the_options['showagain_text'] ) ?>" />
                                 <span class="cli_form_help"><?php _e('Input a text to appear on the revisit consent widget.', 'cookie-law-info'); ?></span>
                             </td>
                         </tr>

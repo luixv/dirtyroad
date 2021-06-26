@@ -269,7 +269,7 @@ if ( ! class_exists( 'Cookie_Law_Info_Cookieyes' ) ) {
 					</div>
 					<div class="wt-cli-modal-body">
 						<form id="wt-cli-ckyes-form-password-reset">
-							<input type="email" name="ckyes-reset-email" class="wt-cli-form-input" placeholder="<?php echo __('Email','cookie-law-info'); ?>" value="<?php echo $this->get_user_email(); // phpcs:ignore WordPress.Security.EscapeOutput ?>" />
+							<input type="email" name="ckyes-reset-email" class="wt-cli-form-input" placeholder="<?php echo __('Email','cookie-law-info'); ?>" value="<?php echo esc_attr( $this->get_user_email() ); ?>" />
 							<div class="wt-cli-action-container">
 								<button id="wt-cli-ckyes-password-reset-btn" class="wt-cli-action button button-primary"><?php echo __( 'Send password reset email', 'cookie-law-info' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
 							</div>
@@ -283,7 +283,7 @@ if ( ! class_exists( 'Cookie_Law_Info_Cookieyes' ) ) {
 					<div class="wt-cli-modal-body">
 						<p><?php echo sprintf( __( 'Enter your email to create an account with CookieYes. By clicking “Connect”, your CookieYes account will be created automatically and you can start scanning your website for cookies right away!', 'cookie-law-info' ), $this->get_user_email() ); // phpcs:ignore WordPress.Security.EscapeOutput ?></p>
 						<form id="wt-cli-ckyes-form-register">
-							<input type="email" name="ckyes-email" class="wt-cli-form-input" placeholder="<?php echo __('Email','cookie-law-info'); ?>" value="<?php echo $this->get_user_email(); // phpcs:ignore WordPress.Security.EscapeOutput ?>"/>
+							<input type="email" name="ckyes-email" class="wt-cli-form-input" placeholder="<?php echo __('Email','cookie-law-info'); ?>" value = "<?php echo esc_attr( $this->get_user_email() ); ?>" />
 							<div class="wt-cli-action-container">
 								<div class="wt-cli-action-group">
 									<button id="wt-cli-ckyes-register-btn" class="wt-cli-action button button-primary"><?php echo __( 'Connect', 'cookie-law-info' );  // phpcs:ignore WordPress.Security.EscapeOutput ?></button>

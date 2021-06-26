@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
                 <tr valign="top">
                     <td>
                         <label for="privacy_overview_title"><?php _e('Title', 'cookie-law-info'); ?></label>
-                        <input type="text" name="privacy_overview_title" value="<?php echo sanitize_text_field( stripslashes( $privacy_title ) ); ?>" class="cli-textbox" />
+                        <input type="text" name="privacy_overview_title" value="<?php echo esc_attr( sanitize_text_field( stripslashes( $privacy_title ) ) ); ?>" class="cli-textbox" />
                     </td>
                  </tr>
                 <tr valign="top">

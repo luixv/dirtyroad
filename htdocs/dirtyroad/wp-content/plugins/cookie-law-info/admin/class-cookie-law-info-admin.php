@@ -435,7 +435,7 @@ class Cookie_Law_Info_Admin {
 			// Are on latest version
 			return true;
 		}
-		echo 'VERSION: ' . $version . '<br /> V2: ' . CLI_LATEST_VERSION_NUMBER;
+		echo 'VERSION: ' . esc_html( $version ). '<br /> V2: ' . CLI_LATEST_VERSION_NUMBER;
 		// If you got this far then you're on an inbetween version
 		return false;
 	}
@@ -458,7 +458,7 @@ class Cookie_Law_Info_Admin {
 			if ( $option['value'] == $selected ) {
 				echo ' selected="selected"';
 			}
-			echo '>' . $option['text'] . '</option>';
+			echo '>' . esc_html( $option['text'] ) . '</option>';
 		}
 	}
 

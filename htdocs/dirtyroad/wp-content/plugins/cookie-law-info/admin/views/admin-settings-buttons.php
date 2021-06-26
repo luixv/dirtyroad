@@ -4,7 +4,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 ?>
-<div class="cookie-law-info-tab-content" data-id="<?php echo $target_id; ?>">
+<div class="cookie-law-info-tab-content" data-id="<?php echo esc_attr( $target_id ); ?>">
 	
 	<ul class="cli_sub_tab">
 		<li style="border-left:none; padding-left: 0px;" data-target="accept-all-button"><a><?php _e('Accept All Button', 'cookie-law-info'); ?></a></li>
@@ -24,14 +24,14 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top">
 					<th scope="row"><label for="button_1_text_field"><?php _e( 'Text', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_1_text_field" value="<?php echo stripslashes( $the_options['button_1_text'] ); ?>" />
+						<input type="text" name="button_1_text_field" value="<?php echo esc_attr( stripslashes( $the_options['button_1_text'] ) ); ?>" />
 					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="button_1_link_colour_field"><?php _e( 'Text colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-							echo '<input type="text" name="button_1_link_colour_field" id="cli-colour-link-button-1" value="' . $the_options['button_1_link_colour'] . '" class="my-color-field" />';
+							echo '<input type="text" name="button_1_link_colour_field" id="cli-colour-link-button-1" value="' . esc_attr( $the_options['button_1_link_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -47,7 +47,7 @@ if ( ! defined( 'WPINC' ) ) {
 					<th scope="row"><label for="button_1_button_colour_field"><?php _e( 'Background colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-						echo '<input type="text" name="button_1_button_colour_field" id="cli-colour-btn-button-1" value="' . $the_options['button_1_button_colour'] . '" class="my-color-field" />';
+						echo '<input type="text" name="button_1_button_colour_field" id="cli-colour-btn-button-1" value="' . esc_attr( $the_options['button_1_button_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -63,7 +63,7 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top" class="cli-plugin-row cli-indent-15" cli_frm_tgl-id="cli_accept_action" cli_frm_tgl-val="CONSTANT_OPEN_URL">
 					<th scope="row"><label for="button_1_url_field"><?php _e( 'URL', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_1_url_field" id="button_1_url_field" value="<?php echo $the_options['button_1_url']; ?>" />
+						<input type="text" name="button_1_url_field" id="button_1_url_field" value="<?php echo esc_attr( $the_options['button_1_url'] ); ?>" />
 						<span class="cli_form_help"><?php _e( 'Specify the URL to redirect users on accept button click. e.g. Entering the cookie policy page URL will redirect users to the cookie policy page after giving consent.', 'cookie-law-info' ); ?></span>
 					</td>
 				</tr>
@@ -97,14 +97,14 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top">
 					<th scope="row"><label for="button_3_text_field"><?php _e( 'Text', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_3_text_field" value="<?php echo stripslashes( $the_options['button_3_text'] ); ?>" />
+						<input type="text" name="button_3_text_field" value="<?php echo esc_attr( stripslashes( $the_options['button_3_text'] ) ); ?>" />
 					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="button_3_link_colour_field"><?php _e( 'Text colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-							echo '<input type="text" name="button_3_link_colour_field" id="cli-colour-link-button-3" value="' . $the_options['button_3_link_colour'] . '" class="my-color-field" />';
+							echo '<input type="text" name="button_3_link_colour_field" id="cli-colour-link-button-3" value="' . esc_attr( $the_options['button_3_link_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>               
@@ -120,7 +120,7 @@ if ( ! defined( 'WPINC' ) ) {
 					<th scope="row"><label for="button_3_button_colour_field"><?php _e( 'Background colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-							echo '<input type="text" name="button_3_button_colour_field" id="cli-colour-btn-button-3" value="' . $the_options['button_3_button_colour'] . '" class="my-color-field" />';
+							echo '<input type="text" name="button_3_button_colour_field" id="cli-colour-btn-button-3" value="' . esc_attr( $the_options['button_3_button_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -139,7 +139,7 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top" class="cli-plugin-row" cli_frm_tgl-id="cli_reject_action" cli_frm_tgl-val="CONSTANT_OPEN_URL">
 					<th scope="row"><label for="button_3_url_field"><?php _e( 'URL', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_3_url_field" id="button_3_url_field" value="<?php echo $the_options['button_3_url']; ?>" />
+						<input type="text" name="button_3_url_field" id="button_3_url_field" value="<?php echo esc_url( $the_options['button_3_url'] ); ?>" />
 						<span class="cli_form_help"><?php _e( 'Specify the URL to redirect users on reject button click. e.g. Entering the cookie policy page URL will redirect users to the cookie policy page after rejecting cookies.', 'cookie-law-info' ); ?></span>
 					</td>
 				</tr>
@@ -168,14 +168,14 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top">
 					<th scope="row"><label for="button_4_text_field"><?php _e('Text', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_4_text_field" value="<?php echo stripslashes( $the_options['button_4_text'] ); ?>" />
+						<input type="text" name="button_4_text_field" value="<?php echo esc_attr( stripslashes( $the_options['button_4_text'] ) ); ?>" />
 					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="button_4_link_colour_field"><?php _e( 'Text colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-							echo '<input type="text" name="button_4_link_colour_field" id="cli-colour-link-button-4" value="' . $the_options['button_4_link_colour'] . '" class="my-color-field" />';
+							echo '<input type="text" name="button_4_link_colour_field" id="cli-colour-link-button-4" value="' . esc_attr( $the_options['button_4_link_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -191,7 +191,7 @@ if ( ! defined( 'WPINC' ) ) {
 					<th scope="row"><label for="button_4_button_colour_field"><?php _e( 'Background colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-							echo '<input type="text" name="button_4_button_colour_field" id="cli-colour-btn-button-4" value="' . $the_options['button_4_button_colour'] . '" class="my-color-field" />';
+							echo '<input type="text" name="button_4_button_colour_field" id="cli-colour-btn-button-4" value="' . esc_attr( $the_options['button_4_button_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -206,7 +206,7 @@ if ( ! defined( 'WPINC' ) ) {
 			<?php
 			if ( Cookie_Law_Info_Admin::module_exists( 'cli-policy-generator' ) ) {
 				?>
-			<p><?php _e( 'Click', 'cookie-law-info' ); ?> <a href="<?php echo admin_url( 'edit.php?post_type=' . CLI_POST_TYPE . '&page=cookie-law-info-policy-generator' ); ?>"><?php _e( 'here', 'cookie-law-info' ); ?></a> <?php _e( ' to generate content for Cookie Policy page.', 'cookie-law-info' ); ?>
+			<p><?php _e( 'Click', 'cookie-law-info' ); ?> <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CLI_POST_TYPE . '&page=cookie-law-info-policy-generator' ) ); ?>"><?php _e( 'here', 'cookie-law-info' ); ?></a> <?php _e( ' to generate content for Cookie Policy page.', 'cookie-law-info' ); ?>
 			</p>
 				<?php
 			}
@@ -216,14 +216,14 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top">
 					<th scope="row"><label for="button_2_text_field"><?php _e( 'Text', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_2_text_field" value="<?php echo stripslashes( $the_options['button_2_text'] ); ?>" />
+						<input type="text" name="button_2_text_field" value="<?php echo esc_attr( stripslashes( $the_options['button_2_text'] ) ); ?>" />
 					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="button_2_link_colour_field"><?php _e( 'Text colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-							echo '<input type="text" name="button_2_link_colour_field" id="cli-colour-link-button-1" value="' . $the_options['button_2_link_colour'] . '" class="my-color-field" />';
+							echo '<input type="text" name="button_2_link_colour_field" id="cli-colour-link-button-1" value="' . esc_attr( $the_options['button_2_link_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -239,7 +239,7 @@ if ( ! defined( 'WPINC' ) ) {
 					<th scope="row"><label for="button_2_button_colour_field"><?php _e( 'Background colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-							echo '<input type="text" name="button_2_button_colour_field" id="cli-colour-btn-button-1" value="' . $the_options['button_2_button_colour'] . '" class="my-color-field" />';
+							echo '<input type="text" name="button_2_button_colour_field" id="cli-colour-btn-button-1" value="' . esc_attr( $the_options['button_2_button_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -256,7 +256,7 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top" cli_frm_tgl-id="cli_readmore_url_type" cli_frm_tgl-val="url">
 					<th scope="row"><label for="button_2_url_field"><?php _e( 'URL', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_2_url_field" id="button_2_url_field" value="<?php echo $the_options['button_2_url']; ?>" />
+						<input type="text" name="button_2_url_field" id="button_2_url_field" value="<?php echo esc_url( $the_options['button_2_url'] ); ?>" />
 					</td>
 				</tr>
 				<tr valign="top" cli_frm_tgl-id="cli_readmore_url_type" cli_frm_tgl-val="page">
@@ -267,7 +267,7 @@ if ( ! defined( 'WPINC' ) ) {
 							<?php
 							foreach ( $all_pages as $page ) {
 								?>
-								<option value="<?php echo $page->ID; ?>" <?php echo ( $the_options['button_2_page'] == $page->ID ? 'selected' : '' ); ?>> <?php echo $page->post_title; ?> </option>;
+								<option value="<?php echo esc_attr( $page->ID ); ?>" <?php echo ( $the_options['button_2_page'] == $page->ID ? 'selected' : '' ); ?>> <?php echo esc_html( $page->post_title ); ?> </option>;
 								<?php
 							}
 							?>
@@ -306,7 +306,7 @@ if ( ! defined( 'WPINC' ) ) {
 				</tr>
 			</table><!-- end custom button -->
 		</div>
-		<div class="cli_sub_tab_content wt-cli-ccpa-element" data-id="do-not-sell-button">
+		<div class="cli_sub_tab_content" data-id="do-not-sell-button">
 			<h3><?php _e( 'Do not sell', 'cookie-law-info' ); ?> <code>[wt_cli_ccpa_optout]</code></h3>
 			<p><?php _e( 'Customise the appearance of CCPA notice. Enabling ‘Show CCPA notice’ displays the notice on the consent bar and records prior consent from the user. Alternatively, insert CCPA shortcode [wt_cli_ccpa_optout] to render CCPA notice in a specific page of your site, preferably, cookie policy page.', 'cookie-law-info' ); ?></p>
 
@@ -314,7 +314,7 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top">
 					<th scope="row"><label for="button_6_text_field"><?php _e( 'CCPA Text', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_6_text_field" value="<?php echo stripslashes( $the_options['button_6_text'] ); ?>" />
+						<input type="text" name="button_6_text_field" value="<?php echo esc_attr( stripslashes( $the_options['button_6_text'] ) ); ?>" />
 					</td>
 				</tr>
 				<tr valign="top">
@@ -331,7 +331,7 @@ if ( ! defined( 'WPINC' ) ) {
 					<th scope="row"><label for="button_6_link_colour_field"><?php _e( 'Text colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-						echo '<input type="text" name="button_6_link_colour_field" id="cli-colour-link-button-6" value="' . $the_options['button_6_link_colour'] . '" class="my-color-field" />';
+						echo '<input type="text" name="button_6_link_colour_field" id="cli-colour-link-button-6" value="' . esc_attr( $the_options['button_6_link_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -344,14 +344,14 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top">
 					<th scope="row"><label for="button_7_text_field"><?php _e( 'Text', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_7_text_field" value="<?php echo stripslashes( $the_options['button_7_text'] ); ?>" />
+						<input type="text" name="button_7_text_field" value="<?php echo esc_attr( stripslashes( $the_options['button_7_text'] ) ); ?>" />
 					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="button_7_link_colour_field"><?php _e( 'Text colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-						echo '<input type="text" name="button_7_link_colour_field" id="cli-colour-link-button-7" value="' . $the_options['button_7_link_colour'] . '" class="my-color-field" />';
+						echo '<input type="text" name="button_7_link_colour_field" id="cli-colour-link-button-7" value="' . esc_attr( $the_options['button_7_link_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -367,7 +367,7 @@ if ( ! defined( 'WPINC' ) ) {
 					<th scope="row"><label for="button_7_button_colour_field"><?php _e( 'Background colour', 'cookie-law-info' ); ?></label></th>
 					<td>
 						<?php
-						echo '<input type="text" name="button_7_button_colour_field" id="cli-colour-btn-button-7" value="' . $the_options['button_7_button_colour'] . '" class="my-color-field" />';
+						echo '<input type="text" name="button_7_button_colour_field" id="cli-colour-btn-button-7" value="' . esc_attr( $the_options['button_7_button_colour'] ) . '" class="my-color-field" />';
 						?>
 					</td>
 				</tr>
@@ -382,7 +382,7 @@ if ( ! defined( 'WPINC' ) ) {
 				<tr valign="top" class="cli-plugin-row cli-indent-15" cli_frm_tgl-id="cli_accept_all_action" cli_frm_tgl-val="CONSTANT_OPEN_URL">
 					<th scope="row"><label for="button_7_url_field"><?php _e( 'URL', 'cookie-law-info' ); ?></label></th>
 					<td>
-						<input type="text" name="button_7_url_field" id="button_7_url_field" value="<?php echo $the_options['button_7_url']; ?>" />
+						<input type="text" name="button_7_url_field" id="button_7_url_field" value="<?php echo esc_url( $the_options['button_7_url'] ); ?>" />
 						<span class="cli_form_help"><?php _e( 'Button will only link to URL if Action = Open URL', 'cookie-law-info' ); ?></span>
 					</td>
 				</tr>
