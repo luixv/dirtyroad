@@ -21,11 +21,16 @@
 
 	<?php if ( isset( $address ) ) echo "<p>" . $address . "</p>" ?>
 		
-	<?php if ( isset( $available ) ) 
-			if (substr_count($available, 'Yes') > 0) {
+	<?php if ( isset( $available ) ) {
+			if (substr_count($available, 'Yes') > 0) {			
+				if ( isset( $guests ) ) {				
 					echo "<p style='color:LimeGreen; font-weight: bolder' >" . $available . ", " . $guests . " guest(s)</p>"; 
+				}	else {
+					echo "<p style='color:LimeGreen; font-weight: bolder' >" . $available . "</p>";
+				}				
 			} else {
 					echo "<p style='color:crimson; font-weight: bolder' >" . $available . "</p>";
 			}				
+	}
 	?>
 </div>
