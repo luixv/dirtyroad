@@ -125,7 +125,7 @@ function my_forcelogin_bypass( $bypass, $visited_url ) {
 	home_url( '/faq/' ),
 	home_url( '/impressum/' ),
 	home_url( '/photos/' ),
-	home_url( '/terms/' ),
+	home_url( '/terms_and_conditions/' ),
   );
   if ( ! $bypass ) {
     $bypass = in_array( $visited_url, $allowed );
