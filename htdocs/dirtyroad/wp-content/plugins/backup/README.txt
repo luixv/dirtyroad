@@ -168,6 +168,11 @@ When you are facing an issue of any kind with any of our products, the first thi
 
 == Changelog ==
 
+= 1.6.5 =
+* Improvement of symlink download logic
+* Bug fixed related to automatically signing out from BackupGuard plugin
+* Bug fixed related to failed restore, now we show warning notice
+
 = 1.6.4 =
 * New feature: New cloud integration with "Pcloud" is added
 * New feature: New cloud integration with "Box" is added
