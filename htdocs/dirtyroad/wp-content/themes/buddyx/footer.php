@@ -22,7 +22,7 @@ namespace BuddyX\Buddyx;
 		<?php if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'footer' ) ) { ?>
 			<div class="site-footer-wrapper">
 				<div class="container">
-					<?php if (  !is_page( 'register' ) &&( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) )) : ?>
+					<?php if ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) : ?>
 						<div class="footer-inner" role="complementary" aria-label="<?php esc_attr_e( 'Footer', 'buddyx' ); ?>">
 								<?php if ( is_active_sidebar( 'footer-1' ) ) { ?>
 							<div class="footer-widget">
