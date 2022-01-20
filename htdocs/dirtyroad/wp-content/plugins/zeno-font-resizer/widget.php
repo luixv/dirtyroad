@@ -8,14 +8,14 @@ if (function_exists('register_sidebar') && class_exists('WP_Widget')) {
 	class Zeno_FR_Widget extends WP_Widget {
 
 		/* Constructor */
-		function __construct() {
+		public function __construct() {
 			$widget_ops = array( 'classname' => 'Zeno_FR_Widget', 'description' => esc_html__( 'Displays options to change the font size.', 'zeno-font-resizer' ) );
 			parent::__construct('Zeno_FR_Widget', 'Zeno Font Resizer', $widget_ops);
 			$this->alt_option_name = 'Zeno_FR_Widget';
 		}
 
 		/** @see WP_Widget::widget */
-		function widget($args, $instance) {
+		public function widget( $args, $instance ) {
 			extract($args);
 
 			$default_value = array(
@@ -37,20 +37,20 @@ if (function_exists('register_sidebar') && class_exists('WP_Widget')) {
 		}
 
 		/** @see WP_Widget::update */
-		function update($new_instance, $old_instance) {
+		public function update( $new_instance, $old_instance ) {
 			$instance = $old_instance;
 			$instance['title'] = strip_tags($new_instance['title']);
 			return $instance;
 		}
 
 		/** @see WP_Widget::form */
-		function form($instance) {
+		public function form( $instance ) {
 
 			$default_value = array(
 					'title' => esc_html__('Font Resizer', 'zeno-font-resizer'),
 				);
-			$instance      = wp_parse_args( (array) $instance, $default_value );
-			$title         = esc_attr($instance['title']);
+			$instance = wp_parse_args( (array) $instance, $default_value );
+			$title    = esc_attr($instance['title']);
 			?>
 
 			<p>
