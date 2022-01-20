@@ -1,4 +1,5 @@
 <?php
+
 $backups             = SGBackup::getAllBackups();
 $downloadUrl         = admin_url('admin-post.php?action=backup_guard_downloadBackup&');
 $contentClassName    = getBackupPageContentClassName('backups');
@@ -24,9 +25,9 @@ $allowDataCollection = SGConfig::get('SG_BACKUP_SEND_USAGE_STATUS');
                                 $currentUser = wp_get_current_user();
                             }
                             if (!empty($currentUser)) {
-	                            // phpcs:disable
+                                // phpcs:disable
                                 $displayName = $currentUser->display_name;
-	                            // phpcs:enable
+                                // phpcs:enable
                                 $displayName = ucfirst($displayName);
                             }
                             ?>
@@ -180,36 +181,38 @@ This will provide us with an opportunity to make the experience so much better f
                     </td>
                     <td><?php echo $backup['name'] ?></td>
                     <td><?php echo !$backup['active'] ? $backup['size'] : '' ?></td>
-                    <td><?php echo backupGuardConvertDateTimezone($backup['date']) ?></td>
+                    <td><?php echo backupGuardConvertDateTimezone($backup['date'], true) ?></td>
                     <td id="sg-status-tabe-data-<?php echo $backup['id'] ?>" <?php echo $backup['active'] ? 'data-toggle="tooltip" data-placement="top" data-original-title="" data-container="#sg-wrapper"' : '' ?>>
-                        <?php if ($backup['active']) :
-                            $filteredStatuses = backupGuardFilterStatusesByActionType($backup, $backup['options']);
-                            ?>
-                            <input type="hidden" class="sg-active-action-id" value="<?php echo $backup['id']; ?>"/>
-                            <?php foreach ($filteredStatuses as $statusCode) : ?>
-                            <span class="btn-xs sg-status-icon sg-status-<?php echo $statusCode; ?>">&nbsp;</span>
-                            <?php endforeach; ?>
-                            <div class="sg-progress progress">
-                                <div class="progress-bar"></div>
-                            </div>
-                        <?php else : ?>
+                <?php
+
+                if ($backup['active']) :
+                    $filteredStatuses = backupGuardFilterStatusesByActionType($backup, $backup['options']);
+                    ?>
+                    <input type="hidden" class="sg-active-action-id" value="<?php echo $backup['id']; ?>"/>
+                    <?php foreach ($filteredStatuses as $statusCode) : ?>
+                        <span class="btn-xs sg-status-icon sg-status-<?php echo $statusCode; ?>">&nbsp;</span>
+                    <?php endforeach; ?>
+                    <div class="sg-progress progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                <?php else : ?>
                             <?php
                             if ($backup['status'] == SG_ACTION_STATUS_FINISHED_WARNINGS) : ?>
                                 <span class="btn-xs text-warning" data-toggle="tooltip" data-placement="top"
                                       data-original-title="
-                                      <?php if ($backup['type'] == SG_ACTION_TYPE_BACKUP) :
-                                                echo _backupGuardT('Warnings found during backup', true);
-                                      elseif ($backup['type'] == SG_ACTION_TYPE_RESTORE) :
-                                                echo _backupGuardT('Warnings found during restore', true);
-                                      else :
-                                                echo _backupGuardT('Warnings found during upload', true);
-                                      endif; ?>
+                                <?php if ($backup['type'] == SG_ACTION_TYPE_BACKUP) :
+                                    echo _backupGuardT('Warnings found during backup', true);
+                                elseif ($backup['type'] == SG_ACTION_TYPE_RESTORE) :
+                                    echo _backupGuardT('Warnings found during restore', true);
+                                else :
+                                    echo _backupGuardT('Warnings found during upload', true);
+                                endif; ?>
                                       " data-container="#sg-wrapper"><?php _backupGuardT('Warning') ?></span>
                             <?php elseif ($backup['status'] == SG_ACTION_STATUS_ERROR) : ?>
                                 <span class="btn-xs text-danger" data-toggle="tooltip" data-placement="top"
                                       data-original-title="
                                       <?php if ($backup['type'] == SG_ACTION_TYPE_BACKUP) :
-                                                echo _backupGuardT('Errors found during backup', true);
+                                            echo _backupGuardT('Errors found during backup', true);
                                       elseif ($backup['type'] == SG_ACTION_TYPE_RESTORE) :
                                           echo _backupGuardT('Errors found during restore', true);
                                       else :
@@ -219,7 +222,7 @@ This will provide us with an opportunity to make the experience so much better f
                             <?php else : ?>
                                 <span class="btn-xs sg-text-success"><?php _backupGuardT('Success') ?></span>
                             <?php endif; ?>
-                        <?php endif; ?>
+                <?php endif; ?>
                     </td>
                     <td class="sg-backup-actions-td">
                         <?php if ($backup['active']) : ?>

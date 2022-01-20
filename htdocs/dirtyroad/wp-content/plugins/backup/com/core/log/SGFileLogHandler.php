@@ -1,13 +1,14 @@
 <?php
-require_once(SG_LOG_PATH.'SGILogHandler.php');
+
+require_once SG_LOG_PATH . 'SGILogHandler.php';
 
 class SGFileLogHandler implements SGILogHandler
 {
-    protected $filePath = '';
+    protected $_filePath = '';
 
     public function __construct($filePath)
     {
-        $this->filePath = $filePath;
+        $this->_filePath = $filePath;
     }
 
     public function canBeCleared()
@@ -17,31 +18,27 @@ class SGFileLogHandler implements SGILogHandler
 
     public function isWritable()
     {
-        if (!file_exists($this->filePath))
-        {
-            $fp = fopen($this->filePath, 'wb');
-            if (!$fp)
-            {
+        if (!file_exists($this->_filePath)) {
+            $fp = fopen($this->_filePath, 'wb');
+            if (!$fp) {
                 return false;
             }
 
             fclose($fp);
         }
 
-        return is_writable($this->filePath);
+        return is_writable($this->_filePath);
     }
 
     public function write($message)
     {
-        if (!self::isWritable())
-        {
+        if (!self::isWritable()) {
             return false;
         }
 
-        $date = backupGuardConvertDateTimezone(@date('Y-m-d H:i'));
-        $content = $date.': '.$message.PHP_EOL;
-        if (file_put_contents($this->filePath, $content, FILE_APPEND))
-        {
+        $date    = backupGuardConvertDateTimezone(@date('Y-m-d H:i:s'), true);
+        $content = $date . ': ' . $message . PHP_EOL;
+        if (file_put_contents($this->_filePath, $content, FILE_APPEND)) {
             return true;
         }
 
@@ -50,22 +47,21 @@ class SGFileLogHandler implements SGILogHandler
 
     public function readAll()
     {
-        if (!is_readable($this->filePath))
-        {
+        if (!is_readable($this->_filePath)) {
             return false;
         }
 
-        $content = file_get_contents($this->filePath);
+        $content = file_get_contents($this->_filePath);
+
         return $content;
     }
 
     public function clear()
     {
-        if (!self::isWritable())
-        {
+        if (!self::isWritable()) {
             return false;
         }
 
-        return @unlink($this->filePath);
+        return @unlink($this->_filePath);
     }
 }

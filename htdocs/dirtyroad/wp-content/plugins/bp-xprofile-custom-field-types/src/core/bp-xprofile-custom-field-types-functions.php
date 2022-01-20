@@ -42,6 +42,7 @@ function bpxcftr_get_field_types() {
 		'fromto'                       => 'BPXProfileCFTR\Field_Types\Field_Type_From_To',
 		'oembed'                       => 'BPXProfileCFTR\Field_Types\Field_Type_Oembed',
 		'token'                        => 'BPXProfileCFTR\Field_Types\Field_Type_Token',
+		'tags'                         => 'BPXProfileCFTR\Field_Types\Field_Type_Tags',
 	);
 
 	return $fields;
@@ -60,6 +61,7 @@ function bpxcftr_get_selectable_field_types() {
 		'multiselect_custom_post_type',
 		'select_custom_taxonomy',
 		'multiselect_custom_taxonomy',
+		'tags',
 	);
 
 	return apply_filters( 'bpxcftr_selectable_types', $types );
@@ -134,7 +136,7 @@ function bpxcftr_is_selectable_field( $field ) {
  * @return bool
  */
 function bpxcftr_is_multi_valued_field( $field ) {
-	$selectable_types = apply_filters( 'bpxcftr_multi_valued_types', array( 'multiselectbox' ) );
+	$selectable_types = apply_filters( 'bpxcftr_multi_valued_types', array( 'multiselectbox', 'tags' ) );
 
 	return in_array( $field->type, $selectable_types, true ) || $field->type_obj instanceof Field_Type_Multi_Valued;
 }

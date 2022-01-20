@@ -91,6 +91,7 @@
 }
 
 .wrap .wbcom-plugin-heading {
+    display: block !important;
     margin: 0;
     font-size: 32px;
     line-height: initial;
@@ -219,8 +220,8 @@
     padding: 20px 40px;
 }
 
-.wbcom-tab-content select,
-.wbcom-tab-content select option {
+.wbcom-tab-content select:not([multiple]),
+.wbcom-tab-content select:not([multiple]) option {
     width: 100%;
     display: inline-block;
     white-space: nowrap;

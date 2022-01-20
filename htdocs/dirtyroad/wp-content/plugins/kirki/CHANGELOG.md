@@ -1,3 +1,14 @@
+## 3.1.9 - July 19, 2021
+
+* Fixed: Fixed: Styling issue in Switch control.
+
+## 3.1.8 - July 1, 2021
+
+* Updated Google-Fonts lists.
+* Tested up to WordPress 5.8 RC 1.
+* Fixed: Deprecated warning when editing post/page.
+* Fixed: Styling issue in Radio Buttonset control.
+
 ## 3.1.7 - June 21, 2021
 
 * Updated Google-Fonts lists.

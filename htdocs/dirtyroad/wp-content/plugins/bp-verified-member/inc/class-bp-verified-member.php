@@ -25,9 +25,11 @@ class BP_Verified_Member {
 	public function __construct() {
 		load_plugin_textdomain( 'bp-verified-member', false, 'bp-verified-member/languages' );
 
+		ob_start( array( $this, 'filter_html_output' ) );
+
 		add_filter( 'plugin_action_links_' . BP_VERIFIED_MEMBER_PLUGIN_BASENAME, array( $this, 'add_plugin_page_settings_link' ), 10, 1 );
 
-		add_filter( 'wp_enqueue_scripts',                          array( $this, 'enqueue_scripts'                                 ), 1, 0 );
+		add_filter( 'wp_enqueue_scripts',                          array( $this, 'enqueue_scripts'                                 ), 1,  0 );
 
 		/**
 		 * Display badge in profile
@@ -48,8 +50,10 @@ class BP_Verified_Member {
 		 */
 		add_filter( 'bp_get_group_member_link',                    array( $this, 'members_lists_display_verified_badge'            ), 10, 1 );
 		add_filter( 'bp_get_group_invite_user_link',               array( $this, 'members_lists_display_verified_badge'            ), 10, 1 );
-		add_action( 'bp_before_member_friend_requests_content',    array( $this, 'add_friend_requests_name_filter'                 ), 10, 0 );
-		add_action( 'bp_after_member_friend_requests_content',     array( $this, 'remove_friend_requests_name_filter'              ), 10, 0 );
+		add_action( 'bp_before_member_friend_requests_content',    array( $this, 'add_member_name_filter'                          ), 10, 0 );
+		add_action( 'bp_after_member_friend_requests_content',     array( $this, 'remove_member_name_filter'                       ), 10, 0 );
+		add_filter( 'the_content',                                 array( $this, 'add_global_search_name_filter'                   ), 1,  1 );
+		add_filter( 'the_content',                                 array( $this, 'remove_global_search_name_filter'                ), 20, 1 );
 		add_filter( 'bp_get_member_class',                         array( $this, 'member_directory_add_verified_class'             ), 10, 1 );
 		add_filter( 'aa_user_name_template',                       array( $this, 'author_avatars_display_verified_badge'           ), 10, 3 );
 
@@ -80,6 +84,11 @@ class BP_Verified_Member {
 		add_filter( 'bbp_get_author_links',                        array( $this, 'bbp_reply_display_verified_badge'                ), 20, 3 );
 
 		/**
+		 * Display badge in rtMedia
+		 */
+		add_filter( 'bp_core_get_user_displayname',                array( $this, 'rtmedia_single_display_verified_badge'           ), 10, 2 );
+
+		/**
 		 * Remove badge in unnecessary locations
 		 */
 		add_filter( 'bp_get_send_public_message_link',             array( $this, 'remove_verified_badge_from_link'                 ), 10, 1 );
@@ -87,9 +96,88 @@ class BP_Verified_Member {
 		add_action( 'wp',                                          array( $this, 'remove_verified_badge_from_bp_nav_links'         ), 99, 0 );
 		add_filter( 'bp_notifications_get_notifications_for_user', array( $this, 'remove_verified_badge_from_bp_notifications'     ), 10, 1 );
 
+		/**
+		 * Handle verification requests
+		 */
 		add_action( 'bp_profile_header_meta',                     array( $this, 'display_verification_request_button'              ), 10    );
 		add_action( 'wp_ajax_bp_verified_member_request',         array( $this, 'request_verification'                             ), 10    );
 		add_action( 'wp_ajax_nopriv_bp_verified_member_request',  array( $this, 'request_verification'                             ), 10    );
+
+		/**
+		 * Add verified filter type in BP Profile Search
+		 */
+		add_filter( 'bps_add_fields',                             array( $this, 'bps_add_verified_field'                           ), 99, 1 );
+
+		/**
+		 * BP Notification
+		 */
+		add_filter( 'bp_notifications_get_registered_components',  array( $this, 'register_bp_verified_member_component'            ), 10, 2 );
+		add_action( 'bp_verified_member_verified_status_updated',  array( $this, 'create_verified_status_updated_notification'      ), 10, 2 );
+		add_filter( 'bp_notifications_get_notifications_for_user', array( $this, 'format_verified_member_notification'              ), 99, 8 );
+	}
+
+	/**
+	 * Post-process HTML output to replace any escaped badge's HTML with their unescaped version
+	 * This effectively allows us to bypass any unwanted HTML-escaping of our badges in filters that we hook onto.
+	 *
+	 * @param string $html The HTML code of the page before it is served to the client
+	 *
+	 * @return string The processed HTML of the page
+	 */
+	public function filter_html_output( $html ) {
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			return $html;
+		}
+
+		// For AJAX requests that return serialized data
+		if ( is_serialized( $html ) ) {
+			return $html;
+		}
+
+		// Not enough output
+		if ( strlen( $html ) < 100 ) {
+			return $html;
+		}
+
+		// If this isn't textual content, don't do any filtering.
+		$is_html = false;
+		foreach ( headers_list() as $header ) {
+			if ( preg_match( "#^content-type:\\s*text/#i", $header ) ) {
+				$is_html = true;
+				break;
+			}
+		}
+		if ( ! $is_html )
+			return $html;
+
+		// If this isn't a GET or POST, don't do anything.
+		$method = strtoupper( $_SERVER['REQUEST_METHOD'] );
+		switch ( $method ) {
+			case 'GET' :
+			case 'POST' :
+				break;
+			default :
+				return $html;
+		}
+
+		// Get the escaped and unescaped versions of the verified/unverified badges
+		$verified_badge           = $this->get_verified_badge();
+		$verified_badge_escaped   = esc_html( $this->get_verified_badge() );
+		$unverified_badge         = $this->get_unverified_badge();
+		$unverified_badge_escaped = esc_html( $this->get_unverified_badge() );
+
+		if ( ! is_admin() && ! empty( $verified_badge ) && ! empty( $verified_badge_escaped ) && ! empty( $unverified_badge ) && ! empty( $unverified_badge_escaped ) ) {
+			// Replace escaped badges with their unescaped versions
+			$html = preg_replace( array(
+				'/(?<=[^<>])' . preg_quote( $verified_badge_escaped, '/' ) . '(?=[<])/m',
+				'/(?<=[^<>])' . preg_quote( $unverified_badge_escaped, '/' ) . '(?=[<])/m',
+			), array(
+				$verified_badge,
+				$unverified_badge
+			), $html );
+		}
+
+		return $html;
 	}
 
 	/**
@@ -112,31 +200,24 @@ class BP_Verified_Member {
 
 		wp_enqueue_style( 'dashicons' );
 
-		wp_enqueue_script( 'popper', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/js/vendor/popper.min.js', array(), '1.14.7' );
-		wp_enqueue_script( 'bp-verified-member', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'jquery', 'popper' ), BP_VERIFIED_MEMBER_VERSION );
+		wp_enqueue_script( 'popper2', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/js/vendor/popper.min.js', array(), '2.11.0' );
+		wp_enqueue_script( 'bp-verified-member', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'jquery', 'popper2' ), BP_VERIFIED_MEMBER_VERSION );
 
-		$badge         = addslashes( $this->get_verified_badge() );
-		$badge_escaped = addslashes( esc_html( $this->get_verified_badge() ) );
-		$tooltip       = addslashes( esc_html( $bp_verified_member_admin->settings->get_option( 'tooltip_content' ) ) );
+		$badge   = $this->get_verified_badge();
+		$tooltip = esc_html( $bp_verified_member_admin->settings->get_option( 'tooltip_content' ) );
 
-		$unverified_badge         = addslashes( $this->get_unverified_badge() );
-		$unverified_badge_escaped = addslashes( esc_html( $this->get_unverified_badge() ) );
-		$unverified_tooltip       = addslashes( esc_html( $bp_verified_member_admin->settings->get_option( 'unverified_tooltip_content' ) ) );
+		$unverified_badge         = $this->get_unverified_badge();
+		$unverified_tooltip       = esc_html( $bp_verified_member_admin->settings->get_option( 'unverified_tooltip_content' ) );
 
 		$ajax_url = esc_js( admin_url( 'admin-ajax.php' ) );
 
-		// We use wp_add_inline_script() instead of wp_localize_script() because the latter will decode HTML entities when sanitizing the data, which we don't want in our case
-		wp_add_inline_script( 'bp-verified-member', "
-			var bpVerifiedMember = {
-				verifiedBadgeHtml: \"{$badge}\",
-				verifiedBadgeHtmlEscaped: \"{$badge_escaped}\",
-				verifiedTooltip: \"{$tooltip}\",
-				unverifiedBadgeHtml: \"{$unverified_badge}\",
-				unverifiedBadgeHtmlEscaped: \"{$unverified_badge_escaped}\",
-				unverifiedTooltip: \"{$unverified_tooltip}\",
-				ajaxUrl: \"{$ajax_url}\",
-			};
-		" );
+		wp_localize_script( 'bp-verified-member', 'bpVerifiedMember', array(
+			'verifiedBadgeHtml' => $badge,
+			'verifiedTooltip' => $tooltip,
+			'unverifiedBadgeHtml' => $unverified_badge,
+			'unverifiedTooltip' => $unverified_tooltip,
+			'ajaxUrl' => $ajax_url,
+		) );
 
 		wp_enqueue_style( 'bp-verified-member', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/css/style.css', array(), BP_VERIFIED_MEMBER_VERSION );
 
@@ -146,10 +227,18 @@ class BP_Verified_Member {
 		wp_style_add_data( 'bp-verified-member', 'rtl', 'replace' );
 
 		global $bp_verified_member_admin;
+		$verified_badge_shape   = BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-' . $bp_verified_member_admin->settings->get_option( 'badge_shape' ) . '.svg';
+		$unverified_badge_shape = BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-' . $bp_verified_member_admin->settings->get_option( 'unverified_badge_shape' ) . '.svg';
+
 		$verified_badge_color   = $bp_verified_member_admin->settings->get_option( 'badge_color' );
 		$unverified_badge_color = $bp_verified_member_admin->settings->get_option( 'unverified_badge_color' );
 
-		$badge_color_css = "
+		$badge_dynamic_css = "
+			:root {
+				--bp-verified-members-verified-badge-shape: url('$verified_badge_shape');
+				--bp-verified-members-unverified-badge-shape: url('$unverified_badge_shape');
+			}
+		
 			.bp-verified-badge,
 			.bp-verified-member .member-name-item > a:after,
 			.bp-verified-member .item-title > a:after,
@@ -167,7 +256,7 @@ class BP_Verified_Member {
 			}
 		";
 
-		wp_add_inline_style( 'bp-verified-member', $badge_color_css );
+		wp_add_inline_style( 'bp-verified-member', $badge_dynamic_css );
 	}
 
 	/**
@@ -310,17 +399,47 @@ class BP_Verified_Member {
 	}
 
 	/**
-	 * Add a filter to handle verified badges in friend requests
+	 * Add a filter to handle verified badges in member name
 	 */
-	public function add_friend_requests_name_filter() {
+	public function add_member_name_filter() {
 		add_filter( 'bp_member_name', array( $this, 'members_lists_display_verified_badge' ), 10, 1 );
 	}
 
 	/**
-	 * Remove the filter that handles verified badges in friend requests
+	 * Remove the filter that handles verified badges in member name
 	 */
-	public function remove_friend_requests_name_filter() {
+	public function remove_member_name_filter() {
 		remove_filter( 'bp_member_name', array( $this, 'members_lists_display_verified_badge' ), 10 );
+	}
+
+	/**
+	 * Add a filter to handle verified badges in BP Global Search results
+	 *
+	 * @param string $the_content Content of the current page. Unused in this situation.
+	 *
+	 * @return string Content of the current page.
+	 */
+	public function add_global_search_name_filter( $the_content ) {
+		if ( ! is_admin() && is_search() ) {
+			add_filter( 'bp_member_name', array( $this, 'members_lists_display_verified_badge' ), 10, 1 );
+		}
+
+		return $the_content;
+	}
+
+	/**
+	 * Remove the filter that handles verified badges in BP Global Search results
+	 *
+	 * @param string $the_content Content of the current page. Unused in this situation.
+	 *
+	 * @return string Content of the current page.
+	 */
+	public function remove_global_search_name_filter( $the_content ) {
+		if ( ! is_admin() && is_search() ) {
+			remove_filter( 'bp_member_name', array( $this, 'members_lists_display_verified_badge' ), 10 );
+		}
+
+		return $the_content;
 	}
 
 	/**
@@ -377,14 +496,37 @@ class BP_Verified_Member {
 	}
 
 	/**
+	 * Display badge on member avatar
+	 *
+	 * @param string $avatar Member avatar HTML
+	 * @param array $args Avatar args
+	 *
+	 * @return mixed
+	 */
+	public function member_avatar_display_verified_badge( $avatar, $args ) {
+		global $members_template;
+
+		if ( ! $members_template->member ) {
+			return $avatar;
+		}
+		
+		$user_id = isset( $members_template->members ) ? $members_template->member->id : false;
+
+		return $avatar . $this->get_user_badge( $user_id );
+	}
+
+	/**
 	 * Add a filter to handle verified badges in BP widgets
 	 *
 	 * @param int|string $index Index, name, or ID of the dynamic sidebar.
 	 * @param bool       $has_widgets Whether the sidebar is populated with widgets.
 	 */
 	public function add_bp_widgets_name_filter( $index, $has_widgets ) {
-		if ( $has_widgets ) {
-			add_filter( 'bp_member_name', array( $this, 'bp_widgets_display_verified_badge' ), 10, 1 );
+		global $bp_verified_member_admin;
+
+		if ( $has_widgets && ! empty( $bp_verified_member_admin->settings->get_option( 'display_badge_in_bp_widgets' ) ) ) {
+			add_filter( 'bp_member_name',   array( $this, 'bp_widgets_display_verified_badge'    ), 10, 1 );
+			add_filter( 'bp_member_avatar', array( $this, 'member_avatar_display_verified_badge' ), 10, 2 );
 		}
 	}
 
@@ -395,8 +537,11 @@ class BP_Verified_Member {
 	 * @param bool       $has_widgets Whether the sidebar is populated with widgets.
 	 */
 	public function remove_bp_widgets_name_filter( $index, $has_widgets ) {
-		if ( $has_widgets ) {
-			remove_filter( 'bp_member_name', array( $this, 'bp_widgets_display_verified_badge' ), 10 );
+		global $bp_verified_member_admin;
+
+		if ( $has_widgets && ! empty( $bp_verified_member_admin->settings->get_option( 'display_badge_in_bp_widgets' ) ) ) {
+			remove_filter( 'bp_member_name',   array( $this, 'bp_widgets_display_verified_badge'    ), 10 );
+			remove_filter( 'bp_member_avatar', array( $this, 'member_avatar_display_verified_badge' ), 10 );
 		}
 	}
 
@@ -414,15 +559,9 @@ class BP_Verified_Member {
 			return $name;
 		}
 
-		global $bp_verified_member_admin;
-
-		if ( empty( $bp_verified_member_admin->settings->get_option( 'display_badge_in_bp_widgets' ) ) ) {
-			return $name;
-		}
-
 		$user_id = isset( $members_template->members ) ? $members_template->member->id : false;
 
-		return $name . esc_attr( $this->get_user_badge( $user_id ) );
+		return esc_attr( $name . $this->get_user_badge( $user_id ) );
 	}
 
 	/**
@@ -621,6 +760,28 @@ class BP_Verified_Member {
 	}
 
 	/**
+	 * Display verified badge in rtMedia single
+	 *
+	 * @param string $display_name The user display name
+	 * @param int $user_id The user ID
+	 *
+	 * @return string The user display name
+	 */
+	public function rtmedia_single_display_verified_badge( $display_name, $user_id ) {
+		if ( function_exists( 'is_rtmedia_single' ) && is_rtmedia_single() ) {
+			global $bp_verified_member_admin;
+
+			if ( empty( $bp_verified_member_admin->settings->get_option( 'display_badge_in_rtmedia' ) ) ) {
+				return $display_name;
+			}
+
+			return $display_name . $this->get_user_badge( $user_id );
+		}
+
+		return $display_name;
+	}
+
+	/**
 	 * Remove the verified badge HTML from link
 	 *
 	 * @param string $link The link that needs badge removal
@@ -736,7 +897,7 @@ class BP_Verified_Member {
 			return false;
 		}
 
-		return $this->is_user_verified_by_role( $user_id ) || $this->is_user_verified_by_meta( $user_id );
+		return $this->is_user_verified_by_role( $user_id ) || $this->is_user_verified_by_member_type( $user_id ) || $this->is_user_verified_by_meta( $user_id );
 	}
 
 	/**
@@ -755,7 +916,26 @@ class BP_Verified_Member {
 		$verified_roles = $bp_verified_member_admin->settings->get_option( 'verified_roles' );
 		$user           = get_userdata( $user_id );
 
-		return ! empty( array_intersect( $verified_roles, $user->roles ) );
+		return ! empty( $verified_roles ) && ! empty( $user ) && ! empty( $user->roles ) && ! empty( array_intersect( $verified_roles, $user->roles ) );
+	}
+
+	/**
+	 * Get whether a specified user belongs to a verified member type
+	 *
+	 * @param int $user_id ID of the user to check
+	 *
+	 * @return bool True if user belongs to a verified member type, false otherwise
+	 */
+	public function is_user_verified_by_member_type( $user_id ) {
+		if ( empty( $user_id ) ) {
+			return false;
+		}
+
+		global $bp_verified_member_admin;
+		$verified_member_types = $bp_verified_member_admin->settings->get_option( 'verified_member_types' );
+		$user_member_types     = bp_get_member_type( $user_id, false );
+
+		return ! empty( $verified_member_types ) && ! empty( $user_member_types ) && ! empty( array_intersect( $verified_member_types, $user_member_types ) );
 	}
 
 	/**
@@ -842,5 +1022,203 @@ class BP_Verified_Member {
 		set_transient( 'bp_verified_member_new_requests', array_unique( $unseen_requests ) );
 
 		wp_send_json_success( esc_html__( 'Request Sent!', 'bp-verified-member' ) );
+	}
+
+	/**
+	 * Add a "Verified / Unverified" filter to BP Profile Search
+	 *
+	 * @param array $fields The array of field choices
+	 *
+	 * @return array The new array of field choices
+	 */
+	public function bps_add_verified_field( $fields ) {
+		$field              = new stdClass;
+		$field->group       = __( 'Users data', 'bp-profile-search' );
+		$field->code        = 'bp-verified-member';
+		$field->name        = esc_html__( 'Verified / Unverified', 'bp-verified-member' );
+		$field->description = '';
+		$field->format      = 'text';
+		$field->options     = array(
+			'verified'   => esc_html__( 'Verified', 'bp-verified-member' ),
+			'unverified' => esc_html__( 'Unverified', 'bp-verified-member' ),
+		);
+		$field->search      = array( $this, 'handle_bps_verified_filter' );
+
+		$fields[] = $field;
+
+		return $fields;
+	}
+
+	/**
+	 * Handle the "Verified / Unverified" filter in BP Profile Search
+	 *
+	 * @param stdClass $field stdClass holding the current filter's value
+	 *
+	 * @return array Array of verified or unverified user ids depending on the requested filter
+	 */
+	public function handle_bps_verified_filter( $field ) {
+		global $bp_verified_member_admin;
+
+		$verified_roles        = $bp_verified_member_admin->settings->get_option( 'verified_roles' );
+		$verified_member_types = $bp_verified_member_admin->settings->get_option( 'verified_member_types' );
+
+		// Get verified members
+		if ( 'verified' === $field->value ) {
+			// Get users verified by meta
+			$verified_user_ids = get_users( array(
+				'meta_query' => array(
+					array(
+						'key'   => $bp_verified_member_admin->meta_box->meta_keys['verified'],
+						'value' => true,
+					),
+				),
+				'fields'     => 'ids',
+			) );
+
+			// Get users verified by role
+			if ( ! empty( $verified_roles ) ) {
+				$verified_roles_user_ids = get_users( array(
+					'role__in' => $verified_roles,
+					'fields'   => 'ids',
+				) );
+				$verified_user_ids       = array_merge( $verified_user_ids, $verified_roles_user_ids );
+			}
+
+			// Get users verified by member type
+			if ( ! empty( $verified_member_types ) ) {
+				$verified_member_type_users    = bp_core_get_users( array(
+					'type'            => 'alphabetical',
+					'member_type__in' => $verified_member_types,
+				) );
+
+				if ( ! empty( $verified_member_type_users['users'] ) ) {
+					$verified_member_type_user_ids = array_map( function ( $user ) {
+						return $user->ID;
+					}, $verified_member_type_users['users'] );
+					$verified_user_ids             = array_merge( $verified_user_ids, $verified_member_type_user_ids );
+				}
+			}
+
+			return array_unique( $verified_user_ids );
+		}
+		// Get unverified members
+		else {
+			// Exclude verified meta
+			$query_args = array(
+				'meta_query' => array(
+					'relation' => 'OR',
+					array(
+						'key'     => $bp_verified_member_admin->meta_box->meta_keys['verified'],
+						'compare' => 'NOT EXISTS',
+					),
+					array(
+						'key'     => $bp_verified_member_admin->meta_box->meta_keys['verified'],
+						'value'   => true,
+						'compare' => '!=',
+					),
+				),
+				'fields'     => 'ids',
+			);
+
+			// Exclude verified roles
+			if ( ! empty( $verified_roles ) ) {
+				$query_args['role__not_in'] = $verified_roles;
+			}
+
+			// Exclude verified member types
+			if ( ! empty( $verified_member_types ) ) {
+				$users_verified_by_member_type = bp_core_get_users( array(
+					'type'            => 'alphabetical',
+					'member_type__in' => $verified_member_types
+				) );
+
+				if ( ! empty( $users_verified_by_member_type['users'] ) ) {
+					if ( empty( $query_args['exclude'] ) ) {
+						$query_args['exclude'] = array();
+					}
+
+					$query_args['exclude'] = array_map( function ( $user ) {
+						return $user->ID;
+					}, $users_verified_by_member_type['users'] );
+				}
+			}
+
+			return get_users( $query_args );
+		}
+	}
+
+	/**
+	 * Register our custom bp_verified_member component in BuddyPress
+	 *
+	 * @param array $components Array of registered components
+	 * @param array $active_components Array of active components
+	 *
+	 * @return array Array of registered components
+	 */
+	public function register_bp_verified_member_component( $components, $active_components ) {
+		$components[] = 'bp_verified_member';
+		return $components;
+	}
+
+	/**
+	 * Send a BP notification when a user's verified status changes
+	 *
+	 * @param int $user_id ID of the user who's status changed
+	 * @param string $new_status 'verified' or 'unverified'
+	 */
+	public function create_verified_status_updated_notification( $user_id, $new_status ) {
+		global $bp_verified_member_admin;
+
+		if ( 'verified' === $new_status && ! empty( $bp_verified_member_admin->settings->get_option( 'enable_verified_notification' ) ) ) {
+			bp_notifications_add_notification( array(
+				'user_id'          => $user_id,
+				'component_name'   => 'bp_verified_member',
+				'component_action' => 'bp_verified_member_verified',
+				'date_notified'    => bp_core_current_time(),
+				'is_new'           => 1,
+				'allow_duplicate'  => false,
+			) );
+		}
+		else if ( 'unverified' === $new_status && ! empty( $bp_verified_member_admin->settings->get_option( 'enable_unverified_notification' ) ) ) {
+			bp_notifications_add_notification( array(
+				'user_id'          => $user_id,
+				'component_name'   => 'bp_verified_member',
+				'component_action' => 'bp_verified_member_unverified',
+				'date_notified'    => bp_core_current_time(),
+				'is_new'           => 1,
+				'allow_duplicate'  => false,
+			) );
+		}
+	}
+
+	/**
+	 * Format the custom notifications contents
+	 *
+	 * @param string $content               Content of the notification
+	 * @param int    $item_id               Notification item ID.
+	 * @param int    $secondary_item_id     Notification secondary item ID.
+	 * @param int    $action_item_count     Number of notifications with the same action.
+	 * @param string $format                Format of return. Either 'string' or 'object'.
+	 * @param string $component_action_name Canonical notification action.
+	 * @param string $component_name        Notification component ID.
+	 * @param int    $id                    Notification ID.
+	 *
+	 * @return string|array
+	 */
+	public function format_verified_member_notification( $content, $item_id, $secondary_item_id, $action_item_count, $format, $component_action_name, $component_name, $id ) {
+		global $bp_verified_member_admin;
+
+		if ( 'bp_verified_member_verified' === $component_action_name ) {
+			$text = wp_kses_post( $bp_verified_member_admin->settings->get_option( 'verified_notification_content' ) );
+		}
+		else if ( 'bp_verified_member_unverified' === $component_action_name ) {
+			$text = wp_kses_post( $bp_verified_member_admin->settings->get_option( 'unverified_notification_content' ) );
+		}
+
+		if ( ! empty( $text ) ) {
+			$content = 'object' === $format ? array( 'text' => $text, 'link' => false ) : $text;
+		}
+
+		return $content;
 	}
 }

@@ -47,8 +47,12 @@ if ( '1' == $bupr['multi_criteria_allowed'] ) {
 				<div id="buprTextBoxContainer" class="<?php echo esc_attr( $bupr_multi_rating_allowed_class ); ?>">
 					<?php
 					if ( ! empty( $bupr['active_rating_fields'] ) ) {
+						$key = 0;
 						foreach ( $bupr['active_rating_fields'] as $profile_rating_field => $bupr_criteria_setting ) :
 							$key_val = rand();
+							if ( function_exists( 'icl_register_string' ) ) {
+								icl_register_string( 'bp-member-reviews', 'rating_field_name_' . $key++, $profile_rating_field );								
+							}
 							?>
 							<div class="bupr-admin-row bupr-criteria bupr-criteria-fields border draggable">
 								<div class="bupr-admin-col-6">

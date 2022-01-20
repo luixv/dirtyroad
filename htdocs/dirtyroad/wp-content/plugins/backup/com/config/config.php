@@ -1,24 +1,28 @@
 <?php
+
 //Version
 define('SG_ARCHIVE_VERSION', '5');
 
+//Timezone
+define('SG_DEFAULT_TIMEZONE', 'UTC');
+
 //Paths
-define('SG_APP_PATH', realpath(dirname(__FILE__).'/../').'/');
-define('SG_CONFIG_PATH', SG_APP_PATH.'config/');
-define('SG_CORE_PATH', SG_APP_PATH.'core/');
-define('SG_DATABASE_PATH', SG_CORE_PATH.'database/');
-define('SG_LOG_PATH', SG_CORE_PATH.'log/');
-define('SG_STORAGE_PATH', SG_CORE_PATH.'storage/');
-define('SG_EXCEPTION_PATH', SG_CORE_PATH.'exception/');
-define('SG_BACKUP_PATH', SG_CORE_PATH.'backup/');
-define('SG_RESTORE_PATH', SG_CORE_PATH.'restore/');
-define('SG_LIB_PATH', SG_APP_PATH.'lib/');
-define('SG_MAIL_PATH', SG_CORE_PATH.'mail/');
-define('SG_NOTICE_PATH', SG_CORE_PATH.'notice/');
-define('SG_SCHEDULE_PATH', SG_CORE_PATH.'schedule/');
-define('SG_WIDGET_PATH', SG_CORE_PATH.'widget/');
-define('SG_EXTENSION_PATH', SG_CORE_PATH.'extension/');
-define('SG_REQUEST_PATH', SG_LIB_PATH.'Request/');
+define('SG_APP_PATH', realpath(dirname(__FILE__) . '/../') . '/');
+define('SG_CONFIG_PATH', SG_APP_PATH . 'config/');
+define('SG_CORE_PATH', SG_APP_PATH . 'core/');
+define('SG_DATABASE_PATH', SG_CORE_PATH . 'database/');
+define('SG_LOG_PATH', SG_CORE_PATH . 'log/');
+define('SG_STORAGE_PATH', SG_CORE_PATH . 'storage/');
+define('SG_EXCEPTION_PATH', SG_CORE_PATH . 'exception/');
+define('SG_BACKUP_PATH', SG_CORE_PATH . 'backup/');
+define('SG_RESTORE_PATH', SG_CORE_PATH . 'restore/');
+define('SG_LIB_PATH', SG_APP_PATH . 'lib/');
+define('SG_MAIL_PATH', SG_CORE_PATH . 'mail/');
+define('SG_NOTICE_PATH', SG_CORE_PATH . 'notice/');
+define('SG_SCHEDULE_PATH', SG_CORE_PATH . 'schedule/');
+define('SG_WIDGET_PATH', SG_CORE_PATH . 'widget/');
+define('SG_EXTENSION_PATH', SG_CORE_PATH . 'extension/');
+define('SG_REQUEST_PATH', SG_LIB_PATH . 'Request/');
 
 // Seal themes
 define('SG_SEAL_THEME_DARK', "dark");
@@ -68,8 +72,8 @@ define('SG_NOTICE_EXECUTION_TIMEOUT', 'timeout_error');
 define('SG_NOTICE_MIGRATION_ERROR', 'migration_error');
 define('SG_NOTICE_NOT_WRITABLE_ERROR', 'restore_notwritable_error');
 
-define('SG_WORDPRESS_CORE_TABLE', SG_ENV_DB_PREFIX.'options');
-define('SG_MAGENTO_CORE_TABLE', SG_ENV_DB_PREFIX.'core_config_data');
+define('SG_WORDPRESS_CORE_TABLE', SG_ENV_DB_PREFIX . 'options');
+define('SG_MAGENTO_CORE_TABLE', SG_ENV_DB_PREFIX . 'core_config_data');
 
 //Backup file default prefix
 define('SG_BACKUP_FILE_NAME_DEFAULT_PREFIX', 'sg_backup_');
@@ -83,7 +87,7 @@ define('SG_SCHEDULE_ACTION', 'backup_guard_schedule_action');
 define('SG_SCHEDULER_DEFAULT_ID', 1);
 
 //one day in seconds
-define('SG_ONE_DAY_IN_SECONDS', 24*60*60);
+define('SG_ONE_DAY_IN_SECONDS', 24 * 60 * 60);
 
 define('SG_ENTRY_TYPE_FILE', 1);
 define('SG_ENTRY_TYPE_CDR', 2);
@@ -174,9 +178,9 @@ define('SG_BACKUP_IN_BACKGROUND_MODE', 0);
 define('SG_BACKUP_UPLOAD_TO_STORAGES', ''); //list of storage ids separated by commas
 
 //Database tables
-define('SG_ACTION_TABLE_NAME', SG_ENV_DB_PREFIX.'sg_action');
-define('SG_CONFIG_TABLE_NAME', SG_ENV_DB_PREFIX.'sg_config');
-define('SG_SCHEDULE_TABLE_NAME', SG_ENV_DB_PREFIX.'sg_schedule');
+define('SG_ACTION_TABLE_NAME', SG_ENV_DB_PREFIX . 'sg_action');
+define('SG_CONFIG_TABLE_NAME', SG_ENV_DB_PREFIX . 'sg_config');
+define('SG_SCHEDULE_TABLE_NAME', SG_ENV_DB_PREFIX . 'sg_schedule');
 
 define('SG_SSH_KEY_FILE_FOLDER_NAME', 'sshKeyFolder/');
 
@@ -216,3 +220,12 @@ define('BACKUP_GUARD_TEXTDOMAIN', 'backup-guard-pro');
 define('BACKUP_GUARD_ONE_MB', 1000000);
 
 define('BACKUP_GUARD_CLOUD_UPGRADE_URL', 'http://backup-guard.com/admin/billing/process/2');
+
+define('BACKUP_GUARD_DOWNLOAD_MODE_LINK', 0);
+define('BACKUP_GUARD_DOWNLOAD_MODE_PHP', 1);
+define('BACKUP_GUARD_DOWNLOAD_MODE_SYMLINK', 2);
+
+define('SG_SLEEP_LOW_VALUE', 2);
+define('SG_SLEEP_MIDDLE_VALUE', 5);
+define('SG_SLEEP_HIGHT_VALUE', 10);
+define('SG_FILES_COUNT', 100);

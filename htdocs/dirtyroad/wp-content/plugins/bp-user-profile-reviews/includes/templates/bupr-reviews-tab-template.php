@@ -32,7 +32,10 @@ $args = array(
 	),
 );
 
-$reviews = new WP_Query( $args ); ?>
+$reviews = new WP_Query( $args );
+?>
+
+<?php do_action( 'bupr_before_member_review_list' ); ?>
 
 <div class="bupr-bp-member-reviews-block">
 	<div class="select-wrap">
@@ -57,6 +60,7 @@ $reviews = new WP_Query( $args ); ?>
 						$review_date           = date_i18n( 'M Y' );
 						$anonymous_post_review = get_post_meta( $post->ID, 'bupr_anonymous_review_post', true );
 						$member_review_ratings = get_post_meta( $post->ID, 'profile_star_rating', false );
+						$author_id             = get_post_field( 'post_author', get_the_ID() );
 
 						if ( ! empty( $bupr['active_rating_fields'] ) ) {
 							$member_review_rating_fields = $bupr['active_rating_fields'];
@@ -71,6 +75,13 @@ $reviews = new WP_Query( $args ); ?>
 						}
 						?>
 						<div class="bupr-row">
+							<?php if ( ! empty( $bupr['allow_update'] ) && 'yes' === $bupr['allow_update'] ) : ?>
+								<?php if ( bp_loggedin_user_id() == $author_id ) : ?>
+									<div id="bupr-reiew-edit" class="bupr-edit-review-button-wrapper" data-review="<?php echo esc_attr( $post->ID ); ?>">
+										<button type="button" class="bupr-edit-review-button"><?php echo sprintf( esc_html__( 'Edit %s', 'bp-member-reviews' ), bupr_profile_review_singular_tab_name() ); ?></button>
+									</div>
+								<?php endif; ?>
+							<?php endif; ?>
 							<div class="bupr-members-profiles">
 								<div class="item-avatar">
 									<?php
@@ -151,8 +162,10 @@ $reviews = new WP_Query( $args ); ?>
 										</time>
 								</span>
 								<?php echo '</div>'; ?>
-
-								<?php $url = 'view/' . get_the_id(); ?>
+								<?php
+								$user_id = bp_displayed_user_id();
+								$url     = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/view/' . get_the_id();
+								?>
 								<div class="bupr-review-description">
 									<div class="bupr-full-description">
 										<?php
@@ -173,6 +186,7 @@ $reviews = new WP_Query( $args ); ?>
 												<?php
 											}
 										}
+
 										if ( ! empty( $member_review_rating_fields ) && ! empty( $member_review_ratings[0] ) ) :
 											foreach ( $member_review_ratings[0] as $field => $bupr_value ) {
 
@@ -252,3 +266,4 @@ $reviews = new WP_Query( $args ); ?>
 		</div>
 	</div>
 </div>
+<?php do_action( 'bupr_after_member_review_list' ); ?>

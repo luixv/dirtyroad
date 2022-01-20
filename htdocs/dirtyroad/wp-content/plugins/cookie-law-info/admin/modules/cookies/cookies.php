@@ -846,9 +846,9 @@ class Cookie_Law_Info_Cookies {
 						<p style="font-weight:500;font-size:1.05em;"><?php _e( 'Clicking “Migrate cookie categories” will auto migrate your existing cookie categories (Necessary and Non-necessary) to our new Cookie Category taxonomy. This action is required to enable the cookie scanner.', 'cookie-law-info' ); ?></p>
 						<h3 style="font-size:1.05em;"><?php echo __( 'What happens after migration?', 'cookie-law-info' ); ?></h3>
 						<ul>
-							<li><?php echo __( 'You no longer need to manage static cookie categories. After the migration, new cookie categories (Necessary, Functional, Analytics, Performance, Advertisement, and Others) will be created automatically. Also, you can easily add custom cookie categories and edit/delete the existing categories including the custom categories.', 'cookiel-law-info' ); ?></li>
-							<li><?php echo __( 'If you have made any changes to the existing "Non-necessary" category we will migrate it to the newly created “Cookie Category” section. If not, we will delete the "Non-necessary" category automatically.', 'cookiel-law-info' ); ?></li>
-							<li><?php echo __( 'During the migration phase your existing cookie category translations will be lost. Hence we request you to add it manually soon after the migration. You can access the existing translations by navigating to the string translation settings of your translator plugin.', 'cookiel-law-info' ); ?></li>
+							<li><?php echo __( 'You no longer need to manage static cookie categories. After the migration, new cookie categories (Necessary, Functional, Analytics, Performance, Advertisement, and Others) will be created automatically. Also, you can easily add custom cookie categories and edit/delete the existing categories including the custom categories.', 'cookie-law-info' ); ?></li>
+							<li><?php echo __( 'If you have made any changes to the existing "Non-necessary" category we will migrate it to the newly created “Cookie Category” section. If not, we will delete the "Non-necessary" category automatically.', 'cookie-law-info' ); ?></li>
+							<li><?php echo __( 'During the migration phase your existing cookie category translations will be lost. Hence we request you to add it manually soon after the migration. You can access the existing translations by navigating to the string translation settings of your translator plugin.', 'cookie-law-info' ); ?></li>
 						</ul>
 					</div>
 					<div class="wt-cli-notice-actions">

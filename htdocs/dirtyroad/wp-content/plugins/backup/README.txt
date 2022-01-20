@@ -5,8 +5,8 @@ Author: Backup Guard
 Donate link: https://backup-guard.com/products/backup-wordpress
 Tags: backup, wordpress backup plugin, backup plugin, database backup, migrate, back up
 Requires at least: 3.9
-Tested up to: 5.7
-Stable tag: 1.6.3
+Tested up to: 5.8
+Stable tag: 1.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,48 @@ When you are facing an issue of any kind with any of our products, the first thi
 6.  Site backup customization
 
 == Changelog ==
+
+= 1.6.8.4 =
+* Bug fixes
+
+= 1.6.8.3 =
+* Improvement of banner
+
+= 1.6.8.2 =
+* Improvement of banner for marketing purposes
+
+= 1.6.8.1 =
+* Bug fixed related to scheduled backups that didn’t run because of the path
+
+= 1.6.8 =
+* Improvement of silent restoration
+* Improvement of restore: issues related to upload_path have been resolved
+* Bug fixed related to responsiveness in 'Why Upgrade' section
+
+= 1.6.7.1 =
+* Code improvement of download mode check function
+* Bug fixed related to displaying pCloud and Box clouds on the schedule page
+* Bug fixed related to displaying pCloud and Box clouds in the whole plugin when they are not connected from the 'Cloud'
+
+= 1.6.7 =
+* New feature: Timezone choosing opportunity has been added
+* New feature: During yearly backup month and day choosing opportunity has been added
+* Bug fixed related to 2 and more scheduled backups
+* Bug fixed related to LiteSpeed warning
+
+= 1.6.6.1 =
+* Bug fixed related to not supported define array in PHP 5.6
+
+= 1.6.6 =
+* New feature: Upload chunk size is now visible in the log
+* New feature: Download from dropbox chunk by chunk is added
+* New feature: Minimum chunk size for Amazon S3 is changed to 5mb
+* New feature: When background mode is enabled during backup, CPU usage is reduced
+* Bug fixed related to error messages that user face when using "Gold" and "Silver" plans
+* Bug fixed related to backup log total duration
+
+= 1.6.5.1 =
+* Bug fixed related to backup download
 
 = 1.6.5 =
 * Improvement of symlink download logic

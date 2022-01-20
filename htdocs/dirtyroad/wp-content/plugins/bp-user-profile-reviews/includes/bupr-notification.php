@@ -49,7 +49,7 @@ function bupr_add_review_notification_format( $action, $item_id, $secondary_item
 		$admin_info     = get_userdata( $secondary_item_id );
 
 		if ( $admin_info ) {
-			$admin_name = $admin_info->user_login;
+			$admin_name = $admin_info->user_nicename;
 		} else {
 			$admin_name = '';
 		}

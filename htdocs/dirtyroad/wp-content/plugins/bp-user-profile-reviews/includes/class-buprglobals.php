@@ -68,6 +68,9 @@ if ( ! class_exists( 'BUPRGlobals' ) ) {
 				if ( array_key_exists( 'bupr_allow_notification', $bupr_general_settings ) ) {
 					$allow_notification = $bupr_general_settings['bupr_allow_notification'];
 				}
+				if ( array_key_exists( 'bupr_allow_update', $bupr_general_settings ) ) {
+					$allow_update = $bupr_general_settings['bupr_allow_update'];
+				}
 				if ( array_key_exists( 'bupr_exc_member', $bupr_general_settings ) ) {
 					$exclude_given_members = $bupr_general_settings['bupr_exc_member'];
 				}
@@ -110,6 +113,9 @@ if ( ! class_exists( 'BUPRGlobals' ) ) {
 				if ( empty( $allow_notification ) ) {
 					$allow_notification = 'no';
 				}
+				if ( empty( $allow_update ) ) {
+					$allow_update = 'no';
+				}
 				if ( empty( $exclude_given_members ) ) {
 					$exclude_given_members = array();
 				}
@@ -125,6 +131,7 @@ if ( ! class_exists( 'BUPRGlobals' ) ) {
 				$reviews_per_page      = 3;
 				$allow_email           = 'yes';
 				$allow_notification    = 'yes';
+				$allow_update          = 'yes';
 				$exclude_given_members = $name;
 				$add_taken_members     = $name;
 				$auto_approve_reviews  = 'yes';
@@ -185,6 +192,7 @@ if ( ! class_exists( 'BUPRGlobals' ) ) {
 				'reviews_per_page'       => $reviews_per_page,
 				'allow_email'            => $allow_email,
 				'allow_notification'     => $allow_notification,
+				'allow_update'           => $allow_update,
 				'exclude_given_members'  => $exclude_given_members,
 				'add_taken_members'      => $add_taken_members,
 				'rating_color'           => $rating_color,

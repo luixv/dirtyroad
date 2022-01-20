@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit();
 <div class="thimpress_donate_button">
 
     <div class="donate_button_title">
-		<?php _e( 'Support us', 'fundpress' ) ?>
+		<?php _e( 'Donate now', 'fundpress' ) ?>
     </div>
 
     <span class="donate_items_count"><?php printf( '%s', FP()->cart->cart_items_count ) ?></span>

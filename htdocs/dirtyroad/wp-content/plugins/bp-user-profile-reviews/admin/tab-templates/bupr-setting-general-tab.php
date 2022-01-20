@@ -124,6 +124,20 @@ global $bupr;
 				</tr>
 				<tr>
 					<th scope="row">
+						<label for="bupr_review_update">
+							<?php esc_html_e( 'Update Review', 'bp-member-reviews' ); ?>
+						</label>
+					</th>
+					<td>
+						<label class="bupr-switch">
+							<input type="checkbox" id="bupr_review_update" name="bupr_admin_general_options[bupr_allow_update]" <?php checked( esc_attr( $bupr['allow_update'] ), 'yes' ); ?> value="yes">
+							<div class="bupr-slider bupr-round"></div>
+						</label>
+						<p class="description"><?php esc_html_e( 'Enable this option, if you want the members update/modify their reviews.', 'bp-member-reviews' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
 						<label for="profile_reviews_per_page">
 							<?php esc_html_e( 'Reviews pages show at most', 'bp-member-reviews' ); ?>
 						</label>

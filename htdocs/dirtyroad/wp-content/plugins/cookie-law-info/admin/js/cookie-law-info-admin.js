@@ -60,6 +60,13 @@
 		 		cli_nav_tab.eq(0).click();
 		 	}		 	
 		}
+		$('#cky-table-comparison-link').click(function( event ){
+			event.preventDefault();
+			$('a[href="#cookie-law-info-upgrade-pro"]').trigger("click");
+			$('html,body').animate({
+				scrollTop: $('#cky-container').offset().top - 50  },
+				'slow');
+		});
 		$('.cli_sub_tab li').click(function(){
 			var trgt=$(this).attr('data-target');
 			var prnt=$(this).parent('.cli_sub_tab');

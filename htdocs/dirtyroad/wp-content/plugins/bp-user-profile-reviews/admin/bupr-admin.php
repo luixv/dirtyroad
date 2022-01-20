@@ -219,7 +219,7 @@ if ( ! class_exists( 'BUPR_Admin' ) ) {
 				'has_archive'        => true,
 				'hierarchical'       => false,
 				'menu_position'      => null,
-				'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
+				'supports'           => array( 'title', 'editor', 'author' ),
 			);
 			register_post_type( 'review', $args );
 

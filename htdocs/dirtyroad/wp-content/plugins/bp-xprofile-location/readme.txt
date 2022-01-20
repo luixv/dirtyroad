@@ -6,8 +6,8 @@ Author: PhiloPress
 Author URI: https://philopress.com/
 Plugin URI: https://www.philopress.com/products/bp-xprofile-location/
 Requires at least: 4.0
-Tested up to: 5.7
-Stable tag: 4.2
+Tested up to: 5.8
+Stable tag: 4.5
 License: GPLv2 or later
 
 == Description ==
@@ -88,6 +88,15 @@ If you selected the "Save Geocode" option when creating the profile field and a 
 
 
 == Changelog ==
+
+= 4.5 =
+* removes js comments to prevent errors when white space is trimmed.
+
+= 4.4 =
+* removes the check for an active xprofiles component. This is an important update, especially for BuddyBoss users.
+
+= 4.3 =
+* fixes a bug re the use of 'legend' instead of 'label' for the field name formatting
 
 = 4.2 =
 * fixes a bug re use of Profile Search in BuddyBoss when the "Search Mode" for a Location field is not set to 'distance'

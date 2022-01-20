@@ -150,9 +150,9 @@ class bupr_single_member_rating_widget extends WP_Widget {
 				$user_anonymous_review = get_post_meta( $buprKey, 'bupr_anonymous_review_post', true );
 				if ( $bupr_user_count == $rating_limit ) {
 					break;
-				} else {
+				} else {					
 					echo '<li class="vcard"><div class="item-avatar">';
-					echo get_avatar( $final_review_obj[ $buprKey ]->ID, 50 );
+					echo get_avatar( $final_review_obj[ $buprKey ]->post_author, 50 );
 					echo '</div>';
 					echo '<div class="item">';
 					$members_profile = bp_core_get_userlink( $final_review_obj[ $buprKey ]->post_author );
@@ -175,23 +175,16 @@ class bupr_single_member_rating_widget extends WP_Widget {
 					}
 					echo '<div class="item-meta">';
 
-					for ( $i = 1; $i <= $stars_on; $i++ ) {
-						?>
-						<span class="fas fa-star bupr-star-rate"></span>
-						<?php
+					for ( $i = 1; $i <= $stars_on; $i++ ) { 
+                                            ?><span class="fas fa-star bupr-star-rate"></span><?php
 					}
-
-					for ( $i = 1; $i <= $stars_half; $i++ ) {
-						?>
-						<span class="fas fa-star-half-alt bupr-star-rate"></span>
-						<?php
+					for ( $i = 1; $i <= $stars_half; $i++ ) { 
+                                            ?><span class="fas fa-star-half-alt bupr-star-rate"></span><?php
 					}
-
-					for ( $i = 1; $i <= $stars_off; $i++ ) {
-						?>
-						<span class="far fa-star bupr-star-rate"></span>
-						<?php
+					for ( $i = 1; $i <= $stars_off; $i++ ) { 
+                                            ?><span class="far fa-star bupr-star-rate"></span><?php
 					}
+                                        
 					echo '</div>';
 
 					$bupr_avg_rating = round( $bupr_avg_rating, 2 );

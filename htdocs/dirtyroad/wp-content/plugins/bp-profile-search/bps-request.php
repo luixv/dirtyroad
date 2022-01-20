@@ -205,7 +205,10 @@ function bps_get_form_fields ($form)
 		{
 			$key = bps_key ($code, $filter);
 			if (isset ($request[$key]))
+			{
+				$f->filter = $filter;
 				$f->value = $request[$key];
+			}
 
 			$f->error_message = _bps_validate_field ($f);
 			if ($f->error_message)  $errors[$form] += 1;

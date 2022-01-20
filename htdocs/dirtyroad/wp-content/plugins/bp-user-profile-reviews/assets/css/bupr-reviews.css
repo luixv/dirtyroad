@@ -1,3 +1,15 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Global
+# Model
+# Success and Error Message
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+# Global
+--------------------------------------------------------------*/
 #bp-member-reviews-list {
   width: 100%;
 }
@@ -24,6 +36,7 @@
 
 #bupr_member_review_id {
   padding: 10px;
+  padding-left: 10px !important;
   max-width: 300px;
   width: 100%;
   border: 1px #e3e3e3 solid;
@@ -71,16 +84,18 @@
   display: inline-block;
   width: 100%;
   background: #f7f7f7;
-  padding: 3px 10px;
+  margin: 10px 0 0;
+  padding: 10px;
   border-radius: 3px;
-  margin-top: 5px;
 }
 
 .multi-review>div {
   padding: 0px;
 }
 
-/****************** MODAL CSS ***********************/
+/*--------------------------------------------------------------
+# Model
+--------------------------------------------------------------*/
 /* The Modal (background) */
 .modal {
   display: none;
@@ -183,7 +198,9 @@
   color: red;
 }
 
-/* bupr success and error msg */
+/*--------------------------------------------------------------
+# Success and Error Message
+--------------------------------------------------------------*/
 .bupr-success {
   width: 90%;
   padding: 10px;

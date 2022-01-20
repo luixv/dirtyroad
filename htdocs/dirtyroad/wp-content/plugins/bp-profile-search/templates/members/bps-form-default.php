@@ -17,7 +17,7 @@ if (!isset ($options['collapsible']))  $options['collapsible'] = 'Yes';
 
 // 2nd section: display the form to select the template options
 
-if (is_admin ())
+if (bps_screen () || defined ('DOING_AJAX'))
 {
 ?>
 	<p><strong><?php _e('jQuery UI Theme', 'bp-profile-search'); ?></strong></p>
@@ -210,7 +210,7 @@ foreach ($F->fields as $f)
 			<script>
 				jQuery(function ($) {
 					bps_autocomplete('<?php echo $id; ?>', '<?php echo $id; ?>_lat', '<?php echo $id; ?>_lng');
-					$('#<?php echo $id; ?>_icon').click(function () {
+					$('#<?php echo $id; ?>_icon').on('click', function () {
 						bps_locate('<?php echo $id; ?>', '<?php echo $id; ?>_lat', '<?php echo $id; ?>_lng')
 					});
 				});

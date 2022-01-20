@@ -238,9 +238,12 @@ class Cookie_Law_Info_Public
 	 */
 	public function cookielawinfo_inject_cli_script()
 	{
-		global $wp_customize;
 		$the_options = Cookie_Law_Info::get_settings();
-		if ($the_options['is_on'] == true) {
+		$show_cookie_bar = true;
+		if(apply_filters('wt_cli_hide_bar_on_page_editor', true) && $this->is_page_editor_active()) {
+			$show_cookie_bar = false;
+		}
+		if ( $the_options['is_on'] == true && $show_cookie_bar ){
 			// Output the HTML in the footer:
 			$message = nl2br($the_options['notify_message']);
 			$str = do_shortcode(stripslashes($message));
@@ -270,9 +273,6 @@ class Cookie_Law_Info_Public
 						$post_slug = $current_obj->post_name;
 					}
 				}
-			}
-			if (isset($wp_customize)) {
-				$notify_html = '';
 			}
 			$notify_html = apply_filters('cli_show_cookie_bar_only_on_selected_pages', $notify_html, $post_slug);
 			require_once plugin_dir_path(__FILE__) . 'views/cookie-law-info_bar.php';
@@ -539,6 +539,25 @@ class Cookie_Law_Info_Public
 		if( 'viewed_cookie_policy' === $cookie || false !== strpos( $cookie, 'cookielawinfo-checkbox') ) {
 			return true;
 		}
+		return false;
+	}
+	/**
+	* Check whether any page editor is active or not
+	*
+	* @since  2.0.5
+	* @return bool
+	*/
+	public function is_page_editor_active() {
+		global $wp_customize;
+		if( isset($_GET['et_fb']) 
+			|| (defined( 'ET_FB_ENABLED' ) && ET_FB_ENABLED)
+			|| isset($_GET['elementor-preview']) 
+			|| isset($_POST['cs_preview_state'])
+			|| isset($wp_customize)
+		) {
+			return true;
+		}
+
 		return false;
 	}
 }

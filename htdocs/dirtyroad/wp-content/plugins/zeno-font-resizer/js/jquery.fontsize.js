@@ -18,9 +18,9 @@ jQuery.fn.zeno_font_resizer_manager = function () {
 
 	if (zeno_font_resizer_value == "innerbody") {
 		zeno_font_resizer_element = "div#innerbody";
-	} else if(zeno_font_resizer_value == "ownid") {
+	} else if (zeno_font_resizer_value == "ownid") {
 		zeno_font_resizer_element = "div#" + zeno_font_resizer_ownid;
-	} else if(zeno_font_resizer_value == "ownelement") {
+	} else if (zeno_font_resizer_value == "ownelement") {
 		zeno_font_resizer_element = zeno_font_resizer_ownelement;
 	}
 
@@ -37,8 +37,12 @@ jQuery.fn.zeno_font_resizer_manager = function () {
 		newFontSize = newFontSize + parseFloat(zeno_font_resizer_resizeSteps);
 		newFontSize = newFontSize.toFixed(2);
 		var maxFontSize = startFontSize + ( zeno_font_resizer_resizeSteps * 5 );
-		if (newFontSize > maxFontSize) { return false; }
-		if (newFontSize > zeno_font_resizer_resizeMax) { return false; }
+		if (newFontSize > maxFontSize) {
+			return false;
+		}
+		if (newFontSize > zeno_font_resizer_resizeMax) {
+			return false;
+		}
 		jQuery(zeno_font_resizer_element + "").css("font-size", newFontSize + "px");
 		Cookies.set('fontSize', newFontSize, {expires: parseInt(zeno_font_resizer_cookieTime), path: '/'});
 
@@ -68,8 +72,12 @@ jQuery.fn.zeno_font_resizer_manager = function () {
 		newFontSize = newFontSize - zeno_font_resizer_resizeSteps;
 		newFontSize = newFontSize.toFixed(2);
 		var minFontSize = startFontSize - ( zeno_font_resizer_resizeSteps * 5 );
-		if (newFontSize < minFontSize) { return false; }
-		if (newFontSize < zeno_font_resizer_resizeMin) { return false; }
+		if (newFontSize < minFontSize) {
+			return false;
+		}
+		if (newFontSize < zeno_font_resizer_resizeMin) {
+			return false;
+		}
 		jQuery("" + zeno_font_resizer_element + "").css("font-size", newFontSize + "px");
 		Cookies.set('fontSize', newFontSize, {expires: parseInt(zeno_font_resizer_cookieTime), path: '/'});
 
@@ -123,5 +131,5 @@ jQuery.fn.zeno_font_resizer_manager = function () {
 
 
 jQuery(document).ready(function(){
-	jQuery(".zeno_font_resizer").zeno_font_resizer_manager();
+	jQuery( '.zeno_font_resizer' ).zeno_font_resizer_manager();
 });

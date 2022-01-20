@@ -69,6 +69,20 @@ function bupr_get_template( $template_name, $args = array(), $tempate_path = '',
  *
  * @return string Tab name
  */
+function bupr_profile_review_singular_tab_name() {
+	global $bupr;
+
+	if ( isset( $bupr['review_label'] ) ) {
+		$tab_name = $bupr['review_label'];
+	}
+	return apply_filters( 'bupr_profile_review_singular_tab_name', esc_html( $tab_name ) );
+}
+
+/**
+ * Get Review tab name on memeber profile.
+ *
+ * @return string Tab name
+ */
 function bupr_profile_review_tab_name() {
 	global $bupr;
 

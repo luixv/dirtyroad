@@ -63,7 +63,7 @@ function bps_field_selector ($k)
 ?>
 	<div id="field_div<?php echo $k; ?>" class="sortable">
 		<span class="bps_col1" title="<?php _e('drag and drop to reorder fields', 'bp-profile-search'); ?>">&nbsp;&#x21C5;</span>
-		<?php _bps_field_select ($groups, "bps_options[field_name][$k]", "field_name$k", $code, true); ?>
+		<?php _bps_field_select ($groups, "bps_options[field_name][$k]", "field_name$k", false, true); ?>
 		<a class="remove_field delete" href="javascript:void(0)"><?php _e('Remove', 'bp-profile-search'); ?></a>
 		<span class="spinner"></span>
 	</div>

@@ -710,6 +710,7 @@ background: #ffffff;
     transform: scale(0);
 	overflow: hidden;
     outline: 0;
+    display: none;
 }
 .cli-modal a {
 	text-decoration: none;
@@ -1372,4 +1373,12 @@ a.wt-cli-ccpa-opt-out {
     .cli-style-v2 .cli-bar-btn_container {
         flex-wrap: wrap;
     }
+}
+/* Fix: HTML validation error due to the enclosing of <p> tags on category description */
+.wt-cli-cookie-description {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 0;
+    padding: 0;
+    color: #000;
 }

@@ -99,6 +99,22 @@ class Field_Settings_Helper {
 
 				break;
 
+			case 'tags':
+				$default_tags = isset( $_POST['bpxcftr_tags_default_tags'] ) ? wp_unslash( $_POST['bpxcftr_tags_default_tags'] ) : '';
+				$default_tags = sanitize_textarea_field( $default_tags );
+
+				$allow_tags   = isset( $_POST['bpxcftr_tags_allow_new_tags'] ) ? 1 : 0;
+
+				bp_xprofile_update_field_meta( $field->id, 'default_tags', $default_tags );
+
+				if ( $allow_tags ) {
+					bp_xprofile_update_field_meta( $field->id, 'allow_new_tags', $allow_tags );
+				} else {
+					bp_xprofile_delete_meta( $field->id, 'field', 'allow_new_tags' );
+				}
+
+				break;
+
 			case 'number_minmax':
 				$min = isset( $_POST['bpxcftr_minmax_min'] ) ? intval( $_POST['bpxcftr_minmax_min'] ) : 0;
 				bp_xprofile_update_field_meta( $field->id, 'min_val', $min );

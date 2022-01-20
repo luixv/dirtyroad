@@ -3,7 +3,7 @@ Contributors: davidvongries, aristath, dannycooper, wplemon, igmoweb
 Tags: customizer, options framework, theme, mods, toolkit, gutenberg
 Requires at least: 4.9
 Tested up to: 5.8
-Stable tag: 3.1.7
+Stable tag: 3.1.9
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -87,12 +87,8 @@ If you want to integrate Kirki in your theme or plugin, please read the instruct
 
 == Changelog ==
 
-= 3.1.7 - June 21, 2021 =
+= 3.1.9 - July 19, 2021 =
 
-* Updated Google-Fonts lists.
-* Tested up to WordPress 5.8 Beta 1.
-* Fixed: PHP 8 warnings.
-* Fixed: Missing Kirki styles in WordPress 5.8.
-* Fixed: https://wordpress.org/support/topic/plugin-title-conflict/ in https://github.com/kirki-framework/kirki/commit/0fb25dca4d1c4460ec45dc194d5210f854b1b737
+* Fixed: Styling issue in Switch control.
 
 [See the previous changelogs here](https://github.com/kirki-framework/kirki/blob/master/CHANGELOG.md).

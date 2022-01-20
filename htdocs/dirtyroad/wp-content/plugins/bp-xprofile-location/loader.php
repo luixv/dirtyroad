@@ -2,7 +2,7 @@
 /*
  * Plugin Name: BP xProfile Location
  * Description: Adds an xProfile Location field type that uses the Google Places API to complete and validate addresses
- * Version: 4.2
+ * Version: 4.5
  * Author: PhiloPress
  * Author URI: https://www.philopress.com/
  * Text Domain: bp-profile-location
@@ -11,6 +11,8 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+define( 'PP_LOC_DIR', dirname( __FILE__ ) );
 
 
 function pp_loc_bp_check() {
@@ -32,26 +34,18 @@ function pp_loc_install_buddypress_buddyboss_notice() {
 
 function pp_loc_init() {
 
-	if ( bp_is_active( 'xprofile' ) ) {
+	load_plugin_textdomain( 'bp-profile-location', false, PP_LOC_DIR . '/languages' );
 
-		define( 'PP_LOC_DIR', dirname( __FILE__ ) );
+	if ( is_admin() )  {
 
-		load_plugin_textdomain( 'bp-profile-location', false, PP_LOC_DIR . '/languages' );
-
-		if ( is_admin() )  {
-
-			$bp = buddypress();
-			if ( $bp->buddyboss ) {
-				require( PP_LOC_DIR . '/inc/admin-pp-field-option-location-boss.php' );
-			} else {
-				require( PP_LOC_DIR . '/inc/admin-pp-field-option-location.php' );
-			}
+		$bp = buddypress();
+		if ( $bp->buddyboss ) {
+			require( PP_LOC_DIR . '/inc/admin-pp-field-option-location-boss.php' );
+		} else {
+			require( PP_LOC_DIR . '/inc/admin-pp-field-option-location.php' );
 		}
-	} else {
-		echo '<div id="message" class="error fade"><p style="line-height: 150%">';
-		 _e('BP xProfile Location requires the BuddyPress Extended Profiles component. Please enable Extended Profiles or deactivate BP xProfile Location.');
-		echo '</p></div>';
 	}
+
 
 	$bp = buddypress();
 

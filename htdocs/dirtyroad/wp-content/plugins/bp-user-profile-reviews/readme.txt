@@ -3,8 +3,8 @@ Contributors: wbcomdesigns, vapvarun
 Donate link: https://wbcomdesigns.com/donate/
 Tags: buddypress, members
 Requires at least: 4.0
-Tested up to: 5.7.3
-Stable tag: 2.5.0
+Tested up to: 5.8.2
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,32 @@ Yes you can use the review form on other page, just go to "Dashboard->Review->BP
 4. Plugin Settings
 
 == Changelog ==
+= 2.6.1 =
+* Fix: Fixed member header add review button redirects to 404 page
+
+= 2.6.0 =
+* Fix: (#170) added common space between rating stars
+* Fix: (#160 )Fixed shortcode attribute is not working
+* Fix: (#155) Fixed member avatar changed on rating filter of widget
+* Fix: (#168) Update review content UI
+* Fix: Added admin option to control update review functionality
+* Fix: (#167) Fixed any one can update review
+* Fix: (#166) Fixed edit functionality not working if starts are not change
+* Fix: (#164) Managed edit review pop UI with kleo
+* Fix: (#157) Fixed email string translation not working
+* Fix: (#120) Fixed member directory review not showing with buddyboss
+* Fix: (#154) Update success message color
+* Fix: (#145) Fixed replace plural string with singular tab name
+* Fix: (#155) Fixed user avatar not showing
+* Fix: (#161) Fixed remove review cpt featurde image support
+* Fix: (#139) Managed edit review model UI
+* Fix: (#163) Managed UI with olympus theme
+* Fix: (#162) Update custom input slider UI
+* Fix: (#101) Fixed review notification url go to 404 page
+* Fix: Remove Siteurl filter from plugin file and set in function file
+* Fix: Update Member criteria field name with WPML Plugin
+* Fix: Fixed admin-ajax.php url issue
+* Fix: Fixed #158 - Add review(while translating) redirect to 404 page
 
 = 2.5.0 =
 * Fix: Update plugin backend UI

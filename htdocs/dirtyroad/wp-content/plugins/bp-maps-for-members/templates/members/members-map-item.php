@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -19,7 +20,7 @@
 
 	<?php if ( isset( $title ) ) echo $title; ?>
 
-	<?php if ( isset( $address ) ) echo "<p>" . $address . "</p>" ?>
+	<?php if ( isset( $address ) ) echo "<p>" . $guests . " " . $address . "</p>" ?>
 		
 	<?php if ( isset( $available ) ) {
 			if (substr_count($available, 'Yes') > 0) {			

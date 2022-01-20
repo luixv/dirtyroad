@@ -38,6 +38,7 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 		 * @author   Wbcom Designs
 		 */
 		public function bupr_display_top_members_display( $attrs ) {
+
 			global $wpdb;
 			global $bupr;
 			$atts            = shortcode_atts(
@@ -53,11 +54,10 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 			$bupr_avg_rating = 0;
 			$user_id         = get_current_user_id();
 			// Our variables from the widget settings.
-			$bupr_title  = $atts['title'];
-			$memberLimit = $atts['total_member'];
-			$topMember   = $atts['type'];
-			$avatar      = $atts['avatar'];
-
+			$bupr_title              = $atts['title'];
+			$memberLimit             = $atts['total_member'];
+			$topMember               = $atts['type'];
+			$avatar                  = $atts['avatar'];
 			$output                  = '';
 			$bupr_users              = get_users();
 			$bupr_max_review         = array();
@@ -161,7 +161,7 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 			$output         .= '<ul class="bupr-member-main">';
 			if ( 0 !== $bupr_member_count ) {
 				foreach ( $bupr_members_ratings_data as $buprKey => $buprValue ) {
-					if ( $bupr_user_count === $memberLimit ) {
+					if ( $bupr_user_count == $memberLimit ) {
 						break;
 					} else {
 
@@ -406,9 +406,10 @@ if ( ! class_exists( 'BUPR_Shortcodes' ) ) {
 								<p class="bupr-hide-subject">
 									<input name="review-subject" id="review_subject" type="text" placeholder="<?php esc_html_e( 'Review Subject', 'bp-member-reviews' ); ?>" ><br/><span class="bupr-error-fields">*<?php esc_html_e( 'This field is required.', 'bp-member-reviews' ); ?></span>
 								</p>
-								<textarea name="review-desc" id="review_desc" placeholder="<?php echo sprintf( esc_html__( 'Enter your %s', 'bp-member-reviews' ), esc_html( $bupr['review_label'] ) ); ?>" rows="4" cols="50"></textarea><br/><span class="bupr-error-fields">*<?php esc_html_e( 'This field is required.', 'bp-member-reviews' ); ?></span>
+								<textarea name="review-desc" id="review_desc" placeholder="<?php echo sprintf( __( 'Enter your %s', 'bp-member-reviews' ), $bupr['review_label'] ); ?>" rows="4" cols="50"></textarea><br/><span class="bupr-error-fields">*<?php esc_html_e( 'This field is required.', 'bp-member-reviews' ); ?></span>
 
 					<?php
+
 					if ( ! empty( $bupr['active_rating_fields'] ) ) {
 						$field_counter = 1;
 						$flage         = true;

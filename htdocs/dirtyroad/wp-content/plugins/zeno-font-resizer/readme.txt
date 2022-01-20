@@ -2,8 +2,8 @@
 Contributors: mpol
 Tags: font size, text size, text resizer, font resizer, accessibility
 Requires at least: 3.7
-Tested up to: 5.7
-Stable tag: 1.7.7
+Tested up to: 5.8
+Stable tag: 1.7.8
 License: GPLv2
 
 Zeno Font Resizer allows the visitors of your website to change the font size of your text.
@@ -25,6 +25,10 @@ This plugin is a fork of font-resizer with many bugfixes applied and features ad
 = Compatibility =
 
 This plugin is compatible with [ClassicPress](https://www.classicpress.net).
+
+= Contributions =
+
+This plugin is also available in [GitLab](https://gitlab.com/toomanybicycles/zeno-font-resizer).
 
 
 == Installation ==
@@ -92,9 +96,14 @@ More information can be found in the [Handbook](https://make.wordpress.org/acces
 
 = I want to use a shortcode in my content element =
 
-There is an additional plugin on [Github](https://github.com/MPolleke/zeno-font-resizer-shortcode) you can use for that.
+There is an additional plugin on [GitLab](https://gitlab.com/toomanybicycles/zeno-font-resizer-shortcode) you can use for that.
 
 == Changelog ==
+
+= 1.7.8 =
+* 2021-12-09
+* Upgrade js-cookie.js from 2.2.0 to 3.0.1.
+* Take some hints from phpcs and wpcs.
 
 = 1.7.7 =
 * 2021-02-22
