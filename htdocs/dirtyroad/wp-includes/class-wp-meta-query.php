@@ -560,9 +560,9 @@ class WP_Meta_Query {
 				$join .= $i ? " AS $alias" : '';
 
 				if ( 'LIKE' === $meta_compare_key ) {
-					$join .= $wpdb->prepare( " ON ($this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.meta_key LIKE %s )", '%' . $wpdb->esc_like( $clause['key'] ) . '%' );
+					$join .= $wpdb->prepare( " ON ( $this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.meta_key LIKE %s )", '%' . $wpdb->esc_like( $clause['key'] ) . '%' );
 				} else {
-					$join .= $wpdb->prepare( " ON ($this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.meta_key = %s )", $clause['key'] );
+					$join .= $wpdb->prepare( " ON ( $this->primary_table.$this->primary_id_column = $alias.$this->meta_id_column AND $alias.meta_key = %s )", $clause['key'] );
 				}
 
 				// All other JOIN clauses.
@@ -812,7 +812,7 @@ class WP_Meta_Query {
 			$clause_compare  = strtoupper( $clause['compare'] );
 			$sibling_compare = strtoupper( $sibling['compare'] );
 			if ( in_array( $clause_compare, $compatible_compares, true ) && in_array( $sibling_compare, $compatible_compares, true ) ) {
-				$alias = $sibling['alias'];
+				$alias = preg_replace( '/\W/', '_', $sibling['alias'] );
 				break;
 			}
 		}
