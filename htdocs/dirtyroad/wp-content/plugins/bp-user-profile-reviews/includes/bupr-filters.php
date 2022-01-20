@@ -32,7 +32,7 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 			add_action( 'wp', array( $this, 'bupr_member_profile_reviews_tab' ), 11 );
 			add_action( 'bp_before_member_header_meta', array( $this, 'bupr_member_average_rating' ) );
 
-			add_action( 'bp_setup_admin_bar', array( $this, 'bupr_setup_admin_bar' ), 80 );
+			add_action( 'bp_setup_admin_bar', array( $this, 'bupr_setup_admin_bar' ), 10 );
 
 			add_action( 'init', array( $this, 'bupr_add_bp_member_reviews_taxonomy_term' ) );
 			add_filter( 'post_row_actions', array( $this, 'bupr_bp_member_reviews_row_actions' ), 10, 2 );
@@ -45,7 +45,12 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 			 */
 
 			add_action( 'bp_directory_members_item_meta', array( $this, 'bupr_rating_directory' ), 50 );
+
+			if ( function_exists( 'buddypress' ) && buddypress()->buddyboss ) {
+				add_action( 'bp_nouveau_get_member_meta', array( $this, 'bupr_rating_directory' ), 50 );
+			}
 			add_action( 'init', array( $this, 'bupr_set_default_rating_criteria' ) );
+			add_action( 'bupr_after_member_review_list', array( $this, 'bupr_edit_review_form_modal' ) );
 		}
 
 		/**
@@ -95,6 +100,11 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 		 * @author   Wbcom Designs
 		 */
 		public function bupr_rating_directory() {
+
+			if ( ! bp_is_members_directory() ) {
+				return;
+			}
+
 			global $members_template;
 			global $bupr;
 
@@ -241,7 +251,7 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 				if ( ! empty( $bupr['exclude_given_members'] ) ) {
 
 					if ( in_array( $user_role[0], $bupr['exclude_given_members'], true ) ) {
-						$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_plural_slug();
+						$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_singular_slug();
 						$bp_template_option = bp_get_option( '_bp_theme_package_id' );
 						if ( 'nouveau' === $bp_template_option ) {
 							?>
@@ -262,7 +272,7 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 						}
 					}
 				} else {
-					$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_plural_slug();
+					$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_singular_slug();
 					$bp_template_option = bp_get_option( '_bp_theme_package_id' );
 					if ( 'nouveau' === $bp_template_option ) {
 						?>
@@ -305,7 +315,7 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 					$user_role = $this->bupr_get_current_user_roles( $user_id );
 
 					if ( in_array( $user_role[0], $bupr['add_taken_members'], true ) ) {
-						$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_plural_slug();
+						$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_singular_slug();
 						$bp_template_option = bp_get_option( '_bp_theme_package_id' );
 						if ( 'nouveau' === $bp_template_option ) {
 							?>
@@ -326,7 +336,7 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 						}
 					}
 				} else {
-					$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_plural_slug();
+					$review_url         = bp_core_get_userlink( $user_id, false, true ) . bupr_profile_review_tab_plural_slug() . '/add-' . bupr_profile_review_tab_singular_slug();
 					$bp_template_option = bp_get_option( '_bp_theme_package_id' );
 					if ( 'nouveau' === $bp_template_option ) {
 						?>
@@ -584,7 +594,8 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 		public function bupr_member_profile_reviews_tab() {
 			global $bp;
 			global $bupr;
-			$bp_pages    = bp_core_get_directory_pages();
+			$bp_pages = bp_core_get_directory_pages();
+			add_filter( 'site_url', 'bupr_site_url', 99 );
 			$member_slug = $bp_pages->members->slug;
 
 				/* count member's review */
@@ -642,10 +653,9 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 
 				// Add subnav to add a review.
 			if ( bp_displayed_user_id() === bp_loggedin_user_id() ) {
-
 				if ( ! empty( $bupr['exclude_given_members'] ) ) {
 					$user_role = $this->bupr_get_current_user_roles( bp_loggedin_user_id() );
-					if ( in_array( $user_role[0], $bupr['exclude_given_members'], true ) && ! bp_loggedin_user_id() ) {
+					if ( ! empty( $user_role ) && in_array( $user_role[0], $bupr['exclude_given_members'], true ) && ! bp_loggedin_user_id() ) {
 						bp_core_new_subnav_item(
 							array(
 								/* translators: Review Label */
@@ -674,13 +684,13 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 					if ( in_array( $user_role, $bupr['add_taken_members'], true ) ) {
 						bp_core_new_subnav_item(
 							array(
-								'name'            => sprintf( esc_html__( 'Add %1$s', 'bp-member-reviews' ), esc_html( bupr_profile_review_tab_name() ) ),
-								'slug'            => 'add-' . bupr_profile_review_tab_plural_slug(),
+								'name'            => sprintf( esc_html__( 'Add %1$s', 'bp-member-reviews' ), esc_html( bupr_profile_review_singular_tab_name() ) ),
+								'slug'            => 'add-' . bupr_profile_review_tab_singular_slug(),
 								'parent_url'      => $bp->loggedin_user->domain . $parent_slug . '/',
 								'parent_slug'     => $parent_slug,
 								'screen_function' => array( $this, 'bupr_reviews_form_tab_function_to_show_screen' ),
 								'position'        => 200,
-								'link'            => site_url() . "/$member_slug/$name/$parent_slug/" . 'add-' . bupr_profile_review_tab_plural_slug(),
+								'link'            => site_url() . "/$member_slug/$name/$parent_slug/" . 'add-' . bupr_profile_review_tab_singular_slug(),
 							)
 						);
 					}
@@ -688,18 +698,19 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 
 					bp_core_new_subnav_item(
 						array(
-							'name'            => sprintf( esc_html__( 'Add %1$s', 'bp-member-reviews' ), esc_html( bupr_profile_review_tab_name() ) ),
-							'slug'            => 'add-' . bupr_profile_review_tab_plural_slug(),
+							'name'            => sprintf( esc_html__( 'Add %1$s', 'bp-member-reviews' ), esc_html( bupr_profile_review_singular_tab_name() ) ),
+							'slug'            => 'add-' . bupr_profile_review_tab_singular_slug(),
 							'parent_url'      => $bp->loggedin_user->domain . $parent_slug . '/',
 							'parent_slug'     => $parent_slug,
 							'screen_function' => array( $this, 'bupr_reviews_form_tab_function_to_show_screen' ),
 							'position'        => 200,
-							'link'            => site_url() . "/$member_slug/$name/$parent_slug/" . 'add-' . bupr_profile_review_tab_plural_slug(),
+							'link'            => site_url() . "/$member_slug/$name/$parent_slug/" . 'add-' . bupr_profile_review_tab_singular_slug(),
 						)
 					);
 
 				}
 			}
+			remove_filter( 'site_url', 'bupr_site_url', 99 );
 		}
 
 		/**
@@ -792,6 +803,11 @@ if ( ! class_exists( 'BUPR_Custom_Hooks' ) ) {
 			bupr_get_template( 'bupr-single-review-template.php' );
 		}
 
+		public function bupr_edit_review_form_modal() {
+			if ( is_user_logged_in() ) {
+				bupr_get_template( 'bupr-edit-review-form.php' );
+			}
+		}
 	}
 	new BUPR_Custom_Hooks();
 }

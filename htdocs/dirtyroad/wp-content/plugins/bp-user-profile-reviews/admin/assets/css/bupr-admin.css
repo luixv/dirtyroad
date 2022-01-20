@@ -280,8 +280,8 @@ button.bupr-accordion.active::after {
 
 /* custom css for switch */
 .bupr-switch-custom {
-    height: 30px !important;
     margin: 0 10px !important;
+    margin-top: 6px !important;
 }
 
 .buprcriteria .bupr-switch {
@@ -289,10 +289,6 @@ button.bupr-accordion.active::after {
 }
 
 @media(max-width: 781px) {
-    .bupr-switch-custom .bupr-slider::before {
-        height: 23px !important;
-    }
-
     .buprcriteria input:checked+.bupr-slider::before {
         transform: translateX(35px) !important;
     }
