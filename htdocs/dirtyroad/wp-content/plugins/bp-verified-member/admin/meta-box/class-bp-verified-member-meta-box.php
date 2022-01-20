@@ -64,8 +64,9 @@ if ( ! class_exists( 'BP_Verified_Member_Meta_Box' ) ) :
 
 			/** @var BP_Verified_Member $bp_verified_member */
 			global $bp_verified_member;
-			$is_verified_by_role = $bp_verified_member->is_user_verified_by_role( $user_id );
-			$is_verified_by_meta = $bp_verified_member->is_user_verified_by_meta( $user_id );
+			$is_verified_by_role        = $bp_verified_member->is_user_verified_by_role( $user_id );
+			$is_verified_by_member_type = $bp_verified_member->is_user_verified_by_member_type( $user_id );
+			$is_verified_by_meta        = $bp_verified_member->is_user_verified_by_meta( $user_id );
 			?>
 			<table class="form-table">
 				<tbody>
@@ -74,6 +75,8 @@ if ( ! class_exists( 'BP_Verified_Member_Meta_Box' ) ) :
 					<td>
 						<?php if ( $is_verified_by_role ) : ?>
 							<p><em><?php esc_html_e( 'This user belongs to a verified role. If you wish to unverify this user, please assign another role to them.', 'bp-verified-member' ); ?></em></p>
+						<?php elseif ( $is_verified_by_member_type ) : ?>
+							<p><em><?php esc_html_e( 'This user belongs to a verified member type. If you wish to unverify this user, please remove their member type or assign another member type to them.', 'bp-verified-member' ); ?></em></p>
 						<?php else : ?>
 							<label for="<?php echo esc_attr( $this->meta_keys['verified'] ); ?>">
 								<input name="<?php echo esc_attr( $this->meta_keys['verified'] ); ?>" id="<?php echo esc_attr( $this->meta_keys['verified'] ); ?>" type="checkbox" <?php checked( $is_verified_by_meta, true ); ?>>

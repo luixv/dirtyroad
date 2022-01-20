@@ -63,6 +63,13 @@ class BP_Verified_Member_Admin {
 		add_action( 'wp_ajax_bp_verified_member_dismiss_new_requests_notice', array( $this, 'dismiss_new_requests_notice'          ), 10, 0 );
 		add_filter( 'views_users',                                            array( $this, 'add_verification_requests_users_view' ), 99, 1 );
 		add_action( 'users_list_table_query_args',                            array( $this, 'filter_verification_requests_users'   ), 10, 1 );
+
+		/**
+		 * User verified / unverified event
+		 */
+		add_action( 'update_user_meta',                                       array( $this, 'before_update_user_meta'              ), 10, 4 );
+		add_action( 'set_user_role',                                          array( $this, 'after_update_user_role'               ), 10, 3 );
+		add_action( 'set_object_terms',                                       array( $this, 'after_update_object_terms'            ), 10, 6 );
 	}
 
 	/**
@@ -76,10 +83,11 @@ class BP_Verified_Member_Admin {
 		// Enqueue admin script
 		wp_enqueue_script( 'bp-verified-member-admin', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), BP_VERIFIED_MEMBER_VERSION, true );
 		wp_localize_script( 'bp-verified-member-admin', 'bpVerifiedMemberAdmin', array(
-			'ajaxUrl'               => admin_url( 'admin-ajax.php' ),
-			'verifiedTooltip'       => esc_html__( 'Click to unverify', 'bp-verified-member' ),
-			'verifiedByRoleTooltip' => esc_html__( 'User belongs to a verified role', 'bp-verified-member' ),
-			'unverifiedTooltip'     => esc_html__( 'Click to verify', 'bp-verified-member' ),
+			'ajaxUrl'                     => admin_url( 'admin-ajax.php' ),
+			'verifiedTooltip'             => esc_html__( 'Click to unverify', 'bp-verified-member' ),
+			'verifiedByRoleTooltip'       => esc_html__( 'User belongs to a verified role', 'bp-verified-member' ),
+			'verifiedByMemberTypeTooltip' => esc_html__( 'User belongs to a verified member type', 'bp-verified-member' ),
+			'unverifiedTooltip'           => esc_html__( 'Click to verify', 'bp-verified-member' ),
 		) );
 
 		// Enqueue dependencies except the main frontend script
@@ -114,16 +122,23 @@ class BP_Verified_Member_Admin {
 			/** @var $bp_verified_member BP_Verified_Member */
 			global $bp_verified_member;
 
+			$button_class = 'bp-verified-member-toggle';
+
 			if ( $bp_verified_member->is_user_verified( $user_id ) ) {
 				$output .= $bp_verified_member->get_verified_badge();
 
-				$is_verified_by_role = $bp_verified_member->is_user_verified_by_role( $user_id );
+				if ( $bp_verified_member->is_user_verified_by_role( $user_id ) ) {
+					$button_class .= ' bp-verified-by-role';
+				}
+				else if ( $bp_verified_member->is_user_verified_by_member_type( $user_id ) ) {
+					$button_class .= ' bp-verified-by-member-type';
+				}
 			}
 			else {
 				$output .= $bp_verified_member->get_unverified_badge();
 			}
 
-			$output = '<a href="#" class="bp-verified-member-toggle' . ( ! empty( $is_verified_by_role ) ? ' bp-verified-by-role' : '' ) .'" data-user-id="' . esc_attr( $user_id ) . '" data-bp-verified-member-toggle-nonce="' . esc_attr( wp_create_nonce( 'bp-verified-member-toggle' ) ) . '">' . $output . '</a>';
+			$output = '<a href="#" class="' . esc_attr( $button_class ) .'" data-user-id="' . esc_attr( $user_id ) . '" data-bp-verified-member-toggle-nonce="' . esc_attr( wp_create_nonce( 'bp-verified-member-toggle' ) ) . '">' . $output . '</a>';
 		}
 
 		return $output;
@@ -222,7 +237,7 @@ class BP_Verified_Member_Admin {
 		$new_requests = get_transient( 'bp_verified_member_new_requests' );
 		if ( ! empty( $new_requests ) ) :
 			// Clear transient and bail if we are on the requests view
-			if ( $_GET['view'] === 'bp_verified_member_requests' ) {
+			if ( ! empty( $_GET['view'] ) && $_GET['view'] === 'bp_verified_member_requests' ) {
 				delete_transient( 'bp_verified_member_new_requests' );
 				return;
 			}
@@ -300,9 +315,19 @@ class BP_Verified_Member_Admin {
 			'fields'      => 'ID',
 		);
 
+		// Exclude verified roles
 		$verified_roles = $this->settings->get_option( 'verified_roles' );
 		if ( ! empty( $verified_roles ) ) {
 			$query_args['role__not_in'] = $verified_roles;
+		}
+
+		// Exclude verified member types
+		$verified_member_types = $this->settings->get_option( 'verified_member_types' );
+		if ( ! empty( $verified_member_types ) ) {
+			$users_verified_by_member_type = bp_core_get_users( array( 'type' => 'alphabetical', 'member_type__in' => $verified_member_types ) );
+			if ( ! empty( $users_verified_by_member_type['users'] ) ) {
+				$query_args['exclude'] = array_map( function( $user ) { return $user->ID; }, $users_verified_by_member_type['users'] );
+			}
 		}
 
 		$verification_requests = new WP_User_Query( $query_args );
@@ -352,8 +377,8 @@ class BP_Verified_Member_Admin {
 			),
 		);
 
+		// Exclude verified roles
 		$verified_roles = $this->settings->get_option( 'verified_roles' );
-
 		if ( ! empty( $verified_roles ) ) {
 			if ( empty( $query_args['role__not_in'] ) ) {
 				$query_args['role__not_in'] = array();
@@ -362,6 +387,136 @@ class BP_Verified_Member_Admin {
 			$query_args['role__not_in'] = array_unique( array_merge( $query_args['role__not_in'], $verified_roles ) );
 		}
 
+		// Exclude verified member types
+		$verified_member_types = $this->settings->get_option( 'verified_member_types' );
+		if ( ! empty( $verified_member_types ) ) {
+			$users_verified_by_member_type = bp_core_get_users( array( 'type' => 'alphabetical', 'member_type__in' => $verified_member_types ) );
+			if ( ! empty( $users_verified_by_member_type['users'] ) ) {
+				if ( empty( $query_args['exclude'] ) ) {
+					$query_args['exclude'] = array();
+				}
+
+				$query_args['exclude'] = array_unique( array_merge( $query_args['exclude'], array_map( function( $user ) { return $user->ID; }, $users_verified_by_member_type['users'] ) ) );
+			}
+		}
+
 		return $query_args;
+	}
+
+	/**
+	 * Maybe trigger the verified status updated event when the verified meta changed
+	 *
+	 * @param int $meta_id ID of the meta that just is about to change
+	 * @param int $user_id ID of the user who's meta is about to change
+	 * @param string $meta_key Meta key
+	 * @param mixed $meta_value Meta value
+	 */
+	public function before_update_user_meta( $meta_id, $user_id, $meta_key, $meta_value ) {
+		if ( $meta_key !== $this->meta_box->meta_keys['verified'] ) {
+			return;
+		}
+
+		global $bp_verified_member;
+
+		$verified_by_role        = $bp_verified_member->is_user_verified_by_role( $user_id );
+		$verified_by_member_type = $bp_verified_member->is_user_verified_by_member_type( $user_id );
+
+		// Bail if user is already verified through other means
+		if ( $verified_by_role || $verified_by_member_type ) {
+			return;
+		}
+
+		$is_verified  = $meta_value == true;
+		$was_verified = $bp_verified_member->is_user_verified_by_meta( $user_id );
+
+		if ( $is_verified && ! $was_verified ) {
+			do_action( 'bp_verified_member_verified_status_updated', $user_id, 'verified' );
+		} else if ( ! $is_verified && $was_verified ) {
+			do_action( 'bp_verified_member_verified_status_updated', $user_id, 'unverified' );
+		}
+	}
+
+	/**
+	 * Maybe trigger the verified status updated event when a verified role is being given or removed
+	 *
+	 * @param int $user_id ID of the user who's role just changed
+	 * @param string $role Slug of the new role that was given to the user
+	 * @param array $old_roles Old roles that the user had
+	 */
+	public function after_update_user_role( $user_id, $role, $old_roles ) {
+		$verified_roles = $this->settings->get_option( 'verified_roles' );
+
+		// Bail if there are no verified roles
+		if ( empty( $verified_roles ) ) {
+			return;
+		}
+
+		global $bp_verified_member;
+		$verified_by_meta        = $bp_verified_member->is_user_verified_by_meta( $user_id );
+		$verified_by_member_type = $bp_verified_member->is_user_verified_by_member_type( $user_id );
+
+		// Bail if user is already verified through other means
+		if ( $verified_by_meta || $verified_by_member_type ) {
+			return;
+		}
+
+		$has_verified_role = in_array( $role, $verified_roles );
+		$had_verified_role = ! empty( array_intersect( $old_roles, $verified_roles ) );
+
+		if ( $has_verified_role && ! $had_verified_role ) {
+			do_action( 'bp_verified_member_verified_status_updated', $user_id, 'verified' );
+		} else if ( ! $has_verified_role && $had_verified_role ) {
+			do_action( 'bp_verified_member_verified_status_updated', $user_id, 'unverified' );
+		}
+	}
+
+	/**
+	 * Maybe trigger the verified status updated event when a verified member type is being given or removed
+	 *
+	 * @param int    $object_id  Object ID.
+	 * @param array  $terms      An array of object terms.
+	 * @param array  $tt_ids     An array of term taxonomy IDs.
+	 * @param string $taxonomy   Taxonomy slug.
+	 * @param bool   $append     Whether to append new terms to the old terms.
+	 * @param array  $old_tt_ids Old array of term taxonomy IDs.
+	 */
+	public function after_update_object_terms( $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids ) {
+		if ( function_exists( 'bp_get_member_type_tax_name' ) && $taxonomy !== bp_get_member_type_tax_name() ) {
+			return;
+		}
+
+		$verified_member_types = $this->settings->get_option( 'verified_member_types' );
+
+		// Bail if there are no verified member types
+		if ( empty( $verified_member_types ) ) {
+			return;
+		}
+
+		global $bp_verified_member;
+		$verified_by_meta = $bp_verified_member->is_user_verified_by_meta( $object_id );
+		$verified_by_role = $bp_verified_member->is_user_verified_by_role( $object_id );
+
+		// Bail if user is already verified through other means
+		if ( $verified_by_meta || $verified_by_role ) {
+			return;
+		}
+
+		$old_term_slugs = array();
+		if ( ! empty( $old_tt_ids ) ) {
+			$old_term_slugs = get_terms( array(
+				'taxonomy'         => $taxonomy,
+				'term_taxonomy_id' => $old_tt_ids,
+				'fields'           => 'slugs',
+			) );
+		}
+
+		$has_verified_member_type = ! empty( array_intersect( $terms, $verified_member_types ) );
+		$had_verified_member_type = ! empty( array_intersect( $old_term_slugs, $verified_member_types ) );
+
+		if ( $has_verified_member_type && ! $had_verified_member_type ) {
+			do_action( 'bp_verified_member_verified_status_updated', $object_id, 'verified' );
+		} else if ( ! $has_verified_member_type && $had_verified_member_type ) {
+			do_action( 'bp_verified_member_verified_status_updated', $object_id, 'unverified' );
+		}
 	}
 }

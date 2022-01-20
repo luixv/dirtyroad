@@ -55,12 +55,19 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 
 			$this->defaults = array(
 				"{$this->option_group}_verified_roles"                    => array(),
+				"{$this->option_group}_verified_member_types"             => array(),
 				"{$this->option_group}_enable_verification_requests"      => false,
+				"{$this->option_group}_badge_shape"                       => 'circle',
 				"{$this->option_group}_badge_color"                       => '#1DA1F2',
 				"{$this->option_group}_tooltip_content"                   => esc_html__( 'Verified', 'bp-verified-member' ),
 				"{$this->option_group}_display_unverified_badge"          => 0,
+				"{$this->option_group}_unverified_badge_shape"            => 'circle',
 				"{$this->option_group}_unverified_badge_color"            => '#DD9933',
 				"{$this->option_group}_unverified_tooltip_content"        => esc_html__( 'Unverified', 'bp-verified-member' ),
+				"{$this->option_group}_enable_verified_notification"      => false,
+				"{$this->option_group}_verified_notification_content"     => esc_html__( 'Congratulations, your profile is now verified !', 'bp-verified-member' ),
+				"{$this->option_group}_enable_unverified_notification"    => false,
+				"{$this->option_group}_unverified_notification_content"   => esc_html__( 'Sorry, your profile has been unverified', 'bp-verified-member' ),
 				"{$this->option_group}_display_badge_in_activity_stream"  => 1,
 				"{$this->option_group}_display_badge_in_profile_username" => 1,
 				"{$this->option_group}_display_badge_in_profile_fullname" => 0,
@@ -69,6 +76,7 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 				"{$this->option_group}_display_badge_in_messages"         => 0,
 				"{$this->option_group}_display_badge_in_bbp_topics"       => 1,
 				"{$this->option_group}_display_badge_in_bbp_replies"      => 1,
+				"{$this->option_group}_display_badge_in_rtmedia"          => 1,
 				"{$this->option_group}_display_badge_in_wp_comments"      => 1,
 				"{$this->option_group}_display_badge_in_wp_posts"         => 1,
 			);
@@ -95,23 +103,97 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 		 * Options page callback.
 		 */
 		public function render_settings_page() {
+			wp_enqueue_style( 'glider.js', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/css/vendor/glider.min.css', array(), '1.7.4' );
+			wp_enqueue_style( 'bp-verified-member-settings', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/css/settings.css', array(), BP_VERIFIED_MEMBER_VERSION );
+			wp_enqueue_script( 'glider.js', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/js/vendor/glider.min.js', array(), '1.7.4', true );
+			wp_enqueue_script( 'bp-verified-member-settings', BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/js/settings.js', array( 'glider.js', 'jquery' ), BP_VERIFIED_MEMBER_VERSION, true );
 			?>
 
 			<div class="wrap">
+
 				<h1><?php esc_html_e( 'Verified Member Settings', 'bp-verified-member' ); ?></h1>
 
 				<?php if ( ! bp_core_do_network_admin() ) : ?>
 					<h2 class="nav-tab-wrapper"><?php bp_core_admin_tabs( __( 'Verified Member', 'bp-verified-member' ) ); ?></h2>
 				<?php endif; ?>
 
-				<form method="post" action="options.php">
-					<?php
-					// This prints out all hidden setting fields
-					settings_fields( $this->option_group );
-					do_settings_sections( $this->page_slug );
-					submit_button();
-					?>
-				</form>
+				<div class="bp-verified-member-settings-container">
+
+					<form class="bp-verified-member-settings-form" method="post" action="options.php">
+						<?php
+						// This prints out all hidden setting fields
+						settings_fields( $this->option_group );
+						do_settings_sections( $this->page_slug );
+						submit_button();
+						?>
+					</form>
+
+					<div class="bp-verified-member-settings-sidebar">
+
+						<br /><br />
+
+						<div class="themosaurus-promo">
+							<h2><?php esc_html_e( 'Like BP Verified Member?', 'bp-verified-member' ); ?></h2>
+							<h3><?php esc_html_e( 'Check out our premium, 100% compatible themes!', 'bp-verified-member' ); ?></h3>
+							<div class="glider-contain">
+								<button aria-label="Previous" class="glider-prev">
+									<i class="dashicons dashicons-arrow-left-alt2"></i>
+								</button>
+
+								<div class="glider">
+									<div class="gwangi">
+										<a target="_blank" href="https://themeforest.net/item/gwangi-dating-community-theme/21115855">
+											<img src="https://files.themosaurus.com/bp-verified-member/gwangi-promo.png" alt="Gwangi Promo Image">
+										</a>
+									</div>
+									<div class="cera">
+										<a target="_blank" href="https://themeforest.net/item/cera-intranet-community-theme/24872621">
+											<img src="https://files.themosaurus.com/bp-verified-member/cera-promo.png" alt="Cera Promo Image">
+										</a>
+									</div>
+									<div class="gorgo">
+										<a target="_blank" href="https://themeforest.net/item/gorgo-minimal-content-focused-blog-and-magazine/23091367">
+											<img src="https://files.themosaurus.com/bp-verified-member/gorgo-promo.png" alt="Gorgo Promo Image">
+										</a>
+									</div>
+									<div class="stego">
+										<a target="_blank" href="https://themeforest.net/item/stego-food-truck-restaurant-theme/29935711">
+											<img src="https://files.themosaurus.com/bp-verified-member/stego-promo.png" alt="Stego Promo Image">
+										</a>
+									</div>
+									<div class="armadon">
+										<a target="_blank" href="https://themeforest.net/item/armadon-gaming-community-wordpress-theme/27957394">
+											<img src="https://files.themosaurus.com/bp-verified-member/armadon-promo.png" alt="Armadon Promo Image">
+										</a>
+									</div>
+									<div class="sinclair">
+										<a target="_blank" href="https://themeforest.net/item/sinclair-political-donations-wordpress-theme/31136760">
+											<img src="https://files.themosaurus.com/bp-verified-member/sinclair-promo.png" alt="Sinclair Promo Image">
+										</a>
+									</div>
+								</div>
+
+								<button aria-label="Next" class="glider-next">
+									<i class="dashicons dashicons-arrow-right-alt2"></i>
+								</button>
+							</div>
+							<div role="tablist" class="dots"></div>
+						</div>
+
+						<br /><br />
+						<br /><br />
+
+						<div class="themosaurus-promo">
+							<h2><?php esc_html_e( 'MatchPress', 'bp-verified-member' ); ?></h2>
+							<h3><?php esc_html_e( "Let's Swipe Your BuddyPress Community", 'bp-verified-member' ); ?></h3>
+							<a target="_blank" href="https://matchpress.me/">
+								<img src="https://files.themosaurus.com/bp-verified-member/matchpress-promo.jpg" alt="MatchPress">
+							</a>
+						</div>
+
+					</div>
+
+				</div>
 			</div>
 
 			<?php
@@ -147,6 +229,12 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 							'type'        => 'multi_checkbox',
 							'options'     => $this->get_role_options(),
 						),
+						"{$this->option_group}_verified_member_types"        => array(
+							'label'       => esc_html__( 'Verified Member Types', 'bp-verified-member' ),
+							'description' => empty( $this->get_member_type_options() ) ? esc_html__( 'There are no member types. You need to create a member type to use this option.', 'bp-verified-member' ) : esc_html__( 'Automatically grant verified badge to the following member types:', 'bp-verified-member' ),
+							'type'        => 'multi_checkbox',
+							'options'     => $this->get_member_type_options(),
+						),
 						"{$this->option_group}_enable_verification_requests" => array(
 							'label'       => esc_html__( 'Enable Verification Requests', 'bp-verified-member' ),
 							'description' => esc_html__( 'Display a button on user profiles to allow users to send a verification request. The requests will then be displayed for admins in the "Verification Requests" view in the users table.', 'bp-verified-member' ),
@@ -157,6 +245,22 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 				"{$this->option_group}_verified_badge_section"     => array(
 					'title'  => esc_html__( 'Verified badge', 'bp-verified-member' ),
 					'fields' => array(
+						"{$this->option_group}_badge_shape" => array(
+							'label'             => esc_html__( 'Verified Badge Shape', 'bp-verified-member' ),
+							'type'              => 'radio_image',
+							'is_badge_selector' => true,
+							'badge_type'        => 'verified',
+							'options'           => array(
+								'circle'  => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-circle.svg',
+								'square'  => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-square.svg',
+								'diamond' => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-diamond.svg',
+								'hexagon' => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-hexagon.svg',
+								'spiky'   => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-spiky.svg',
+								'wavy'    => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-wavy.svg',
+								'shield'  => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-shield.svg',
+								'blob'    => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-blob.svg',
+							),
+						),
 						"{$this->option_group}_badge_color" => array(
 							'label' => esc_html__( 'Verified Badge Color', 'bp-verified-member' ),
 							'type'  => 'color',
@@ -176,6 +280,22 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 							'description' => esc_html__( 'Display an unverified badge for users who are not verified.', 'bp-verified-member' ),
 							'type'        => 'checkbox',
 						),
+						"{$this->option_group}_unverified_badge_shape" => array(
+							'label'             => esc_html__( 'Unverified Badge Shape', 'bp-verified-member' ),
+							'type'              => 'radio_image',
+							'is_badge_selector' => true,
+							'badge_type'        => 'unverified',
+							'options'           => array(
+								'circle'  => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-circle.svg',
+								'square'  => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-square.svg',
+								'diamond' => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-diamond.svg',
+								'hexagon' => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-hexagon.svg',
+								'spiky'   => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-spiky.svg',
+								'wavy'    => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-wavy.svg',
+								'shield'  => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-shield.svg',
+								'blob'    => BP_VERIFIED_MEMBER_PLUGIN_DIR_URL . 'assets/images/mask-blob.svg',
+							),
+						),
 						"{$this->option_group}_unverified_badge_color" => array(
 							'label' => esc_html__( 'Unverified Badge Color', 'bp-verified-member' ),
 							'type'  => 'color',
@@ -184,6 +304,31 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 							'label'       => esc_html__( 'Unverified Badge Tooltip Content', 'bp-verified-member' ),
 							'description' => esc_html__( 'Content of the tooltip displayed when hovering on a unverified badge. Empty for no tooltip.', 'bp-verified-member' ),
 							'type'        => 'text',
+						),
+					),
+				),
+				"{$this->option_group}_notifications_section"     => array(
+					'title'  => esc_html__( 'Notifications', 'bp-verified-member' ),
+					'fields' => array(
+						"{$this->option_group}_enable_verified_notification" => array(
+							'label' => esc_html__( 'Enable Verified Notification', 'bp-verified-member' ),
+							'description' => esc_html__( 'Send a BuddyPress notification to the user when they get verified.', 'bp-verified-member' ),
+							'type'        => 'checkbox',
+						),
+						"{$this->option_group}_verified_notification_content" => array(
+							'label'       => esc_html__( 'Verified Notification Content', 'bp-verified-member' ),
+							'description' => esc_html__( 'Content of the notification sent when a user gets verified.', 'bp-verified-member' ),
+							'type'        => 'textarea',
+						),
+						"{$this->option_group}_enable_unverified_notification" => array(
+							'label' => esc_html__( 'Enable Unverified Notification', 'bp-verified-member' ),
+							'description' => esc_html__( 'Send a BuddyPress notification to the user when their verified status gets revoked.', 'bp-verified-member' ),
+							'type'        => 'checkbox',
+						),
+						"{$this->option_group}_unverified_notification_content" => array(
+							'label'       => esc_html__( 'Unverified Notification Content', 'bp-verified-member' ),
+							'description' => esc_html__( 'Content of the notification sent when a user gets unverified.', 'bp-verified-member' ),
+							'type'        => 'textarea',
 						),
 					),
 				),
@@ -257,6 +402,16 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 						),
 					),
 				),
+				"{$this->option_group}_rtmedia_section"   => array(
+					'title'  => esc_html__( 'rtMedia Settings', 'bp-verified-member' ),
+					'fields' => array(
+						"{$this->option_group}_display_badge_in_rtmedia" => array(
+							'label'       => esc_html__( 'Display in rtMedia views', 'bp-verified-member' ),
+							'description' => esc_html__( 'Display Verified Badge in rtMedia lightbox and single media views', 'bp-verified-member' ),
+							'type'        => 'checkbox',
+						),
+					),
+				),
 				"{$this->option_group}_wp_section"        => array(
 					'title'  => esc_html__( 'WordPress Settings', 'bp-verified-member' ),
 					'fields' => array(
@@ -277,12 +432,11 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 			foreach ( $settings as $section_id => $section ) {
 
 				// Don't show bbPress settings if bbPress isn't activated
-				if ( "{$this->option_group}_bbp_section" === $section_id && ! function_exists( 'bbpress' ) ) {
-					continue;
-				}
-
-				// Don't show messages settings if BP Better Messages is activated
-				if ( "{$this->option_group}_message_section" === $section_id && class_exists( 'BP_Better_Messages' ) ) {
+				if (
+					"{$this->option_group}_bbp_section" === $section_id && ! function_exists( 'bbpress' ) || // Don't show bbPress settings if bbPress isn't activated
+					"{$this->option_group}_rtmedia_section" === $section_id && ! function_exists( 'rtmedia' ) || // Don't show rtMedia settings if rtMedia isn't activated
+					"{$this->option_group}_message_section" === $section_id && class_exists( 'BP_Better_Messages' ) // Don't show messages settings if BP Better Messages is activated
+				) {
 					continue;
 				}
 
@@ -307,9 +461,11 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 						$this->page_slug, // Page
 						$section_id, // Section
 						array(
-							'id'          => $field_id,
-							'description' => ! empty( $field['description'] ) ? $field['description'] : '',
-							'options'     => ! empty( $field['options'] ) && is_array( $field['options'] ) ? $field['options'] : array(),
+							'id'                => $field_id,
+							'description'       => ! empty( $field['description'] ) ? $field['description'] : '',
+							'options'           => ! empty( $field['options'] ) && is_array( $field['options'] ) ? $field['options'] : array(),
+							'is_badge_selector' => ! empty( $field['is_badge_selector'] ),
+							'badge_type'        => ! empty( $field['badge_type'] ) ? $field['badge_type'] : 'verified',
 						) // Callback args
 					);
 				}
@@ -354,6 +510,17 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 		}
 
 		/**
+		 * Sanitize radio image field.
+		 *
+		 * @param mixed $input Contains the setting value.
+		 *
+		 * @return string The sanitized radio image value
+		 */
+		public function sanitize_radio_image( $input ) {
+			return sanitize_text_field( $input );
+		}
+
+		/**
 		 * Sanitize text field.
 		 *
 		 * @param mixed $input Contains the setting value.
@@ -362,6 +529,17 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 		 */
 		public function sanitize_text( $input ) {
 			return sanitize_text_field( $input );
+		}
+
+		/**
+		 * Sanitize textarea field.
+		 *
+		 * @param mixed $input Contains the setting value.
+		 *
+		 * @return string The sanitized text
+		 */
+		public function sanitize_textarea( $input ) {
+			return wp_kses_post( $input );
 		}
 
 		/**
@@ -379,8 +557,7 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 			<input type="checkbox" id="<?php echo esc_attr( $args['id'] ); ?>" name="<?php echo esc_attr( $args['id'] ); ?>" <?php echo esc_attr( $checked ); ?> />
 			<?php if ( ! empty( $args['description'] ) ) : ?>
 				<label for="<?php echo esc_attr( $args['id'] ); ?>"><?php echo esc_html( $args['description'] ); ?></label>
-			<?php endif; ?>
-			<?php
+			<?php endif;
 		}
 
 		/**
@@ -389,7 +566,7 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 		 * @param array $args Field args.
 		 */
 		public function render_multi_checkbox_field( $args ) {
-			if ( empty( $args['id'] ) || empty( $args['options'] ) ) {
+			if ( empty( $args['id'] ) || ! isset( $args['options'] ) ) {
 				return;
 			}
 
@@ -407,6 +584,38 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 		}
 
 		/**
+		 * Render a radio image field.
+		 *
+		 * @param array $args Field args.
+		 */
+		public function render_radio_image_field( $args ) {
+			if ( empty( $args['id'] ) || ! isset( $args['options'] ) ) {
+				return;
+			}
+
+			if ( ! empty( $args['description'] ) ) : ?>
+				<p><?php echo wp_kses_post( $args['description'] ); ?></p>
+ 			<?php endif; ?>
+
+			<ul id="input_<?php echo esc_attr( $args['id'] ); ?>" class="bp-verified-member-radio-image-control<?php echo ! empty( $args['is_badge_selector'] ) ? ' bp-verified-member-badge-selector' : ''; ?>">
+				<?php foreach ( $args['options'] as $value => $image ) : ?>
+					<li>
+						<input type="radio" name="<?php echo esc_attr( $args['id'] ); ?>" value="<?php echo esc_attr( $value ); ?>" id="<?php echo esc_attr( $args['id'] . $value ); ?>" <?php checked( $this->get_option( $args['id'] ), esc_attr( $value ) ); ?> />
+						<label for="<?php echo esc_attr( $args['id'] . $value ); ?>">
+							<?php if ( ! empty( $args['is_badge_selector'] ) ) : ?>
+								<span style="--bp-verified-members-<?php echo esc_attr( $args['badge_type'] ); ?>-badge-shape: url('<?php echo esc_url( $image ); ?>')" class="bp-<?php echo esc_attr( $args['badge_type'] ); ?>-badge"></span>
+							<?php else : ?>
+								<img src="<?php echo esc_url( $image ); ?>">
+							<?php endif; ?>
+						</label>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+
+			<?php
+		}
+
+		/**
 		 * Render a color field.
 		 *
 		 * @param array $args Field args.
@@ -420,8 +629,7 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 			<input type="text" id="<?php echo esc_attr( $args['id'] ); ?>" name="<?php echo esc_attr( $args['id'] ); ?>" value="<?php echo esc_attr( $this->get_option( $args['id'] ) ); ?>" class="color-picker" />
 			<?php if ( ! empty( $args['description'] ) ) : ?>
 				<label for="<?php echo esc_attr( $args['id'] ); ?>"><?php echo esc_html( $args['description'] ); ?></label>
-			<?php endif; ?>
-			<?php
+			<?php endif;
 		}
 
 		/**
@@ -438,8 +646,25 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 			<input type="text" id="<?php echo esc_attr( $args['id'] ); ?>" name="<?php echo esc_attr( $args['id'] ); ?>" value="<?php echo esc_attr( $this->get_option( $args['id'] ) ); ?>" />
 			<?php if ( ! empty( $args['description'] ) ) : ?>
 				<label for="<?php echo esc_attr( $args['id'] ); ?>"><?php echo wp_kses_post( $args['description'] ); ?></label>
-			<?php endif; ?>
-			<?php
+			<?php endif;
+		}
+
+		/**
+		 * Render a textarea field.
+		 *
+		 * @param array $args Field args.
+		 */
+		public function render_textarea_field( $args ) {
+			if ( empty( $args['id'] ) ) {
+				return;
+			}
+
+			?>
+			<textarea id="<?php echo esc_attr( $args['id'] ); ?>" name="<?php echo esc_attr( $args['id'] ); ?>" rows="2"><?php echo wp_kses_post( $this->get_option( $args['id'] ) ); ?></textarea>
+			<?php if ( ! empty( $args['description'] ) ) : ?>
+				<br>
+				<label for="<?php echo esc_attr( $args['id'] ); ?>"><?php echo wp_kses_post( $args['description'] ); ?></label>
+			<?php endif;
 		}
 
 		/**
@@ -478,6 +703,21 @@ if ( ! class_exists( 'BP_Verified_Member_Settings' ) ) :
 			}
 
 			return $role_options;
+		}
+
+		/**
+		 * Get an array of role options where each key is the role slug and each value is the role name
+		 *
+		 * @return array Array of role options
+		 */
+		private function get_member_type_options() {
+			$member_types        = bp_get_member_types( array(), 'objects' );
+			$member_type_options = array();
+			foreach ( $member_types as $member_type_slug => $member_type ) {
+				$member_type_options[ $member_type_slug ] = $member_type->labels['name'];
+			}
+
+			return $member_type_options;
 		}
 	}
 
