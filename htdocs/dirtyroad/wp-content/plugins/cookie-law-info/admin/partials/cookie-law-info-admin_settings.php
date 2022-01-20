@@ -74,7 +74,7 @@ $all_pages=get_pages($args_for_get_pages);
     </div>
 
    
-    <div class="cli_settings_left">
+    <div class="cli_settings_left" id="cky-container">
         <div class="nav-tab-wrapper wp-clearfix cookie-law-info-tab-head">
             <?php
             $tab_head_arr=array(
@@ -83,11 +83,12 @@ $all_pages=get_pages($args_for_get_pages);
                 'cookie-law-info-buttons'=>__('Customise Buttons','cookie-law-info'),
                 'cookie-law-info-advanced'=>__('Advanced','cookie-law-info'),
                 'cookie-law-info-help'=>__('Help Guide','cookie-law-info'),
+                'cookie-law-info-upgrade-pro'=>__('Free vs Pro','cookie-law-info'),
             );
             Cookie_Law_Info::generate_settings_tabhead($tab_head_arr);
             ?>
         </div>
-        <div class="cookie-law-info-tab-container">
+        <div id="cky-tab-container" class="cookie-law-info-tab-container">
             <?php
             $setting_views_a=array(
                 'cookie-law-info-general'=>'admin-settings-general.php',
@@ -97,6 +98,7 @@ $all_pages=get_pages($args_for_get_pages);
             );
             $setting_views_b=array(           
                 'cookie-law-info-help'=>'admin-settings-help.php',           
+                'cookie-law-info-upgrade-pro'=>'admin-settings-upgrade-pro.php',           
             );
             ?>
             <form method="post" action="<?php echo esc_url($_SERVER["REQUEST_URI"]);?>" id="cli_settings_form">
@@ -134,7 +136,7 @@ $all_pages=get_pages($args_for_get_pages);
         </div>
     </div>
     <div class="cli_settings_right">
-     <?php include $cli_admin_view_path."goto-pro.php"; ?>   
+     <?php include $cli_admin_view_path."goto-pro-v2.php"; ?>   
     </div>
 
 </div>

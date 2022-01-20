@@ -101,7 +101,9 @@ $js_blocking_enabled = Cookie_Law_Info::wt_cli_is_js_blocking_active();
 						</div>
 						<div class="cli-tab-content">
 							<div class="cli-tab-pane cli-fade" data-id="<?php echo esc_attr( $key ); ?>">
-								<p><?php echo do_shortcode( $category_description, 'cookielawinfo-category' ); ?></p>
+								<div class="wt-cli-cookie-description">
+									<?php echo do_shortcode( $category_description, 'cookielawinfo-category' ); ?>
+								</div>
 							</div>
 						</div>
 					</div>

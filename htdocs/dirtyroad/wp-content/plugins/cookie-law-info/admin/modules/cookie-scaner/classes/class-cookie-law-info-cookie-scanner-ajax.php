@@ -12,7 +12,7 @@ class Cookie_Law_Info_Cookie_Scanner_Ajax extends Cookie_Law_Info_Cookie_Scaner 
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_cli_cookie_scaner', array( $this, 'ajax_cookie_scaner' ) );
-		add_action( 'wt_cli_ckyes_abort_scan', array( $this, 'update_abort_status'));
+		add_action( 'wt_cli_ckyes_abort_scan', array( $this, 'update_abort_status' ) );
 	}
 	/**
 	 * Ajax callback which handles the ajax calls from scanner.
@@ -206,7 +206,7 @@ class Cookie_Law_Info_Cookie_Scanner_Ajax extends Cookie_Law_Info_Cookie_Scaner 
 				$this->set_ckyes_scan_status( 1 );
 				$estimate = ( isset( $response['estimatedTimeInSeconds'] ) ? $response['estimatedTimeInSeconds'] : 0 );
 
-				$this->set_ckyes_scan_estimate( $estimate ); 
+				$this->set_ckyes_scan_estimate( $estimate );
 				$data['title']   = __( 'Scanning initiated successfully', 'cookie-law-info' );
 				$data['message'] = __( 'It might take a few minutes to a few hours to complete the scanning of your website. This depends on the number of pages to scan and the website speed. Once the scanning is complete, we will notify you by email.', 'cookie-law-info' );
 				$data['html']    = $this->get_scan_progress_html();
@@ -359,13 +359,13 @@ class Cookie_Law_Info_Cookie_Scanner_Ajax extends Cookie_Law_Info_Cookie_Scaner 
 		global $wpdb;
 		$urls         = array();
 		$url_table    = $wpdb->prefix . $this->url_table;
-		$sql          = "SELECT id_cli_cookie_scan_url,url FROM `$url_table` WHERE id_cli_cookie_scan=$scan_id ORDER BY id_cli_cookie_scan_url ASC"; // AND scanned=0
-		$urls_from_db = $wpdb->get_results( $sql, ARRAY_A );
+		$sql          = $wpdb->prepare( "SELECT id_cli_cookie_scan_url,url FROM $url_table WHERE id_cli_cookie_scan=%d ORDER BY id_cli_cookie_scan_url ASC", $scan_id );
+		$urls_from_db = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery,WordPress.DB.PreparedSQL.NotPrepared
 
 		if ( ! empty( $urls_from_db ) ) {
 			foreach ( $urls_from_db as $data ) {
 				if ( isset( $data['url'] ) ) {
-					$urls[] = $data['url'];
+					$urls[] = sanitize_text_field( $data['url'] );
 				}
 			}
 		}
