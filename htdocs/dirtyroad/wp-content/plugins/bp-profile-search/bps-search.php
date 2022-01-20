@@ -63,10 +63,11 @@ function bps_filter_members ($querystring, $object)
 		{
 			$included = explode (',', $args['include']);
 			$users = array_intersect ($users, $included);
-			if (count ($users) == 0)  $users = array (0);
 		}
 
 		$users = apply_filters ('bps_search_results', $users);
+		if (count ($users) == 0)  $users = array (0);
+
 		$args['include'] = implode (',', $users);
 		$querystring = build_query ($args);
 	}

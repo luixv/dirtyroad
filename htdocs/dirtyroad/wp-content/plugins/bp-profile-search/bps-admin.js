@@ -7,7 +7,7 @@ jQuery(function ($) {
 		handle: 'span'
 	});
 
-	$('#template').change(function () {
+	$('#template').on('change', function () {
 		var spinner = $('#bps_template .spinner');
 		var save_button = $('#publish');
 		var data = {
@@ -26,7 +26,7 @@ jQuery(function ($) {
 		});
 	});
 
-	$('#add_field').click(function () {
+	$('#add_field').on('click', function () {
 		var save_button = $('input[type=submit]');
 		var counter = $('#field_next').val();
 		var data = {

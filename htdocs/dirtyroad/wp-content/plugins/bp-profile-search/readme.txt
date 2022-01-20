@@ -2,10 +2,10 @@
 Contributors: dontdream
 Tags: buddypress, directory, members, users, search, filter
 Requires at least: 4.9
-Tested up to: 5.7
-Stable tag: 5.4.2
+Tested up to: 5.8
+Stable tag: 5.4.4
 
-Member search and member directories for BuddyPress.
+Member search and member directories for BuddyPress and the BuddyBoss platform.
 
 == Description ==
 
@@ -115,6 +115,10 @@ See the standard installation procedure, in [Managing Plugins](https://wordpress
 
 == Changelog ==
 
+= 5.4.4 =
+* Fixed: bug on search fields marked *required*
+= 5.4.3 =
+* Fixed: widget preview in WordPress 5.8
 = 5.4.2 =
 * Added: ability to change the position of the *active filters* section
 = 5.4.1 =

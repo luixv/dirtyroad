@@ -240,38 +240,6 @@ class bps_Fields
 		return $empty;
 	}
 
-	public static function remove_empty_values ($value, $filter)
-	{
-		switch ($filter)
-		{
-		case 'contains':
-		case '':
-		case 'like':
-		case 'match_single':
-			if ($value === '')  return false;
-			return $value;
-
-		case 'range':
-		case 'age_range':
-			if ($value['min'] === '')  unset ($value['min']);
-			if ($value['max'] === '')  unset ($value['max']);
-			return $value;
-
-		case 'distance':
-			if ($value['location'] === '')  return false;
-			return $value;
-
-		case 'gmw_proximity':
-			if ($value['address'] === '')  return false;
-			return $value;
-
-		case 'one_of':
-		case 'match_any':
-		case 'match_all':
-			return $value;
-		}
-	}
-
 	public static function get_display ($f, $filter)
 	{
 		$format = isset ($f->format)? $f->format: 'none';
@@ -285,25 +253,6 @@ class bps_Fields
 			$display = (isset ($f->type) && in_array ($f->type, $display))? $f->type: $display[0];
 
 		return $display;
-	}
-
-	public static function set_display ($f, $filter)
-	{
-		$format = isset ($f->format)? $f->format: 'none';
-		$enum = (isset ($f->options) && is_array ($f->options))? count ($f->options): 0;
-		$selector = $format. ($enum? '/e': '');
-//		$display = apply_filters ('bps_field_config', self::$display, $f);
-		$display = self::$display;
-		if (!isset ($display[$selector][$filter]))  return false;
-
-		$display = $display[$selector][$filter];
-
-		if (is_string ($display))
-			$f->display = $display;
-		else
-			$f->display = (isset ($f->type) && in_array ($f->type, $display))? $f->type: $display[0];
-
-		return true;
 	}
 }
 
