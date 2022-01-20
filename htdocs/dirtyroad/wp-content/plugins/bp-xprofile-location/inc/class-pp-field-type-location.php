@@ -66,10 +66,12 @@ if ( !class_exists('PP_Field_Type_Location') ) {
 			if ( empty( $save_geocode ) )
 				$save_geocode = '0';
 			?>
-			<label for="<?php bp_the_profile_field_input_name(); ?>"><?php echo $label_name; ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php esc_html_e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
+			<legend for="<?php bp_the_profile_field_input_name(); ?>"><?php echo $label_name; ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php esc_html_e( '(required)', 'buddypress' ); ?><?php endif; ?></legend>
 			<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
 			<input <?php echo $html; ?>  />
-			<?php bp_the_profile_field_description(); ?>
+			<?php if ( bp_get_the_profile_field_description() ) : ?>
+				<p class="description" tabindex="0"><?php bp_the_profile_field_description(); ?></p>
+			<?php endif; ?>
 
 			<script>
 
@@ -79,9 +81,6 @@ if ( !class_exists('PP_Field_Type_Location') ) {
 
 					var input = '<?php bp_the_profile_field_input_name() ?>';
 
-					//console.log( input );
-
-					// An easy way of preventing Google Places from misbehaving if the user hits enter
 					google.maps.event.addDomListener(document.getElementById(input), 'keydown', function(event) {
 						if (event.keyCode === 13) {
 							event.preventDefault();
@@ -98,7 +97,6 @@ if ( !class_exists('PP_Field_Type_Location') ) {
 					google.maps.event.addListener(ppx_autocomplete, 'place_changed', function () {
 
 						var place = ppx_autocomplete.getPlace();
-						//console.log(place);
 
 						document.getElementById(input).value = place.formatted_address;
 
