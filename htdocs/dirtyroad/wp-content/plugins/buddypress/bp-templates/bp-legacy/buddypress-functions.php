@@ -6,7 +6,7 @@
  *
  * @package BuddyPress
  * @subpackage BP_Theme_Compat
- * @version 3.1.0
+ * @version 10.0.0
  */
 
 // Exit if accessed directly.
@@ -124,7 +124,7 @@ class BP_Legacy extends BP_Theme_Compat {
 
 		// Only hook the 'sitewide_notices' overlay if the Sitewide
 		// Notices widget is not in use (to avoid duplicate content).
-		if ( bp_is_active( 'messages' ) && ! is_active_widget( false, false, 'bp_messages_sitewide_notices_widget', true ) ) {
+		if ( bp_is_active( 'messages' ) && ! bp_is_widget_block_active( 'bp/sitewide-notices', 'bp_messages_sitewide_notices_widget', true ) ) {
 			add_action( 'wp_footer', array( $this, 'sitewide_notices' ), 9999 );
 		}
 
@@ -337,7 +337,15 @@ class BP_Legacy extends BP_Theme_Compat {
 			) );
 
 			// Enqueue script.
-			wp_enqueue_script( $asset['handle'] . '-password-verify', $asset['location'], $dependencies, $this->version);
+			wp_enqueue_script( $asset['handle'] . '-password-verify', $asset['location'], $dependencies, $this->version );
+			wp_localize_script(
+				$asset['handle'] . '-password-verify',
+				'bpPasswordVerify',
+				array(
+					'tooWeakPasswordWarning' => __( 'Your password is too weak, please use a stronger password.', 'buddypress' ),
+					'requiredPassStrength'   => bp_members_user_pass_required_strength(),
+				)
+			);
 		}
 
 		// Star private messages.
@@ -490,8 +498,9 @@ class BP_Legacy extends BP_Theme_Compat {
 	 */
 	public function sitewide_notices() {
 		// Do not show notices if user is not logged in.
-		if ( ! is_user_logged_in() )
+		if ( ! is_user_logged_in() || is_admin() ) {
 			return;
+		}
 
 		// Add a class to determine if the admin bar is on or not.
 		$class = did_action( 'admin_bar_menu' ) ? 'admin-bar-on' : 'admin-bar-off';
@@ -699,7 +708,9 @@ function bp_legacy_theme_ajax_querystring( $query_string, $object ) {
 
 	// Set up the cookies passed on this AJAX request. Store a local var to avoid conflicts.
 	if ( ! empty( $_POST['cookie'] ) ) {
-		$_BP_COOKIE = wp_parse_args( str_replace( '; ', '&', urldecode( $_POST['cookie'] ) ) );
+		$_BP_COOKIE = bp_parse_args(
+			str_replace( '; ', '&', urldecode( $_POST['cookie'] ) )
+		);
 	} else {
 		$_BP_COOKIE = &$_COOKIE;
 	}
@@ -1533,16 +1544,25 @@ function bp_legacy_theme_ajax_joinleave_group() {
 	// Cast gid as integer.
 	$group_id = (int) $_POST['gid'];
 
-	if ( groups_is_user_banned( bp_loggedin_user_id(), $group_id ) )
+	if ( groups_is_user_banned( bp_loggedin_user_id(), $group_id ) ) {
 		return;
+	}
 
-	if ( ! $group = groups_get_group( $group_id ) )
+	$group = groups_get_group( $group_id );
+
+	if ( ! $group ) {
 		return;
+	}
+
+	$action = '';
+	if ( isset( $_POST['action'] ) ) {
+		$action = sanitize_key( wp_unslash( $_POST['action'] ) );
+	}
 
 	// Client doesn't distinguish between different request types, so we infer from user status.
 	if ( groups_is_user_member( bp_loggedin_user_id(), $group->id ) ) {
 		$request_type = 'leave_group';
-	} elseif ( groups_check_user_has_invite( bp_loggedin_user_id(), $group->id ) ) {
+	} elseif ( groups_check_user_has_invite( bp_loggedin_user_id(), $group->id ) && 'joinleave_group' !== $action ) {
 		$request_type = 'accept_invite';
 	} elseif ( 'private' === $group->status ) {
 		$request_type = 'request_membership';
@@ -1623,15 +1643,7 @@ function bp_legacy_theme_ajax_close_notice() {
 		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem closing the notice.', 'buddypress' ) . '</p></div>';
 
 	} else {
-		$user_id    = get_current_user_id();
-		$notice_ids = bp_get_user_meta( $user_id, 'closed_notices', true );
-		if ( ! is_array( $notice_ids ) ) {
-			$notice_ids = array();
-		}
-
-		$notice_ids[] = (int) $_POST['notice_id'];
-
-		bp_update_user_meta( $user_id, 'closed_notices', $notice_ids );
+		bp_messages_dismiss_sitewide_notice( bp_loggedin_user_id(), (int) $_POST['notice_id'] );
 	}
 
 	exit;

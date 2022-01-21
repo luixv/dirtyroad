@@ -344,7 +344,7 @@ class BP_XProfile_Component extends BP_Component {
 				'parent'   => 'my-account-' . $this->id,
 				'id'       => 'my-account-' . $this->id . '-public',
 				'title'    => _x( 'View', 'My Account Profile sub nav', 'buddypress' ),
-				'href'     => $profile_link,
+				'href'     => trailingslashit( $profile_link . 'public' ),
 				'position' => 10
 			);
 
@@ -455,5 +455,17 @@ class BP_XProfile_Component extends BP_Component {
 			'BP_REST_XProfile_Field_Groups_Endpoint',
 			'BP_REST_XProfile_Data_Endpoint',
 		) );
+	}
+
+	/**
+	 * Register the BP xProfile Blocks.
+	 *
+	 * @since 9.0.0
+	 *
+	 * @param array $blocks Optional. See BP_Component::blocks_init() for
+	 *                      description.
+	 */
+	public function blocks_init( $blocks = array() ) {
+		parent::blocks_init( array() );
 	}
 }

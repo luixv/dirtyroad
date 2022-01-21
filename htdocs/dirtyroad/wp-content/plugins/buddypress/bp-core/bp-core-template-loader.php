@@ -88,6 +88,63 @@ function bp_get_asset_template_part( $slug, $name = null, $args = array() ) {
 }
 
 /**
+ * Get a dynamic template part.
+ *
+ * @since 9.0.0
+ *
+ * @param string $template     The Template Pack's relative path to the templata.
+ *                             Optional.
+ * @param string $type         Whether to use the template for JavaScript or PHP.
+ *                             Optional. Defaults to `js`.
+ * @param array  $tokens       The data to use to customize the template. Optional.
+ * @param array  $allowed_tags The allowed tags to use. Optional.
+ * @return string HTML/JS output.
+ */
+function bp_get_dynamic_template_part( $template = '', $type = 'js', $tokens = array(), $allowed_tags = array() ) {
+	$template_string = '';
+
+	if ( ! $template ) {
+		return '';
+	}
+
+	// Use the BP Theme Compat API to allow template override.
+	$template_path = bp_locate_template( $template );
+	if ( $template_path ) {
+		$template_string = file_get_contents( $template_path );
+	}
+
+	if ( ! $template_string ) {
+		return '';
+	}
+
+	if ( ! $allowed_tags ) {
+		$allowed_tags = array(
+			'li'   => array( 'class' => true ),
+			'div'  => array( 'class' => true ),
+			'span' => array( 'class' => true ),
+			'a'    => array(
+				'href'            => true,
+				'class'           => true,
+				'data-bp-tooltip' => true,
+			),
+			'img'  => array(
+				'src'     => true,
+				'class'   => true,
+				'loading' => true,
+			),
+		);
+	}
+
+	if ( 'js' !== $type ) {
+		$template_string = wp_kses( $template_string, $allowed_tags );
+
+		return bp_core_replace_tokens_in_text( $template_string, $tokens );
+	}
+
+	return $template_string;
+}
+
+/**
  * Retrieve the name of the highest priority template file that exists.
  *
  * Searches in the STYLESHEETPATH before TEMPLATEPATH so that themes which
@@ -396,11 +453,22 @@ function bp_get_query_template( $type, $templates = array() ) {
 	 */
 	$templates = apply_filters( "bp_get_{$type}_template", $templates );
 
-	// Filter possible templates, try to match one, and set any BuddyPress theme
-	// compat properties so they can be cross-checked later.
+	/*
+	 * Filter possible templates, try to match one, and set any BuddyPress theme
+	 * compat properties so they can be cross-checked later.
+	 */
 	$templates = bp_set_theme_compat_templates( $templates );
 	$template  = bp_locate_template( $templates );
-	$template  = bp_set_theme_compat_template( $template );
+
+	/*
+	 * The current theme is using the WordPress Full Site Editing feature.
+	 * BuddyPress then needs to use the WordPress template canvas to retrieve the community content.
+	 */
+	if ( current_theme_supports( 'block-templates' ) && $template === get_theme_file_path( 'index.php' ) ) {
+		$template = ABSPATH . WPINC . '/template-canvas.php';
+	}
+
+	$template = bp_set_theme_compat_template( $template );
 
 	/**
 	 * Filters the path to a template file.

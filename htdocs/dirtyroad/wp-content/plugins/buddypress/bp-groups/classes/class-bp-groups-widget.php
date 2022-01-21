@@ -21,16 +21,18 @@ class BP_Groups_Widget extends WP_Widget {
 	 * Working as a group, we get things done better.
 	 *
 	 * @since 1.0.3
+	 * @since 9.0.0 Adds the `show_instance_in_rest` property to Widget options.
 	 */
 	public function __construct() {
 		$widget_ops = array(
 			'description'                 => __( 'A dynamic list of recently active, popular, newest, or alphabetical groups', 'buddypress' ),
 			'classname'                   => 'widget_bp_groups_widget buddypress widget',
 			'customize_selective_refresh' => true,
+			'show_instance_in_rest'       => true,
 		);
 		parent::__construct( false, _x( '(BuddyPress) Groups', 'widget name', 'buddypress' ), $widget_ops );
 
-		if ( is_customize_preview() || is_active_widget( false, false, $this->id_base ) ) {
+		if ( is_customize_preview() || bp_is_widget_block_active( '', $this->id_base ) ) {
 			add_action( 'bp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		}
 	}
@@ -212,9 +214,14 @@ class BP_Groups_Widget extends WP_Widget {
 			'title'         => __( 'Groups', 'buddypress' ),
 			'max_groups'    => 5,
 			'group_default' => 'active',
-			'link_title'    => false
+			'link_title'    => false,
 		);
-		$instance = bp_parse_args( (array) $instance, $defaults, 'groups_widget_form' );
+
+		$instance = bp_parse_args(
+			(array) $instance,
+			$defaults,
+			'groups_widget_form'
+		);
 
 		$max_limit = bp_get_widget_max_count_limit( __CLASS__ );
 

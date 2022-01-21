@@ -131,6 +131,28 @@ class BP_Invitation {
 	 */
 	public $accepted;
 
+	/**
+	 * Columns in the invitations table.
+	 *
+	 * @since 9.0.0
+	 * @access public
+	 * @var array
+	 */
+	public static $columns = array(
+		'id',
+		'user_id',
+		'inviter_id',
+		'invitee_email',
+		'class',
+		'item_id',
+		'secondary_item_id',
+		'type',
+		'content',
+		'date_modified',
+		'invite_sent',
+		'accepted'
+	);
+
 	/** Public Methods ****************************************************/
 
 	/**
@@ -473,8 +495,16 @@ class BP_Invitation {
 
 		// Order by.
 		if ( ! empty( $args['order_by'] ) ) {
-			$order_by               = implode( ', ', (array) $args['order_by'] );
-			$conditions['order_by'] = "{$order_by}";
+			$order_by_clean = array();
+			foreach ( (array) $args['order_by'] as $key => $value ) {
+				if ( in_array( $value, self::$columns, true ) ) {
+					$order_by_clean[] = $value;
+				}
+			}
+			if ( ! empty( $order_by_clean ) ) {
+				$order_by               = implode( ', ', $order_by_clean );
+				$conditions['order_by'] = "{$order_by}";
+			}
 		}
 
 		// Sort order direction.
@@ -712,24 +742,28 @@ class BP_Invitation {
 		$invites_table_name = BP_Invitation_Manager::get_table_name();
 
 		// Parse the arguments.
-		$r  = bp_parse_args( $args, array(
-			'id'                => false,
-			'user_id'           => false,
-			'inviter_id'        => false,
-			'invitee_email'     => false,
-			'class'             => false,
-			'item_id'           => false,
-			'secondary_item_id' => false,
-			'type'              => 'all',
-			'invite_sent'       => 'all',
-			'accepted'          => 'pending',
-			'search_terms'      => '',
-			'order_by'          => false,
-			'sort_order'        => false,
-			'page'              => false,
-			'per_page'          => false,
-			'fields'            => 'all',
-		), 'bp_invitations_invitation_get' );
+		$r = bp_parse_args(
+			$args,
+			array(
+				'id'                => false,
+				'user_id'           => false,
+				'inviter_id'        => false,
+				'invitee_email'     => false,
+				'class'             => false,
+				'item_id'           => false,
+				'secondary_item_id' => false,
+				'type'              => 'all',
+				'invite_sent'       => 'all',
+				'accepted'          => 'pending',
+				'search_terms'      => '',
+				'order_by'          => false,
+				'sort_order'        => false,
+				'page'              => false,
+				'per_page'          => false,
+				'fields'            => 'all',
+			),
+			'bp_invitations_invitation_get'
+		);
 
 		$sql = array(
 			'select'     => "SELECT",
@@ -836,24 +870,28 @@ class BP_Invitation {
 		global $wpdb;
 		$invites_table_name = BP_Invitation_Manager::get_table_name();
 
-		$r  = bp_parse_args( $args, array(
-			'id'                => false,
-			'user_id'           => false,
-			'inviter_id'        => false,
-			'invitee_email'     => false,
-			'class'             => false,
-			'item_id'           => false,
-			'secondary_item_id' => false,
-			'type'              => 'all',
-			'invite_sent'       => 'all',
-			'accepted'          => 'pending',
-			'search_terms'      => '',
-			'order_by'          => false,
-			'sort_order'        => false,
-			'page'              => false,
-			'per_page'          => false,
-			'fields'            => 'all',
-		), 'bp_invitations_invitation_get_total_count' );
+		$r = bp_parse_args(
+			$args,
+			array(
+				'id'                => false,
+				'user_id'           => false,
+				'inviter_id'        => false,
+				'invitee_email'     => false,
+				'class'             => false,
+				'item_id'           => false,
+				'secondary_item_id' => false,
+				'type'              => 'all',
+				'invite_sent'       => 'all',
+				'accepted'          => 'pending',
+				'search_terms'      => '',
+				'order_by'          => false,
+				'sort_order'        => false,
+				'page'              => false,
+				'per_page'          => false,
+				'fields'            => 'all',
+			),
+			'bp_invitations_invitation_get_total_count'
+		);
 
 		// Build the query
 		$select_sql = "SELECT COUNT(*)";

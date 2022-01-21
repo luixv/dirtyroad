@@ -51,6 +51,10 @@ class BP_XProfile_Field_Type_WordPress_Biography extends BP_XProfile_Field_Type_
 	 * @return string The sanitized field value.
 	 */
 	public function sanitize_for_db( $value ) {
+		if ( ! $value ) {
+			return '';
+		}
+
 		return trim( $value );
 	}
 
@@ -107,10 +111,13 @@ class BP_XProfile_Field_Type_WordPress_Biography extends BP_XProfile_Field_Type_
 		/** This action is documented in bp-xprofile/bp-xprofile-classes */
 		do_action( bp_get_the_profile_field_errors_action() );
 
-		$r = wp_parse_args( $raw_properties, array(
-			'cols' => 40,
-			'rows' => 5,
-		) );
+		$r = bp_parse_args(
+			$raw_properties,
+			array(
+				'cols' => 40,
+				'rows' => 5,
+			)
+		);
 		?>
 
 		<textarea <?php echo $this->get_edit_field_html_elements( $r ); ?>><?php
@@ -130,10 +137,14 @@ class BP_XProfile_Field_Type_WordPress_Biography extends BP_XProfile_Field_Type_
 	 * @param array $raw_properties Optional key/value array of permitted attributes that you want to add.
 	 */
 	public function admin_field_html( array $raw_properties = array() ) {
-		$r = bp_parse_args( $raw_properties, array(
-			'cols' => 40,
-			'rows' => 5,
-		) ); ?>
+		$r = bp_parse_args(
+			$raw_properties,
+			array(
+				'cols' => 40,
+				'rows' => 5,
+			)
+		);
+		?>
 
 		<textarea <?php echo $this->get_edit_field_html_elements( $r ); ?>></textarea>
 
