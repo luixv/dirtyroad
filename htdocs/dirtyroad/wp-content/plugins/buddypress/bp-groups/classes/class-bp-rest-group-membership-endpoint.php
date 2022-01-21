@@ -123,14 +123,14 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 		$group = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
 		$args  = array(
 			'group_id'            => $group->id,
-			'group_role'          => $request['roles'],
-			'type'                => $request['status'],
-			'per_page'            => $request['per_page'],
-			'page'                => $request['page'],
-			'search_terms'        => $request['search'],
-			'exclude'             => $request['exclude'],
-			'exclude_admins_mods' => (bool) $request['exclude_admins'],
-			'exclude_banned'      => (bool) $request['exclude_banned'],
+			'group_role'          => $request->get_param( 'roles' ),
+			'type'                => $request->get_param( 'status' ),
+			'per_page'            => $request->get_param( 'per_page' ),
+			'page'                => $request->get_param( 'page' ),
+			'search_terms'        => $request->get_param( 'search' ),
+			'exclude'             => $request->get_param( 'exclude' ),
+			'exclude_admins_mods' => (bool) $request->get_param( 'exclude_admins' ),
+			'exclude_banned'      => (bool) $request->get_param( 'exclude_banned' ),
 		);
 
 		if ( empty( $args['exclude'] ) ) {
@@ -197,7 +197,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 				'status' => rest_authorization_required_code(),
 			)
 		);
-		$group  = $this->groups_endpoint->get_group_object( $request['group_id'] );
+		$group  = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
 
 		if ( empty( $group->id ) ) {
 			$retval = new WP_Error(
@@ -231,10 +231,10 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function create_item( $request ) {
-		$user  = bp_rest_get_user( $request['user_id'] );
-		$group = $this->groups_endpoint->get_group_object( $request['group_id'] );
+		$user  = bp_rest_get_user( $request->get_param( 'user_id' ) );
+		$group = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
 
-		if ( ! $request['context'] || 'view' === $request['context'] ) {
+		if ( ! $request->get_param( 'context' ) || 'view' === $request->get_param( 'context' ) ) {
 			if ( ! groups_join_group( $group->id, $user->ID ) ) {
 				return new WP_Error(
 					'bp_rest_group_member_failed_to_join',
@@ -248,7 +248,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 			// Get the group member.
 			$group_member = new BP_Groups_Member( $user->ID, $group->id );
 		} else {
-			$role         = $request['role'];
+			$role         = $request->get_param( 'role' );
 			$group_id     = $group->id;
 			$group_member = new BP_Groups_Member( $user->ID, $group_id );
 
@@ -332,7 +332,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 				)
 			);
 		} else {
-			$user             = bp_rest_get_user( $request['user_id'] );
+			$user             = bp_rest_get_user( $request->get_param( 'user_id' ) );
 			$loggedin_user_id = bp_loggedin_user_id();
 
 			if ( ! $user instanceof WP_User ) {
@@ -344,7 +344,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 					)
 				);
 			} else {
-				$group = $this->groups_endpoint->get_group_object( $request['group_id'] );
+				$group = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
 
 				if ( ! $group instanceof BP_Groups_Group ) {
 					$retval = new WP_Error(
@@ -388,10 +388,10 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function update_item( $request ) {
-		$user         = bp_rest_get_user( $request['user_id'] );
-		$group        = $this->groups_endpoint->get_group_object( $request['group_id'] );
-		$action       = $request['action'];
-		$role         = $request['role'];
+		$user         = bp_rest_get_user( $request->get_param( 'user_id' ) );
+		$group        = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
+		$action       = $request->get_param( 'action' );
+		$role         = $request->get_param( 'role' );
 		$group_id     = $group->id;
 		$group_member = new BP_Groups_Member( $user->ID, $group_id );
 
@@ -487,7 +487,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 				)
 			);
 		} else {
-			$user             = bp_rest_get_user( $request['user_id'] );
+			$user             = bp_rest_get_user( $request->get_param( 'user_id' ) );
 			$loggedin_user_id = bp_loggedin_user_id();
 
 			if ( ! $user instanceof WP_User ) {
@@ -499,7 +499,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 					)
 				);
 			} else {
-				$group = $this->groups_endpoint->get_group_object( $request['group_id'] );
+				$group = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
 
 				if ( ! $group instanceof BP_Groups_Group ) {
 					$retval = new WP_Error(
@@ -511,7 +511,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 					);
 				} elseif ( bp_current_user_can( 'bp_moderate' ) ) {
 					$retval = true;
-				} elseif ( in_array( $request['action'], array( 'ban', 'unban', 'promote', 'demote' ), true ) ) {
+				} elseif ( in_array( $request->get_param( 'action' ), array( 'ban', 'unban', 'promote', 'demote' ), true ) ) {
 					if ( groups_is_user_admin( $loggedin_user_id, $group->id ) ) {
 						if ( $loggedin_user_id !== $user->ID ) {
 							$retval = true;
@@ -533,8 +533,8 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 						);
 
 						$retval = new WP_Error(
-							'bp_rest_group_member_cannot_' . $request['action'],
-							$messages[ $request['action'] ],
+							'bp_rest_group_member_cannot_' . $request->get_param( 'action' ),
+							$messages[ $request->get_param( 'action' ) ],
 							array(
 								'status' => rest_authorization_required_code(),
 							)
@@ -568,7 +568,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 		$request->set_param( 'context', 'edit' );
 
 		// Get the Group member before it's removed.
-		$member   = new BP_Groups_Member( $request['user_id'], $request['group_id'] );
+		$member   = new BP_Groups_Member( $request->get_param( 'user_id' ), $request->get_param( 'group_id' ) );
 		$previous = $this->prepare_item_for_response( $member, $request );
 
 		if ( ! $member->remove() ) {
@@ -590,8 +590,8 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 			)
 		);
 
-		$user  = bp_rest_get_user( $request['user_id'] );
-		$group = $this->groups_endpoint->get_group_object( $request['group_id'] );
+		$user  = bp_rest_get_user( $request->get_param( 'user_id' ) );
+		$group = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
 
 		/**
 		 * Fires after a group member is deleted via the REST API.
@@ -636,7 +636,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 				)
 			);
 		} else {
-			$user             = bp_rest_get_user( $request['user_id'] );
+			$user             = bp_rest_get_user( $request->get_param( 'user_id' ) );
 			$loggedin_user_id = bp_loggedin_user_id();
 
 			if ( ! $user instanceof WP_User ) {
@@ -648,7 +648,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 					)
 				);
 			} else {
-				$group = $this->groups_endpoint->get_group_object( $request['group_id'] );
+				$group = $this->groups_endpoint->get_group_object( $request->get_param( 'group_id' ) );
 
 				if ( ! $group instanceof BP_Groups_Group ) {
 					$retval = new WP_Error(
@@ -699,7 +699,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 	 */
 	public function prepare_item_for_response( $group_member, $request ) {
 		$user                   = bp_rest_get_user( $group_member->user_id );
-		$context                = ! empty( $request['context'] ) ? $request['context'] : 'view';
+		$context                = ! empty( $request->get_param( 'context' ) ) ? $request->get_param( 'context' ) : 'view';
 		$member_data            = $this->members_endpoint->user_data( $user, $context, $request );
 		$group_member->group_id = $request->get_param( 'group_id' );
 
@@ -707,12 +707,13 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 		$data = array_merge(
 			$member_data,
 			array(
-				'group'         => (int) $group_member->group_id,
-				'is_mod'        => (bool) $group_member->is_mod,
-				'is_admin'      => (bool) $group_member->is_admin,
-				'is_banned'     => (bool) $group_member->is_banned,
-				'is_confirmed'  => (bool) $group_member->is_confirmed,
-				'date_modified' => bp_rest_prepare_date_response( $group_member->date_modified ),
+				'group'             => (int) $group_member->group_id,
+				'is_mod'            => (bool) $group_member->is_mod,
+				'is_admin'          => (bool) $group_member->is_admin,
+				'is_banned'         => (bool) $group_member->is_banned,
+				'is_confirmed'      => (bool) $group_member->is_confirmed,
+				'date_modified'     => bp_rest_prepare_date_response( $group_member->date_modified, get_date_from_gmt( $group_member->date_modified ) ),
+				'date_modified_gmt' => bp_rest_prepare_date_response( $group_member->date_modified ),
 			)
 		);
 
@@ -720,6 +721,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 		$data     = $this->filter_response_by_context( $data, $context );
 		$response = rest_ensure_response( $data );
 
+		// Add prepare links.
 		$response->add_links( $this->prepare_links( $group_member ) );
 
 		/**
@@ -729,7 +731,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 		 *
 		 * @param WP_REST_Response $response      The response data.
 		 * @param WP_REST_Request  $request       Request used to generate the response.
-		 * @param BP_Groups_Member $group_member  Group member object.
+		 * @param BP_Groups_Member $group_member  The group member object.
 		 */
 		return apply_filters( 'bp_rest_group_members_prepare_value', $response, $request, $group_member );
 	}
@@ -748,7 +750,7 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 		// Entity meta.
 		$links = array(
 			'self'       => array(
-				'href' => rest_url( bp_rest_get_user_url( $group_member->user_id ) ),
+				'href' => bp_rest_get_object_url( $group_member->user_id, 'members' ),
 			),
 			'collection' => array(
 				'href' => rest_url( sprintf( '/%s/%d/members', $base, $group_member->group_id ) ),
@@ -888,8 +890,17 @@ class BP_REST_Group_Membership_Endpoint extends WP_REST_Controller {
 
 			$schema['properties']['date_modified'] = array(
 				'context'     => array( 'view', 'edit' ),
-				'description' => __( "The date of the last time the membership of this user was modified, in the site's timezone.", 'buddypress' ),
-				'type'        => 'string',
+				'description' => __( 'The date of the last time the membership of this user was modified, in the site\'s timezone.', 'buddypress' ),
+				'readonly'    => true,
+				'type'        => array( 'string', 'null' ),
+				'format'      => 'date-time',
+			);
+
+			$schema['properties']['date_modified_gmt'] = array(
+				'context'     => array( 'view', 'edit' ),
+				'description' => __( 'The date of the last time the membership of this user was modified, as GMT.', 'buddypress' ),
+				'readonly'    => true,
+				'type'        => array( 'string', 'null' ),
 				'format'      => 'date-time',
 			);
 

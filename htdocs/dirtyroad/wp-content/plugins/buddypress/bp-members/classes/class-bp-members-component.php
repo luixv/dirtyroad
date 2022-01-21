@@ -40,7 +40,7 @@ class BP_Members_Component extends BP_Component {
 			array(
 				'adminbar_myaccount_order' => 20,
 				'search_query_arg'         => 'members_search',
-				'features'                 => array( 'invitations' )
+				'features'                 => array( 'invitations', 'membership_requests' ),
 			)
 		);
 	}
@@ -58,6 +58,7 @@ class BP_Members_Component extends BP_Component {
 
 		// Always include these files.
 		$includes = array(
+			'cssjs',
 			'filters',
 			'template',
 			'adminbar',
@@ -71,6 +72,19 @@ class BP_Members_Component extends BP_Component {
 
 		if ( bp_is_active( 'activity' ) ) {
 			$includes[] = 'activity';
+		}
+
+		/**
+		 * Duplicate bp_get_membership_requests_required() and
+		 * bp_get_signup_allowed() logic here,
+		 * because those functions are not available yet.
+		 * The `bp_get_signup_allowed` filter is documented in
+		 * bp-members/bp-members-template.php.
+		 */
+		$signup_allowed = apply_filters( 'bp_get_signup_allowed', (bool) bp_get_option( 'users_can_register' ) );
+		$membership_requests_enabled = (bool) bp_get_option( 'bp-enable-membership-requests' );
+		if ( bp_is_active( 'members', 'membership_requests' ) && ! $signup_allowed && $membership_requests_enabled ) {
+			$includes[] = 'membership-requests';
 		}
 
 		// Include these only if in admin.
@@ -154,6 +168,71 @@ class BP_Members_Component extends BP_Component {
 	}
 
 	/**
+	 * Set up additional globals for the component.
+	 *
+	 * @since 10.0.0
+	 */
+	public function setup_additional_globals() {
+		$bp = buddypress();
+
+		/** Logged in user ***************************************************
+		 */
+
+		// The core userdata of the user who is currently logged in.
+		$bp->loggedin_user->userdata = bp_core_get_core_userdata( bp_loggedin_user_id() );
+
+		// Fetch the full name for the logged in user.
+		$bp->loggedin_user->fullname = isset( $bp->loggedin_user->userdata->display_name ) ? $bp->loggedin_user->userdata->display_name : '';
+
+		// Hits the DB on single WP installs so get this separately.
+		$bp->loggedin_user->is_super_admin = $bp->loggedin_user->is_site_admin = is_super_admin( bp_loggedin_user_id() );
+
+		// The domain for the user currently logged in. eg: http://example.com/members/andy.
+		$bp->loggedin_user->domain = bp_core_get_user_domain( bp_loggedin_user_id() );
+
+		/** Displayed user ***************************************************
+		 */
+
+		// The core userdata of the user who is currently being displayed.
+		$bp->displayed_user->userdata = bp_core_get_core_userdata( bp_displayed_user_id() );
+
+		// Fetch the full name displayed user.
+		$bp->displayed_user->fullname = isset( $bp->displayed_user->userdata->display_name ) ? $bp->displayed_user->userdata->display_name : '';
+
+		// The domain for the user currently being displayed.
+		$bp->displayed_user->domain = bp_core_get_user_domain( bp_displayed_user_id() );
+
+		// If A user is displayed, check if there is a front template
+		if ( bp_get_displayed_user() ) {
+			$bp->displayed_user->front_template = bp_displayed_user_get_front_template();
+		}
+
+		/** Initialize the nav for the members component *********************
+		 */
+
+		$this->nav = new BP_Core_Nav();
+
+		/** Signup ***********************************************************
+		 */
+
+		$bp->signup = new stdClass;
+
+		/** Profiles Fallback ************************************************
+		 */
+
+		if ( ! bp_is_active( 'xprofile' ) ) {
+			$bp->profile       = new stdClass;
+			$bp->profile->slug = 'profile';
+			$bp->profile->id   = 'profile';
+		}
+
+		/** Network Invitations **************************************************
+		 */
+
+		$bp->members->invitations = new stdClass;
+	}
+
+	/**
 	 * Set up bp-members global settings.
 	 *
 	 * The BP_MEMBERS_SLUG constant is deprecated, and only used here for
@@ -196,63 +275,23 @@ class BP_Members_Component extends BP_Component {
 				'table_name_signups'       => $wpdb->base_prefix . 'signups', // Signups is a global WordPress table.
 			),
 			'notification_callback' => 'members_format_notifications',
+			'block_globals'         => array(
+				'bp/dynamic-members' => array(
+					'widget_classnames' => array( 'widget_bp_core_members_widget', 'buddypress' ),
+				),
+				'bp/online-members' => array(
+					'widget_classnames' => array( 'widget_bp_core_whos_online_widget', 'buddypress' ),
+				),
+				'bp/active-members' => array(
+					'widget_classnames' => array( 'widget_bp_core_recently_active_widget', 'buddypress' ),
+				),
+			),
 		);
 
 		parent::setup_globals( $args );
 
-		/** Logged in user ***************************************************
-		 */
-
-		// The core userdata of the user who is currently logged in.
-		$bp->loggedin_user->userdata       = bp_core_get_core_userdata( bp_loggedin_user_id() );
-
-		// Fetch the full name for the logged in user.
-		$bp->loggedin_user->fullname       = isset( $bp->loggedin_user->userdata->display_name ) ? $bp->loggedin_user->userdata->display_name : '';
-
-		// Hits the DB on single WP installs so get this separately.
-		$bp->loggedin_user->is_super_admin = $bp->loggedin_user->is_site_admin = is_super_admin( bp_loggedin_user_id() );
-
-		// The domain for the user currently logged in. eg: http://example.com/members/andy.
-		$bp->loggedin_user->domain         = bp_core_get_user_domain( bp_loggedin_user_id() );
-
-		/** Displayed user ***************************************************
-		 */
-
-		// The core userdata of the user who is currently being displayed.
-		$bp->displayed_user->userdata = bp_core_get_core_userdata( bp_displayed_user_id() );
-
-		// Fetch the full name displayed user.
-		$bp->displayed_user->fullname = isset( $bp->displayed_user->userdata->display_name ) ? $bp->displayed_user->userdata->display_name : '';
-
-		// The domain for the user currently being displayed.
-		$bp->displayed_user->domain   = bp_core_get_user_domain( bp_displayed_user_id() );
-
-		// Initialize the nav for the members component.
-		$this->nav = new BP_Core_Nav();
-
-		// If A user is displayed, check if there is a front template
-		if ( bp_get_displayed_user() ) {
-			$bp->displayed_user->front_template = bp_displayed_user_get_front_template();
-		}
-
-		/** Signup ***********************************************************
-		 */
-
-		$bp->signup = new stdClass;
-
-		/** Profiles Fallback ************************************************
-		 */
-
-		if ( ! bp_is_active( 'xprofile' ) ) {
-			$bp->profile       = new stdClass;
-			$bp->profile->slug = 'profile';
-			$bp->profile->id   = 'profile';
-		}
-
-		/** Network Invitations **************************************************
-		 */
-
-		$bp->members->invitations = new stdClass;
+		// Additional globals.
+		$this->setup_additional_globals();
 	}
 
 	/**
@@ -613,7 +652,7 @@ class BP_Members_Component extends BP_Component {
 					'parent'   => 'my-account-' . $this->id,
 					'id'       => 'my-account-' . $this->id . '-public',
 					'title'    => _x( 'View', 'My Account Profile sub nav', 'buddypress' ),
-					'href'     => $profile_link,
+					'href'     => trailingslashit( $profile_link . 'public' ),
 					'position' => 10
 				);
 
@@ -667,6 +706,7 @@ class BP_Members_Component extends BP_Component {
 			$bp->bp_options_avatar = bp_core_fetch_avatar( array(
 				'item_id' => bp_displayed_user_id(),
 				'type'    => 'thumb',
+				/* translators: %s: member name */
 				'alt'     => sprintf( __( 'Profile picture of %s', 'buddypress' ), $bp->bp_options_title )
 			) );
 		}
@@ -695,17 +735,13 @@ class BP_Members_Component extends BP_Component {
 	 *
 	 * @since 5.0.0
 	 * @since 6.0.0 Adds the Member Cover and Signup REST endpoints.
+	 * @since 9.0.0 Moves the `BP_REST_Components_Endpoint` controller in `BP_Core` component.
 	 *
 	 * @param array $controllers Optional. See BP_Component::rest_api_init() for
 	 *                           description.
 	 */
 	public function rest_api_init( $controllers = array() ) {
 		$controllers = array(
-			/**
-			 * As the Members component is always loaded,
-			 * let's register the Components endpoint here.
-			 */
-			'BP_REST_Components_Endpoint',
 			'BP_REST_Members_Endpoint',
 			'BP_REST_Attachments_Member_Avatar_Endpoint',
 		);
@@ -741,11 +777,10 @@ class BP_Members_Component extends BP_Component {
 						'wp-element',
 						'wp-components',
 						'wp-i18n',
-						'wp-editor',
-						'wp-compose',
-						'wp-data',
 						'wp-block-editor',
+						'wp-server-side-render',
 						'bp-block-components',
+						'bp-block-data',
 					),
 					'style'              => 'bp-member-block',
 					'style_url'          => plugins_url( 'css/blocks/member.css', dirname( __FILE__ ) ),
@@ -782,12 +817,11 @@ class BP_Members_Component extends BP_Component {
 						'wp-element',
 						'wp-components',
 						'wp-i18n',
-						'wp-compose',
-						'wp-data',
 						'wp-api-fetch',
 						'wp-url',
 						'wp-block-editor',
 						'bp-block-components',
+						'bp-block-data',
 						'lodash',
 					),
 					'style'              => 'bp-members-block',
@@ -828,7 +862,123 @@ class BP_Members_Component extends BP_Component {
 					),
 					'render_callback'    => 'bp_members_render_members_block',
 				),
+				'bp/dynamic-members' => array(
+					'name'               => 'bp/dynamic-members',
+					'editor_script'      => 'bp-dynamic-members-block',
+					'editor_script_url'  => plugins_url( 'js/blocks/dynamic-members.js', dirname( __FILE__ ) ),
+					'editor_script_deps' => array(
+						'wp-blocks',
+						'wp-element',
+						'wp-components',
+						'wp-i18n',
+						'wp-block-editor',
+						'wp-server-side-render',
+						'bp-block-data',
+					),
+					'style'              => 'bp-dynamic-members-block',
+					'style_url'          => plugins_url( 'css/blocks/dynamic-members.css', dirname( __FILE__ ) ),
+					'attributes'         => array(
+						'title'         => array(
+							'type'    => 'string',
+							'default' => __( 'Members', 'buddypress' ),
+						),
+						'maxMembers'    => array(
+							'type'    => 'number',
+							'default' => 5,
+						),
+						'memberDefault' => array(
+							'type'    => 'string',
+							'default' => 'active',
+						),
+						'linkTitle'     => array(
+							'type'    => 'boolean',
+							'default' => false,
+						),
+					),
+					'render_callback'    => 'bp_members_render_dynamic_members_block',
+				),
+				'bp/online-members'  => array(
+					'name'               => 'bp/online-members',
+					'editor_script'      => 'bp-online-members-block',
+					'editor_script_url'  => plugins_url( 'js/blocks/online-members.js', dirname( __FILE__ ) ),
+					'editor_script_deps' => array(
+						'wp-blocks',
+						'wp-element',
+						'wp-components',
+						'wp-i18n',
+						'wp-block-editor',
+						'wp-server-side-render',
+					),
+					'editor_style'       => 'bp-member-avatar-blocks',
+					'editor_style_url'   => plugins_url( 'css/blocks/member-avatar-blocks.css', dirname( __FILE__ ) ),
+					'attributes'         => array(
+						'title'      => array(
+							'type'    => 'string',
+							'default' => __( 'Who\'s Online', 'buddypress' ),
+						),
+						'maxMembers' => array(
+							'type'    => 'number',
+							'default' => 15,
+						),
+					),
+					'render_callback'    => 'bp_members_render_online_members_block',
+				),
+				'bp/active-members'  => array(
+					'name'               => 'bp/active-members',
+					'editor_script'      => 'bp-active-members-block',
+					'editor_script_url'  => plugins_url( 'js/blocks/active-members.js', dirname( __FILE__ ) ),
+					'editor_script_deps' => array(
+						'wp-blocks',
+						'wp-element',
+						'wp-components',
+						'wp-i18n',
+						'wp-block-editor',
+						'wp-server-side-render',
+					),
+					'editor_style'       => 'bp-member-avatar-blocks',
+					'editor_style_url'   => plugins_url( 'css/blocks/member-avatar-blocks.css', dirname( __FILE__ ) ),
+					'attributes'         => array(
+						'title'      => array(
+							'type'    => 'string',
+							'default' => __( 'Recently Active Members', 'buddypress' ),
+						),
+						'maxMembers' => array(
+							'type'    => 'number',
+							'default' => 15,
+						),
+					),
+					'render_callback'    => 'bp_members_render_active_members_block',
+				),
 			)
 		);
+	}
+
+	/**
+	 * Add the Members directory states.
+	 *
+	 * @since 10.0.0
+	 *
+	 * @param array   $states Optional. See BP_Component::admin_directory_states() for description.
+	 * @param WP_Post $post   Optional. See BP_Component::admin_directory_states() for description.
+	 * @return array          See BP_Component::admin_directory_states() for description.
+	 */
+	public function admin_directory_states( $states = array(), $post = null ) {
+		$bp = buddypress();
+
+		if ( isset( $bp->pages->members->id ) && (int) $bp->pages->members->id === (int) $post->ID ) {
+			$states['page_for_members_directory'] = _x( 'BP Members Page', 'page label', 'buddypress' );
+		}
+
+		if ( bp_get_signup_allowed() || bp_get_members_invitations_allowed() ) {
+			if ( isset( $bp->pages->register->id ) && (int) $bp->pages->register->id === (int) $post->ID ) {
+				$states['page_for_bp_registration'] = _x( 'BP Registration Page', 'page label', 'buddypress' );
+			}
+
+			if ( isset( $bp->pages->activate->id ) && (int) $bp->pages->activate->id === (int) $post->ID ) {
+				$states['page_for_bp_activation'] = _x( 'BP Activation Page', 'page label', 'buddypress' );
+			}
+		}
+
+		return parent::admin_directory_states( $states, $post );
 	}
 }

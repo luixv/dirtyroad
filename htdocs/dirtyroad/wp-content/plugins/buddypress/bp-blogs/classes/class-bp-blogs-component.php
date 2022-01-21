@@ -81,6 +81,11 @@ class BP_Blogs_Component extends BP_Component {
 			'autocomplete_all'      => defined( 'BP_MESSAGES_AUTOCOMPLETE_ALL' ),
 			'global_tables'         => $global_tables,
 			'meta_tables'           => $meta_tables,
+			'block_globals'         => array(
+				'bp/recent-posts' => array(
+					'widget_classnames' => array( 'widget_bp_blogs_widget', 'buddypress' ),
+				),
+			),
 		);
 
 		// Setup the globals.
@@ -132,10 +137,11 @@ class BP_Blogs_Component extends BP_Component {
 
 		if ( bp_is_active( 'activity' ) ) {
 			$includes[] = 'activity';
-		}
 
-		if ( is_multisite() ) {
-			$includes[] = 'widgets';
+			if ( is_multisite() ) {
+				$includes[] = 'widgets';
+				$includes[] = 'blocks';
+			}
 		}
 
 		// Include the files.
@@ -290,7 +296,7 @@ class BP_Blogs_Component extends BP_Component {
 				'parent'   => 'my-account-' . $this->id,
 				'id'       => 'my-account-' . $this->id . '-my-sites',
 				'title'    => __( 'My Sites', 'buddypress' ),
-				'href'     => $blogs_link,
+				'href'     => trailingslashit( $blogs_link . 'my-sites' ),
 				'position' => 10
 			);
 
@@ -378,5 +384,71 @@ class BP_Blogs_Component extends BP_Component {
 		}
 
 		parent::rest_api_init( $controllers );
+	}
+
+	/**
+	 * Register the BP Blogs Blocks.
+	 *
+	 * @since 9.0.0
+	 *
+	 * @param array $blocks Optional. See BP_Component::blocks_init() for
+	 *                      description.
+	 */
+	public function blocks_init( $blocks = array() ) {
+		$blocks = array();
+
+		if ( is_multisite() && bp_is_active( 'activity' ) ) {
+			$blocks['bp/recent-posts'] = array(
+				'name'               => 'bp/recent-posts',
+				'editor_script'      => 'bp-recent-posts-block',
+				'editor_script_url'  => plugins_url( 'js/blocks/recent-posts.js', dirname( __FILE__ ) ),
+				'editor_script_deps' => array(
+					'wp-blocks',
+					'wp-element',
+					'wp-components',
+					'wp-i18n',
+					'wp-block-editor',
+					'wp-server-side-render',
+				),
+				'style'              => 'bp-recent-posts-block',
+				'style_url'          => plugins_url( 'css/blocks/recent-posts.css', dirname( __FILE__ ) ),
+				'attributes'         => array(
+					'title'     => array(
+						'type'    => 'string',
+						'default' => __( 'Recent Networkwide Posts', 'buddypress' ),
+					),
+					'maxPosts'  => array(
+						'type'    => 'number',
+						'default' => 10,
+					),
+					'linkTitle' => array(
+						'type'    => 'boolean',
+						'default' => false,
+					),
+				),
+				'render_callback'    => 'bp_blogs_render_recent_posts_block',
+			);
+		}
+
+		parent::blocks_init( $blocks );
+	}
+
+	/**
+	 * Add the Sites directory states.
+	 *
+	 * @since 10.0.0
+	 *
+	 * @param array   $states Optional. See BP_Component::admin_directory_states() for description.
+	 * @param WP_Post $post   Optional. See BP_Component::admin_directory_states() for description.
+	 * @return array          See BP_Component::admin_directory_states() for description.
+	 */
+	public function admin_directory_states( $states = array(), $post = null ) {
+		$bp = buddypress();
+
+		if ( isset( $bp->pages->blogs->id ) && (int) $bp->pages->blogs->id === (int) $post->ID ) {
+			$states['page_for_sites_directory'] = _x( 'BP Sites Page', 'page label', 'buddypress' );
+		}
+
+		return parent::admin_directory_states( $states, $post );
 	}
 }

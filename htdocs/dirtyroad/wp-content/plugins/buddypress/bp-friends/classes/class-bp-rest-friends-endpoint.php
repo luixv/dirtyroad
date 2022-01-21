@@ -637,14 +637,15 @@ class BP_REST_Friends_Endpoint extends WP_REST_Controller {
 	 */
 	public function prepare_item_for_response( $friendship, $request ) {
 		$data = array(
-			'id'           => $friendship->id,
-			'initiator_id' => $friendship->initiator_user_id,
-			'friend_id'    => $friendship->friend_user_id,
-			'is_confirmed' => (bool) $friendship->is_confirmed,
-			'date_created' => bp_rest_prepare_date_response( $friendship->date_created ),
+			'id'               => (int) $friendship->id,
+			'initiator_id'     => (int) $friendship->initiator_user_id,
+			'friend_id'        => (int) $friendship->friend_user_id,
+			'is_confirmed'     => (bool) $friendship->is_confirmed,
+			'date_created'     => bp_rest_prepare_date_response( $friendship->date_created, get_date_from_gmt( $friendship->date_created ) ),
+			'date_created_gmt' => bp_rest_prepare_date_response( $friendship->date_created ),
 		);
 
-		$context  = ! empty( $request['context'] ) ? $request['context'] : 'view';
+		$context  = ! empty( $request->get_param( 'context' ) ) ? $request->get_param( 'context' ) : 'view';
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
 		$response = rest_ensure_response( $data );
@@ -683,12 +684,12 @@ class BP_REST_Friends_Endpoint extends WP_REST_Controller {
 			'collection' => array(
 				'href' => rest_url( $base ),
 			),
-			'initiator'       => array(
-				'href'       => rest_url( bp_rest_get_user_url( $friendship->initiator_user_id ) ),
+			'initiator'  => array(
+				'href'       => bp_rest_get_object_url( $friendship->initiator_user_id, 'members' ),
 				'embeddable' => true,
 			),
-			'friend'       => array(
-				'href'       => rest_url( bp_rest_get_user_url( $friendship->friend_user_id ) ),
+			'friend'     => array(
+				'href'       => bp_rest_get_object_url( $friendship->friend_user_id, 'members' ),
 				'embeddable' => true,
 			),
 		);
@@ -819,32 +820,39 @@ class BP_REST_Friends_Endpoint extends WP_REST_Controller {
 				'title'      => 'bp_friends',
 				'type'       => 'object',
 				'properties' => array(
-					'id'           => array(
+					'id'               => array(
 						'context'     => array( 'view', 'edit' ),
 						'description' => __( 'Unique numeric identifier of the friendship.', 'buddypress' ),
 						'type'        => 'integer',
 					),
-					'initiator_id' => array(
+					'initiator_id'     => array(
 						'context'     => array( 'view', 'edit' ),
 						'description' => __( 'The unique numeric identifier of the user who is requesting the Friendship.', 'buddypress' ),
 						'type'        => 'integer',
 					),
-					'friend_id'    => array(
+					'friend_id'        => array(
 						'context'     => array( 'view', 'edit' ),
 						'description' => __( 'The unique numeric identifier of the user who is invited to agree to the Friendship request.', 'buddypress' ),
 						'type'        => 'integer',
 					),
-					'is_confirmed' => array(
+					'is_confirmed'     => array(
 						'context'     => array( 'view', 'edit' ),
 						'description' => __( 'Whether the friendship been confirmed/accepted.', 'buddypress' ),
 						'readonly'    => true,
 						'type'        => 'boolean',
 					),
-					'date_created' => array(
+					'date_created'     => array(
 						'context'     => array( 'view', 'edit' ),
-						'description' => __( "The date the friendship was created, in the site's timezone.", 'buddypress' ),
+						'description' => __( 'The date the friendship was created, in the site\'s timezone.', 'buddypress' ),
 						'readonly'    => true,
-						'type'        => 'string',
+						'type'        => array( 'string', 'null' ),
+						'format'      => 'date-time',
+					),
+					'date_created_gmt' => array(
+						'context'     => array( 'view', 'edit' ),
+						'description' => __( 'The date the friendship was created, as GMT.', 'buddypress' ),
+						'readonly'    => true,
+						'type'        => array( 'string', 'null' ),
 						'format'      => 'date-time',
 					),
 				),

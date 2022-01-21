@@ -3,7 +3,7 @@
  * BuddyPress Messages Sitewide Notices Widget.
  *
  * @package BuddyPress
- * @subpackage Messages
+ * @subpackage MessagesClasses
  * @since 1.9.0
  */
 
@@ -19,8 +19,11 @@ class BP_Messages_Sitewide_Notices_Widget extends WP_Widget {
 
 	/**
 	 * Constructor method.
+	 *
+	 * @since 1.9.0
+	 * @since 9.0.0 Adds the `show_instance_in_rest` property to Widget options.
 	 */
-	function __construct() {
+	public function __construct() {
 		parent::__construct(
 			'bp_messages_sitewide_notices_widget',
 			__( '(BuddyPress) Sitewide Notices', 'buddypress' ),
@@ -28,6 +31,7 @@ class BP_Messages_Sitewide_Notices_Widget extends WP_Widget {
 				'classname'                   => 'widget_bp_core_sitewide_messages buddypress widget',
 				'description'                 => __( 'Display Sitewide Notices posted by the site administrator', 'buddypress' ),
 				'customize_selective_refresh' => true,
+				'show_instance_in_rest'       => true,
 			)
 		);
 	}
@@ -102,13 +106,14 @@ class BP_Messages_Sitewide_Notices_Widget extends WP_Widget {
 	 * @see WP_Widget::form() for a description of parameters.
 	 *
 	 * @param array $instance See {@WP_Widget::form()}.
-	 *
-	 * @return string|null Widget form output.
 	 */
 	public function form( $instance ) {
-		$instance = wp_parse_args( (array) $instance, array(
-			'title' => '',
-		) );
+		$instance = bp_parse_args(
+			(array) $instance,
+			array(
+				'title' => '',
+			)
+		);
 
 		$title = strip_tags( $instance['title'] ); ?>
 

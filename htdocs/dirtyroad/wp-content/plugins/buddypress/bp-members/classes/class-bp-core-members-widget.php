@@ -21,6 +21,7 @@ class BP_Core_Members_Widget extends WP_Widget {
 	 * Constructor method.
 	 *
 	 * @since 1.5.0
+	 * @since 9.0.0 Adds the `show_instance_in_rest` property to Widget options.
 	 */
 	public function __construct() {
 
@@ -33,9 +34,10 @@ class BP_Core_Members_Widget extends WP_Widget {
 			'description'                 => $description,
 			'classname'                   => 'widget_bp_core_members_widget buddypress widget',
 			'customize_selective_refresh' => true,
+			'show_instance_in_rest'       => true,
 		) );
 
-		if ( is_customize_preview() || is_active_widget( false, false, $this->id_base ) ) {
+		if ( is_customize_preview() || bp_is_widget_block_active( '', $this->id_base ) ) {
 			add_action( 'bp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		}
 	}
@@ -246,16 +248,19 @@ class BP_Core_Members_Widget extends WP_Widget {
 	 *
 	 * @since 2.3.0
 	 *
-	 *
 	 * @param array $instance Widget instance settings.
 	 * @return array
 	 */
 	public function parse_settings( $instance = array() ) {
-		return bp_parse_args( $instance, array(
-			'title' 	     => __( 'Members', 'buddypress' ),
-			'max_members' 	 => 5,
-			'member_default' => 'active',
-			'link_title' 	 => false
-		), 'members_widget_settings' );
+		return bp_parse_args(
+			$instance,
+			array(
+				'title' 	     => __( 'Members', 'buddypress' ),
+				'max_members' 	 => 5,
+				'member_default' => 'active',
+				'link_title' 	 => false,
+			),
+			'members_widget_settings'
+		);
 	}
 }

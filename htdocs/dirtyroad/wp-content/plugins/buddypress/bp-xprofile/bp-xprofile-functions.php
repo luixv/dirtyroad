@@ -60,12 +60,16 @@ function bp_xprofile_get_groups( $args = array() ) {
 function xprofile_insert_field_group( $args = '' ) {
 
 	// Parse the arguments.
-	$r = bp_parse_args( $args, array(
-		'field_group_id' => false,
-		'name'           => false,
-		'description'    => '',
-		'can_delete'     => true
-	), 'xprofile_insert_field_group' );
+	$r = bp_parse_args(
+		$args,
+		array(
+			'field_group_id' => false,
+			'name'           => false,
+			'description'    => '',
+			'can_delete'     => true,
+		),
+		'xprofile_insert_field_group'
+	);
 
 	// Bail if no group name.
 	if ( empty( $r['name'] ) ) {
@@ -230,20 +234,23 @@ function bp_xprofile_create_field_type( $type ) {
  */
 function xprofile_insert_field( $args = '' ) {
 
-	$r = wp_parse_args( $args, array(
-		'field_id'          => null,
-		'field_group_id'    => null,
-		'parent_id'         => null,
-		'type'              => '',
-		'name'              => '',
-		'description'       => '',
-		'is_required'       => false,
-		'can_delete'        => true,
-		'order_by'          => '',
-		'is_default_option' => false,
-		'option_order'      => null,
-		'field_order'       => null,
-	) );
+	$r = bp_parse_args(
+		$args,
+		array(
+			'field_id'          => null,
+			'field_group_id'    => null,
+			'parent_id'         => null,
+			'type'              => '',
+			'name'              => '',
+			'description'       => '',
+			'is_required'       => false,
+			'can_delete'        => true,
+			'order_by'          => '',
+			'is_default_option' => false,
+			'option_order'      => null,
+			'field_order'       => null,
+		)
+	);
 
 	// Field_group_id is required.
 	if ( empty( $r['field_group_id'] ) ) {
@@ -808,11 +815,13 @@ add_action( 'bp_user_query_uid_clauses', 'bp_xprofile_bp_user_query_search', 10,
  * Syncs Xprofile data to the standard built in WordPress profile data.
  *
  * @since 1.0.0
+ * @since 9.2.0 Adds the $args arguments to catch hook's additional arguments.
  *
- * @param int $user_id ID of the user to sync.
+ * @param int   $user_id ID of the user to sync.
+ * @param array $args    Hook's additional arguments.
  * @return bool
  */
-function xprofile_sync_wp_profile( $user_id = 0 ) {
+function xprofile_sync_wp_profile( $user_id = 0, ...$args ) {
 
 	// Bail if profile syncing is disabled.
 	if ( bp_disable_profile_sync() ) {
@@ -827,25 +836,59 @@ function xprofile_sync_wp_profile( $user_id = 0 ) {
 		return false;
 	}
 
-	$fullname = xprofile_get_field_data( bp_xprofile_fullname_field_id(), $user_id );
+	$fullname_field_id = (int) bp_xprofile_fullname_field_id();
+	$usermeta          = array();
+	$userdata          = array();
+
+	if ( isset( $args[1]['meta'] ) ) {
+		$usermeta = $args[1]['meta'];
+	} elseif ( isset( $args[3] ) ) {
+		$usermeta = $args[3];
+	}
+
+	if ( isset( $usermeta['profile_field_ids'] ) ) {
+		$xprofile_fields = wp_parse_id_list( $usermeta['profile_field_ids'] );
+		$xprofile_fields = array_diff( $xprofile_fields, array( $fullname_field_id ) );
+
+		foreach ( $xprofile_fields as $xprofile_field_id ) {
+			$field_type = bp_xprofile_get_field_type( $xprofile_field_id );
+
+			$field_key = 'field_' . $xprofile_field_id;
+			if ( isset( $field_type->wp_user_key ) && isset( $usermeta[ $field_key ] ) && $usermeta[ $field_key ] ) {
+				$userdata[ $field_type->wp_user_key ] = $usermeta[ $field_key ];
+			}
+		}
+	}
+
+	$fullname = xprofile_get_field_data( $fullname_field_id, $user_id );
 	$space    = strpos( $fullname, ' ' );
 
 	if ( false === $space ) {
-		$firstname = $fullname;
-		$lastname = '';
+		if ( ! isset( $userdata['first_name'] ) ) {
+			$userdata['first_name'] = $fullname;
+		}
+
+		if ( ! isset( $userdata['last_name'] ) ) {
+			$userdata['last_name'] = '';
+		}
 	} else {
-		$firstname = substr( $fullname, 0, $space );
-		$lastname = trim( substr( $fullname, $space, strlen( $fullname ) ) );
+		if ( ! isset( $userdata['first_name'] ) ) {
+			$userdata['first_name'] = substr( $fullname, 0, $space );
+		}
+
+		if ( ! isset( $userdata['last_name'] ) ) {
+			$userdata['last_name'] = trim( substr( $fullname, $space, strlen( $fullname ) ) );
+		}
 	}
 
 	bp_update_user_meta( $user_id, 'nickname',   $fullname  );
-	bp_update_user_meta( $user_id, 'first_name', $firstname );
-	bp_update_user_meta( $user_id, 'last_name',  $lastname  );
+	bp_update_user_meta( $user_id, 'first_name', $userdata['first_name'] );
+	bp_update_user_meta( $user_id, 'last_name',  $userdata['last_name']  );
 
 	wp_update_user( array( 'ID' => $user_id, 'display_name' => $fullname ) );
 }
-add_action( 'bp_core_signup_user',      'xprofile_sync_wp_profile' );
-add_action( 'bp_core_activated_user',   'xprofile_sync_wp_profile' );
+add_action( 'bp_core_signup_user', 'xprofile_sync_wp_profile', 10, 5 );
+add_action( 'bp_core_activated_user', 'xprofile_sync_wp_profile', 10, 3 );
 
 /**
  * Syncs the standard built in WordPress profile data to XProfile.
@@ -983,7 +1026,12 @@ function bp_xprofile_delete_meta( $object_id, $object_type, $meta_key = false, $
  * @param bool   $single      Optional. If true, return only the first value of the
  *                            specified meta_key. This parameter has no effect if meta_key is not
  *                            specified. Default: true.
- * @return mixed Meta value if found. False on failure.
+ * @return mixed An array of values if `$single` is false.
+ *               The value of the meta field if `$single` is true.
+ *               False for an invalid `$object_type` (one of `group`, `field`, `data`).
+ *               False for an invalid `$object_id` (non-numeric, zero, or negative value),
+ *               or if `$meta_type` is not specified.
+ *               An empty string if a valid but non-existing object ID is passed.
  */
 function bp_xprofile_get_meta( $object_id, $object_type, $meta_key = '', $single = true ) {
 	// Sanitize object type.
@@ -1302,7 +1350,7 @@ function bp_xprofile_get_fields_by_visibility_levels( $user_id, $levels = array(
 		$levels = (array)$levels;
 	}
 
-	$user_visibility_levels = bp_get_user_meta( $user_id, 'bp_xprofile_visibility_levels', true );
+	$user_visibility_levels = (array) bp_get_user_meta( $user_id, 'bp_xprofile_visibility_levels', true );
 
 	// Parse the user-provided visibility levels with the default levels, which may take
 	// precedence.
@@ -1317,7 +1365,7 @@ function bp_xprofile_get_fields_by_visibility_levels( $user_id, $levels = array(
 	}
 
 	$field_ids = array();
-	foreach( (array) $user_visibility_levels as $field_id => $field_visibility ) {
+	foreach( $user_visibility_levels as $field_id => $field_visibility ) {
 		if ( in_array( $field_visibility, $levels ) ) {
 			$field_ids[] = $field_id;
 		}
@@ -1436,7 +1484,7 @@ function bp_xprofile_get_signup_field_ids() {
 		global $wpdb;
 		$bp = buddypress();
 
-		$signup_field_ids = $wpdb->get_col( "SELECT object_id FROM {$bp->profile->table_name_meta} WHERE object_type = 'field' AND meta_key = 'signup_position' ORDER BY meta_value ASC" );
+		$signup_field_ids = $wpdb->get_col( "SELECT object_id FROM {$bp->profile->table_name_meta} WHERE object_type = 'field' AND meta_key = 'signup_position' ORDER BY CONVERT(meta_value, SIGNED) ASC" );
 
 		wp_cache_set( 'signup_fields', $signup_field_ids, 'bp_xprofile' );
 	}

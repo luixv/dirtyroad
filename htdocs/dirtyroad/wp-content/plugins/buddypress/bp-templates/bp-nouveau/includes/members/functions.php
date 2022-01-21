@@ -3,7 +3,7 @@
  * Members functions
  *
  * @since 3.0.0
- * @version 8.0.0
+ * @version 10.0.0
  */
 
 // Exit if accessed directly.
@@ -530,31 +530,36 @@ function bp_nouveau_member_customizer_nav() {
 	return $nav->get_primary();
 }
 
-function pp_mm_item_extra( $args, $member_id ) {
-	$available = xprofile_get_field_data( 'Available', $member_id, 'comma' );
-	if ( ! empty( $available ) ) {
-			$args['available'] = $available;
-	}
-	$guests = xprofile_get_field_data( 'Guests', $member_id, 'comma' );
-	if ( ! empty( $guests ) ) {
-			$args['guests'] = $guests;
-	}
-	
-	return $args;
-}
-add_filter( 'pp_mm_item_filter', 'pp_mm_item_extra', 10, 2 );
-
 /**
-function rt_change_profile_tab_order() {
-global $bp;
-$bp->bp_nav['profile']['position'] = 10;
-$bp->bp_nav['location']['position'] = 20;
-$bp->bp_nav['activity']['position'] = 40;
-$bp->bp_nav['notifications']['position'] = 50;
-$bp->bp_nav['messages']['position'] = 60;
-$bp->bp_nav['friends']['position'] = 70;
-$bp->bp_nav['groups']['position'] = 80;
-$bp->bp_nav['settings']['position'] = 90;
+ * Includes additional information about the Members loop Ajax response.
+ *
+ * @since 10.0.0
+ *
+ * @param array $additional_info An associative array with additional information to include in the Ajax response.
+ * @param array $args            The Ajax query arguments.
+ * @return array                 Additional information about the members loop.
+ */
+function bp_nouveau_members_loop_additional_info( $additional_info = array(), $args = array() ) {
+	if ( ! isset( $GLOBALS['members_template'] ) || ! $GLOBALS['members_template'] ) {
+		return $additional_info;
+	}
+
+	$members_template = $GLOBALS['members_template'];
+
+	if ( isset( $members_template->member_count ) && 'all' === $args['scope'] ) {
+		$additional_info['totalItems'] = bp_core_number_format( $members_template->member_count );
+		$additional_info['navLabel']   = esc_html__( 'All Members', 'buddypress' );
+
+		$nav_labels = array(
+			'active' => esc_html__( 'Active Members', 'buddypress' ),
+			'newest' => esc_html__( 'Newest Members', 'buddypress' ),
+		);
+
+		if ( isset( $nav_labels[ $args['filter'] ] ) ) {
+			$additional_info['navLabel'] = $nav_labels[ $args['filter'] ];
+		}
+	}
+
+	return $additional_info;
 }
-add_action( 'bp_setup_nav', 'rt_change_profile_tab_order', 999 );
-*/
+add_filter( 'bp_nouveau_members_ajax_object_template_response', 'bp_nouveau_members_loop_additional_info', 10, 2 );

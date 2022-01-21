@@ -50,36 +50,30 @@ function bp_rest_api_is_available() {
 	/**
 	 * Filter here to disable the BP REST API.
 	 *
-	 * The BP REST API requires at least WordPress 4.7.0
+	 * The BP REST API requires at least WordPress 4.7.0.
 	 *
 	 * @since 5.0.0
 	 *
 	 * @param boolean $value True if the BP REST API is available. False otherwise.
 	 */
-	return apply_filters( 'bp_rest_api_is_available', bp_is_running_wp( '4.7.0' ) && bp_rest_in_buddypress() ) || bp_rest_is_plugin_active();
+	return apply_filters( 'bp_rest_api_is_available', bp_rest_in_buddypress() ) || bp_rest_is_plugin_active();
 }
 
 /**
  * Register the jQuery.ajax wrapper for BP REST API requests.
  *
  * @since 5.0.0
+ * @deprecated 10.0.0
  */
 function bp_rest_api_register_request_script() {
 	if ( ! bp_rest_api_is_available() ) {
 		return;
 	}
 
-	$dependencies = array( 'jquery' );
-
-	// The wrapper for WP REST API requests was introduced in WordPress 4.9.0.
-	if ( wp_script_is( 'wp-api-request', 'registered' ) ) {
-		$dependencies = array( 'wp-api-request' );
-	}
-
 	wp_register_script(
 		'bp-api-request',
 		sprintf( '%1$sbp-core/js/bp-api-request%2$s.js', buddypress()->plugin_url, bp_core_get_minified_asset_suffix() ),
-		$dependencies,
+		array( 'jquery', 'wp-api-request' ),
 		bp_get_version(),
 		true
 	);
@@ -88,9 +82,8 @@ function bp_rest_api_register_request_script() {
 		'bp-api-request',
 		'bpApiSettings',
 		array(
-			'root'            => esc_url_raw( get_rest_url() ),
-			'nonce'           => wp_create_nonce( 'wp_rest' ),
-			'unexpectedError' => __( 'An unexpected error occured. Please try again.', 'buddypress' ),
+			'unexpectedError'   => __( 'An unexpected error occured. Please try again.', 'buddypress' ),
+			'deprecatedWarning' => __( 'The bp.apiRequest function is deprecated since BuddyPress 10.0.0, please use wp.apiRequest instead.', 'buddypress' ),
 		)
 	);
 }
@@ -135,19 +128,23 @@ function bp_rest_version() {
 }
 
 /**
- * Get user URL.
+ * Get a REST API object URL from a component.
  *
- * @since 5.0.0
+ * @since 9.0.0
  *
- * @param  int $user_id User ID.
+ * @param integer $object_id   Object ID.
+ * @param string  $object_path Path of the component endpoint.
  * @return string
  */
-function bp_rest_get_user_url( $user_id ) {
-	return sprintf(
-		'/%s/%s/members/%d',
-		bp_rest_namespace(),
-		bp_rest_version(),
-		$user_id
+function bp_rest_get_object_url( $object_id, $object_path ) {
+	return rest_url(
+		sprintf(
+			'/%1$s/%2$s/%3$s/%4$d',
+			bp_rest_namespace(),
+			bp_rest_version(),
+			$object_path,
+			$object_id
+		)
 	);
 }
 

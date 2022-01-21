@@ -19,7 +19,7 @@ function bp_groups_register_scripts() {
     wp_register_script(
         'bp-group-manage-members',
         sprintf( '%1$sbp-groups/js/manage-members%2$s.js', buddypress()->plugin_url, bp_core_get_minified_asset_suffix() ),
-        array( 'json2', 'wp-backbone', 'bp-api-request' ),
+        array( 'json2', 'wp-backbone', 'wp-api-request' ),
         bp_get_version(),
         true
     );
@@ -49,10 +49,7 @@ function bp_groups_get_group_manage_members_script_data( $group_id = 0 ) {
 		$group_id
 	);
 
-	$preloaded_members = array();
-	if ( bp_is_running_wp( '5.0.0' ) ) {
-		$preloaded_members = rest_preload_api_request( '', $path );
-	}
+	$preloaded_members = rest_preload_api_request( '', $path );
 
 	return array(
 		'path'      => remove_query_arg( 'exclude_admins', $path ),
@@ -63,3 +60,25 @@ function bp_groups_get_group_manage_members_script_data( $group_id = 0 ) {
 		),
 	);
 }
+
+/**
+ * Registers a new script to manage the dynamic part of the Dynamic groups widget/block.
+ *
+ * @since 9.0.0
+ *
+ * @param array $scripts Data about the scripts to register.
+ * @return array Data about the scripts to register.
+ */
+function bp_groups_register_widget_block_scripts( $scripts = array() ) {
+	$scripts['bp-dynamic-groups-script'] = array(
+		'file'         => plugins_url( 'js/dynamic-groups.js', __FILE__ ),
+		'dependencies' => array(
+			'bp-dynamic-widget-block-script',
+			'wp-i18n',
+		),
+		'footer'       => true,
+	);
+
+	return $scripts;
+}
+add_filter( 'bp_core_register_common_scripts', 'bp_groups_register_widget_block_scripts', 9, 1 );
