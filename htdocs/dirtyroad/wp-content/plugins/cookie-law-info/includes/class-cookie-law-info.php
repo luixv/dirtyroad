@@ -78,7 +78,7 @@ class Cookie_Law_Info {
 		} 
 		else 	
 		{
-			$this->version = '2.0.8';
+			$this->version = '2.0.9';
 		}
 		$this->plugin_name = 'cookie-law-info';
 
@@ -233,8 +233,6 @@ class Cookie_Law_Info {
 
 		$plugin_public->common_modules();
  
-		//below hook's functions needs update
-		$this->loader->add_action( 'init',$plugin_public,'other_plugin_compatibility');
 		$this->loader->add_action( 'wp_footer',$plugin_public,'cookielawinfo_inject_cli_script');
 		$this->loader->add_action('wp_head',$plugin_public,'include_user_accepted_cookielawinfo');
 		$this->loader->add_action('wp_footer',$plugin_public,'include_user_accepted_cookielawinfo_in_body');
