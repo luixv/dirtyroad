@@ -2,15 +2,8 @@
 anonymous/
 apache/
 cgi-bin/
-contrib/
-htdocs/configuration.php
 htdocs/cache
 img/
-install/
-licenses/
-locale/
-mailouput/
-mailtodisk/
 perl/
 php/
 phpMyAdmin/
